@@ -1,0 +1,110 @@
+import React, { useState } from "react";
+import KlipModal from "../../../Common/KlipModal";
+import LoginBox from "../../../Common/LoginBox";
+import { Main } from "./styles";
+
+export default function PurchaseModal({
+  on,
+  setModal,
+  item_name,
+  price,
+  unit,
+}) {
+  const [proceed, setProceed] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+
+  const handleModal = () => {
+    if (window.localStorage.getItem("klipID")) {
+      setProceed(true);
+    } else {
+      setLoginModal(true);
+    }
+  };
+
+  return (
+    <Main className={on ? "on" : "hidden"}>
+      <div className="page-container">
+        <div class="popup-content">
+          <div class="close-btn" onClick={() => setModal(false)} />
+          <div class="comp-payment-receipt">
+            <dl class="comp-payment-receipt-title">
+              <dt>PAYMENT RECEIPT</dt>
+              <dd>{item_name}</dd>
+            </dl>
+
+            <div class="payment-price-list">
+              <dl class="comp-payment-price">
+                <dt>Price</dt>
+                <dd>
+                  <span>{price}</span> MARD
+                </dd>
+              </dl>
+              <dl class="comp-payment-price">
+                <dt>Unit</dt>
+                <dd>
+                  <span>{unit}</span>
+                </dd>
+              </dl>
+            </div>
+            <div class="comp-dot__line"></div>
+            <div class="payment-price-list">
+              <dl class="comp-payment-price">
+                <dt>Total</dt>
+                <dd>
+                  <span>{Math.round(price * unit * 1000) / 1000}</span> MARD
+                </dd>
+              </dl>
+            </div>
+
+            <div class="payment-btn-bx">
+              <div class="proceed-btn">
+                <button className="comp-btn-default" onClick={handleModal}>
+                  PROCEED
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <img
+            class="popup-content-bg img-pc"
+            src="/Shop/bg_popup_shop_big.png"
+            alt=""
+          />
+          <img
+            class="popup-content-bg img-m"
+            src="/Shop/bg_popup_shop_small00.png"
+            alt=""
+          />
+
+          <div class="dimmed-bg"></div>
+        </div>
+      </div>
+
+      <div className={["login-modal", !loginModal && "hidden"].join(" ")}>
+        <div className="login-wrapper">
+          <LoginBox />
+        </div>
+      </div>
+
+      <KlipModal modal={proceed} setModal={setProceed} />
+    </Main>
+  );
+}
+
+/*
+결제 버튼을 누르면 Receipt 가 먼저 나옴(로그인여부에 관계X)
+  상품 이름 / 가격 / 개수 / 총 가격 제시
+  결제 버튼
+    (로그인O) > QR코드 출력해 결제 연결
+    (로그인X) > 로그인 박스 출력
+
+모바일에서는 글자가 작아짐(레이아웃 변경은 없다)
+  배경 이미지로 변경되는 것 같음
+
+받아야 할 데이터:
+  - 상품 이름
+  - 가격
+  - 개수
+*/
+
+/* .popup-content wallet 부분은 뭔지 잘 모르겠으니 일단 주석처리 */
