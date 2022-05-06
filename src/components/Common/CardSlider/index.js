@@ -2,6 +2,7 @@ import React from "react";
 import { Main } from "./styles";
 
 export default function CardSlider({
+  top,
   active_color,
   color,
   count,
@@ -16,7 +17,7 @@ export default function CardSlider({
   };
 
   return (
-    <Main color={color} active_color={active_color}>
+    <Main color={color} active_color={active_color} top={top}>
       <div
         className={["left-side", now !== 0 && "side-active"].join(" ")}
         onClick={() => handleButton(-1)}

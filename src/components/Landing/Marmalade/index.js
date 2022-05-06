@@ -48,7 +48,7 @@ export default function Marmalade() {
           <img src="/Token_Nft/logo-mard.png" />
           <div className="mar_text">
             <div className="pin_wrapper">
-              <Pin>Token/NFT</Pin>
+              <Pin>TOKEN/NFT</Pin>
             </div>
             <MAR_Title color="#75594E">MARMALADE TOKEN</MAR_Title>
             <div className="mar_desc">
@@ -67,9 +67,10 @@ export default function Marmalade() {
           </div>
         </div>
         <CardSlider
+          top={-10}
           count={3}
           active_color="#3E2A18"
-          color="#EADEB9"
+          color="#c7bd9d"
           now={now}
           update={setNow}
         />

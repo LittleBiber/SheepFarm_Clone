@@ -5,6 +5,7 @@ export default function Footer() {
   const copyLink = () => {
     const link = "https://sheepfarm.io";
     navigator.clipboard.writeText(link);
+    alert("copied!");
   };
 
   const scrollTop = () => {
@@ -25,7 +26,7 @@ export default function Footer() {
       <a href="https://sheepfarm.medium.com/" target="_blank">
         <img src="/Sidebar/medium.png" />
       </a>
-      <div onClick={copyLink}>
+      <div className="share" onClick={copyLink}>
         <img src="/Sidebar/link.png" />
       </div>
       <div onClick={scrollTop}>

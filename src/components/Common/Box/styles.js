@@ -4,12 +4,6 @@ export const Main = styled.div`
   background-color: ${({ bgcolor }) => bgcolor};
   border: 5px solid ${({ border }) => border};
 
-  @media (max-width: 1000px) {
-    position: relative;
-    left: 50%;
-    transform: translateX(-135px);
-  }
-
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -21,18 +15,29 @@ export const Main = styled.div`
   box-shadow: 0px 15px 21px #e8dcb5;
   z-index: 1;
 
+  @media (max-width: 1000px) {
+    position: relative;
+    left: 50%;
+    transform: translateX(-155px);
+  }
+
   img {
     border-radius: 35px;
     margin-bottom: 22px;
+
+    @media (max-width: 1000px) {
+      width: 250px;
+    }
   }
 
   .box_title {
     color: ${({ color }) => color};
-    font-weight: 800;
+    font-weight: 900;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.05em;
     margin-bottom: 15px;
+    font-family: "Poppins";
   }
 
   .box_desc {
@@ -42,5 +47,8 @@ export const Main = styled.div`
     line-height: 22px;
     text-align: center;
     letter-spacing: 0.03em;
+    font-family: "Poppins";
+
+    width: 230px;
   }
 `;

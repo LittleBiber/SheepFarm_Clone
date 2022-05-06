@@ -17,7 +17,10 @@ export default function Newsletter() {
           </NewsletterTitle>
           <div className="email_form">
             <input type="email" placeholder="Type your email..." />
-            <button type="submit" onClick={() => alert("AHHHHHHHHA")}>
+            <button
+              type="submit"
+              onClick={() => alert("Okay, You'll be fed soon!")}
+            >
               Baa!
             </button>
           </div>

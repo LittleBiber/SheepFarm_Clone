@@ -2,9 +2,7 @@ import styled from "styled-components";
 import { Title } from "../../../styles/index";
 
 export const Main = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 600px;
+  min-height: 100vh;
   background-color: #fae8c4;
   position: relative;
 
@@ -160,10 +158,13 @@ export const Main = styled.div`
 `;
 
 export const NewsletterTitle = styled(Title)`
-  color: #3f2d1c;
+  font-weight: bold;
+  font-size: 47px;
   line-height: 66px;
+  color: #3f2d1c;
   text-shadow: 6px 6px 5px rgb(233 211 169 / 50%);
   margin-bottom: 80px;
+  letter-spacing: 0.05em;
 
   @media (max-width: 1200px) {
     font-size: 36px;
@@ -182,5 +183,6 @@ export const NewsletterTitle = styled(Title)`
     font-size: 28px !important;
     line-height: 40px !important;
     font-size: 32px;
+    margin-top: 0;
   }
 `;

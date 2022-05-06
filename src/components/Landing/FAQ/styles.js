@@ -73,14 +73,18 @@ export const Main = styled.div`
 `;
 
 export const QuestionTitle = styled(Title)`
-  text-shadow: 6px 6px 5px rgb(233 211 169 / 50%);
-  color: #3f2d1c;
+  font-weight: bold;
+  font-size: 47px;
+  line-height: 66px;
   text-align: center;
+  letter-spacing: 0.05em;
+  color: #3f2d1c;
+  text-shadow: 6px 6px 5px rgb(233 211 169 / 50%);
+  margin-bottom: 40px;
 
   @media (max-width: 1000px) {
     font-size: 36px;
     line-height: 44px;
-
     font-weight: bold;
     letter-spacing: 0.05em;
   }
@@ -88,5 +92,6 @@ export const QuestionTitle = styled(Title)`
   @media (max-width: 580px) {
     font-size: 28px !important;
     line-height: 40px !important;
+    margin-top: 0;
   }
 `;

@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap");
-
   width: 100%;
   height: 980px;
   position: relative;
@@ -10,6 +8,7 @@ export const Main = styled.div`
 
   display: flex;
   justify-content: center;
+  font-weight: 900;
 
   .welcome_image {
     position: absolute;
@@ -19,6 +18,22 @@ export const Main = styled.div`
     width: 2600px;
     height: 980px;
     z-index: -2;
+
+    @media (max-width: 580px) {
+      display: none;
+    }
+  }
+
+  .welcome_image_mobile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+
+    @media (min-width: 580px) {
+      display: none;
+    }
   }
 
   .welcome_text {
@@ -34,8 +49,6 @@ export const Main = styled.div`
     @media (max-width: 1100px) {
       padding: 40px 0px 48px;
       width: 428px;
-      // padding-left: 0;
-      // padding-right: 0;
     }
 
     @media (max-width: 580px) {
@@ -44,7 +57,6 @@ export const Main = styled.div`
   }
 
   .title {
-    font-family: "Arvo";
     color: #35220e;
     letter-spacing: 0.03em;
     position: relative;
@@ -53,6 +65,10 @@ export const Main = styled.div`
   .big {
     font-size: 64px;
     line-height: 72px;
+
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #35220e;
 
     @media (max-width: 1100px) {
       font-size: 40px;
@@ -70,7 +86,8 @@ export const Main = styled.div`
     padding: 0 0 10px;
 
     @media (max-width: 1100px) {
-      font-size: 24px;
+      font-size: 40px;
+      line-height: 44px;
     }
 
     @media (max-width: 580px) {
@@ -81,6 +98,7 @@ export const Main = styled.div`
 
   .underline {
     position: relative;
+    z-index: 10;
 
     ::after {
       content: "";
@@ -92,6 +110,16 @@ export const Main = styled.div`
       height: 30px;
       background-color: #ffe380;
       z-index: -1;
+
+      @media (max-width: 1100px) {
+        height: 24px;
+        bottom: 4px;
+      }
+
+      @media (max-width: 580px) {
+        bottom: 0.93458vw;
+        height: 5.60748vw;
+      }
     }
   }
 

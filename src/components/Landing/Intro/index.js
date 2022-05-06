@@ -9,6 +9,11 @@ export default function Intro() {
         src="/Landing/bg_section_top.jpg"
         alt="bg_section_top.jpg"
       />
+      <img
+        className="welcome_image_mobile"
+        src="/Landing/bg_section_top_m.jpg"
+        alt=""
+      />
       <div className="welcome_text">
         <span className="title small">INTRODUCING A METAVERSE</span>
         <span className="title big underline">SHEEP FARMING</span>

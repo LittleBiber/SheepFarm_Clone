@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Title } from "../../../styles/index";
 
 export const Main = styled.div`
   width: 100%;
@@ -137,5 +138,25 @@ export const Main = styled.div`
         }
       }
     }
+  }
+`;
+
+export const SheepsterTitle = styled(Title)`
+  color: #3f2d1c;
+  font-weight: bold;
+  text-shadow: 6px 6px 5px rgb(189 181 155 / 50%);
+  margin-top: 100px;
+
+  @media (max-width: 1000px) {
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 580px) {
+    font-size: 28px !important;
+    line-height: 40px !important;
   }
 `;

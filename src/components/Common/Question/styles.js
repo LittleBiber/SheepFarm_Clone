@@ -8,6 +8,7 @@ export const Main = styled.li`
   border: 2px solid #3f2d1c;
   border-radius: 25px;
   padding: 25px;
+  font-family: "Poppins";
 
   @media (max-width: 580px) {
     min-width: 350px !important;
@@ -39,6 +40,7 @@ export const Main = styled.li`
   .answer {
     color: #dbae85;
     letter-spacing: 0.05em;
+    line-height: 25px;
 
     @media (max-width: 580px) {
       font-size: 14px;

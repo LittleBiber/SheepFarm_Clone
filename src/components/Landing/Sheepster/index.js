@@ -1,12 +1,12 @@
 import React from "react";
 import { Title } from "../../../styles/index";
-import { Main } from "./styles";
+import { Main, SheepsterTitle } from "./styles";
 
 export default function Sheepster() {
   return (
     <Main>
       <div className="page-container">
-        <Title>BECOME A "SHEEPSTER"</Title>
+        <SheepsterTitle>BECOME A "SHEEPSTER"</SheepsterTitle>
         <div className="sheepster_board">
           <img src="/Sheepster/sheepster-board.png" alt="board" />
           <div className="sheepster_apply">

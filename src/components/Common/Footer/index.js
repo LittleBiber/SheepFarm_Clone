@@ -11,6 +11,11 @@ export default function Footer({ section }) {
         </a>
         <span>2021-2022 All rights reserved. Nightingale Interactive.</span>
       </div>
+      <div class="error-report-container">
+        <button class="btn-error-report" onclick="show_error_report_popup()">
+          Report error
+        </button>
+      </div>
     </Main>
   );
 }

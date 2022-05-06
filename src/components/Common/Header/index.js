@@ -22,6 +22,11 @@ export default function Header({ bgcolor }) {
     );
   };
 
+  const chkHref = () => {
+    const now = window.location.href.split("/").reverse()[0];
+    return Boolean(now);
+  };
+
   useEffect(() => {
     const value = window.localStorage.getItem("klipID");
     if (value) setUserID(value);
@@ -52,7 +57,10 @@ export default function Header({ bgcolor }) {
         </div>
 
         <div class="login_box">
-          <a href="https://game.sheepfarm.io/" className="play-btn">
+          <a
+            href="https://game.sheepfarm.io/"
+            className={["play-btn", !chkHref() && "hidden"].join(" ")}
+          >
             <span>PLAY GAME</span>
           </a>
           <input

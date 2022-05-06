@@ -43,28 +43,32 @@ export default function Features() {
   const [idx, setIdx] = useState(0);
 
   return (
-    <Main offset={idx * -404}>
-      <Pin>GAME</Pin>
-      <div className="feature_title">GAME FEATURES</div>
+    <Main offset={idx * -455}>
+      <div className="page-container">
+        <Pin>GAME</Pin>
+        <div className="feature_title">GAME FEATURES</div>
+
+        <div className="box_wrapper">
+          <div className="boxes">
+            {DATA_LIST.map((e, idx) => (
+              <Box {...e} key={idx} offset={idx * -404} />
+            ))}
+          </div>
+        </div>
+
+        <CardSlider
+          top={-90}
+          active_color="#75594E"
+          color="#EADEB9"
+          count={4}
+          now={idx}
+          update={setIdx}
+        />
+      </div>
       <img
-        className="side_image"
+        className="bg-char"
         src="/Features/buy_cash_mishell_50p.png"
         alt=""
-      />
-      <div className="box_wrapper">
-        <div className="boxes">
-          {DATA_LIST.map((e, idx) => (
-            <Box {...e} key={idx} />
-          ))}
-        </div>
-      </div>
-
-      <CardSlider
-        active_color="#75594E"
-        color="#EADEB9"
-        count={4}
-        now={idx}
-        update={setIdx}
       />
     </Main>
   );

@@ -50,4 +50,21 @@ export const Main = styled.div`
       }
     }
   }
+
+  .error-report-container {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 100%;
+
+    .btn-error-report {
+      border: 0;
+      color: #b09184;
+      background-color: transparent;
+      border-radius: 20px;
+      padding: 10px;
+      font-size: 12px;
+      font-family: "Poppins";
+    }
+  }
 `;

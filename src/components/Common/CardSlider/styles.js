@@ -5,10 +5,21 @@ export const Main = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 10;
-  filter: brightness(80%);
+  // filter: brightness(80%);
   opacity: 0.8;
+  color: ${({ color }) => color};
 
-  color: #fff8e2;
+  @media (max-width: 1000px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 580px) {
+    position: relative;
+    top: ${({ top }) => top}px;
+    transform: scale(0.5);
+  }
 
   .left-side {
     width: 0px;
@@ -38,11 +49,11 @@ export const Main = styled.div`
   }
 
   .side-active {
-    color: #3e2a18;
+    color: ${({ active_color }) => active_color};
   }
 
   .selection-active {
-    background: #3e2a18;
+    background: ${({ active_color }) => active_color};
   }
 
   @media (min-width: 1000px) {

@@ -49,7 +49,7 @@ export default function Nightingale() {
           <div className="mar_text">
             {/* 핀, 제목, 설명 div */}
             <div className="pin_wrapper">
-              <Pin>Token/NFT</Pin>
+              <Pin>TOKEN/NFT</Pin>
             </div>
             <MAR_Title color="#FFF8E2">NIGHTINGALE TOKEN</MAR_Title>
             <div className="mar_desc">

@@ -6,8 +6,12 @@ export const Main = styled.div`
   height: 100%;
   background-color: #fff8e2;
 
+  @media (max-width: 1000px) {
+    padding: 50px 0 40px 0;
+  }
+
   .page-container {
-    padding: 70px 0px; // 하단이 이미지박스 때문에(이거 왜 크기가 이상하게 잡힐까...;;) padding을 더 줘야 빈공간이 생김
+    padding: 70px 0px;
     margin: 0 auto;
     width: 1300px;
     max-width: 100%;
@@ -29,6 +33,10 @@ export const Main = styled.div`
         @media (max-width: 1000px) {
           margin: 0 0 30px;
         }
+
+        @media (max-width: 580px) {
+          width: 170px !important;
+        }
       }
 
       .mar_text {
@@ -40,6 +48,7 @@ export const Main = styled.div`
           color: #75594e;
           font-size: 20px;
           font-weight: 500;
+          font-family: "Poppins";
 
           @media (max-width: 580px) {
             font-size: 14px !important;
@@ -77,6 +86,7 @@ export const Main = styled.div`
         justify-content: center;
         gap: 20px;
         transition: all 0.5s;
+        font-family: "Poppins";
 
         @media (max-width: 1000px) {
           transform: translateX(${({ offset }) => offset}px);
@@ -89,6 +99,9 @@ export const Main = styled.div`
 `;
 
 export const MAR_Title = styled(Title)`
+  margin-bottom: 20px;
+  font-weight: bold;
+
   text-shadow: 4px 4px 4px rgb(232 220 181 / 80%);
 
   @media (max-width: 1000px) {
@@ -96,6 +109,7 @@ export const MAR_Title = styled(Title)`
     font-size: 36px;
     line-height: 44px;
     letter-spacing: 0.05em;
+    margin-top: 0;
   }
 
   @media (max-width: 580px) {

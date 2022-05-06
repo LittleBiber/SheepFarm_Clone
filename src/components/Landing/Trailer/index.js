@@ -6,12 +6,14 @@ export default function Overview() {
   return (
     <Main>
       <div className="page-container">
-        <div className="pin_wrapper">
-          <Pin>GAME</Pin>
+        <div className="top">
+          <div className="pin_wrapper">
+            <Pin>GAME</Pin>
+          </div>
+          <Title>GAME TRAILER</Title>
         </div>
-        <Title>GAME TRAILER</Title>
         <div className="video_wrapper">
-          <video poster="/Trailer/placeholder2.png">
+          <video poster="/Trailer/placeholder2.png" controls>
             <source
               src="https://sheepfarm.io/img/SheepFarm_2021_V02.mp4"
               type="video/mp4"

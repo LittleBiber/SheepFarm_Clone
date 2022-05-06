@@ -15,6 +15,43 @@ export const Main = styled.div`
   align-items: center;
   overflow: hidden;
 
+  @media (max-width: 1000px) {
+    min-height: unset;
+    padding-top: 80px;
+  }
+
+  .page-container {
+    padding: 50px 0;
+
+    margin: 0 auto;
+    width: 1300px;
+    max-width: 100%;
+    z-index: 10;
+
+    @media (max-width: 1100px) {
+      padding: 0 50px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 1000px) {
+      padding: 0;
+    }
+
+    .top {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 47px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: unset;
+      margin-bottom: 50px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   video {
     width: 100%;
     height: 100%;
@@ -90,5 +127,10 @@ export const Title = styled.div`
     font-size: 36px;
     line-height: 44px;
     letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 580px) {
+    font-size: 28px !important;
+    line-height: 40px !important;
   }
 `;

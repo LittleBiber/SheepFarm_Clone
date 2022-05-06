@@ -53,10 +53,9 @@ export default function NFTMarket() {
             </div>
             <MAR_Title color="#FFF8E2">NFT MARKET</MAR_Title>
             <div className="mar_desc">
-              Marmalade (MARD) token is the in-game utility token used and
-              serves as the main economic unit in Sheepfarm in meta-land. The
-              MARD supply can be regulated by in-game features that burn tokens
-              continuously, promoting the ecosystem's overall growth.
+              You can easily trade game items with other users either within our
+              local NFT marketplace or 3rd party marketplaces such as OpenSea,
+              Rarible, SuperRare, etc.
             </div>
           </div>
         </div>
@@ -69,8 +68,8 @@ export default function NFTMarket() {
         </div>
         <CardSlider
           count={3}
-          active_color="#3E2A18"
-          color="#EADEB9"
+          active_color="#77AACF"
+          color="#FFF8E2"
           now={now}
           update={setNow}
         />

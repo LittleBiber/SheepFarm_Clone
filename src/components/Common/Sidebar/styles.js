@@ -19,6 +19,13 @@ export const Main = styled.div`
     vertical-align: middle;
   }
 
+  .share {
+    cursor: pointer;
+    @media (max-width: 1100px) {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 1100px) {
     position: fixed;
     top: unset;

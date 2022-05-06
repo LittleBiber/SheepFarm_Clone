@@ -6,30 +6,34 @@ export default function Overview() {
   return (
     <Main>
       <div className="container">
-        <div className="image-container">
-          <img src="Overview/ss3t.png" alt="ss3t" />
-        </div>
-        <div className="left">
-          <div>
-            <Pin>GAME</Pin>
+        <div className="content-wrapper">
+          <div className="image-container">
+            <img src="Overview/ss3t.png" alt="ss3t" />
           </div>
-          <div>
-            <div className="title shadow">OVERVIEW</div>
-            <div className="description">
-              In Sheepfarm in meta-land, you can purchase real-world pastures,
-              run your own farm, raise sheep, and make money! Collect adorable
-              sheep (NFT) and compete with other players for a profit! (PvP)
-              <div className="banner_small">
-                <a className="banner" href="https://sheepfarm.io/map">
-                  <img src="/Overview/icon-pasture.svg" alt="pasture" />
-                  <span>GET YOU PASTURE</span>
-                </a>
-                <img
-                  className="avail_web"
-                  src="/Overview/available_web.png"
-                  alt="web"
-                  onClick={() => alert("Comming Soon!")}
-                />
+          <div className="left">
+            <div className="pin_wrapper">
+              <Pin>GAME</Pin>
+            </div>
+            <div className="row">
+              <div className="title shadow">OVERVIEW</div>
+            </div>
+            <div className="row">
+              <div className="description">
+                In Sheepfarm in meta-land, you can purchase real-world pastures,
+                run your own farm, raise sheep, and make money! Collect adorable
+                sheep (NFT) and compete with other players for a profit! (PvP)
+                <span className="banner_small">
+                  <a className="banner" href="https://sheepfarm.io/map">
+                    <img src="/Overview/icon-pasture.svg" alt="pasture" />
+                    <span>GET YOU PASTURE</span>
+                  </a>
+                  <img
+                    className="avail_web"
+                    src="/Overview/available_web.png"
+                    alt="web"
+                    onClick={() => alert("Comming Soon!")}
+                  />
+                </span>
               </div>
             </div>
           </div>

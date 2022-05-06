@@ -8,10 +8,11 @@ export const Main = styled.div`
   align-items: center;
   justify-content: center;
 
+  max-width: 420px;
+
   @media (max-width: 1000px) {
     position: relative;
     left: 50%;
-    // transform: translateX(-150px);
   }
 
   img {
@@ -41,6 +42,10 @@ export const Main = styled.div`
     border-radius: 25px;
     padding: 90px 20px 56px;
 
+    display: flex;
+    flex-direction: column;
+    justify-contents: center;
+
     div:nth-child(1) {
       font-weight: bold;
       font-size: 20px;
@@ -51,7 +56,7 @@ export const Main = styled.div`
       padding-bottom: 25px;
     }
 
-    div:nth-child(2) {
+    .token-desc {
       font-weight: 500;
       font-size: 20px;
       line-height: 36px;
