@@ -139,14 +139,16 @@ export const TypeSelector = styled.div`
 
     .selected {
       color: #ffd600;
-      font-weight: 700;
+      font-weight: 900;
     }
   }
 `;
 
 export const WorldSelector = styled.div`
+  font-family: "Poppins";
   background-color: #75594e;
   margin-top: -1px;
+  font-weight: 900;
 
   ul {
     padding: 0;
@@ -181,9 +183,11 @@ export const WorldSelector = styled.div`
     span {
       font-size: 18px;
       color: #fff8e2;
-      font-weight: 800;
+      font-weight: 900;
       opacity: 0.5;
       line-height: 30px;
+
+      letter-spacing: 0.5px;
     }
   }
 

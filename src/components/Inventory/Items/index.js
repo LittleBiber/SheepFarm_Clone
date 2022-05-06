@@ -14,7 +14,11 @@ export default function Items({ selected, world }) {
   return (
     <Main>
       <ItemTable>
-        {userID ? <ItemBox selected={selected} world={world} /> : <LoginBox />}
+        {userID ? (
+          <ItemBox selected={selected} world={world} />
+        ) : (
+          <LoginBox type="big" />
+        )}
       </ItemTable>
     </Main>
   );

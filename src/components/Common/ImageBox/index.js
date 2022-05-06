@@ -22,9 +22,7 @@ export default function ImageBox({
     >
       <img src={image} alt="image" />
       <div className="ibox_desc">
-        <div>
-          <strong>{title}</strong>
-        </div>
+        <div className="ibox_title">{title}</div>
         <div className="token-desc">{desc}</div>
       </div>
     </Main>

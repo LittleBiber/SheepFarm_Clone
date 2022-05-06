@@ -46,14 +46,17 @@ export const Main = styled.div`
     flex-direction: column;
     justify-contents: center;
 
-    div:nth-child(1) {
+    .ibox_title {
       font-weight: bold;
       font-size: 20px;
       line-height: 45px;
       text-align: center;
-      letter-spacing: 0.03em;
+      letter-spacing: 0;
       color: ${({ color }) => color};
       padding-bottom: 25px;
+      font-weight: 900;
+
+      -webkit-text-stroke: 0.5px ${({ color }) => color};
     }
 
     .token-desc {
@@ -61,7 +64,7 @@ export const Main = styled.div`
       font-size: 20px;
       line-height: 36px;
       text-align: center;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.065em;
       color: ${({ color }) => color};
 
       @media (max-width: 1000px) {

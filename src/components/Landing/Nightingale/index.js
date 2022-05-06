@@ -42,12 +42,9 @@ export default function Nightingale() {
   return (
     <Main offset={-150 + now * -435}>
       <div className="page-container">
-        {/* -150, -585, -1020*/}
         <div className="mar_top">
-          {/* 메인 */} {/* 이미지 div */}
           <img src="/Token_Nft/ngit.png" />
           <div className="mar_text">
-            {/* 핀, 제목, 설명 div */}
             <div className="pin_wrapper">
               <Pin>TOKEN/NFT</Pin>
             </div>

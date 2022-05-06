@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { Title } from "../../../styles/index";
 
 export const Main = styled.div`
-  width: 100%;
-  height: 100%;
   background-color: #fff8e2;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 844px;
 
   @media (max-width: 1000px) {
     padding: 50px 0 40px 0;
@@ -48,6 +52,8 @@ export const Main = styled.div`
           color: #75594e;
           font-size: 20px;
           font-weight: 500;
+          letter-spacing: 1px;
+
           font-family: "Poppins";
 
           @media (max-width: 580px) {

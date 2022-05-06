@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import KlipModal from "../../Common/KlipModal";
 import { Main, Link, WalletButton } from "./styles";
+import LoginBox from "../../Common/LoginBox";
 
 export default function Header({ bgcolor }) {
   const [boxOpen, setBoxOpen] = useState(false);
@@ -103,7 +104,13 @@ export default function Header({ bgcolor }) {
           </label>
         </div>
 
-        <div id="wallet-button-wrapper" className={!boxOpen ? "hidden" : ""}>
+        <div
+          className={["loginbox-wrapper", !boxOpen ? "hidden" : ""].join(" ")}
+        >
+          <LoginBox type="normal" />
+        </div>
+
+        {/* <div id="wallet-button-wrapper" className={!boxOpen ? "hidden" : ""}>
           <div className="btns">
             <WalletButton
               color="black"
@@ -128,9 +135,9 @@ export default function Header({ bgcolor }) {
               <span>Connect with Kilp</span>
             </WalletButton>
           </div>
-        </div>
+        </div> */}
       </div>
-      <KlipModal modal={modal} setModal={setModal} />
+      {/* <KlipModal modal={modal} setModal={setModal} /> */}
     </Main>
   );
 }

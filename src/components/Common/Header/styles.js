@@ -88,7 +88,7 @@ export const Main = styled.div`
       .wallet_web {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
 
         cursor: pointer;
         padding: 8px 20px;
@@ -138,30 +138,47 @@ export const Main = styled.div`
       }
     }
 
-    #wallet-button-wrapper {
-      position: absolute;
-      top: 90px;
-      right: 0;
-      align-items: center;
-      transition: all 0.2s;
+    // #wallet-button-wrapper {
+    //   position: absolute;
+    //   top: 90px;
+    //   right: 0;
+    //   align-items: center;
+    //   transition: all 0.2s;
 
-      .btns {
-        background-color: #f5e7aa;
-        padding: 20px;
-        border: 4px solid #6f5246;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: all 0.2s;
+    //   .btns {
+    //     background-color: #f5e7aa;
+    //     padding: 20px;
+    //     border: 4px solid #6f5246;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     transition: all 0.2s;
 
-        img {
-          width: 30px;
-          margin-right: 10px;
-        }
+    //     img {
+    //       width: 30px;
+    //       margin-right: 10px;
+    //     }
 
-        button:not(:last-child) {
-          margin-bottom: 15px;
-        }
+    //     button:not(:last-child) {
+    //       margin-bottom: 15px;
+    //     }
+    //   }
+    // }
+  }
+
+  .loginbox-wrapper {
+    position: absolute;
+    top: 90px;
+    right: 0;
+    transition: fadein ease-in-out 1s;
+
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
       }
     }
   }

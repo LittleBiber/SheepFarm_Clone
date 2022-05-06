@@ -31,6 +31,7 @@ export const Main = styled.div`
       justify-content: center;
 
       .message-text {
+        font-family: "Poppins";
         width: 95%;
         height: 100%;
         color: #44362a;
@@ -134,6 +135,7 @@ export const SelectAll = styled.div`
   }
 
   .selectall-text {
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 800;
     font-size: 24px;

@@ -59,6 +59,7 @@ export const Main = styled.div`
       }
 
       .email_form {
+        font-family: "Poppins";
         margin-bottom: 55px;
         display: flex;
         width: 100%;
@@ -107,6 +108,7 @@ export const Main = styled.div`
       }
 
       .desc {
+        font-family: "Poppins";
         font-weight: 500;
         font-size: 20px;
         line-height: 39px;

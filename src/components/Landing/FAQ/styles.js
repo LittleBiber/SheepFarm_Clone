@@ -13,11 +13,11 @@ export const Main = styled.div`
   overflow: hidden;
   flex-direction: column;
 
-  .pin_wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+  // .pin_wrapper {
+  //   width: 100%;
+  //   display: flex;
+  //   justify-content: center;
+  // }
 
   .question_list {
     padding: 0;

@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { Title } from "../../../styles/index";
 
 export const Main = styled.div`
-  width: 100%;
-  height: 100%;
   background-color: #b1d1e7;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 844px;
 
   background-image: url(/Token_Nft/nft-bg.png);
   background-size: cover;
@@ -51,6 +55,8 @@ export const Main = styled.div`
           color: #fff8e2;
           font-size: 20px;
           font-weight: 500;
+          letter-spacing: 0.5px;
+
           font-family: "Poppins";
 
           @media (max-width: 580px) {

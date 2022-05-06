@@ -60,13 +60,15 @@ export const Main = styled.div`
     color: #35220e;
     letter-spacing: 0.03em;
     position: relative;
+
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #492100;
   }
 
   .big {
     font-size: 64px;
     line-height: 72px;
 
-    letter-spacing: 0.03em;
     text-transform: uppercase;
     color: #35220e;
 
@@ -98,7 +100,7 @@ export const Main = styled.div`
 
   .underline {
     position: relative;
-    z-index: 10;
+    z-index: 1;
 
     ::after {
       content: "";
@@ -135,7 +137,11 @@ export const Main = styled.div`
     background: #ff7f22;
     color: white;
     font-family: "Poppins";
-    font-weight: bold;
+    font-weight: 900;
+
+    :hover {
+      background: #d06920;
+    }
 
     @media (max-width: 1100px) {
       display: none;

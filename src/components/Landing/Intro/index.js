@@ -19,7 +19,7 @@ export default function Intro() {
         <span className="title big underline">SHEEP FARMING</span>
         <span className="title big">SIMULATOR!</span>
         <button className="play-game" onClick={() => alert("Not Ready")}>
-          Play Game
+          PLAY GAME
         </button>
       </div>
     </Main>
