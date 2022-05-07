@@ -198,4 +198,14 @@ export const Main = styled.div`
     z-index: -1;
     background-color: transparent;
   }
+
+  .table-wrapper::-webkit-scrollbar {
+    width: 8px; /* 스크롤바의 너비 */
+  }
+
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: #75594e; /* 스크롤바의 색상 */
+
+    border-radius: 10px;
+  }
 `;

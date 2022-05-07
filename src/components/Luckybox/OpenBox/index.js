@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Main, SectionLoginBox } from "./styles";
+import LoginBox from "../../Common/LoginBox";
 
 export default function OpenBox() {
   const [userID, setUserID] = useState(null);
@@ -23,7 +24,8 @@ export default function OpenBox() {
           </div>
         </>
       ) : (
-        <SectionLoginBox />
+        // <SectionLoginBox />
+        <LoginBox type="no_background" />
       )}
     </Main>
   );

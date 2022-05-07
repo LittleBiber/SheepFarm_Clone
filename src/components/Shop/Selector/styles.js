@@ -6,6 +6,7 @@ export const Main = styled.div`
   align-items: center;
   margin-bottom: 46px;
   gap: 10px;
+  font-size: 20px;
 
   @media (max-width: 720px) {
     margin-top: 28px;

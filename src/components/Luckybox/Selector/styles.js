@@ -22,7 +22,7 @@ export const Main = styled.div`
     border: 2px solid #e3d8c4;
     border-radius: 30px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 800;
     line-height: 25px;
     letter-spacing: 0.05em;
     display: flex;

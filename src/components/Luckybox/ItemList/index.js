@@ -15,22 +15,22 @@ export default function ItemList() {
       current: 89507021, //실시간으로 값이 변경되는것 같은데;
       startat: 88826725,
     },
-    // {
-    //   id: 2,
-    //   name: "Season 3 lucky box (STANDARD)",
-    //   count: 3,
-    //   price: 3,
-    //   current: 89507021,
-    //   startat: 88826725,
-    // },
-    // {
-    //   id: 3,
-    //   name: "Season 3 lucky box",
-    //   count: 0,
-    //   price: 3.5,
-    //   current: 89507021,
-    //   startat: 88826725,
-    // },
+    {
+      id: 2,
+      name: "Season 3 lucky box (STANDARD)",
+      count: 0,
+      price: 3,
+      current: 89507021,
+      startat: 88826725,
+    },
+    {
+      id: 3,
+      name: "Season 3 lucky box",
+      count: 0,
+      price: 3.5,
+      current: 89507021,
+      startat: 88826725,
+    },
   ];
 
   const MODAL_DATA = [

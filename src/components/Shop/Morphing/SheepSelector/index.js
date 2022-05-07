@@ -6,12 +6,12 @@ export default function SheepSelector() {
   const [modal, setModal] = useState(false);
 
   // 일단 더미 sheep을 생성해서 테스트
-  const [sheepList, setSheepList] = useState([
-    { name: "a", gender: "male", rarity: "rare" },
-    { name: "b", gender: "male", rarity: "normal" },
-    { name: "c", gender: "female", rarity: "rare" },
-    { name: "d", gender: "female", rarity: "normal" },
-  ]);
+  // const [sheepList, setSheepList] = useState([
+  //   { name: "a", gender: "male", rarity: "rare" },
+  //   { name: "b", gender: "male", rarity: "normal" },
+  //   { name: "c", gender: "female", rarity: "rare" },
+  //   { name: "d", gender: "female", rarity: "normal" },
+  // ]);
 
   const [sheep, setSheep] = useState({ male: null, female: null });
   const checkSheep = () => {

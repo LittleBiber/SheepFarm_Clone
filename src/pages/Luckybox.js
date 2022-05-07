@@ -8,6 +8,7 @@ import MobileHeader from "../components/Common/MobileHeader";
 import Footer from "../components/Common/Footer";
 
 const Wrapper = styled.div`
+  font-family: "Poppins";
   background-color: #fff8e2;
 `;
 
@@ -37,6 +38,7 @@ const Main = styled.div`
     margin-bottom: 0;
     font-weight: 900;
     line-height: 75px;
+    letter-spacing: 1px;
 
     @media (max-width: 1100px) {
       padding-top: 0;

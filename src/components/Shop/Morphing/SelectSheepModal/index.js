@@ -8,6 +8,7 @@ export default function SelectSheepModal({ modal, setModal }) {
   };
 
   const killModal = () => {
+    setRarity("rare");
     setModal(false);
   };
 

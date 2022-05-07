@@ -11,20 +11,20 @@ export default function Treats() {
       desc: "Well, Chocolate is chocolate",
       desc_sub: "(Restores hunger for 8 hours)",
     },
-    {
-      id: 222,
-      name: "Spicy Bon Bon",
-      price: 0.035,
-      desc: "Hot candy",
-      desc_sub: "(Restores hunger for 8 hours)",
-    },
-    {
-      id: 333,
-      name: "Sweet Bon Bon",
-      price: 0.045,
-      desc: "Sweet Chocolate",
-      desc_sub: "(Restores hunger for 8 hours)",
-    },
+    // {
+    //   id: 222,
+    //   name: "Spicy Bon Bon",
+    //   price: 0.035,
+    //   desc: "Hot candy",
+    //   desc_sub: "(Restores hunger for 8 hours)",
+    // },
+    // {
+    //   id: 333,
+    //   name: "Sweet Bon Bon",
+    //   price: 0.045,
+    //   desc: "Sweet Chocolate",
+    //   desc_sub: "(Restores hunger for 8 hours)",
+    // },
   ];
 
   return (

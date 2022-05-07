@@ -20,9 +20,10 @@ export const MorphingHelp = styled.div`
     dt {
       color: #6f5246;
       margin-bottom: 5px;
-
       font-weight: 700;
       letter-spacing: -0.015em;
+      font-size: 24px;
+      line-height: 36px;
 
       @media (max-width: 1100px) {
         font-size: 2.18182vw;
@@ -42,6 +43,8 @@ export const MorphingHelp = styled.div`
 
       font-weight: 400;
       letter-spacing: 0.05em;
+      font-size: 20px;
+      line-height: 25px;
 
       @media (max-width: 1100px) {
         font-size: 1.81818vw;

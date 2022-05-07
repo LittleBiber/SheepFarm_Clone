@@ -82,7 +82,7 @@ export default function PurchaseModal({
 
       <div className={["login-modal", !loginModal && "hidden"].join(" ")}>
         <div className="login-wrapper">
-          <LoginBox />
+          <LoginBox type="normal" />
         </div>
       </div>
 

@@ -133,6 +133,7 @@ export const Main = styled.div`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
+        font-size: 20px;
 
         dt {
           font-size: 20px;
@@ -141,8 +142,8 @@ export const Main = styled.div`
         }
 
         dd {
-          font-size: 1.66667vw;
-          line-height: 1.66667vw;
+          // font-size: 1.66667vw;
+          // line-height: 1.66667vw;
 
           flex-shrink: 0;
           margin: 0;
@@ -162,24 +163,18 @@ export const Main = styled.div`
     }
 
     .item-buy-btn button {
-      border-color: #df650d;
-      background-color: #ff7f22;
-
-      cursor: pointer;
-
       display: flex;
-
       justify-content: center;
-
       align-items: center;
       width: 100%;
       height: 60px !important;
       border-radius: 12px;
-
       transition: -webkit-transform 0.1s;
       transition: transform 0.1s;
       transition: transform 0.1s, -webkit-transform 0.1s;
       color: #fff;
+      background-color: #ff7f22;
+      border: 2px solid #df650d;
 
       font-size: 24px;
       font-weight: 700;

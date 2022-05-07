@@ -22,7 +22,22 @@ const BOX_VALUES = {
       margin-bottom: 20px;
     }
   `,
-  no_background: ``,
+  no_background: `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 40px;
+    max-width: 640px;
+    margin: 10vh auto 0;
+
+    .wallet-button-box {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  `,
 };
 
 export const Main = styled.div`
@@ -119,7 +134,18 @@ const BUTTON_VALUES = {
     justify-content: center;
     align-items: center;
   `,
-  no_background: ``,
+  no_background: `
+    font-size: 16px;
+    line-height: 27px;
+    padding: 19px 0px;
+    font-weight: 500;
+    width: 100%;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  `,
 };
 
 export const WalletButton = styled.button`

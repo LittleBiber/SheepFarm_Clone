@@ -435,7 +435,7 @@ export default function ProbabiltyModal({ modal, setModal }) {
           </div>
         </div>
       </div>
-      <div className="dimmed-bg"></div>
+      <div className="dimmed-bg" />
     </Main>
   );
 }

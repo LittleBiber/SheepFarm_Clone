@@ -10,8 +10,6 @@ export default function ItemBox({
   startat,
   setModal,
 }) {
-  // const count = 0; // 나중에 데이터 제대로 넘겨받으면 전부 없애야 함
-
   const checkout = () => {
     if (count > 0) return alert("checkout");
     else return alert("Sorry, it's sold out.");
@@ -38,7 +36,6 @@ export default function ItemBox({
           <span>+ 6 decoration</span>
           <span>
             <span>{count}</span> available
-            {/*style="color: #FFA6A6;"*/}
           </span>
         </div>
         <div className="sales-date-info">
