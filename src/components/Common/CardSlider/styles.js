@@ -45,7 +45,7 @@ export const Main = styled.div`
     height: 21px;
     margin: 0 20px;
     cursor: pointer;
-    background-color: #fff8e2;
+    background-color: #decc92;
   }
 
   .side-active {

@@ -88,7 +88,8 @@ export const Main = styled.div`
     padding: 0 0 10px;
 
     @media (max-width: 1100px) {
-      font-size: 40px;
+      padding: 0;
+      font-size: 24px;
       line-height: 44px;
     }
 

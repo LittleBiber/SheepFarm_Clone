@@ -36,10 +36,16 @@ export default function MobileHeader({ bgcolor }) {
     );
   };
 
+  const copyLink = () => {
+    const link = "https://sheepfarm.io";
+    navigator.clipboard.writeText(link);
+    alert("copied!");
+  };
+
   return (
     <>
       <MobileMenuBar open={open} bgcolor={bgcolor}>
-        <a className="button-top shared" />
+        <a className="button-top shared" onClick={copyLink} />
         <a href="/">
           <img className="logo" src="/MobileHeader/sheepfarm_logo_top.png" />
         </a>

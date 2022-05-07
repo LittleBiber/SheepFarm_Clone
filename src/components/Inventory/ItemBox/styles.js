@@ -1,38 +1,60 @@
 import styled from "styled-components";
 
-export const Main = styled.div`
-  max-width: 1300px;
-  width: 100vw;
-  overflow: hidden;
-  padding-top: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+export const ItemList = styled.div`
+  // max-width: 1300px;
+  // width: 100vw;
+  // overflow: hidden;
+  // padding-top: 80px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
 
   @media (max-width: 720px) {
-    padding: 0px 0px 20px 0px;
+    padding-top: 0;
   }
+
+  overflow: hidden;
+  padding-top: 80px;
+
+  display: flex;
+  justify-content: center;
 
   dl {
     text-align: center;
-    width: 860px;
+    width: 860px; // 왜 이거 내쪽에서만 오류 나지?
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
 
     dt {
       margin-bottom: 85px;
+
+      @media (max-width: 720px) {
+        margin-bottom: 30px;
+      }
     }
 
     dd {
       position: relative;
       margin-top: -1px;
-      margin-bottom: 0.5rem;
-      margin-left: 0;
 
-      display: flex;
-      justify-content: center;
+      // position: relative;
+      // margin-top: -1px;
+      // margin-bottom: 0.5rem;
+      // margin-left: 0;
+
+      // display: flex;
+      // justify-content: center;
 
       .message-text {
+        font-size: 50px;
+        font-weight: 900;
+        line-height: 75px;
+
         font-family: "Poppins";
-        width: 95%;
+        font-weight: 900;
+        width: 100%;
         height: 100%;
         color: #44362a;
         display: flex;
@@ -40,14 +62,29 @@ export const Main = styled.div`
         align-items: center;
         letter-spacing: 2px;
 
-        font-size: 50px;
-        font-weight: 900;
-        line-height: 75px;
-
         @media (max-width: 720px) {
           font-size: 5.60748vw;
           line-height: 8.17757vw;
         }
+
+        // width: 100%;
+        // height: 100%;
+        // color: #44362a;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // letter-spacing: 2px;
+
+        // font-size: 50px;
+        // font-weight: 900;
+        // line-height: 75px;
+
+        // font-family: "Poppins";
+
+        // @media (max-width: 720px) {
+        //   font-size: 5.60748vw;
+        //   line-height: 8.17757vw;
+        // }
       }
     }
   }
@@ -79,12 +116,35 @@ export const Main = styled.div`
   }
 `;
 
+export const ProductList = styled.div`
+  display: none;
+
+  @media (max-width: 720px) {
+    display: block;
+    padding-top: 80px;
+    padding-bottom: 120px;
+  }
+`;
+
 export const SelectAll = styled.div`
-  width: 100%;
+  // width: 100%;
+  // display: flex;
+  // justify-content: flex-end;
+  // align-items: center;
+  // margin-bottom: 23px;
+
   display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin-bottom: 23px;
+
+  @media (max-width: 1100px) {
+    margin-top: 75px;
+  }
 
   @media (max-width: 720px) {
     padding-right: 8.64486vw;

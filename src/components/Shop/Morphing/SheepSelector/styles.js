@@ -174,8 +174,9 @@ export const ButtonBox = styled.div`
     }
 
     button {
+      font-family: "Poppins";
       font-size: 24px;
-      font-weight: 900;
+      font-weight: 700;
       line-height: 36px;
       letter-spacing: -0.015em;
 

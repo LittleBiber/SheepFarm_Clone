@@ -153,6 +153,7 @@ export const SheepsterTitle = styled(Title)`
     font-size: 36px;
     line-height: 44px;
     letter-spacing: 0.05em;
+    margin-bottom: 0px;
   }
 
   @media (max-width: 580px) {

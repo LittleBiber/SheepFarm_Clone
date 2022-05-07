@@ -10,6 +10,8 @@ export const Main = styled.div`
   justify-content: center;
   min-height: 844px;
 
+  overflow: hidden;
+
   @media (max-width: 1000px) {
     padding: 50px 0 40px 0;
   }

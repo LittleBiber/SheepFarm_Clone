@@ -13,6 +13,7 @@ export const Main = styled.div`
     padding-left: 7.71028vw;
     gap: 2.33645vw;
     padding: 2.80374vw 4.6729vw;
+    font-size: 3.27103vw;
   }
 
   div {
@@ -24,9 +25,9 @@ export const Main = styled.div`
     border: 2px solid #e3d8c4;
     text-decoration: none;
 
-    @media (max-width: 720px) {
-      border: 2px solid #ecc66a;
-    }
+    // @media (max-width: 720px) {
+    //   border: 2px solid #ecc66a;
+    // }
   }
 
   .active {

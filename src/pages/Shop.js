@@ -68,7 +68,7 @@ const ContentWrapper = styled.div`
       padding: 55px 0 50px;
       font-size: 36px;
       line-height: 54px;
-      margin-bottom: 0;
+      margin: 0;
 
       font-weight: 900;
       letter-spacing: 0.05em;

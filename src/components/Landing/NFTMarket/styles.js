@@ -13,6 +13,8 @@ export const Main = styled.div`
   background-image: url(/Token_Nft/nft-bg.png);
   background-size: cover;
 
+  overflow: hidden;
+
   @media (max-width: 1000px) {
     padding: 50px 0 40px 0;
   }

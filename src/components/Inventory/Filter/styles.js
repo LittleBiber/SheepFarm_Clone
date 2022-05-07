@@ -44,9 +44,17 @@ export const TypeSelector = styled.div`
   }
 
   li {
-    margin: 0 41px 0 0;
     padding: 0;
     list-style: none;
+    margin: 0 41px 0 0;
+
+    :nth-child(5) {
+      margin: 0;
+    }
+
+    @media (max-width: 1100px) {
+      margin-right: 15px;
+    }
 
     @media (max-width: 720px) {
       margin-right: 2.33645vw;
@@ -73,13 +81,17 @@ export const TypeSelector = styled.div`
 
     p {
       margin: 0;
-      height: 105px; // 이것 덕분에 etc의 span이 눌려보이지 않는듯
+      height: 105px;
       display: flex;
       justify-content: center;
       align-items: center;
       padding-top: 20px;
       box-sizing: border-box;
+      transition: -webkit-transform 0.25s;
       transition: transform 0.25s;
+      transition: transform 0.25s, -webkit-transform 0.25s;
+      font-family: "Poppins";
+      jusitfy-contents: center;
 
       @media (max-width: 720px) {
         padding-top: 9px;
@@ -113,10 +125,15 @@ export const TypeSelector = styled.div`
 
     dl {
       margin: 0;
+      font-family: "Poppins";
 
       dt {
         color: #fff8e2;
         font-weight: 400;
+
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.05em;
 
         @media (max-width: 720px) {
           font-size: 2.80374vw;
@@ -130,6 +147,10 @@ export const TypeSelector = styled.div`
         font-weight: 400;
         color: #fff8e2;
 
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.05em;
+
         @media (max-width: 720px) {
           font-size: 2.80374vw;
           line-height: 2.80374vw;
@@ -139,7 +160,7 @@ export const TypeSelector = styled.div`
 
     .selected {
       color: #ffd600;
-      font-weight: 900;
+      font-weight: 700;
     }
   }
 `;
@@ -181,13 +202,13 @@ export const WorldSelector = styled.div`
       #75594e;
 
     span {
-      font-size: 18px;
       color: #fff8e2;
-      font-weight: 900;
+      font-weight: 800;
       opacity: 0.5;
       line-height: 30px;
-
       letter-spacing: 0.5px;
+      font-size: 20px;
+      font-family: "Poppins";
     }
   }
 

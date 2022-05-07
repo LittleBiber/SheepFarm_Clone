@@ -26,7 +26,7 @@ const Main = styled.div`
 
   @media (max-width: 1000px) {
     padding: 30px 0;
-    top: 80px;
+    top: 60px;
   }
 
   .title {

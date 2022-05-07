@@ -62,11 +62,12 @@ export const Main = styled.div`
         font-family: "Poppins";
         margin-bottom: 55px;
         display: flex;
-        width: 100%;
+        width: 30vw;
 
         @media (max-width: 1200px) {
           margin-bottom: 20px;
           transform: scale(0.8);
+          width: 70vw;
         }
 
         input {
@@ -172,6 +173,7 @@ export const NewsletterTitle = styled(Title)`
     font-size: 36px;
     line-height: 44px;
     margin-bottom: 30px;
+    margin-top: 0;
   }
 
   @media (max-width: 1000px) {

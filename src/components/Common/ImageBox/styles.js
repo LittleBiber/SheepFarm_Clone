@@ -47,7 +47,6 @@ export const Main = styled.div`
     justify-contents: center;
 
     .ibox_title {
-      font-weight: bold;
       font-size: 20px;
       line-height: 45px;
       text-align: center;
@@ -55,8 +54,6 @@ export const Main = styled.div`
       color: ${({ color }) => color};
       padding-bottom: 25px;
       font-weight: 900;
-
-      -webkit-text-stroke: 0.5px ${({ color }) => color};
     }
 
     .token-desc {
@@ -70,6 +67,7 @@ export const Main = styled.div`
       @media (max-width: 1000px) {
         font-size: 16px;
         line-height: 32px;
+        letter-spacing: 0.03em;
       }
     }
 

@@ -12,7 +12,7 @@ export const Main = styled.div`
     padding: 70px 0;
 
     @media (max-width: 1100px) {
-      padding: 0 50px;
+      padding: 70px 0;
     }
 
     @media (max-width: 580px) {
@@ -63,7 +63,7 @@ export const Main = styled.div`
 `;
 
 export const PartnersTitle = styled(Title)`
-  margin-bottom: 40px !important;
+  margin-bottom: 40px;
   font-weight: bold;
   text-align: center;
   color: #fff8e2;
@@ -74,6 +74,7 @@ export const PartnersTitle = styled(Title)`
     font-size: 36px;
     line-height: 44px;
     letter-spacing: 0.05em;
+    margin-top: 0;
   }
 
   @media (max-width: 580px) {

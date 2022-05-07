@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const MobileMenuBar = styled.div`
+  font-family: "Poppins";
+
   background-color: ${({ open, bgcolor }) => (open ? "#543F36" : bgcolor)};
   width: 100%;
   height: 80px;
@@ -42,6 +44,8 @@ export const MobileMenuBar = styled.div`
 
 export const MobileMenu = styled.div`
   ${({ open }) => !open && "display: none"};
+
+  font-family: "Poppins";
 
   position: fixed;
   z-index: 9999;

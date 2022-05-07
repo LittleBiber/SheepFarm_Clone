@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Main, SelectAll } from "./styles";
+import { ItemList, ProductList, SelectAll } from "./styles";
 
 export default function ItemBox({ selected, world }) {
   const [checkall, setCheckAll] = useState(false);
 
   return (
-    <Main>
+    <>
       <SelectAll>
         <div className="cx-wrapper">
           <input
@@ -26,7 +26,8 @@ export default function ItemBox({ selected, world }) {
         </div>
         <div className="selectall-text">Select All</div>
       </SelectAll>
-      <div className="item_list">
+      <ProductList />
+      <ItemList>
         <dl>
           <dt className="img-messages">
             <img
@@ -52,8 +53,8 @@ export default function ItemBox({ selected, world }) {
             )}
           </dd>
         </dl>
-      </div>
-    </Main>
+      </ItemList>
+    </>
   );
 }
 

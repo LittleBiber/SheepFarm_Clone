@@ -7,6 +7,7 @@ import MobileHeader from "../components/Common/MobileHeader";
 import Footer from "../components/Common/Footer";
 
 const Main = styled.div`
+  background-color: #fff8e2;
   position: relative;
   top: 80px;
 `;

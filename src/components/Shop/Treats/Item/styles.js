@@ -142,8 +142,8 @@ export const Main = styled.div`
         }
 
         dd {
-          // font-size: 1.66667vw;
-          // line-height: 1.66667vw;
+          font-size: 1.66667vw;
+          line-height: 1.66667vw;
 
           flex-shrink: 0;
           margin: 0;
@@ -153,16 +153,22 @@ export const Main = styled.div`
           letter-spacing: -0.015em;
 
           span:nth-child(1) {
-            // font-size: 24px;
+            font-size: 24px;
             font-weight: 700;
             line-height: 36px;
             letter-spacing: -0.015em;
+
+            @media (max-width: 720px) {
+              font-size: 4.6729vw;
+              line-height: 7.00935vw;
+            }
           }
         }
       }
     }
 
     .item-buy-btn button {
+      font-family: "Poppins";
       display: flex;
       justify-content: center;
       align-items: center;

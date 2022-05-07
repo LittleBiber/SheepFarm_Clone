@@ -26,6 +26,8 @@ export const Main = styled.div`
 `;
 
 export const Content = styled.li`
+  height: 100%;
+
   display: flex;
 
   flex-direction: column;
