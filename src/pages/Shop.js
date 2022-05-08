@@ -14,13 +14,22 @@ const Main = styled.div`
   position: relative;
 
   @media (max-width: 1000px) {
-    top: 40px;
+    top: 80px;
   }
 `;
 
-const ContentWrapper = styled.div`
+const PageContainer = styled.div`
   margin: 0 auto;
   max-width: 1440px;
+`;
+
+const ContentWrapper = styled.div`
+  // margin: 0 auto;
+  // max-width: 1440px;
+
+  min-height: 100vh;
+  background-color: #fff8e2;
+  padding: 75px 65px 197px 70px;
 
   @media (max-width: 1440px) {
     padding-right: 4.51389vw;
@@ -42,24 +51,8 @@ const ContentWrapper = styled.div`
   }
 
   .content-box {
-    min-height: 100vh;
-    background-color: #fff8e2;
-    padding: 75px 65px 197px 70px;
-
-    // position: relative;
-    // top: 80px;
-
-    // max-width: 1440px;
-    // width: 100%;
-    // min-height: 100vh;
-    // padding: 70px;
-
     @media (max-width: 1000px) {
-      padding: 30px 0;
-    }
-
-    @media (max-width: 720px) {
-      padding: 20px 0;
+      padding: 0;
     }
 
     .title {
@@ -85,29 +78,6 @@ const ContentWrapper = styled.div`
         margin-bottom: 0;
         padding: 40px 0 0;
       }
-
-      // color: #6f5246;
-      // text-align: center;
-      // padding: 75px 0 60px;
-      // font-size: 36px;
-      // line-height: 54px;
-      // margin-bottom: 0;
-      // font-weight: 900;
-      // line-height: 75px;
-
-      // @media (max-width: 1100px) {
-      //   padding-top: 0;
-      // }
-
-      // @media (max-width: 1000px) {
-      //   padding-top: 10px;
-      //   padding-bottom: 40px;
-      // }
-
-      // @media (max-width: 768px) {
-      //   font-size: 24px;
-      //   line-height: 36px;
-      // }
     }
   }
 `;
@@ -120,13 +90,15 @@ export default function Shop() {
     <Main>
       <Header bgcolor="#543F36" />
       <MobileHeader bgcolor="#543F36" />
-      <ContentWrapper>
-        <div className="content-box">
-          <h1 className="title">SHOP</h1>
-          <Selector select={select} setSelect={setSelect} />
-          <div className="shop-contents">{components[select]}</div>
-        </div>
-      </ContentWrapper>
+      <PageContainer>
+        <ContentWrapper>
+          <div className="content-box">
+            <h1 className="title">SHOP</h1>
+            <Selector select={select} setSelect={setSelect} />
+            <div className="shop-contents">{components[select]}</div>
+          </div>
+        </ContentWrapper>
+      </PageContainer>
       <Footer section={true} />
     </Main>
   );

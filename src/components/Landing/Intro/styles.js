@@ -138,7 +138,7 @@ export const Main = styled.div`
     background: #ff7f22;
     color: white;
     font-family: "Poppins";
-    font-weight: 900;
+    font-weight: 700;
 
     :hover {
       background: #d06920;

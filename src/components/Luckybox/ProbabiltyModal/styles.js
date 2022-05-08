@@ -52,6 +52,10 @@ export const Main = styled.div`
           @media (max-width: 580px) {
             max-width: 500px;
           }
+
+          @media (max-width: 500px) {
+            max-width: 410px;
+          }
         }
       }
 

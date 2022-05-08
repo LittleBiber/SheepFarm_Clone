@@ -19,18 +19,6 @@ export const Main = styled.div`
 `;
 
 export const ItemTable = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // width: 1300px;
-  // min-height: 100vh;
-
-  // padding: 75px 70px 197px;
-
-  // @media (max-width: 720px) {
-  //   padding: 0;
-  // }
-
   .comp-sign-in {
     display: flex;
     justify-content: center;
@@ -47,12 +35,7 @@ export const ItemTable = styled.div`
 
       .wallet-btns {
         display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
         align-items: center;
         -webkit-transition: all 0.2s;
         transition: all 0.2s;

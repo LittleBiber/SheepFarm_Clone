@@ -61,6 +61,7 @@ export const Content = styled.li`
     justify-content: flex-end;
 
     .probability-btn {
+      font-family: "Poppins";
       position: relative;
       right: -35px;
       padding: 10px 26px 10px 20px;
@@ -69,6 +70,8 @@ export const Content = styled.li`
       font-weight: 800;
       color: white;
       margin-bottom: 12px;
+
+      border: 1px solid grey;
 
       font-size: 20px;
       line-height: 25px;
@@ -120,6 +123,7 @@ export const Content = styled.li`
 
       span:first-child {
         font-weight: bold;
+        font-size: 20px;
       }
 
       span:last-child {

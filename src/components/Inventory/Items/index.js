@@ -13,9 +13,7 @@ export default function Items({ selected, world }) {
 
   return (
     <Main>
-      {/* comp-sub-wrap */}
       <ItemTable>
-        {/* comp-sub-content */}
         {userID ? (
           <ItemBox selected={selected} world={world} />
         ) : (

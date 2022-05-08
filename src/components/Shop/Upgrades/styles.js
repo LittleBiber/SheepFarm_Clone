@@ -102,7 +102,6 @@ export const Main = styled.div`
       }
 
       .comp-select__item--name {
-        // display: none;
         margin-top: 10px;
         color: #6f5246;
         text-align: center;
@@ -144,6 +143,7 @@ export const Main = styled.div`
 
       ul {
         margin: 0;
+        padding: 0;
         width: 830px;
         display: flex;
         justify-content: center;
@@ -233,46 +233,58 @@ export const Main = styled.div`
       position: relative;
       text-align: center;
 
-      @media (max-width: 1100px) {
-        font-size: 25px;
-      }
+      .upgrades-gage__txt {
+        // transform: translateX(50%);
 
-      span {
-        display: inline-block;
-        font-size: 16px;
-        line-height: 24px;
-        color: #6f5246;
-        font-weight: 700;
-      }
-
-      .img-pc {
-        display: none;
-
-        position: relative;
-        left: 9px;
-        top: 9px;
-        width: 810px;
-
-        @media (min-width: 1100px) {
-          display: none !important;
-
-          width: 340px;
-          height: 20px;
+        span {
+          display: inline-block;
+          font-size: 16px;
+          line-height: 24px;
+          color: #6f5246;
+          font-weight: 700;
+          // transform: translateX(-50%);
         }
       }
 
-      .img-m {
-        display: none;
-
+      .upgrades-gage-bx {
+        display: block;
+        left: 0;
+        top: 0;
         position: relative;
-        left: 9px;
-        top: 9px;
-        width: 810px;
+        z-index: 1;
+        overflow: hidden;
+        height: 40px;
+        width: 0%;
 
-        @media (max-width: 1100px) {
-          width: 340px;
-          height: 20px;
+        .img-pc {
           display: none;
+
+          position: relative;
+          left: 9px;
+          top: 9px;
+          width: 810px;
+
+          @media (min-width: 1100px) {
+            display: none !important;
+
+            width: 340px;
+            height: 20px;
+          }
+        }
+
+        .img-m {
+          display: none;
+
+          position: relative;
+          left: 9px;
+          top: 9px;
+          width: 810px;
+
+          @media (max-width: 1100px) {
+            width: 340px;
+            height: 20px;
+            display: none;
+          }
         }
       }
     }
@@ -311,6 +323,7 @@ export const Main = styled.div`
       width: 300px;
 
       button {
+        font-family: "Poppins";
         display: flex;
         justify-content: center;
         align-items: center;
@@ -320,6 +333,8 @@ export const Main = styled.div`
         transition: transform 0.1s;
         transition: transform 0.1s, -webkit-transform 0.1s;
         color: #fff;
+
+        border: 1px solid grey;
 
         font-size: 24px;
         font-weight: 700;

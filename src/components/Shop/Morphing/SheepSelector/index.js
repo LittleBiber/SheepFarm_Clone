@@ -5,14 +5,6 @@ import { Main, ButtonBox } from "./styles";
 export default function SheepSelector() {
   const [modal, setModal] = useState(false);
 
-  // 일단 더미 sheep을 생성해서 테스트
-  // const [sheepList, setSheepList] = useState([
-  //   { name: "a", gender: "male", rarity: "rare" },
-  //   { name: "b", gender: "male", rarity: "normal" },
-  //   { name: "c", gender: "female", rarity: "rare" },
-  //   { name: "d", gender: "female", rarity: "normal" },
-  // ]);
-
   const [sheep, setSheep] = useState({ male: null, female: null });
   const checkSheep = () => {
     return sheep.male && sheep.female;
@@ -21,12 +13,12 @@ export default function SheepSelector() {
   return (
     <>
       <Main>
-        <div class="comp-select Male">
-          <div class="comp-select-bx">
-            <div class="comp-select-item" onClick={() => setModal("Male")}>
+        <div className="comp-select Male">
+          <div className="comp-select-bx">
+            <div className="comp-select-item" onClick={() => setModal("Male")}>
               <div>
                 {/* <!-- class :on --> */}
-                <span class="on">
+                <span className="on">
                   <img src="/Morphing/ic_male.png" alt="" />
                   <p>Select Male Sheep</p>
                 </span>
@@ -36,24 +28,27 @@ export default function SheepSelector() {
             </div>
 
             <img
-              class="comp-select-bg"
+              className="comp-select-bg"
               src="/Morphing/img_item_select_bg.png"
               alt=""
             />
           </div>
 
           {/* <!-- class :on --> */}
-          <div class="comp-select__item--name">Name #001</div>
+          <div className="comp-select__item--name">Name #001</div>
         </div>
 
-        <img class="morphing-plus" src="/Morphing/ic_plus.png" alt="" />
+        <img className="morphing-plus" src="/Morphing/ic_plus.png" alt="" />
 
-        <div class="comp-select Female">
-          <div class="comp-select-bx">
-            <div class="comp-select-item" onClick={() => setModal("Female")}>
+        <div className="comp-select Female">
+          <div className="comp-select-bx">
+            <div
+              className="comp-select-item"
+              onClick={() => setModal("Female")}
+            >
               <div>
                 {/* <!-- class :on --> */}
-                <span class="on">
+                <span className="on">
                   <img src="/Morphing/ic_female.png" alt="" />
                   <p>Select Female Sheep</p>
                 </span>
@@ -63,20 +58,20 @@ export default function SheepSelector() {
             </div>
 
             <img
-              class="comp-select-bg"
+              className="comp-select-bg"
               src="/Morphing/img_item_select_bg.png"
               alt=""
             />
           </div>
 
           {/* <!-- class :on --> */}
-          <div class="comp-select__item--name"></div>
+          <div className="comp-select__item--name"></div>
         </div>
       </Main>
 
       <ButtonBox>
         {/* 비활성화 시 회색 / 활성화되면 여타버튼처럼 주황색계열 */}
-        <div class="comp-btn-default">
+        <div className="comp-btn-default">
           <button
             className={checkSheep() ? "button-active" : "button-disabled"}
           >

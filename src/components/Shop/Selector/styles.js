@@ -8,6 +8,9 @@ export const Main = styled.div`
   gap: 10px;
   font-size: 20px;
 
+  line-height: 25px;
+  letter-spacing: 0.05em;
+
   @media (max-width: 720px) {
     margin-top: 28px;
     padding-left: 7.71028vw;
@@ -24,10 +27,6 @@ export const Main = styled.div`
     border-radius: 30px;
     border: 2px solid #e3d8c4;
     text-decoration: none;
-
-    // @media (max-width: 720px) {
-    //   border: 2px solid #ecc66a;
-    // }
   }
 
   .active {

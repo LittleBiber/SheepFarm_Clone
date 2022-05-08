@@ -11,28 +11,28 @@ export default function Item({ id, name, price, desc, desc_sub }) {
 
   return (
     <Main>
-      <div class="item-view">
+      <div className="item-view">
         <img src="https://cdn.sheepfarm.io/cms/item/thumb/338.png" alt="" />
       </div>
 
-      <dl class="item-description-bx">
-        <dt class="item-name">{name}</dt>
-        <dd class="item-price">{price} MARD</dd>
-        <dd class="item-description">
+      <dl className="item-description-bx">
+        <dt className="item-name">{name}</dt>
+        <dd className="item-price">{price} MARD</dd>
+        <dd className="item-description">
           <span>{desc}</span>
           <br />
           {desc_sub}
         </dd>
       </dl>
 
-      <div class="item-control">
-        <div class="comp-count-bx">
-          <div class="comp-count" data-counter-idx="0">
-            <button class="minus-btn" onClick={() => setUnit(unit - 1)}>
+      <div className="item-control">
+        <div className="comp-count-bx">
+          <div className="comp-count" data-counter-idx="0">
+            <button className="minus-btn" onClick={() => setUnit(unit - 1)}>
               -
             </button>
             <input type="text" value={unit} />
-            <button class="plus-btn" onClick={() => setUnit(unit + 1)}>
+            <button className="plus-btn" onClick={() => setUnit(unit + 1)}>
               +
             </button>
           </div>
@@ -45,7 +45,7 @@ export default function Item({ id, name, price, desc, desc_sub }) {
           </dl>
         </div>
 
-        <div class="item-buy-btn">
+        <div className="item-buy-btn">
           <button data-id={id} onClick={handleModal}>
             Purchase
           </button>

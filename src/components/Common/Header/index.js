@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import KlipModal from "../../Common/KlipModal";
-import { Main, Link, WalletButton } from "./styles";
+import { Main, Link } from "./styles";
 import LoginBox from "../../Common/LoginBox";
 
 export default function Header({ bgcolor }) {
   const [boxOpen, setBoxOpen] = useState(false);
-
-  const [modal, setModal] = useState(false);
 
   const [userID, setUserID] = useState(null);
 
@@ -57,7 +54,7 @@ export default function Header({ bgcolor }) {
           </div>
         </div>
 
-        <div class="login_box">
+        <div className="login_box">
           <a
             href="https://game.sheepfarm.io/"
             className={["play-btn", !chkHref() && "hidden"].join(" ")}
@@ -71,26 +68,28 @@ export default function Header({ bgcolor }) {
           />
           <label htmlFor="walletbox">
             <div className="wallet_web">
-              <img
-                className={["wallet-list", userID && "hidden"].join(" ")}
-                src="/Header/ic_wallet.png"
-                alt=""
-              />
-              <img
-                className={["wallet-kaikas", "hidden"].join(" ")}
-                src="/Header/ic_wallet_kaikas.png"
-                alt=""
-              />
-              <img
-                className={["wallet-klip", !userID && "hidden"].join(" ")}
-                src="/Header/ic_wallet_klip.png"
-                alt=""
-              />
-              <img
-                className={["wallet-matamask", "hidden"].join(" ")}
-                src="/Header/ic_wallet_matamask.png"
-                alt=""
-              />
+              <div className="wallet_icons">
+                <img
+                  className={["wallet-list", userID && "hidden"].join(" ")}
+                  src="/Header/ic_wallet.png"
+                  alt=""
+                />
+                <img
+                  className={["wallet-kaikas", "hidden"].join(" ")}
+                  src="/Header/ic_wallet_kaikas.png"
+                  alt=""
+                />
+                <img
+                  className={["wallet-klip", !userID && "hidden"].join(" ")}
+                  src="/Header/ic_wallet_klip.png"
+                  alt=""
+                />
+                <img
+                  className={["wallet-matamask", "hidden"].join(" ")}
+                  src="/Header/ic_wallet_matamask.png"
+                  alt=""
+                />
+              </div>
               <img
                 className="wallet-signout"
                 src="/Header/ic_wallet_close.png"
@@ -109,35 +108,7 @@ export default function Header({ bgcolor }) {
         >
           <LoginBox type="normal" />
         </div>
-
-        {/* <div id="wallet-button-wrapper" className={!boxOpen ? "hidden" : ""}>
-          <div className="btns">
-            <WalletButton
-              color="black"
-              bgcolor="#FCFCFC"
-              border="#D3D1D1"
-              onClick={() => alert("Not Ready")}
-            >
-              <img src="/Header/metamask.webp" />
-              <span>Connect Metamask Wallet</span>
-            </WalletButton>
-            <WalletButton color="white" bgcolor="#696053" border="#38332A">
-              <img src="/Header/kaikas.svg" />
-              <span>Connect KAIKAS Wallet</span>
-            </WalletButton>
-            <WalletButton
-              color="black"
-              bgcolor="#FAE64D"
-              border="#F6BA21"
-              onClick={() => setModal(!modal)}
-            >
-              <img src="/Header/klip.svg" />
-              <span>Connect with Kilp</span>
-            </WalletButton>
-          </div>
-        </div> */}
       </div>
-      {/* <KlipModal modal={modal} setModal={setModal} /> */}
     </Main>
   );
 }

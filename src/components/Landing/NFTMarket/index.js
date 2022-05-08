@@ -3,51 +3,17 @@ import { Pin } from "../../../styles/index";
 import ImageBox from "../../Common/ImageBox";
 import CardSlider from "../../Common/CardSlider";
 import { Main, MAR_Title } from "./styles";
+import { DATA_LIST } from "./dummy";
 
 export default function NFTMarket() {
   const [now, setNow] = useState(0);
 
-  const DATA_LIST = [
-    {
-      imgborder: "#3E2A18",
-      boxborder: "#3E2A18",
-      background: "#FFF8E2",
-      shadow: "#76aace",
-      color: "#6f5246",
-      image: "/Token_Nft/sheep_nft.png",
-      title: "Sheep",
-      desc: "Farmers that sell the wool from their sheep can earn MARD tokens in exchange for their goods. The rarity rating of a sheep influences the value of the wool it produces, and in general, rarer sheep generate more valuable wool.",
-    },
-    {
-      imgborder: "#3E2A18",
-      boxborder: "#3E2A18",
-      background: "#FFF8E2",
-      shadow: "#76aace",
-      color: "#6f5246",
-      image: "/Token_Nft/deco_nft.png",
-      title: "Decorations",
-      desc: "Decor keeps sheep happy, which enhances their wool production while also allowing them to play with the many decorative pieces on the property. Make your sheep farm more attractive to ensure that your sheep stay comfortable and happy!",
-    },
-    {
-      imgborder: "#3E2A18",
-      boxborder: "#3E2A18",
-      background: "#FFF8E2",
-      shadow: "#76aace",
-      color: "#6f5246",
-      image: "/Token_Nft/land_nft.png",
-      title: "Pastures",
-      desc: "Sheep farmers start off by owning virtual pastures based on real-world environments and at least one pasture is needed for gameplay. Players can raise sheep and use various items to decorate their pastures.",
-    },
-  ];
   return (
     <Main offset={-150 + now * -435}>
       <div className="page-container">
-        {/* -150, -585, -1020*/}
         <div className="mar_top">
-          {/* 메인 */} {/* 이미지 div */}
           <img src="/Token_Nft/logo-nft.png" />
           <div className="mar_text">
-            {/* 핀, 제목, 설명 div */}
             <div className="pin_wrapper">
               <Pin>TOKEN/NFTT</Pin>
             </div>

@@ -28,13 +28,19 @@ export const MobileMenuBar = styled.div`
   }
 
   .shared {
-    background-image: url(/MobileHeader/${({ open }) =>
-      open ? "shared_sub.svg" : "shared.svg"});
+    background-image: url(/MobileHeader/${({ open, bgcolor }) =>
+      bgcolor === "#543F36" || open ? "shared_sub.svg" : "shared.svg"});
   }
 
   .menu {
-    background-image: url(/MobileHeader/${({ open }) =>
-      open ? "icon-menu-close_sub.svg" : "hamburger.svg"});
+    background-image: url(/MobileHeader/${({ open, bgcolor }) => {
+      if (bgcolor === "#543F36" && !open) return "hamburger_sub.svg";
+      else if (bgcolor !== "#543F36" && !open) return "hamburger.svg";
+      else if (bgcolor === "#543F36" && open) return "icon-menu-close_sub.svg";
+      else return "icon-menu-close_sub.svg";
+
+      // return open ? "icon-menu-close_sub.svg" : "hamburger.svg";
+    }});
   }
 
   @media (min-width: 1000px) {
@@ -161,13 +167,14 @@ export const MobileWallet = styled.div`
       font-size: 16px;
       line-height: 27px;
       padding: 0px 30px;
-      font-weight: 500;
       width: 100%;
       height: 45px;
       outline: none;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-familiy: "Poppins";
+      font-weight: 500;
 
       img {
         width: 30px;
@@ -184,6 +191,8 @@ export const MobileWallet = styled.div`
     }
 
     .disconnect-btn {
+      font-family: "Poppins";
+      font-weight: 500;
       margin-top: 10px;
       background-color: #fcfcfc;
       width: 150px;
@@ -191,6 +200,10 @@ export const MobileWallet = styled.div`
       border-radius: 10px;
       font-size: 14px;
       cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

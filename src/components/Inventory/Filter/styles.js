@@ -73,6 +73,12 @@ export const TypeSelector = styled.div`
     height: 160px;
     cursor: pointer;
 
+    @media (min-width: 1440px) {
+      :hover p {
+        padding-top: 0;
+      }
+    }
+
     @media (max-width: 720px) {
       padding-left: 1.86916vw;
       padding-right: 1.86916vw;
@@ -87,11 +93,10 @@ export const TypeSelector = styled.div`
       align-items: center;
       padding-top: 20px;
       box-sizing: border-box;
-      transition: -webkit-transform 0.25s;
-      transition: transform 0.25s;
-      transition: transform 0.25s, -webkit-transform 0.25s;
       font-family: "Poppins";
       jusitfy-contents: center;
+
+      transition: padding-top 0.2s;
 
       @media (max-width: 720px) {
         padding-top: 9px;
@@ -206,7 +211,7 @@ export const WorldSelector = styled.div`
       font-weight: 800;
       opacity: 0.5;
       line-height: 30px;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       font-size: 20px;
       font-family: "Poppins";
     }

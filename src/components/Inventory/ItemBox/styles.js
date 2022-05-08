@@ -1,23 +1,15 @@
 import styled from "styled-components";
 
 export const ItemList = styled.div`
-  // max-width: 1300px;
-  // width: 100vw;
-  // overflow: hidden;
-  // padding-top: 80px;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-
-  @media (max-width: 720px) {
-    padding-top: 0;
-  }
-
   overflow: hidden;
   padding-top: 80px;
 
   display: flex;
   justify-content: center;
+
+  @media (max-width: 720px) {
+    padding-top: 0;
+  }
 
   dl {
     text-align: center;
@@ -39,14 +31,6 @@ export const ItemList = styled.div`
       position: relative;
       margin-top: -1px;
 
-      // position: relative;
-      // margin-top: -1px;
-      // margin-bottom: 0.5rem;
-      // margin-left: 0;
-
-      // display: flex;
-      // justify-content: center;
-
       .message-text {
         font-size: 50px;
         font-weight: 900;
@@ -66,25 +50,6 @@ export const ItemList = styled.div`
           font-size: 5.60748vw;
           line-height: 8.17757vw;
         }
-
-        // width: 100%;
-        // height: 100%;
-        // color: #44362a;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // letter-spacing: 2px;
-
-        // font-size: 50px;
-        // font-weight: 900;
-        // line-height: 75px;
-
-        // font-family: "Poppins";
-
-        // @media (max-width: 720px) {
-        //   font-size: 5.60748vw;
-        //   line-height: 8.17757vw;
-        // }
       }
     }
   }
@@ -127,18 +92,8 @@ export const ProductList = styled.div`
 `;
 
 export const SelectAll = styled.div`
-  // width: 100%;
-  // display: flex;
-  // justify-content: flex-end;
-  // align-items: center;
-  // margin-bottom: 23px;
-
   display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   margin-bottom: 23px;
 

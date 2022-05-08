@@ -97,8 +97,11 @@ export const Main = styled.div`
         box-sizing: border-box;
         border-radius: 100px;
 
-        .wallet-list {
+        .wallet_icons {
           margin-right: 9px;
+        }
+
+        .wallet-list {
           width: 24px;
           vertical-align: middle;
         }
@@ -127,7 +130,8 @@ export const Main = styled.div`
         }
 
         .wallet-text {
-          display: inline-block;
+          display: flex;
+          align-items: center;
           font-size: 14px;
           line-height: 21px;
           font-weight: 700;
@@ -137,33 +141,6 @@ export const Main = styled.div`
         }
       }
     }
-
-    // #wallet-button-wrapper {
-    //   position: absolute;
-    //   top: 90px;
-    //   right: 0;
-    //   align-items: center;
-    //   transition: all 0.2s;
-
-    //   .btns {
-    //     background-color: #f5e7aa;
-    //     padding: 20px;
-    //     border: 4px solid #6f5246;
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     transition: all 0.2s;
-
-    //     img {
-    //       width: 30px;
-    //       margin-right: 10px;
-    //     }
-
-    //     button:not(:last-child) {
-    //       margin-bottom: 15px;
-    //     }
-    //   }
-    // }
   }
 
   .loginbox-wrapper {

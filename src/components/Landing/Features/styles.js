@@ -13,16 +13,13 @@ export const Main = styled.div`
 
   overflow: hidden;
 
-  // @media (max-width: 1000px) {
-  //   padding-bottom: 0;
-  // }
-
   .page-container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 1;
+    width: 1300px;
 
     .feature_title {
       font-family: Arvo;

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Main } from "./styles";
+import ReportModal from "../ReportModal";
 
 export default function Footer({ section }) {
+  const [report, setReport] = useState(false);
+
+  const handleReportModal = () => {
+    setReport(true);
+  };
+
   return (
     <Main section={section}>
       <div className="page-container">
@@ -11,10 +18,13 @@ export default function Footer({ section }) {
         </a>
         <span>2021-2022 All rights reserved. Nightingale Interactive.</span>
       </div>
-      <div class="error-report-container">
-        <button class="btn-error-report" onclick="show_error_report_popup()">
+      <div className="error-report-container">
+        <button className="btn-error-report" onClick={handleReportModal}>
           Report error
         </button>
+      </div>
+      <div className={!report && "hidden"}>
+        <ReportModal setReport={setReport} />
       </div>
     </Main>
   );

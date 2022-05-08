@@ -24,31 +24,31 @@ export default function PurchaseModal({
   return (
     <Main className={on ? "on" : "hidden"}>
       <div className="page-container">
-        <div class="popup-content">
-          <div class="close-btn" onClick={() => setModal(false)} />
-          <div class="comp-payment-receipt">
-            <dl class="comp-payment-receipt-title">
+        <div className="popup-content">
+          <div className="close-btn" onClick={() => setModal(false)} />
+          <div className="comp-payment-receipt">
+            <dl className="comp-payment-receipt-title">
               <dt>PAYMENT RECEIPT</dt>
               <dd>{item_name}</dd>
             </dl>
 
-            <div class="payment-price-list">
-              <dl class="comp-payment-price">
+            <div className="payment-price-list">
+              <dl className="comp-payment-price">
                 <dt>Price</dt>
                 <dd>
                   <span>{price}</span> MARD
                 </dd>
               </dl>
-              <dl class="comp-payment-price">
+              <dl className="comp-payment-price">
                 <dt>Unit</dt>
                 <dd>
                   <span>{unit}</span>
                 </dd>
               </dl>
             </div>
-            <div class="comp-dot__line"></div>
-            <div class="payment-price-list">
-              <dl class="comp-payment-price">
+            <div className="comp-dot__line"></div>
+            <div className="payment-price-list">
+              <dl className="comp-payment-price">
                 <dt>Total</dt>
                 <dd>
                   <span>{Math.round(price * unit * 1000) / 1000}</span> MARD
@@ -56,8 +56,8 @@ export default function PurchaseModal({
               </dl>
             </div>
 
-            <div class="payment-btn-bx">
-              <div class="proceed-btn">
+            <div className="payment-btn-bx">
+              <div className="proceed-btn">
                 <button className="comp-btn-default" onClick={handleModal}>
                   PROCEED
                 </button>
@@ -66,17 +66,17 @@ export default function PurchaseModal({
           </div>
 
           <img
-            class="popup-content-bg img-pc"
+            className="popup-content-bg img-pc"
             src="/Shop/bg_popup_shop_big.png"
             alt=""
           />
           <img
-            class="popup-content-bg img-m"
+            className="popup-content-bg img-m"
             src="/Shop/bg_popup_shop_small00.png"
             alt=""
           />
 
-          <div class="dimmed-bg"></div>
+          <div className="dimmed-bg"></div>
         </div>
       </div>
 

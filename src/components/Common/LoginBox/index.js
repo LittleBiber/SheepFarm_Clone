@@ -8,8 +8,6 @@ export default function LoginBox({ type }) {
   return (
     <Main type={type}>
       <div className="wallet-button-box">
-        {/* <div className="wallet-button-wrapper">
-          <div className="btns"> */}
         <WalletButton
           type={type}
           color="black"
@@ -41,8 +39,6 @@ export default function LoginBox({ type }) {
           <img src="/Header/klip.svg" />
           <span>Connect with Kilp</span>
         </WalletButton>
-        {/* </div>
-        </div> */}
       </div>
       <KlipModal modal={modal} setModal={setModal} />
     </Main>

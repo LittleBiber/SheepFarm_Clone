@@ -54,9 +54,6 @@ export const Main = styled.div`
       }
 
       .image-container {
-        // flex: 0 0 auto;
-        // width: 50%;
-
         flex-shrink: 0;
         width: 100%;
         max-width: 100%;
@@ -132,14 +129,41 @@ export const Main = styled.div`
 
       .row div {
         flex-shrink: 0;
-        width: 100%;
         max-width: 100%;
         padding-right: calc(var(--bs-gutter-x) * 0.5);
         padding-left: calc(var(--bs-gutter-x) * 0.5);
         margin-top: var(--bs-gutter-y);
       }
 
-      .title {
+      .row .title_wrapper {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 47px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+
+        @media (min-width: 1000px) {
+          margin: 0;
+          padding-right: unset;
+          padding-left: unset;
+        }
+
+        @media (max-width: 1000px) {
+          width: 500px;
+          text-align: center;
+        }
+      }
+
+      .center {
+        @media (max-width: 1000px) {
+          display: flex;
+          justify-content: center;
+          line-height: 30px;
+        }
+      }
+
+      .row .title {
         color: #fff8e2;
         font-style: normal;
         font-weight: bold;
@@ -148,11 +172,16 @@ export const Main = styled.div`
         text-transform: uppercase;
         margin-bottom: 20px;
 
+        @media (min-width: 1100px) {
+          padding: 0;
+        }
+
         @media (max-width: 1000px) {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 500px;
+          font-weight: bold;
+          font-size: 36px;
+          line-height: 44px;
+          letter-spacing: 0.05em;
+          margin-bottom: 0;
         }
 
         @media (max-width: 580px) {
@@ -165,7 +194,8 @@ export const Main = styled.div`
         text-shadow: 2px 6px 7px rgb(68 89 46 / 76%);
       }
 
-      .description {
+      .row .description {
+        font-family: "Poppins";
         display: flex;
         flex-direction: column;
         align-itmes: flex-start;
@@ -174,7 +204,12 @@ export const Main = styled.div`
         font-size: 20px;
         font-weight: 500;
 
+        @media (min-width: 1100px) {
+          padding: 0;
+        }
+
         @media (max-width: 1100px) {
+          text-align: center;
           width: 500px;
         }
 
@@ -184,7 +219,7 @@ export const Main = styled.div`
 
         @media (min-width: 992px) {
           flex: 0 0 auto;
-          width: 85%;
+          width: 100%;
         }
 
         @media (max-width: 580px) {

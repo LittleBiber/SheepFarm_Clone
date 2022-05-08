@@ -72,7 +72,6 @@ export const Main = styled.div`
           }
 
           .gender {
-            // 시험삼아 index.css에 적용했는데 잘 적용됨
             color: #6f5246;
             margin-bottom: 5px;
 

@@ -10,23 +10,6 @@ export const Main = styled.div`
   align-items: center;
   overflow: hidden;
 
-  // width: 100%;
-  // height: 100%;
-  // background: #f9f4f1;
-  // position: relative;
-
-  // min-height: 100vh;
-  // display: flex;
-  // align-items: center;
-  // overflow: hidden;
-  // flex-direction: column;
-
-  // .pin_wrapper {
-  //   width: 100%;
-  //   display: flex;
-  //   justify-content: center;
-  // }
-
   .page-container {
     position: relative;
     z-index: 1;
