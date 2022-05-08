@@ -86,9 +86,10 @@ export const Main = styled.div`
       }
 
       .wallet_web {
+        height: 50px;
         display: flex;
         justify-content: center;
-        align-items: stretch;
+        align-items: center;
 
         cursor: pointer;
         padding: 8px 20px;
@@ -106,11 +107,15 @@ export const Main = styled.div`
           vertical-align: middle;
         }
 
-        .wallet-kaikas,
-        .wallet-klip,
-        .wallet-matamask,
-        .wallet-signout {
-          margin-right: 9px;
+        // .wallet-kaikas,
+        // .wallet-klip,
+        // .wallet-matamask,
+        // .wallet-signout {
+        //   // margin-right: 9px;
+        // }
+
+        img {
+          vertical-align: center;
         }
 
         .wallet-signout {

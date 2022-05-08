@@ -70,6 +70,10 @@ export const Main = styled.div`
           width: 70vw;
         }
 
+        @media (max-width: 720px) {
+          width: auto;
+        }
+
         input {
           outline: none;
           margin: 0;

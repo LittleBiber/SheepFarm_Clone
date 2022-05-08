@@ -91,6 +91,7 @@ export default function Upgrades() {
           <div>1 MARD</div>
         </div>
       </div>
+      <div className="maintenance">Under maintenance</div>
     </Main>
   );
 }

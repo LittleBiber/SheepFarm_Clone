@@ -89,12 +89,12 @@ export default function Header({ bgcolor }) {
                   src="/Header/ic_wallet_matamask.png"
                   alt=""
                 />
+                <img
+                  className="wallet-signout"
+                  src="/Header/ic_wallet_close.png"
+                  alt=""
+                />
               </div>
-              <img
-                className="wallet-signout"
-                src="/Header/ic_wallet_close.png"
-                alt=""
-              />
 
               <div className="wallet-text">
                 {userID ? curUserID() : "Wallet Connect"}
