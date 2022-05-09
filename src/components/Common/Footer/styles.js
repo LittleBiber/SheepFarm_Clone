@@ -64,7 +64,6 @@ export const Main = styled.div`
       border-radius: 20px;
       padding: 10px;
       font-size: 12px;
-      font-family: "Poppins";
     }
   }
 `;

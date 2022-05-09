@@ -15,7 +15,7 @@ export default function NFTMarket() {
           <img src="/Token_Nft/logo-nft.png" />
           <div className="mar_text">
             <div className="pin_wrapper">
-              <Pin>TOKEN/NFTT</Pin>
+              <Pin>TOKEN/NFT</Pin>
             </div>
             <MAR_Title color="#FFF8E2">NFT MARKET</MAR_Title>
             <div className="mar_desc">

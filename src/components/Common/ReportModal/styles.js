@@ -11,7 +11,6 @@ export const Main = styled.div`
   border-radius: 20px;
   padding: 40px;
   box-shadow: 5px 5px 5px #0000009e;
-  font-family: "Poppins";
 
   .box_top {
     display: flex;

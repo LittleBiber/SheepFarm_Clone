@@ -8,7 +8,6 @@ import MobileHeader from "../components/Common/MobileHeader";
 import Footer from "../components/Common/Footer";
 
 const Wrapper = styled.div`
-  font-family: "Poppins";
   background-color: #fff8e2;
 `;
 

@@ -93,7 +93,7 @@ export const TypeSelector = styled.div`
       align-items: center;
       padding-top: 20px;
       box-sizing: border-box;
-      font-family: "Poppins";
+
       jusitfy-contents: center;
 
       transition: padding-top 0.2s;
@@ -130,7 +130,6 @@ export const TypeSelector = styled.div`
 
     dl {
       margin: 0;
-      font-family: "Poppins";
 
       dt {
         color: #fff8e2;
@@ -171,7 +170,6 @@ export const TypeSelector = styled.div`
 `;
 
 export const WorldSelector = styled.div`
-  font-family: "Poppins";
   background-color: #75594e;
   margin-top: -1px;
   font-weight: 900;
@@ -213,7 +211,6 @@ export const WorldSelector = styled.div`
       line-height: 30px;
       letter-spacing: 1px;
       font-size: 20px;
-      font-family: "Poppins";
     }
   }
 

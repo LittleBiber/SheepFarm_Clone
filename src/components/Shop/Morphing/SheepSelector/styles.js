@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-  font-family: "Poppins";
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -157,7 +156,6 @@ export const Main = styled.div`
 `;
 
 export const ButtonBox = styled.div`
-  font-family: "Poppins";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -174,7 +172,6 @@ export const ButtonBox = styled.div`
     }
 
     button {
-      font-family: "Poppins";
       font-size: 24px;
       font-weight: 700;
       line-height: 36px;

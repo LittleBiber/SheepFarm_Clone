@@ -7,7 +7,6 @@ export const Main = styled.div`
   z-index: 10;
   display: flex;
   justify-content: center;
-  font-family: "Poppins";
 
   @media (max-width: 1000px) {
     display: none;

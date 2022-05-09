@@ -36,7 +36,6 @@ export const ItemList = styled.div`
         font-weight: 900;
         line-height: 75px;
 
-        font-family: "Poppins";
         font-weight: 900;
         width: 100%;
         height: 100%;
@@ -150,7 +149,6 @@ export const SelectAll = styled.div`
   }
 
   .selectall-text {
-    font-family: "Poppins";
     font-style: normal;
     font-weight: 800;
     font-size: 24px;

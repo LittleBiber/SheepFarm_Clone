@@ -59,15 +59,13 @@ export const Main = styled.div`
       }
 
       .email_form {
-        font-family: "Poppins";
         margin-bottom: 55px;
         display: flex;
-        width: 30vw;
+        flex: 1;
 
         @media (max-width: 1200px) {
           margin-bottom: 20px;
           transform: scale(0.8);
-          width: 70vw;
         }
 
         @media (max-width: 720px) {
@@ -113,7 +111,6 @@ export const Main = styled.div`
       }
 
       .desc {
-        font-family: "Poppins";
         font-weight: 500;
         font-size: 20px;
         line-height: 39px;
@@ -172,6 +169,7 @@ export const NewsletterTitle = styled(Title)`
   text-shadow: 6px 6px 5px rgb(233 211 169 / 50%);
   margin-bottom: 80px;
   letter-spacing: 0.05em;
+  font-family: Arvo;
 
   @media (max-width: 1200px) {
     font-size: 36px;

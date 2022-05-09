@@ -9,7 +9,6 @@ import MobileHeader from "../components/Common/MobileHeader";
 import Footer from "../components/Common/Footer";
 
 const Main = styled.div`
-  font-family: "Poppins";
   background-color: #fff8e2;
   position: relative;
 

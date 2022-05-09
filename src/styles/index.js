@@ -12,7 +12,6 @@ export const Pin = styled.span`
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
   border-radius: 20px;
   margin-bottom: 25px;
-  font-family: "Poppins";
 
   @media (max-width: 580px) {
     padding: 3px 28px !important;

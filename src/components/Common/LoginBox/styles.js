@@ -113,7 +113,6 @@ export const WalletButton = styled.button`
   ${({ type }) => BUTTON_VALUES[type]}
 
   span {
-    font-family: "Poppins";
     font-size: 16px;
     line-height: 27px;
     font-weight: 500;

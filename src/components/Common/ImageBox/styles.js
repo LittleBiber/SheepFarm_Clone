@@ -20,7 +20,7 @@ export const Main = styled.div`
     top: 0;
     z-index: 1;
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
     border-radius: 50%;
     border: 5px solid;
     border-color: ${({ imgborder }) => imgborder};
@@ -53,7 +53,10 @@ export const Main = styled.div`
       letter-spacing: 0;
       color: ${({ color }) => color};
       padding-bottom: 25px;
+
       font-weight: 900;
+      letter-spacing: 0.03em;
+      color: #6f5246;
     }
 
     .token-desc {
@@ -61,7 +64,7 @@ export const Main = styled.div`
       font-size: 20px;
       line-height: 36px;
       text-align: center;
-      letter-spacing: 0.065em;
+      letter-spacing: 0.03em;
       color: ${({ color }) => color};
 
       @media (max-width: 1000px) {

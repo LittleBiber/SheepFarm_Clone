@@ -54,9 +54,7 @@ export const Main = styled.div`
           color: #75594e;
           font-size: 20px;
           font-weight: 500;
-          letter-spacing: 1px;
-
-          font-family: "Poppins";
+          // letter-spacing: 1px;
 
           @media (max-width: 580px) {
             font-size: 14px !important;
@@ -94,7 +92,6 @@ export const Main = styled.div`
         justify-content: center;
         gap: 20px;
         transition: all 0.5s;
-        font-family: "Poppins";
 
         @media (max-width: 1000px) {
           transform: translateX(${({ offset }) => offset}px);
@@ -111,6 +108,11 @@ export const MAR_Title = styled(Title)`
   font-weight: bold;
 
   text-shadow: 4px 4px 4px rgb(232 220 181 / 80%);
+
+  font-family: Arvo;
+  font-size: 47px;
+  line-height: 66px;
+  letter-spacing: 0.05em;
 
   @media (max-width: 1000px) {
     font-weight: bold;

@@ -8,7 +8,7 @@ export const Main = styled.div`
   align-items: center;
   background-color: #75594e;
   position: relative;
-  padding: 50px 0;
+  // padding: 50px 0;
 
   min-height: 100vh;
   display: flex;
@@ -38,6 +38,7 @@ export const Main = styled.div`
     }
 
     .top {
+      width: 100%;
       font-style: normal;
       font-weight: bold;
       font-size: 47px;
@@ -112,13 +113,14 @@ export const Main = styled.div`
 `;
 
 export const Title = styled.div`
+  font-family: "Arvo";
   color: #fff8e2;
   font-style: normal;
   font-weight: bold;
   font-size: 47px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   text-shadow: 6px 6px 5px #63473d;
   text-align: center;
 

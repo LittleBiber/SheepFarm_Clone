@@ -8,6 +8,7 @@ export const Main = styled.div`
 
   display: flex;
   justify-content: center;
+  align-items: center;
   font-weight: 900;
 
   .welcome_image {
@@ -37,13 +38,16 @@ export const Main = styled.div`
   }
 
   .welcome_text {
+    width: 1300px;
+    padding: 80px 80px 98px 55px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    width: 610px;
+    // width: 610px;
     top: 75px;
-    padding: 60px 0;
+    // padding: 60px 0;
     text-align: center;
 
     @media (max-width: 1100px) {
@@ -60,6 +64,8 @@ export const Main = styled.div`
     color: #35220e;
     letter-spacing: 0.03em;
     position: relative;
+    font-family: "Arvo";
+    font-weight: bold;
 
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #492100;
@@ -85,7 +91,7 @@ export const Main = styled.div`
 
   .small {
     font-size: 32px;
-    padding: 0 0 10px;
+    padding: 0 0 15px;
 
     @media (max-width: 1100px) {
       padding: 0;
@@ -137,7 +143,8 @@ export const Main = styled.div`
     margin-top: 24px;
     background: #ff7f22;
     color: white;
-    font-family: "Poppins";
+    letter-spacing: -0.3px;
+
     font-weight: 700;
 
     :hover {

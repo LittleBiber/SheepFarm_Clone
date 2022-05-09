@@ -61,7 +61,6 @@ export const Content = styled.li`
     justify-content: flex-end;
 
     .probability-btn {
-      font-family: "Poppins";
       position: relative;
       right: -35px;
       padding: 10px 26px 10px 20px;

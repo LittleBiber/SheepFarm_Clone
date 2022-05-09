@@ -8,7 +8,6 @@ export const Main = styled.li`
   border: 2px solid #3f2d1c;
   border-radius: 25px;
   padding: 25px;
-  font-family: "Poppins";
 
   @media (max-width: 580px) {
     min-width: 350px !important;
@@ -33,7 +32,6 @@ export const Main = styled.li`
     font-weight: 500;
     font-size: 20px;
     margin-bottom: 10px;
-
     letter-spacing: 0.05em;
   }
 

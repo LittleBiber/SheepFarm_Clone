@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-  font-family: "Poppins";
   position: fixed;
   left: 0;
   top: 0;

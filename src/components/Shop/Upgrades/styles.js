@@ -323,7 +323,6 @@ export const Main = styled.div`
       width: 300px;
 
       button {
-        font-family: "Poppins";
         display: flex;
         justify-content: center;
         align-items: center;

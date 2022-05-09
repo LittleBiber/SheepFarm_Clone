@@ -168,7 +168,6 @@ export const Main = styled.div`
     }
 
     .item-buy-btn button {
-      font-family: "Poppins";
       display: flex;
       justify-content: center;
       align-items: center;

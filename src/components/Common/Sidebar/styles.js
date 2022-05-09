@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Main = styled.div`
   position: fixed;
   right: 20px;
-  bottom: 130px;
+  bottom: 60px;
   transition: top 0.2s;
   display: flex;
   flex-direction: column;
