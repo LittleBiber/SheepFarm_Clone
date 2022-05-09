@@ -98,7 +98,7 @@ export default function Shop() {
           </div>
         </ContentWrapper>
       </PageContainer>
-      <Footer section={true} />
+      <Footer section={false} />
     </Main>
   );
 }

@@ -6,7 +6,7 @@ export const MorphingHelp = styled.div`
   padding-top: 30px;
   margin-bottom: 40px;
 
-  @media (max-widht: 1100px) {
+  @media (max-width: 1100px) {
     padding: 4.54545vw;
   }
 
@@ -61,7 +61,7 @@ export const MorphingHelp = styled.div`
 `;
 
 export const MorphLog = styled.div`
-  margin-top: 50px;
+  margin-top: 90px;
 
   dl {
     margin: 0;

@@ -13,6 +13,15 @@ export const Main = styled.div`
 
   overflow: hidden;
 
+  @media (max-width: 1000px) {
+    position: relative;
+  }
+
+  @media (max-width: 580px) {
+    min-height: unset;
+    padding: 70px 0 0 0;
+  }
+
   .page-container {
     position: relative;
     display: flex;
@@ -20,6 +29,10 @@ export const Main = styled.div`
     align-items: center;
     z-index: 1;
     width: 1300px;
+
+    .pin_wrapper {
+      margin-bottom: 25px;
+    }
 
     .feature_title {
       font-family: Arvo;

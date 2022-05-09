@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import KlipModal from "../../../Common/KlipModal";
 import LoginBox from "../../../Common/LoginBox";
 import { Main } from "./styles";
@@ -13,19 +13,35 @@ export default function PurchaseModal({
   const [proceed, setProceed] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
 
+  const [loginType, setLoginType] = useState(null);
+
   const handleModal = () => {
-    if (window.localStorage.getItem("klipID")) {
+    if (window.localStorage.getItem("userID")) {
       setProceed(true);
     } else {
       setLoginModal(true);
     }
   };
 
+  const killModal = () => {
+    setProceed(false);
+    setLoginModal(false);
+    setModal(false);
+  };
+
+  useEffect(() => {
+    const value = JSON.parse(window.localStorage.getItem("userID"));
+
+    if (value) {
+      setLoginType(value[0]);
+    }
+  }, []);
+
   return (
     <Main className={on ? "on" : "hidden"}>
       <div className="page-container">
         <div className="popup-content">
-          <div className="close-btn" onClick={() => setModal(false)} />
+          <div className="close-btn" onClick={killModal} />
           <div className="comp-payment-receipt">
             <dl className="comp-payment-receipt-title">
               <dt>PAYMENT RECEIPT</dt>
@@ -58,9 +74,23 @@ export default function PurchaseModal({
 
             <div className="payment-btn-bx">
               <div className="proceed-btn">
-                <button className="comp-btn-default" onClick={handleModal}>
+                <button
+                  className={["comp-btn-default", loginModal && "hidden"].join(
+                    " "
+                  )}
+                  onClick={handleModal}
+                >
                   PROCEED
                 </button>
+              </div>
+
+              <div
+                className={[
+                  "login-wrapper",
+                  loginModal && !proceed ? "" : "hidden",
+                ].join(" ")}
+              >
+                <LoginBox type="normal" />
               </div>
             </div>
           </div>
@@ -80,11 +110,11 @@ export default function PurchaseModal({
         </div>
       </div>
 
-      <div className={["login-modal", !loginModal && "hidden"].join(" ")}>
+      {/* <div className={["login-modal", !loginModal && "hidden"].join(" ")}>
         <div className="login-wrapper">
           <LoginBox type="normal" />
         </div>
-      </div>
+      </div> */}
 
       <KlipModal modal={proceed} setModal={setProceed} />
     </Main>

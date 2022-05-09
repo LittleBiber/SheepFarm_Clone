@@ -89,6 +89,11 @@ export const Main = styled.div`
     .sheepster_board {
       position: relative;
       z-index: 1;
+      transform: scale(0.8);
+
+      @media (max-width: 680px) {
+        transform: scale(1);
+      }
 
       img {
         width: 770px;
@@ -96,14 +101,12 @@ export const Main = styled.div`
 
         @media (max-width: 1000px) {
           width: 500px;
-          transform: scale(0.8);
         }
 
         @media (max-width: 680px) {
           width: 350px;
           margin-top: 20px;
           margin-bottom: 50px;
-          transform: scale(1);
         }
       }
 

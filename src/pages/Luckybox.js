@@ -14,6 +14,11 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.div`
   margin: 0 auto;
   max-width: 1440px;
+
+  @media (max-width: 1100px) {
+    position: relative;
+    top: 80px;
+  }
 `;
 
 const Main = styled.div`
@@ -25,7 +30,6 @@ const Main = styled.div`
 
   @media (max-width: 1000px) {
     padding: 30px 0;
-    top: 60px;
   }
 
   .title {
@@ -36,8 +40,7 @@ const Main = styled.div`
     line-height: 54px;
     margin-bottom: 0;
     font-weight: 900;
-    line-height: 75px;
-    letter-spacing: 1px;
+    letter-spacing: 1.6px;
 
     @media (max-width: 1100px) {
       padding-top: 0;

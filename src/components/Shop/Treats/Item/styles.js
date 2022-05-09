@@ -84,7 +84,8 @@ export const Main = styled.div`
   }
 
   .item-control {
-    padding: 0 1.38889vw; // 미디어 쿼리 (max-width: 1440px)가 걸려있음
+    // padding: 0 1.38889vw; // 미디어 쿼리 (max-width: 1440px)가 걸려있음
+    padding: 0 20px;
 
     .comp-count-bx {
       .comp-count {
@@ -128,28 +129,44 @@ export const Main = styled.div`
       }
 
       .total-price {
+        // margin-top: 22px;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: center;
+        // margin-bottom: 1rem;
+        // font-size: 20px;
+
         margin-top: 22px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
-        font-size: 20px;
 
         dt {
           font-size: 20px;
-          line-height: 1.38889vw;
+          line-height: initial;
           font-weight: 400;
+          letter-spacing: 0.05em;
         }
 
         dd {
-          font-size: 1.66667vw;
-          line-height: 1.66667vw;
+          // font-size: 1.66667vw;
+          // line-height: 1.66667vw;
+
+          // flex-shrink: 0;
+          // margin: 0;
+          // color: #ff7f22;
+
+          // font-weight: 700;
+          // letter-spacing: -0.015em;
 
           flex-shrink: 0;
           margin: 0;
           color: #ff7f22;
 
+          font-size: 24px;
           font-weight: 700;
+          line-height: 36px;
           letter-spacing: -0.015em;
 
           span:nth-child(1) {

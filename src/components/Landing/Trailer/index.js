@@ -1,6 +1,6 @@
 import React from "react";
 import { Pin } from "../../../styles";
-import { Main, Title } from "./styles";
+import { Main, TrailerTitle } from "./styles";
 
 export default function Overview() {
   return (
@@ -10,7 +10,7 @@ export default function Overview() {
           <div className="pin_wrapper">
             <Pin>GAME</Pin>
           </div>
-          <Title>GAME TRAILER</Title>
+          <TrailerTitle>GAME TRAILER</TrailerTitle>
         </div>
         <div className="video_wrapper">
           <video poster="/Trailer/placeholder2.png" controls>

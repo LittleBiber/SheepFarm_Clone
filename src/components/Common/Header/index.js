@@ -5,10 +5,11 @@ import LoginBox from "../../Common/LoginBox";
 export default function Header({ bgcolor }) {
   const [boxOpen, setBoxOpen] = useState(false);
 
+  const [loginType, setLoginType] = useState(null);
   const [userID, setUserID] = useState(null);
 
   const signOut = () => {
-    localStorage.removeItem("klipID");
+    localStorage.removeItem("userID");
     window.location.reload();
   };
 
@@ -26,8 +27,12 @@ export default function Header({ bgcolor }) {
   };
 
   useEffect(() => {
-    const value = window.localStorage.getItem("klipID");
-    if (value) setUserID(value);
+    const value = JSON.parse(window.localStorage.getItem("userID"));
+
+    if (value) {
+      setLoginType(value[0]);
+      setUserID(value[1]);
+    }
   }, []);
 
   return (
@@ -80,12 +85,18 @@ export default function Header({ bgcolor }) {
                   alt=""
                 />
                 <img
-                  className={["wallet-klip", !userID && "hidden"].join(" ")}
+                  className={[
+                    "wallet-klip",
+                    loginType !== "klip" && "hidden",
+                  ].join(" ")}
                   src="/Header/ic_wallet_klip.png"
                   alt=""
                 />
                 <img
-                  className={["wallet-matamask", "hidden"].join(" ")}
+                  className={[
+                    "wallet-matamask",
+                    loginType !== "metamask" && "hidden",
+                  ].join(" ")}
                   src="/Header/ic_wallet_matamask.png"
                   alt=""
                 />
@@ -104,7 +115,9 @@ export default function Header({ bgcolor }) {
         </div>
 
         <div
-          className={["loginbox-wrapper", !boxOpen ? "hidden" : ""].join(" ")}
+          className={["loginbox-wrapper", !boxOpen ? "login_off" : ""].join(
+            " "
+          )}
         >
           <LoginBox type="normal" />
         </div>

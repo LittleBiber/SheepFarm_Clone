@@ -8,6 +8,7 @@ import Inventory from "./pages/Inventory";
 import Luckybox from "./pages/Luckybox";
 import Shop from "./pages/Shop";
 import Map from "./pages/Map";
+import MetamaskLogin from "./components/Common/MetamaskLogin";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="luckybox" element={<Luckybox />} />
         <Route path="shop" element={<Shop />} />
         <Route path="map" element={<Map />} />
+        <Route path="metamast_login" element={<MetamaskLogin />} />
       </Routes>
     </BrowserRouter>
   );

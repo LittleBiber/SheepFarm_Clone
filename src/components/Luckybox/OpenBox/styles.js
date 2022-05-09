@@ -40,6 +40,7 @@ export const Main = styled.div`
       font-size: 44px;
       line-height: 56px;
       font-weight: 900;
+      letter-spacing: 0.05em;
     }
   }
 

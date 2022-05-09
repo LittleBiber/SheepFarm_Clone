@@ -25,6 +25,13 @@ export const MobileMenuBar = styled.div`
     cursor: pointer;
   }
 
+  .logo {
+    @media (max-width: 1100px) {
+      padding: 5px 0;
+      width: 104px;
+    }
+  }
+
   .shared {
     background-image: url(/MobileHeader/${({ open, bgcolor }) =>
       bgcolor === "#543F36" || open ? "shared_sub.svg" : "shared.svg"});

@@ -11,7 +11,9 @@ export default function Features() {
   return (
     <Main offset={idx * -455}>
       <div className="page-container">
-        <Pin>GAME</Pin>
+        <div className="pin_wrapper">
+          <Pin>GAME</Pin>
+        </div>
         <div className="feature_title">GAME FEATURES</div>
 
         <div className="box_wrapper">

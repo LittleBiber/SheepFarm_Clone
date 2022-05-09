@@ -19,6 +19,7 @@ export const TypeSelector = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   padding-bottom: 20px;
+  padding-top: 80px;
 
   @media (max-width: 1100px) {
     padding-top: 0;

@@ -7,7 +7,7 @@ export default function Items({ selected, world }) {
   const [userID, setUserID] = useState(null);
 
   useEffect(() => {
-    const value = window.localStorage.getItem("klipID");
+    const value = window.localStorage.getItem("userID");
     if (value) setUserID(value);
   }, []);
 

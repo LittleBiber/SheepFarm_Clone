@@ -37,8 +37,8 @@ export const Main = styled.li`
 
   .answer {
     color: #dbae85;
-    letter-spacing: 0.05em;
-    line-height: 25px;
+    letter-spacing: 0.08em;
+    line-height: 24px;
 
     @media (max-width: 580px) {
       font-size: 14px;

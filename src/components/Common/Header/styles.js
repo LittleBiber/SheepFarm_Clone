@@ -12,11 +12,13 @@ export const Main = styled.div`
     display: none;
   }
 
-  .hidden {
+  .login_off {
+    visibility: hidden !important;
     opacity: 0 !important;
-    z-index: 0 !important;
-    height: 0 !important;
-    pointer-events: none;
+
+    // z-index: 0 !important;
+    // height: 0 !important;
+    // pointer-events: none;
   }
 
   .menu {
@@ -148,20 +150,12 @@ export const Main = styled.div`
   }
 
   .loginbox-wrapper {
+    visibility: visible;
+    opacity: 1;
     position: absolute;
     top: 90px;
     right: 0;
-    transition: fadein ease-in-out 1s;
-
-    @keyframes fadein {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
+    transition: opacity 1s;
   }
 `;
 

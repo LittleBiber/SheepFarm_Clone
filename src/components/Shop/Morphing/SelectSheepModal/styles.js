@@ -57,18 +57,6 @@ export const Main = styled.div`
 
           @media (max-width: 1100px) {
             margin-bottom: 0;
-
-            .gender {
-              font-size: 20px;
-              line-height: 30px;
-              margin-bottom: 0;
-            }
-
-            dd {
-              font-size: 16px;
-              line-height: 24px;
-              margin: 0;
-            }
           }
 
           .gender {
@@ -79,6 +67,12 @@ export const Main = styled.div`
             font-weight: 700;
             line-height: 36px;
             letter-spacing: -0.015em;
+
+            @media (max-width: 1100px) {
+              font-size: 20px;
+              line-height: 30px;
+              margin-bottom: 0;
+            }
           }
 
           dd {
@@ -89,6 +83,12 @@ export const Main = styled.div`
             font-weight: 400;
             line-height: 25px;
             letter-spacing: 0.05em;
+
+            @media (max-width: 1100px) {
+              font-size: 16px;
+              line-height: 24px;
+              margin: 0;
+            }
           }
         }
 

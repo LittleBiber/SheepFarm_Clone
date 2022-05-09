@@ -112,7 +112,7 @@ export const Main = styled.div`
   }
 `;
 
-export const Title = styled.div`
+export const TrailerTitle = styled.div`
   font-family: "Arvo";
   color: #fff8e2;
   font-style: normal;
@@ -123,6 +123,7 @@ export const Title = styled.div`
   // margin-bottom: 20px;
   text-shadow: 6px 6px 5px #63473d;
   text-align: center;
+  line-height: 66px;
 
   @media (max-width: 1000px) {
     font-weight: bold;

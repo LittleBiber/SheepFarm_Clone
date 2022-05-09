@@ -9,7 +9,7 @@ export const BOX_LIST = [
   },
   {
     id: 2,
-    name: "Season 3 lucky box (STANDARD)",
+    name: "Season 3 lucky box (Standard)",
     count: 0,
     price: 3,
     current: 89507021,

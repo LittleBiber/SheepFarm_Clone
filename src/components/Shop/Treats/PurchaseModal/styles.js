@@ -181,6 +181,11 @@ export const Main = styled.div`
               }
             }
           }
+
+          .login-wrapper {
+            width: 419px;
+            margin: auto;
+          }
         }
       }
 
@@ -193,13 +198,13 @@ export const Main = styled.div`
       }
 
       .img-pc {
-        @media (min-width: 720px) {
+        @media (max-width: 720px) {
           display: none;
         }
       }
 
       .img-m {
-        @media (max-width: 720px) {
+        @media (min-width: 720px) {
           display: none;
         }
       }
@@ -216,16 +221,22 @@ export const Main = styled.div`
     }
   }
 
-  .login-modal {
-    position: absolute;
-    left: 0;
-    bottom: 91px;
-    width: 100%;
-    text-align: center;
+  // .login-modal {
+  //   position: absolute;
+  //   left: 0;
+  //   bottom: 180px;
+  //   width: 100%;
+  //   text-align: center;
 
-    .login-wrapper {
-      display: flex;
-      justify-content: center;
-    }
+  //   .login-wrapper {
+  //     display: flex;
+  //     justify-content: center;
+  //     display: inline-block;
+  //     width: 419px;
+  //   }
+  // }
+
+  .hidden {
+    display: none;
   }
 `;

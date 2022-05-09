@@ -6,11 +6,15 @@ import { Main } from "./styles";
 
 export default function KlipModal({ modal, setModal }) {
   const DummyLogin = () => {
-    localStorage.setItem(
-      "klipID",
-      Math.random().toString(36).substr(2, 11) +
-        Math.random().toString(36).substr(2, 11)
-    );
+    const dummyUserID = JSON.stringify([
+      "klip",
+      String(
+        Math.random().toString(36).substr(2, 11) +
+          Math.random().toString(36).substr(2, 11)
+      ),
+    ]);
+    localStorage.setItem("userID", dummyUserID);
+
     window.location.reload();
   };
 

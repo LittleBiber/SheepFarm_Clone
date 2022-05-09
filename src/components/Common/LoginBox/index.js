@@ -13,7 +13,9 @@ export default function LoginBox({ type }) {
           color="black"
           bgcolor="#FCFCFC"
           border="#D3D1D1"
-          onClick={() => alert("Not Ready")}
+          onClick={() =>
+            window.open("metamast_login", "_blank", "width=363, height=623")
+          }
         >
           <img src="/Header/metamask.webp" />
           <span>Connect Metamask Wallet</span>

@@ -7,11 +7,15 @@ export default function MobileHeader({ bgcolor }) {
   const [walletBox, setWalletBox] = useState(false);
   const [modal, setModal] = useState(false);
 
+  const [loginType, setLoginType] = useState(null);
   const [userID, setUserID] = useState(null);
 
   useEffect(() => {
-    const value = window.localStorage.getItem("klipID");
-    if (value) setUserID(value);
+    const value = JSON.parse(window.localStorage.getItem("userID"));
+    if (value) {
+      setLoginType(value[0]);
+      setUserID(value[1]);
+    }
   }, []);
 
   const handleOpen = () => {
@@ -24,7 +28,7 @@ export default function MobileHeader({ bgcolor }) {
   };
 
   const signOut = () => {
-    localStorage.removeItem("klipID");
+    localStorage.removeItem("userID");
     window.location.reload();
   };
 
@@ -78,17 +82,36 @@ export default function MobileHeader({ bgcolor }) {
             &lt; Connect Wallet
           </span>
           <div className="wallet-btns">
-            <button className="wallet-btn" id="metamask-btn">
+            <button
+              className="wallet-btn"
+              id="metamask-btn"
+              onClick={
+                loginType === "metamask"
+                  ? signOut
+                  : () =>
+                      window.open(
+                        "metamast_login",
+                        "_blank",
+                        "width=363, height=623"
+                      )
+              }
+            >
               <img src="/MobileHeader/metamask.webp" />
-              <span>Connect Metamask Wallet</span>
+              <span>
+                {loginType === "metamask"
+                  ? curUserID()
+                  : "Connect Metamask Wallet"}
+              </span>
             </button>
             <button
               className="wallet-btn"
               id="klip-btn"
-              onClick={userID ? signOut : () => setModal(!modal)}
+              onClick={loginType === "klip" ? signOut : () => setModal(!modal)}
             >
               <img src="/MobileHeader/klip.svg" />
-              <span>{userID ? curUserID() : "Connect with Kilp"}</span>
+              <span>
+                {loginType === "klip" ? curUserID() : "Connect with Kilp"}
+              </span>
             </button>
             <button className="disconnect-btn" onClick={signOut}>
               Disconnect

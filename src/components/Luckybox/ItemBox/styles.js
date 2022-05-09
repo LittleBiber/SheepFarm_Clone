@@ -26,8 +26,6 @@ export const Main = styled.div`
 `;
 
 export const Content = styled.li`
-  height: 100%;
-
   display: flex;
 
   flex-direction: column;
@@ -70,11 +68,29 @@ export const Content = styled.li`
       color: white;
       margin-bottom: 12px;
 
-      border: 1px solid grey;
-
       font-size: 20px;
       line-height: 25px;
       letter-spacing: 0.05em;
+
+      cursor: pointer;
+
+      border: none;
+      outline: none;
+
+      // position: relative;
+      // right: -35px;
+      // padding: 10px 26px 10px 20px;
+      // background-color: #a88171;
+      // border-radius: 10px 0 0 10px;
+      // font-weight: 800;
+      // color: white;
+      // margin-bottom: 12px;
+
+      // border: 1px solid grey;
+
+      // font-size: 20px;
+      // line-height: 25px;
+      // letter-spacing: 0.05em;
     }
   }
 
@@ -111,14 +127,26 @@ export const Content = styled.li`
     display: flex;
 
     .sales-period {
+      // flex: 1;
+      // display: flex;
+
+      // flex-direction: column;
+      // text-align: center;
+      // font-weight: 700;
+      // color: #6f5246;
+      // margin-bottom: 16px;
+
       flex: 1;
       display: flex;
-
       flex-direction: column;
       text-align: center;
       font-weight: 700;
       color: #6f5246;
       margin-bottom: 16px;
+
+      font-size: 20px;
+      line-height: 25px;
+      letter-spacing: 0.05em;
 
       span:first-child {
         font-weight: bold;

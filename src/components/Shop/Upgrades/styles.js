@@ -135,12 +135,10 @@ export const Main = styled.div`
 
   .upgrades-select-list {
     margin-bottom: 40px;
-
     .upgrades-select-list-bx {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-
       ul {
         margin: 0;
         padding: 0;
@@ -150,30 +148,23 @@ export const Main = styled.div`
         align-items: center;
         gap: 20px;
         flex-wrap: wrap;
-
         @media (max-width: 1100px) {
           width: 455px;
-
           justify-content: flex-start;
         }
-
         @media (max-width: 720px) {
           width: 100%;
           justify-content: flex-start;
           gap: 3.73832vw;
         }
-
         li {
           position: relative;
-
           @media (max-width: 1100px) {
             flex-shrink: 0;
           }
-
           @media (max-width: 720px) {
             flex-shrink: 0;
           }
-
           div:nth-child(1) {
             display: inline-flex;
             justify-content: center;
@@ -185,27 +176,24 @@ export const Main = styled.div`
             border: 2px solid #bbbbbb;
             border-radius: 8px;
             text-decoration: none;
+            margin-bottom: 7px;
 
             @media (max-width: 1100px) {
               width: 75px;
               height: 75px;
             }
-
             @media (max-width: 720px) {
               width: 17.52336vw;
               height: 17.52336vw;
             }
-
             span {
               color: #6f5246;
               display: none;
-
               @media (max-width: 1100px) {
                 text-align: center;
                 font-size: 14px;
                 font-weight: 400;
               }
-
               @media (max-width: 720px) {
                 line-height: 4.43925vw;
                 padding: 0 1.16822vw;

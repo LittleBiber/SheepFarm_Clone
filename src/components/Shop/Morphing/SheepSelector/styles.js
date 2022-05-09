@@ -175,9 +175,10 @@ export const ButtonBox = styled.div`
       font-size: 24px;
       font-weight: 700;
       line-height: 36px;
+      background: #d6d6d6;
       letter-spacing: -0.015em;
 
-      border: 1px solid grey;
+      border: 2px solid #bbbbbb;
 
       display: flex;
 
