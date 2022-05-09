@@ -48,11 +48,20 @@ export const Main = styled.div`
           margin-bottom: 56px;
           color: #75594e;
 
+          @media (max-width: 720px) {
+            margin-bottom: 7.00935vw;
+          }
+
           dt {
             font-size: 24px;
             font-weight: 700;
             line-height: 36px;
             letter-spacing: -0.015em;
+
+            @media (max-width: 720px) {
+              font-size: 4.6729vw;
+              line-height: initial;
+            }
           }
 
           dd {
@@ -60,17 +69,8 @@ export const Main = styled.div`
             font-weight: 700;
             line-height: 25px;
             letter-spacing: 0.05em;
-          }
 
-          @media (max-widht: 720px) {
-            margin-bottom: 7.00935vw;
-
-            dt {
-              font-size: 4.6729vw;
-              line-height: initial;
-            }
-
-            dd {
+            @media (max-width: 720px) {
               font-size: 3.73832vw;
               line-height: initial;
             }
@@ -86,20 +86,16 @@ export const Main = styled.div`
 
             @media (max-width: 720px) {
               margin: 0;
-
-              dt {
-                font-size: 3.73832vw;
-              }
-
-              dd {
-                font-size: 3.73832vw;
-              }
             }
 
             dt {
               font-size: 20px;
               font-weight: 700;
               color: #75594e;
+
+              @media (max-width: 720px) {
+                font-size: 3.73832vw;
+              }
             }
 
             dd {
@@ -111,6 +107,10 @@ export const Main = styled.div`
               font-weight: 400;
               line-height: 25px;
               letter-spacing: 0.05em;
+
+              @media (max-width: 720px) {
+                font-size: 3.73832vw;
+              }
             }
           }
         }
@@ -140,23 +140,23 @@ export const Main = styled.div`
 
           @media (max-width: 720px) {
             bottom: 9.34579vw;
-
-            .proceed-btn {
-              width: 44.39252vw;
-
-              .comp-btn-default {
-                height: 50px;
-                font-size: 20px;
-              }
-            }
           }
 
           .proceed-btn {
             display: inline-block;
             width: 300px;
 
+            @media (max-width: 720px) {
+              width: 44.39252vw;
+            }
+
             .comp-btn-default {
               display: flex;
+
+              @media (max-width: 720px) {
+                height: 50px;
+                font-size: 20px;
+              }
 
               justify-content: center;
 

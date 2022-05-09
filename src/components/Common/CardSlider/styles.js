@@ -18,6 +18,7 @@ export const Main = styled.div`
   @media (max-width: 580px) {
     position: relative;
     top: ${({ top }) => top}px;
+    // top: -10px;
     transform: scale(0.5);
   }
 

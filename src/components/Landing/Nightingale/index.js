@@ -33,6 +33,7 @@ export default function Nightingale() {
           </div>
         </div>
         <CardSlider
+          top={-30}
           count={3}
           active_color="#3E2A18"
           color="#EADEB9"

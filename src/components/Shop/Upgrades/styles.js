@@ -41,6 +41,13 @@ export const Main = styled.div`
             left: 10px;
             overflow: hidden;
 
+            @media (max-width: 1100px) {
+              width: 32.36364vw;
+              height: 23.36364vw;
+              top: 6.27273vw;
+              left: 0.90909vw;
+            }
+
             @media (max-width: 720px) {
               position: relative;
               width: 35.04673vw;
@@ -53,13 +60,6 @@ export const Main = styled.div`
               text-align: center;
             }
 
-            @media (max-width: 1100px) {
-              width: 32.36364vw;
-              height: 23.36364vw;
-              top: 6.27273vw;
-              left: 0.90909vw;
-            }
-
             span {
               display: inline-block;
               text-align: center;
@@ -68,15 +68,15 @@ export const Main = styled.div`
               letter-spacing: -0.015em;
               color: #6f5246;
 
+              @media (max-width: 1100px) {
+                font-size: 2.18182vw;
+                line-height: 3.27273vw;
+              }
+
               @media (max-width: 720px) {
                 padding: 0 4.6729vw;
                 font-size: 3.27103vw;
                 line-height: 4.90654vw;
-              }
-
-              @media (max-width: 1100px) {
-                font-size: 2.18182vw;
-                line-height: 3.27273vw;
               }
             }
 

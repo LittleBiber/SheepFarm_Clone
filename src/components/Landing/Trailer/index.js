@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Pin } from "../../../styles";
 import { Main, TrailerTitle } from "./styles";
 
 export default function Overview() {
+  const [userAgent, setUserAgent] = useState("pc");
+
+  const chkUserAgent = () => {
+    const UserAgent = window.navigator.userAgent;
+    if (
+      UserAgent.match(
+        /iPhone|iPod|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i
+      ) != null ||
+      UserAgent.match(/LG|SAMSUNG|Samsung/) != null
+    ) {
+      setUserAgent("mobile");
+    }
+  };
+
+  useEffect(() => {
+    chkUserAgent();
+  }, []);
+
   return (
     <Main>
       <div className="page-container">
@@ -10,7 +28,15 @@ export default function Overview() {
           <div className="pin_wrapper">
             <Pin>GAME</Pin>
           </div>
-          <TrailerTitle>GAME TRAILER</TrailerTitle>
+          {userAgent === "pc" ? (
+            <TrailerTitle>GAME TRAILER</TrailerTitle>
+          ) : (
+            <TrailerTitle>
+              GAMEPLAY
+              <br />
+              TRAILER
+            </TrailerTitle>
+          )}
         </div>
         <div className="video_wrapper">
           <video poster="/Trailer/placeholder2.png" controls>

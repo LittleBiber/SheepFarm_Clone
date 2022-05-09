@@ -8,7 +8,9 @@ export default function Faq() {
   return (
     <Main>
       <div className="page-container">
-        <Pin>FAQ</Pin>
+        <div className="pin_wrapper">
+          <Pin>FAQ</Pin>
+        </div>
         <QuestionTitle>STILL DON'T UNDERSTAND?</QuestionTitle>
         <ul className="question_list">
           {DATA_LIST.map((one, idx) => (

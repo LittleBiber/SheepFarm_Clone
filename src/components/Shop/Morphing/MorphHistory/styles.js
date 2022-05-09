@@ -63,6 +63,10 @@ export const MorphingHelp = styled.div`
 export const MorphLog = styled.div`
   margin-top: 90px;
 
+  @media (max-width: 720px) {
+    margin-top: 50px;
+  }
+
   dl {
     margin: 0;
 

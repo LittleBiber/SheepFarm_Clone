@@ -21,6 +21,11 @@ const BOX_VALUES = {
     button:not(:last-child) {
       margin-bottom: 20px;
     }
+
+    @media (max-width: 720px ){
+      display: inline-block;
+      width: 306px;
+    }
   `,
   no_background: `
     display: flex;
@@ -78,9 +83,15 @@ const BUTTON_VALUES = {
     justify-content: center;
     align-items: center;
 
+    
+
     img {
       width: 30px;
       margin-right: 10px;
+
+      @media (max-width: 720px) {
+        width: 20px;
+      }
     }
   `,
   no_background: `
@@ -94,6 +105,11 @@ const BUTTON_VALUES = {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+
+    @media(max-width: 580px) {
+      font-weight: 400;
+      padding: 10px 20px;
+    }
 
     img {
       width: 35px;

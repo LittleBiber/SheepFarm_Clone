@@ -23,6 +23,10 @@ export const Main = styled.div`
     width: 1300px;
     max-width: 100%;
 
+    .pin_wrapper {
+      margin-bottom: 25px;
+    }
+
     @media (max-width: 1100px) {
       padding: 150px 50px 200px 50px;
       box-sizing: border-box;
