@@ -8,7 +8,7 @@ export const Main = styled.div`
   display: flex;
   justify-content: center;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 

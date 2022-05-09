@@ -30,7 +30,7 @@ export const Main = styled.div`
     position: fixed;
     top: unset;
     transition: unset;
-    bottom: 20px;
+    bottom: 40px;
     right: 0;
     display: flex;
     justify-content: space-around;

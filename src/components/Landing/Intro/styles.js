@@ -53,6 +53,11 @@ export const Main = styled.div`
     @media (max-width: 1100px) {
       padding: 40px 0px 48px;
       width: 428px;
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      display: flex;
     }
 
     @media (max-width: 580px) {
