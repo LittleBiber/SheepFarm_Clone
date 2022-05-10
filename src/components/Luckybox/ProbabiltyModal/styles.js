@@ -174,6 +174,7 @@ export const Main = styled.div`
               font-size: 13px;
               font-weight: normal;
               letter-spacing: 0.03em;
+              line-height: 24px;
 
               display: flex;
               justify-content: space-between;

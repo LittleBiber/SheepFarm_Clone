@@ -259,7 +259,7 @@ export const DATA_LIST = {
         },
 
         {
-          name: "Tree Stump &amp; Axe",
+          name: "Tree Stump & Axe",
           value: 7.19424,
         },
 

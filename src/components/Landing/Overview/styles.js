@@ -52,6 +52,10 @@ export const Main = styled.div`
     margin-right: calc(-0.5 * var(--bs-gutter-x));
     margin-left: calc(-0.5 * var(--bs-gutter-x));
 
+    @media (min-width: 992px) {
+      justify-content: center;
+    }
+
     > * {
       flex-shrink: 0;
       width: 100%;
@@ -236,6 +240,14 @@ export const Main = styled.div`
 
     .pin-wrapper {
       margin-bottom: 25px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .col-lg-6 {
+      flex: 0 0 auto;
+      width: 50%;
+      align-items: center;
     }
   }
 `;

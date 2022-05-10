@@ -12,9 +12,9 @@ const Main = styled.div`
   background-color: #fff8e2;
   position: relative;
 
-  @media (max-width: 1000px) {
-    top: 80px;
-  }
+  // @media (max-width: 1000px) {
+  //   top: 80px;
+  // }
 `;
 
 const PageContainer = styled.div`
@@ -36,6 +36,8 @@ const ContentWrapper = styled.div`
   }
 
   @media (max-width: 1100px) {
+    position: relative;
+    top: 80px;
     padding-top: 0;
   }
 
