@@ -1,29 +1,12 @@
-import React, { useEffect, useRef } from "react";
-
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const Main = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
+import Canvas from "../components/Map/Canvas";
 
-export default function Map() {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    if (!canvasRef) return;
-    const ctx = canvasRef.current.getContext("2d");
-    const image = new Image();
-    image.src = "https://sheepfarm.io/img/maps/sector_0.png";
-
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0);
-    };
-  }, [canvasRef]);
-
+export default function Shop() {
   return (
-    <Main>
-      <canvas width="1720px" height="1738px" ref={canvasRef}></canvas>
-    </Main>
+    <>
+      <Canvas />
+    </>
   );
 }
