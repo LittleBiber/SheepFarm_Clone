@@ -564,11 +564,11 @@ export default function Canvas() {
   // }
 
   function onClickGoButton(event) {
-    // let data = $(event.target).data();
-    // if (data.farmId in spotDict) {
-    //   removePopup();
-    //   onClickSpot(spotDict[data.farmId]);
-    // }
+    let data = event.target.data;
+    if (data.farmId in spotDict) {
+      removePopup();
+      onClickSpot(spotDict[data.farmId]);
+    }
   }
 
   function updateSelectedRow(farmId) {
