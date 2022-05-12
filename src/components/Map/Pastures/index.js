@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+
+import PastureBox from "./PastureBox";
 
 const Main = styled.div`
   background-color: white;
@@ -43,90 +45,6 @@ const Main = styled.div`
   #pastures-list {
     height: calc(100% - 30px);
     overflow-y: scroll;
-
-    .row {
-      padding: 4px;
-      display: flex;
-      justify-content: space-between;
-      background-color: #ba8f5d;
-      border-radius: 10px;
-      margin: 10px;
-      cursor: pointer;
-
-      span {
-        display: flex;
-        align-items: center;
-      }
-
-      .sector-id {
-        background-color: #ba8f5d;
-        justify-content: center;
-
-        @media (min-width: 758px) {
-          width: 50px;
-        }
-
-        @media (max-width: 757px) {
-          width: unset;
-        }
-      }
-
-      .property {
-        display: flex;
-        align-items: center;
-        color: white;
-
-        @media (min-width: 758px) {
-          padding: 0 5px;
-        }
-
-        img {
-          @media (max-width: 757px) {
-            width: 25px;
-          }
-        }
-      }
-
-      .sold-btn-parent {
-        display: flex;
-        align-items: center;
-
-        @media (min-width: 758px) {
-          width: 86px;
-        }
-
-        .sold-btn {
-          width: 100%;
-          text-align: center;
-          background-color: #bf3f3f;
-          color: white;
-          cursor: pointer;
-          padding: 6px;
-          text-decoration: none;
-          border-radius: 10px;
-          font-size: 13px;
-          font-family: "Arial";
-        }
-      }
-
-      span .sold-btn {
-        width: 100%;
-        text-align: center;
-        background-color: #bf3f3f;
-        color: white;
-        cursor: pointer;
-        padding: 6px;
-        text-decoration: none;
-        border-radius: 10px;
-        border: none;
-        font-size: 13px;
-        font-family: "Arial";
-
-        @media (min-width: 758px) {
-          width: 86px;
-        }
-      }
-    }
   }
 `;
 
@@ -146,9 +64,18 @@ const Main = styled.div`
     - Occupied면 구매할 수 있는 OpenSeas 링크를 사용
     - Locked면 포인터만 클릭가능하게 보이고 onClick은 없음
   - 크기, 양의 마릿수는 Sectors에서 index로 찾기?
+
+4. 시간복잡도? 아무튼 효율성에 대한 고민
+  - SectorData(Sectors)에는 
+
+5. 렌더링 시점
+  - Map접속 시 모달 보여줄 때는 세부사항은 로딩 안 된 상태로 겉 박스만 존재
+  - 모달을 종료했을 때 포커스가 걸리면서 4_6섹터(맞는지 모름) 의 PastureBox들을 렌더링
+  - 결과적으로 여기 들어오는 items는 한번 필터링된 요소가 들어와야 함.
+    무턱대고 전체 데이터 렌더링하면 페이지 접속에만 5초씩 걸림
 */
 
-export default function Pastures({ SectorData, selected, handleSelected }) {
+export default function Pastures({ items, lands, selected, handleSelected }) {
   function onClickGoButton(event) {
     // let data = event.target["data-farm-id"];
 
@@ -157,76 +84,31 @@ export default function Pastures({ SectorData, selected, handleSelected }) {
     console.log(code);
   }
 
+  useEffect(() => {
+    console.log(items.length)
+  }, [])
+
   return (
     <Main div className="spot-list-area" id="sector-inspector">
       <div className="spot-list-heading" id="pastures-list-heading">
         <span>Pastures</span>
         <span id="remain-amount">
-          Remains {128} / {150}
+          Remains {items.filter(e => e.sold !== 1).length} / {items.length}
         </span>
       </div>
+
       <div id="pastures-list">
-        <div className="row" onClick={onClickGoButton} data-farm-id={94}>
-          {/* data-farm-id 는 어떻게 빼와야 하지? > id/class 또는 함수의 인자로 넘기기? */}
-          <span>
-            {/* style="pointer-events: none;" */}
-            <span className="sector-id">{94}</span>
-            <span className="property">
-              <img src="/Map/size.png" />
-              {"5X5"}
-            </span>
-            <span className="property">
-              <img src="/Map/sheep.png" />3
-            </span>
-          </span>
-          <span className="sold-btn-parent">
-            <a
-              className="sold-btn"
-              target="_blank" /*onClick={OnClickOccupied}*/
-            >
-              OCCUPIED
-            </a>
-          </span>
-        </div>
+        {items.map(one => {
+          return <PastureBox id={one.id} sold={one.sold} key={one.id} />
+        })}
 
-        <div className="row" onClick={onClickGoButton} data-farm-id="6131">
-          <span>
-            {/* style="pointer-events: none;" */}
-            <span className="sector-id">6131</span>
-            <span className="property">
-              <img src="/Map/size.png" />
-              6X6
-            </span>
-            <span className="property">
-              <img src="/Map/sheep.png" />4
-            </span>
-          </span>
-          <span>
-            <button disabled="" className="sold-btn">
-              LOCKED
-            </button>
-          </span>
-        </div>
-
-        <div className="row" onClick={onClickGoButton} data-farm-id="9207">
-          <span>
-            {/* style="pointer-events: none;" */}
-            <span className="sector-id">9207</span>
-            <span className="property">
-              <img src="/Map/size.png" />
-              7X7
-            </span>
-            <span className="property">
-              <img src="/Map/sheep.png" />5
-            </span>
-          </span>
-          <span>
-            <button disabled="" className="sold-btn">
-              LOCKED
-            </button>
-          </span>
-        </div>
       </div>
     </Main>
   );
 }
+
+/*
+
+
+
+*/

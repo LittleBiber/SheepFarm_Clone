@@ -3,8 +3,6 @@ import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import { Stage, Container, Sprite } from "@inlet/react-pixi";
 import styled from "styled-components";
-import { Lands } from "./Lands";
-import { Sectors } from "./Sectors";
 
 const Main = styled.div`
   display: block;
@@ -14,7 +12,7 @@ const Main = styled.div`
   overflow: hidden;
 `;
 
-export default function Canvas() {
+export default function Canvas({ sectors, lands, items }) {
   const isMobile = false; // mobileCheck(); // mobile 여부에 따라 구름 효과 처리
 
   const vw = window.innerWidth;
@@ -64,26 +62,26 @@ export default function Canvas() {
   const FIRST_FOCUS_SECTOR = "6_9"; // 모달창 끄면 포커싱 잡히는 값
 
   //! window.sector_0_data > 각 작은 점들의 좌표값 > Sectors로 파일 분리 (VS Code느려짐)
-  const items = Sectors.map((e) => {
-    // sector_0_data 의 각 값에 대해 처리하는것
-    // Lands.fi >> Lands 데이터는 파일처리가 너무오래걸려서 삭제했었는데 다시 확인해봐야 함
-    //! Lands도 외부파일로 불러옴
+  // const items = sectors.map((e) => {
+  //   // sector_0_data 의 각 값에 대해 처리하는것
+  //   // Lands.fi >> Lands 데이터는 파일처리가 너무오래걸려서 삭제했었는데 다시 확인해봐야 함
+  //   //! Lands도 외부파일로 불러옴
 
-    return {
-      id: e[0],
-      x: e[1],
-      y: e[2],
-      sold: false,
-      size:
-        e[0] <= 1111 + 5000 //! id값으로 사이즈 구분
-          ? "5X5"
-          : e[0] <= 1111 + 5000 + 3000
-          ? "6X6"
-          : "7X7",
-      sheepLimit: e[0] <= 1111 + 5000 ? 3 : e[0] <= 1111 + 5000 + 3000 ? 4 : 5, //! 양 마릿수도 id로 구분
-      tokenId: Lands.find((v) => v.id == e[0]).tokenId,
-    };
-  });
+  //   return {
+  //     id: e[0],
+  //     x: e[1],
+  //     y: e[2],
+  //     sold: false,
+  //     size:
+  //       e[0] <= 1111 + 5000 //! id값으로 사이즈 구분
+  //         ? "5X5"
+  //         : e[0] <= 1111 + 5000 + 3000
+  //         ? "6X6"
+  //         : "7X7",
+  //     sheepLimit: e[0] <= 1111 + 5000 ? 3 : e[0] <= 1111 + 5000 + 3000 ? 4 : 5, //! 양 마릿수도 id로 구분
+  //     tokenId: lands.find((v) => v.id == e[0]).tokenId,
+  //   };
+  // });
 
   const app = new PIXI.Application(CANVAS_SETTING); // PIXI 캔버스 생성 > React에서는 Stage 로 구현
 
@@ -582,7 +580,6 @@ export default function Canvas() {
     //     if (row_position < listTop || row_position > listBottom) {
     //       $("#pastures-list").animate(
     //         {
-    //           scrollTop: row_position - $("div.row").offset().top,
     //         },
     //         300
     //       );
