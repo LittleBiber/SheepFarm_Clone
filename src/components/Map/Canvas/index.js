@@ -13,10 +13,23 @@ const Main = styled.div`
 `;
 
 export default function Canvas({ sectors, lands, items }) {
-  const isMobile = false; // mobileCheck(); // mobile 여부에 따라 구름 효과 처리
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // 간단하게 정규표현식으로 user-agent의 기기 분류로 mobile 여부 확인
+  
+  const [size, setSize] = useState({vw: window.innerWidth, vh: window.innerHeight})
+  const handleSize = () => {
+      setSize(vw: window.innerWidth, vh: window.innerHeight})
+  }
+  
+  useEffect(() => {
+      handleSize()
+  }, [window.innerWidth, window.innerHeight])
+  // 둘중 하니의 값이 변경되면 사이즈 수정하는 함수 생성
+  //! 설마 사이즈 바뀐다고 계속 새로 렌더링하는거 아니겠지?(테스트 필요함 진짜 그럴수 있음)
+  //! 진짜로 새로 렌더링하면 사이즈 조젏 한번에 페이지 터질듯(지금도 팬 돌고 시간걸리는데...)
 
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+//   const vw = window.innerWidth;
+//   const vh = window.innerHeight;
+// 오류 나더라도 당황하지 않고? 참조값 size 상태값 분해할당해서? 집어넣어주기
 
   const canvasParent = useRef(null);
 
