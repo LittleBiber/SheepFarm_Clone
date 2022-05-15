@@ -12,37 +12,41 @@ const Main = styled.div`
   overflow: hidden;
 `;
 
-export default function Canvas({ sectors, lands, items }) {
+export default function Canvas({
+  setSelectedSectors,
+  items,
+  pinId,
+  setPinId,
+  showInfoPopup,
+}) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // 간단하게 정규표현식으로 user-agent의 기기 분류로 mobile 여부 확인
-  
-  const [size, setSize] = useState({vw: window.innerWidth, vh: window.innerHeight})
+
+  const [size, setSize] = useState({
+    vw: window.innerWidth,
+    vh: window.innerHeight,
+  });
   const handleSize = () => {
-      setSize(vw: window.innerWidth, vh: window.innerHeight})
-  }
-  
+    setSize({ vw: window.innerWidth, vh: window.innerHeight });
+  };
+
   useEffect(() => {
-      handleSize()
-  }, [window.innerWidth, window.innerHeight])
+    handleSize();
+  }, [window.innerWidth, window.innerHeight]);
   // 둘중 하니의 값이 변경되면 사이즈 수정하는 함수 생성
   //! 설마 사이즈 바뀐다고 계속 새로 렌더링하는거 아니겠지?(테스트 필요함 진짜 그럴수 있음)
-  //! 진짜로 새로 렌더링하면 사이즈 조젏 한번에 페이지 터질듯(지금도 팬 돌고 시간걸리는데...)
+  //! 부하 문제 실제로 심각함 CPU 70% / 로딩에 7초 >> 초기 렌더링 자체를 어떻게 고쳐야 할까?
 
-//   const vw = window.innerWidth;
-//   const vh = window.innerHeight;
-// 오류 나더라도 당황하지 않고? 참조값 size 상태값 분해할당해서? 집어넣어주기
+  //! 페이지 크기 조정에 따라 Canvas가 동적으로 조절되게 너비 높이를 상태값 지정
+  // 오류는 없고 생각한대로 작동하지만, 성능에 심각한 영향을 줬는지는 모르겠음
 
   const canvasParent = useRef(null);
 
   const CANVAS_SETTING = {
-    width: vw,
-    height: vh,
+    width: size.vw, // vw
+    height: size.vh, // vh
     // resizeTo: canvasParent,
-    //! 크기가 0 / 0 으로 고정됨.
-    /*
-      옵션 비활성화 (이미지 크기만큼 면적이 넓어짐)
-      + overflow: hidden으로 스크롤바 없애버리기
-      ! 화면 크기 조절에 반응하지 않음. 크기를 상태값으로 주면 실시간으로 반응할까?
-    */
+    // 대신 너비/높이를 상태값으로 조절
+
     resolution: 1, //window.devicePixelRatio,
     backgroundColor: 0x4284d2,
   };
@@ -106,10 +110,10 @@ export default function Canvas({ sectors, lands, items }) {
 
   const viewport = new Viewport({
     //! pixi-viewport 문서 참고해야 함
-    screenWidth: vw,
-    screenHeight: vh,
-    worldWidth: vw,
-    worldHeight: vh,
+    screenWidth: size.vw,
+    screenHeight: size.vh,
+    worldWidth: size.vw,
+    worldHeight: size.vh,
     interaction: app.renderer.plugins.interaction,
   });
 
@@ -126,23 +130,28 @@ export default function Canvas({ sectors, lands, items }) {
     .clampZoom({
       minWidth: 120,
       minHeight: 120,
-      maxWidth: vw,
-      maxHeight: vh,
+      maxWidth: size.vw,
+      maxHeight: size.vh,
     });
 
   viewport.on("drag-start", (event) => {
     removePopup(); //! 드래그 시 핀 제거 필수
   });
   viewport.on("clicked", (event) => {
+    // console.log(event);
+
     let sectorId = "";
     let farmInfo = null;
-    let sector = null;
-    let spot = null;
+
+    let sector = null; // 섹터 값 먼저 선언
+    let spot = null; // spot도 먼저 선언
+
     for (let k in sectorDict) {
       let s = sectorDict[k];
       if (s.getBounds().contains(event.screen.x, event.screen.y)) {
-        sector = s;
-        sectorId = k;
+        sector = s; // 섹터 값 결정
+        // console.log("S는 무엇인가?", s);
+        sectorId = k; // 마찬가지로 섹터 id도 결정
         break;
       }
     }
@@ -153,7 +162,10 @@ export default function Canvas({ sectors, lands, items }) {
         let s = spots[i];
         if (s.getBounds().contains(event.screen.x, event.screen.y)) {
           spot = s;
+
           farmInfo = spot.farmInfo;
+          // console.log("spot", s);
+          // console.log("farminfo", farmInfo);
           break;
         }
       }
@@ -348,6 +360,8 @@ export default function Canvas({ sectors, lands, items }) {
   function showInfoPopup(spot) {
     //! Modal로 따로 만드는게 나을까?
 
+    console.log(spot.farmInfo);
+
     let farmInfo = spot.farmInfo; // Spot 생성할 때 인자로 넘긴 데이터
 
     removePopup(); // 이전의 팝업은 제거하고 다시 생성
@@ -434,18 +448,25 @@ export default function Canvas({ sectors, lands, items }) {
   blinkingGizmo.buttonMode = false;
 
   function setBlinkingTarget(target) {
+    //! Sector, Spot 클릭 둘 다 동일한 함수로 처리
+    // console.log(target);
+    // console.log(sectorDict); // {7_5: Container, 8_12: Container, 6_3: Container, 9_6: Container, 6_7: Container, …}
+    // console.log(sectorSpotDict); // {7_5: Array(145), 8_12: Array(32), 6_3: Array(149), 9_6: Array(146), 6_7: Array(152), …}
+
     blinkingGizmo.clear();
 
     if ("farmInfo" in target) {
+      // 클릭한 대상이 Spot이면
       showInfoPopup(target);
       updateSelectedRow(target.farmInfo.id);
     }
 
     for (let sectorId in sectorDict) {
-      // last item was sector
+      // last item was sector >> ?? 이게 뭔 소리지
       let sector = sectorDict[sectorId];
       sector.parent.setChildIndex(sector, 0); // 이전에 보고 있던 Sector의 index를 내려줌
-      let spots = sectorSpotDict[sectorId];
+      let spots = sectorSpotDict[sectorId]; // 해당 Sector안의 Spot들을 가져옴
+
       spots.forEach((e) => {
         e.visible = false;
       }); // Sector 안의 Spot도 다 숨겨주기
@@ -469,12 +490,18 @@ export default function Canvas({ sectors, lands, items }) {
         // on select spot
         let sectorId = target.parentSectorId;
         let spots = sectorSpotDict[sectorId];
+
         spots.forEach((e) => {
           e.visible = true;
         });
       } else if ("sectorId" in target) {
         // on select sector
         let spots = sectorSpotDict[target.sectorId];
+
+        // 상태값을 활용한 Pasture-Canvas 컴포넌트 간 데이터 공유
+        //! 뭔가 비효율적인것만 같은 느낌인데 정확하게 어떻게? 고쳐야 할까
+        setSelectedSectors(spots); // 내가 추가한 함수
+
         spots.forEach((e) => {
           e.visible = true;
         });
@@ -575,14 +602,41 @@ export default function Canvas({ sectors, lands, items }) {
   // }
 
   function onClickGoButton(event) {
-    let data = event.target.data;
-    if (data.farmId in spotDict) {
-      removePopup();
-      onClickSpot(spotDict[data.farmId]);
-    }
+    /*
+    Pasture에서 클릭된 값에 대해 세부사항 보여주던 함수
+      - 어떻게 처리해야 할까?
+    */
+
+    // let data = event.target.data;
+    // if (data.farmId in spotDict) {
+    //   removePopup();
+    //   onClickSpot(spotDict[data.farmId]);
+    // }
+
+    alert("TEST");
   }
 
   function updateSelectedRow(farmId) {
+    /* 선택한 id의 PastureBox의 배경색 변경 + 맨 위로 올려주기
+    - forwardRef를 활용해 Pastures 컴포넌트로 데이터 전달
+      - 컴포넌트가 수신한 Ref를 아래 DOM(요소)으로 전달
+      - Ref 생성과 사용위치가 다른 지금 정확히 필요한 기능!
+    */
+
+    /*
+    ! 필요한 것
+      - 특정 Spot을 클릭하면 Pastures에서 해당 ID의 스팟으로 스크롤 이동
+      - 반대로 Pastures에서도 특정 ID 스팟을 클릭하면 지도상에 Info 박스가 보여져야 함.
+        - 스크롤 이동은 어렵지 않겠지만 Info박스 보여주는 부분이 난이도가 있을듯(PIXI를 활용하니까)
+    ! 나한테 있는 것
+      - 원본 페이지 구현 코드
+    ! 생각해보기
+      - Spot클릭 시에 박스를 보여주니까
+        Pasture에서 onClick을 실행할 때 
+        Spot클릭과 같은 함수를 실행해주면 될까?
+    */
+
+    setPinId(farmId);
     //   $(`div.row[data-farm-id!="${farmId}"]`).removeClass("selected");
     //   $(`div.row[data-farm-id="${farmId}"]`).addClass("selected");
     //   if ($(`div.row[data-farm-id=${farmId}]`).length > 0) {
@@ -717,7 +771,6 @@ export default function Canvas({ sectors, lands, items }) {
     </Main>
   );
 }
-
 
 /*
 1. 섹터 클릭 시 보여주는 스팟들은 뭘 기준으로 필터링되는걸까?

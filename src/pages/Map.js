@@ -8,9 +8,21 @@ import { Sectors } from "../components/Map/Canvas/Sectors";
 
 export default function Map() {
   const [sectors, setSectors] = useState(Sectors);
-  const [lands, setLands] = useState(Lands);
 
-  const items = Sectors.map((e) => {
+  const [selectedSectors, setSelectedSectors] = useState([]);
+  const handleSelectedSectors = (data) => {
+    setSelectedSectors(data);
+  };
+
+  const [selectedSpot, setSelectedSpot] = useState(null);
+  const handleSelectedSpots = (event) => {
+    console.log(event.target);
+    // setSelectedSpot();
+  };
+
+  const [pinId, setPinId] = useState(0);
+
+  const items = sectors.map((e) => {
     // sector_0_data 의 각 값에 대해 처리하는것
     // Lands.fi >> Lands 데이터는 파일처리가 너무오래걸려서 삭제했었는데 다시 확인해봐야 함
     //! Lands도 외부파일로 불러옴
@@ -56,13 +68,25 @@ export default function Map() {
   필요한 것:
     - 현재 선택된 Sector의 Spots정보
     - 현재 선택된 Spot의 ID 또는 전체 데이터
-  
   */
 
   return (
     <>
-      <Canvas /* sectors={sectors} lands={lands} */ items={items} />
-      <Pastures /* SectorData={sectors} lands={lands} */ items={items} />
+      <Canvas
+        items={items}
+        setSelectedSectors={setSelectedSectors}
+        // handleSelectedSpots={handleSelectedSpots}
+        pinId={pinId}
+        setPinId={setPinId}
+      />
+      <Pastures
+        selectedSectors={selectedSectors}
+        handleSelectedSectors={handleSelectedSectors}
+        selectedSpot={selectedSpot}
+        handleSelectedSpots={handleSelectedSpots}
+        pinId={pinId}
+        setPinId={setPinId}
+      />
     </>
   );
 }

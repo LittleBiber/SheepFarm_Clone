@@ -75,33 +75,45 @@ const Main = styled.div`
     무턱대고 전체 데이터 렌더링하면 페이지 접속에만 5초씩 걸림
 */
 
-export default function Pastures({ items, lands, selected, handleSelected }) {
-  function onClickGoButton(event) {
-    // let data = event.target["data-farm-id"];
+export default function Pastures({
+  selectedSectors,
+  selectedSpot,
+  handleSelectedSpots,
+  pinId,
+}) {
+  // function onClickGoButton(event) {
+  //   // let data = event.target["data-farm-id"];
 
-    let code = event.target;
+  //   let code = event.target;
 
-    console.log(code);
-  }
+  //   console.log(code);
+  // }
 
-  useEffect(() => {
-    console.log(items.length)
-  }, [])
+  // useEffect(() => {
+  //   console.log(items.length);
+  // }, []);
 
   return (
     <Main div className="spot-list-area" id="sector-inspector">
       <div className="spot-list-heading" id="pastures-list-heading">
         <span>Pastures</span>
         <span id="remain-amount">
-          Remains {items.filter(e => e.sold !== 1).length} / {items.length}
+          Remains {selectedSectors.filter((e) => e.sold !== 1).length} /{" "}
+          {selectedSectors.length}
         </span>
       </div>
 
       <div id="pastures-list">
-        {items.map(one => {
-          return <PastureBox id={one.id} sold={one.sold} key={one.id} />
+        {selectedSectors.map((one) => {
+          return (
+            <PastureBox
+              {...one.farmInfo}
+              selected={pinId === one.farmInfo.id ? true : false}
+              key={one.id}
+              handleSelectedSpots={handleSelectedSpots}
+            />
+          );
         })}
-
       </div>
     </Main>
   );

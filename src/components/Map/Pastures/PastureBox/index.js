@@ -5,7 +5,7 @@ const Main = styled.div`
   padding: 4px;
   display: flex;
   justify-content: space-between;
-  background-color: #ba8f5d;
+  background-color: ${({ selected }) => (selected ? "#643a3a" : "#ba8f5d")};
   border-radius: 10px;
   margin: 10px;
   cursor: pointer;
@@ -16,7 +16,7 @@ const Main = styled.div`
   }
 
   .sector-id {
-    background-color: #ba8f5d;
+    color: ${({ selected }) => (selected ? "white" : "black")};
     justify-content: center;
 
     @media (min-width: 758px) {
@@ -85,9 +85,14 @@ const Main = styled.div`
   }
 `;
 
-export default function PastureBox({ id, sold }) {
+export default function PastureBox({
+  id,
+  sold,
+  handleSelectedSpots,
+  selected,
+}) {
   return (
-    <Main onClick={(e) => alert(e.target.id)} id={id}>
+    <Main id={id} selected={selected} onClick={handleSelectedSpots}>
       {/* data-farm-id 는 어떻게 빼와야 하지? > id/class 또는 함수의 인자로 넘기기? */}
       <span>
         {/* style="pointer-events: none;" */}
