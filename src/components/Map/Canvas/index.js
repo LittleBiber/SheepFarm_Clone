@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
-import { Stage, Container, Sprite } from "@inlet/react-pixi";
 import styled from "styled-components";
+import DetailModal from "../DetailModal";
+import WelcomeModal from "../WelcomeModal";
+import { makeShader } from "./map_shader";
 
 const Main = styled.div`
   display: block;
@@ -14,12 +16,15 @@ const Main = styled.div`
 
 export default function Canvas({
   setSelectedSectors,
+  selectedSectors,
   items,
   pinId,
   setPinId,
-  showInfoPopup,
 }) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // 간단하게 정규표현식으로 user-agent의 기기 분류로 mobile 여부 확인
+
+  const [welcomeModal, setWelcomeModal] = useState(true);
+  const [spotModal, setSpotModal] = useState(false);
 
   const [size, setSize] = useState({
     vw: window.innerWidth,
@@ -32,12 +37,22 @@ export default function Canvas({
   useEffect(() => {
     handleSize();
   }, [window.innerWidth, window.innerHeight]);
-  // 둘중 하니의 값이 변경되면 사이즈 수정하는 함수 생성
-  //! 설마 사이즈 바뀐다고 계속 새로 렌더링하는거 아니겠지?(테스트 필요함 진짜 그럴수 있음)
-  //! 부하 문제 실제로 심각함 CPU 70% / 로딩에 7초 >> 초기 렌더링 자체를 어떻게 고쳐야 할까?
 
-  //! 페이지 크기 조정에 따라 Canvas가 동적으로 조절되게 너비 높이를 상태값 지정
-  // 오류는 없고 생각한대로 작동하지만, 성능에 심각한 영향을 줬는지는 모르겠음
+  useEffect(() => {
+    if (!selectedSectors.length) return;
+
+    // sectorSpotDict 의 각 값(아마 섹터) 에 대해 > 그 안 Graphics들에 대해 > farmInfo가 data와 같으면?
+    const target = selectedSectors.find((el) => el.farmInfo.id === pinId);
+
+    console.log(pinId);
+
+    onClickSpot(target);
+  }, [pinId]);
+
+  const handleWelcomeModal = () => {
+    setWelcomeModal(false);
+    onClickWelcomeModalOk();
+  };
 
   const canvasParent = useRef(null);
 
@@ -164,8 +179,7 @@ export default function Canvas({
           spot = s;
 
           farmInfo = spot.farmInfo;
-          // console.log("spot", s);
-          // console.log("farminfo", farmInfo);
+
           break;
         }
       }
@@ -173,8 +187,8 @@ export default function Canvas({
 
     if (
       !!spot &&
-      (spot.parent == app.blinkingItem ||
-        (app.blinkingItem != null && app.blinkingItem.parent == spot.parent))
+      (spot.parent === app.blinkingItem ||
+        (app.blinkingItem !== null && app.blinkingItem.parent == spot.parent))
     ) {
       onClickSpot(spot);
     } else if (!!sector) {
@@ -186,17 +200,17 @@ export default function Canvas({
   app.stage.addChild(viewport);
 
   const background = viewport.addChild(PIXI.Sprite.from("/Map/sector_0.png")); // Sprite로 배경 추가
-  // if (isMobile === false) {
-  //   // 모바일 여부에 따라 >> userAgent 로 구분 가능
-  //   app.cloudsVfx = makeShader(); //! 구름 배경 효과 (움직임) > 찾아야 함(아마 Script에 있을듯)
-  //   app.cloudsVfx.scale.set(
-  //     (BACKGROUND_SIZE.width * 3) / app.cloudsVfx.originalWidth,
-  //     (BACKGROUND_SIZE.height * 3) / app.cloudsVfx.originalHeight
-  //   );
+  if (isMobile === false) {
+    // 모바일 여부에 따라 >> userAgent 로 구분 가능
+    app.cloudsVfx = makeShader(); //! 구름 배경 효과 (움직임) > 찾아야 함(아마 Script에 있을듯)
+    app.cloudsVfx.scale.set(
+      (BACKGROUND_SIZE.width * 3) / app.cloudsVfx.originalWidth,
+      (BACKGROUND_SIZE.height * 3) / app.cloudsVfx.originalHeight
+    );
 
-  //   app.cloudsVfx.x = -BACKGROUND_SIZE.width;
-  //   app.cloudsVfx.y = -BACKGROUND_SIZE.height;
-  // }
+    app.cloudsVfx.x = -BACKGROUND_SIZE.width;
+    app.cloudsVfx.y = -BACKGROUND_SIZE.height;
+  }
 
   const uiLayer = new PIXI.Container(); // 이 부분은 어떻게 작동할지 찾아봐야 함.
   app.stage.addChild(uiLayer);
@@ -360,7 +374,8 @@ export default function Canvas({
   function showInfoPopup(spot) {
     //! Modal로 따로 만드는게 나을까?
 
-    console.log(spot.farmInfo);
+    console.log("InfoPopup-spot", spot);
+    console.log("InfoPopup-farmInfo", spot.farmInfo);
 
     let farmInfo = spot.farmInfo; // Spot 생성할 때 인자로 넘긴 데이터
 
@@ -458,6 +473,7 @@ export default function Canvas({
     if ("farmInfo" in target) {
       // 클릭한 대상이 Spot이면
       showInfoPopup(target);
+      setPinId(target.farmInfo.id); // 내가 추가한거
       updateSelectedRow(target.farmInfo.id);
     }
 
@@ -604,7 +620,8 @@ export default function Canvas({
   function onClickGoButton(event) {
     /*
     Pasture에서 클릭된 값에 대해 세부사항 보여주던 함수
-      - 어떻게 처리해야 할까?
+    
+    ? 현재 방식인 viewport Click 대신 useEffect로 선택한 id값이 변경되면 실행하게?
     */
 
     // let data = event.target.data;
@@ -654,34 +671,33 @@ export default function Canvas({
     //   }
   }
 
-  // function onClickLandSearch() {
-  //   let searchLandId = $("#land-id-input").val(); // Pasture ID 를 가져오는듯 > useRef 로 처리?
-  //   if (searchLandId in spotDict) {
-  //     // Spot 모아놓은 값에서 찾는 ID값이 존재하면?
-  //     removePopup(); // 원래 팝업 없애고
-  //     onClickSpot(spotDict[searchLandId]); // 찾는값 있으니까 바로 팝업 띄워주기
-  //   }
-  // }
+  function onClickLandSearch() {
+    // let searchLandId = $("#land-id-input").val(); // Pasture ID 를 가져오는듯 > useRef 로 처리?
+    // if (searchLandId in spotDict) {
+    //   // Spot 모아놓은 값에서 찾는 ID값이 존재하면?
+    //   removePopup(); // 원래 팝업 없애고
+    //   onClickSpot(spotDict[searchLandId]); // 찾는값 있으니까 바로 팝업 띄워주기
+    // }
+  }
 
-  // function onClickWelcomeModalOk() {
-  //   // useState로 모달 보여주기 / 끄기 하면 될듯
-  //   $("#welcom-modal-background").hide();
-  //   onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
-  // }
+  function onClickWelcomeModalOk() {
+    // useState로 모달 보여주기 / 끄기 하면 될듯
+    // $("#welcom-modal-background").hide();
+    onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
+    // setSelectedSectors()
+  }
 
-  // function onClickClose(selector) {
-  //   $(selector).hide();
-
-  //   if (selector == "#bill-paper") {
-  //     $("#klip-qr-code-frame").hide();
-
-  //     if (!!window.klipPollingId) {
-  //       clearInterval(window.klipPollingId); // 주기적으로 값이 바뀌는건가?
-  //       delete window.klipPollingId;
-  //       delete window.lastKlipRequestKey;
-  //     }
-  //   }
-  // }
+  function onClickClose(selector) {
+    // $(selector).hide();
+    // if (selector == "#bill-paper") {
+    //   $("#klip-qr-code-frame").hide();
+    //   if (!!window.klipPollingId) {
+    //     clearInterval(window.klipPollingId); // 주기적으로 값이 바뀌는건가?
+    //     delete window.klipPollingId;
+    //     delete window.lastKlipRequestKey;
+    //   }
+    // }
+  }
 
   function OnClickDetail(farmId) {
     // 팝업 detail 버튼 클릭했을때 모달 보여주는 함수 > 모달 컴포넌트로 따로 만들 수 있을 듯.
@@ -767,7 +783,12 @@ export default function Canvas({
 
   return (
     <Main>
-      <div ref={canvasParent}></div>
+      <div ref={canvasParent} />
+      <WelcomeModal
+        welcomeModal={welcomeModal}
+        setWelcomeModal={handleWelcomeModal}
+      />
+      <DetailModal spotModal={spotModal} setSpotModal={setSpotModal} />
     </Main>
   );
 }

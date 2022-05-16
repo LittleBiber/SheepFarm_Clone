@@ -80,6 +80,7 @@ export default function Pastures({
   selectedSpot,
   handleSelectedSpots,
   pinId,
+  setPinId,
 }) {
   // function onClickGoButton(event) {
   //   // let data = event.target["data-farm-id"];

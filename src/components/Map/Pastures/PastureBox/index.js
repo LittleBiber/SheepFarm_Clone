@@ -91,8 +91,10 @@ export default function PastureBox({
   handleSelectedSpots,
   selected,
 }) {
+  const redirectToMarket = () => alert("Tlqkf");
+
   return (
-    <Main id={id} selected={selected} onClick={handleSelectedSpots}>
+    <Main id={id} selected={selected} onClick={() => handleSelectedSpots(id)}>
       {/* data-farm-id 는 어떻게 빼와야 하지? > id/class 또는 함수의 인자로 넘기기? */}
       <span>
         {/* style="pointer-events: none;" */}
@@ -107,11 +109,11 @@ export default function PastureBox({
       </span>
       <span className="sold-btn-parent">
         {sold ? (
-          <button className="sold-btn">LOCKED</button>
-        ) : (
-          <a className="sold-btn" target="_blank" /*onClick={OnClickOccupied}*/>
+          <a className="sold-btn" target="_blank" onClick={redirectToMarket}>
             OCCUPIED
           </a>
+        ) : (
+          <button className="sold-btn">LOCKED</button>
         )}
       </span>
     </Main>

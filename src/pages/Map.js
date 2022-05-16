@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Canvas from "../components/Map/Canvas";
 import Pastures from "../components/Map/Pastures";
+import Search from "../components/Map/Search";
 
 import { Lands } from "../components/Map/Canvas/Lands";
 import { Sectors } from "../components/Map/Canvas/Sectors";
@@ -16,8 +17,7 @@ export default function Map() {
 
   const [selectedSpot, setSelectedSpot] = useState(null);
   const handleSelectedSpots = (event) => {
-    console.log(event.target);
-    // setSelectedSpot();
+    setPinId(Number(event.target.id));
   };
 
   const [pinId, setPinId] = useState(0);
@@ -50,7 +50,30 @@ export default function Map() {
     console.log(items);
   }, []);
 
-  /*
+  return (
+    <>
+      <Canvas
+        items={items}
+        selectedSectors={selectedSectors}
+        setSelectedSectors={setSelectedSectors}
+        handleSelectedSpots={handleSelectedSpots}
+        pinId={pinId}
+        setPinId={setPinId}
+      />
+      <Pastures
+        selectedSectors={selectedSectors}
+        handleSelectedSectors={handleSelectedSectors}
+        selectedSpot={selectedSpot}
+        handleSelectedSpots={handleSelectedSpots}
+        pinId={pinId}
+        setPinId={setPinId}
+      />
+      <Search />
+    </>
+  );
+}
+
+/*
   가지고 있는 것: Sectors, Lands 전체 데이터
 
   가장 먼저 알아야 할 것: 무엇이 어떤 데이터를 구성하는가?
@@ -69,24 +92,3 @@ export default function Map() {
     - 현재 선택된 Sector의 Spots정보
     - 현재 선택된 Spot의 ID 또는 전체 데이터
   */
-
-  return (
-    <>
-      <Canvas
-        items={items}
-        setSelectedSectors={setSelectedSectors}
-        // handleSelectedSpots={handleSelectedSpots}
-        pinId={pinId}
-        setPinId={setPinId}
-      />
-      <Pastures
-        selectedSectors={selectedSectors}
-        handleSelectedSectors={handleSelectedSectors}
-        selectedSpot={selectedSpot}
-        handleSelectedSpots={handleSelectedSpots}
-        pinId={pinId}
-        setPinId={setPinId}
-      />
-    </>
-  );
-}
