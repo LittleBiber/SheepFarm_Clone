@@ -4,6 +4,9 @@ import { Viewport } from "pixi-viewport";
 import styled from "styled-components";
 import { makeShader } from "./map_shader";
 
+import DetailModal from "../DetailModal";
+import WelcomeModal from "../WelcomeModal";
+
 const Main = styled.div`
   display: block;
   position: relative;
@@ -16,6 +19,7 @@ export default function Canvas({
   items,
   nowSpotList,
   setNowSpotList,
+  nowSpot,
   setNowSpot,
 }) {
   const canvasParent = useRef(null);
@@ -27,6 +31,7 @@ export default function Canvas({
   };
   const BACKGROUND_SIZE = { width: 1720, height: 1738 };
   const SECTOR_SIZE = 56 * 2;
+  const FIRST_FOCUS_SECTOR = "6_9";
   const UNLOCKED_SECTOR = {
     "3_9": 0,
     "4_9": 0,
@@ -48,7 +53,29 @@ export default function Canvas({
     "8_10": 0,
   };
 
+  let buttons = new PIXI.Container();
+  let spotDict = {};
+  let sectorSpotDict = {}; //! 상태값으로 바꿔보기
+  let sectorDict = {};
+
+  // Make Popup
+  let popup = new PIXI.Container();
+  let popupBg = PIXI.Sprite.from("/Map/selected_spot_info.png");
+  let moreBtn = PIXI.Sprite.from("/Map/more_btn.png");
+  moreBtn.anchor.set(0.5, 0.5);
+  moreBtn.y = -70;
+  moreBtn.buttonMode = true;
+  moreBtn.interactive = true;
+  moreBtn.on("pointerup", () => {
+    // OnClickDetail(farmInfo.id);
+  });
+
+  const [welcomeModal, setWelcomeModal] = useState(true);
+  const [spotModal, setSpotModal] = useState(false);
+
   const app = new PIXI.Application(CANVAS_SETTING);
+  const uiLayer = new PIXI.Container();
+  app.stage.addChild(uiLayer);
 
   const viewport = new Viewport({
     screenWidth: window.innerWidth,
@@ -77,7 +104,7 @@ export default function Canvas({
 
   viewport.on("drag-start", (event) => {
     // console.log(event.target);
-    // removePopup();
+    removePopup();
   });
   viewport.on("clicked", (event) => {
     let sectorId = "";
@@ -133,15 +160,10 @@ export default function Canvas({
 
     // console.log("spotDict", spotDict);
 
-    // console.log("sectorSpotDict", sectorSpotDict);
+    console.log("sectorSpotDict", sectorSpotDict);
 
     // console.log("sectorDict", sectorDict);
   }, []);
-
-  let buttons = new PIXI.Container();
-  let spotDict = {};
-  let sectorSpotDict = {};
-  let sectorDict = {};
 
   let blinkingGizmo = new PIXI.Graphics();
   blinkingGizmo.zOrder = 10000;
@@ -234,6 +256,12 @@ export default function Canvas({
       sectorSpotDict[sector.sectorId].push(spot);
     });
 
+    console.log("11234", spotDict);
+
+    console.log("12222222", sectorSpotDict);
+
+    console.log("123444444444", sectorDict);
+
     background.addChild(buttons); // 아까 생성했던 Sector 저장된 변수를 배경에 추가
   };
 
@@ -297,12 +325,19 @@ export default function Canvas({
     // sector는 farmInfo가 없음
     // spot는 farmInfo가 있음
 
+    blinkingGizmo.clear();
+
+    // console.log("BlinkTarget 시작");
+
     if (!target) return;
+
+    // console.log("에러 없이 지나옴");
 
     blinkingEffect(target);
 
+    // console.log("이펙트 함수 통과");
+
     for (let sectorId in sectorDict) {
-      // last item was sector >> ?? 이게 뭔 소리지
       let sector = sectorDict[sectorId];
       sector.parent.setChildIndex(sector, 0);
       let spots = sectorSpotDict[sectorId];
@@ -312,30 +347,47 @@ export default function Canvas({
       });
     }
 
+    // console.log("전부 감추기 통과");
+
     if ("farmInfo" in target) {
       //     // 클릭한 대상이 Spot이면
-      //     showInfoPopup(target);
+      showInfoPopup(target);
       //     setPinId(target.farmInfo.id); // 내가 추가한거
       //     updateSelectedRow(target.farmInfo.id);
 
       let sectorId = target.parentSectorId;
-      let spots = sectorSpotDict[sectorId];
+      let spots = sectorSpotDict[String(sectorId)];
+
+      console.log("여기 문제인가본데?");
+      console.log(sectorSpotDict, sectorId);
+      console.log("이게 중요함", spots, typeof sectorId);
 
       spots.forEach((e) => {
         e.visible = true;
       });
 
+      console.log("대상 섹터 보여주기 통과");
+
       // let sector = sectorDict[target.parentSectorId];
       // showFarmInfosInSector(sector);
-    } else if ("sectorId" in target) {
+    }
+
+    if ("sectorId" in target) {
       let spots = sectorSpotDict[target.sectorId];
+
+      console.log();
 
       //! spots를 상태값으로 사용해 Pastures에 전달
       setNowSpotList(spots);
 
+      console.log();
+
       spots.forEach((e) => {
         e.visible = true;
       });
+
+      console.log();
+
       let sector = sectorDict[target.sectorId];
       sector.parent.setChildIndex(sector, sector.parent.children.length - 1); // sectorDict[target.sectorId].zOrder = 100;
 
@@ -401,7 +453,7 @@ export default function Canvas({
   const onClickSector = (sector) => {
     // console.log(sector);
 
-    // removePopup();
+    removePopup();
     setBlinkingTarget(sector);
 
     viewport.snap(sector.x, sector.y, {
@@ -422,11 +474,149 @@ export default function Canvas({
       removeOnComplete: true,
       removeOnInterrupt: true,
     });
+
+    showInfoPopup(spot);
   };
+
+  const onClickWelcomeModalOk = () => {
+    onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
+  };
+
+  let lastPopup = null;
+  const removePopup = () => {
+    if (lastPopup != null) {
+      lastPopup.parent.removeChild(lastPopup);
+      lastPopup = null;
+    }
+  };
+
+  const showInfoPopup = (spot) => {
+    let farmInfo = spot.farmInfo;
+
+    removePopup();
+
+    // set title text
+    let popupTitleText = new PIXI.Text("[2321] 333.333", {
+      fontFamily: "Arial",
+      fontSize: 15,
+      fill: 0xffffff,
+      align: "center",
+    });
+    popupTitleText.anchor.set(0.5, 0.5);
+    popupTitleText.y = -225;
+    popupTitleText.text = `NZ, Stewart Island, X:${farmInfo.x} Y:${farmInfo.y}`;
+
+    // set max sheep count text
+    let maxSheepNum = 3;
+    if (farmInfo.id <= 6111) maxSheepNum = 3;
+    else if (farmInfo.id <= 9111)
+      // 9111
+      maxSheepNum = 4;
+    else if (farmInfo.id <= 11111) maxSheepNum = 5;
+    else maxSheepNum = "-";
+
+    let popupSheepText = new PIXI.Text("555555", {
+      fontFamily: "Arial",
+      fontSize: 18,
+      fill: 0xffffff,
+      align: "center",
+    });
+    popupSheepText.anchor.set(0.5, 0.5);
+    popupSheepText.y = -118;
+    popupSheepText.x = 20;
+    popupSheepText.text = "" + maxSheepNum;
+
+    // set farm size text
+    let popupSizeText = new PIXI.Text("555555", {
+      fontFamily: "Arial",
+      fontSize: 18,
+      fill: 0xffffff,
+      align: "center",
+    });
+    popupSizeText.anchor.set(0.5, 0.5);
+    popupSizeText.y = -165;
+    popupSizeText.x = 20;
+    popupSizeText.text = farmInfo.size;
+
+    //attach
+    popupBg.anchor.set(0.5, 1);
+    popupBg.addChild(moreBtn);
+    popupBg.addChild(popupTitleText);
+    popupBg.addChild(popupSheepText);
+    popupBg.addChild(popupSizeText);
+    popup.addChild(popupBg);
+
+    popup.x = spot.getBounds().x;
+    popup.y = spot.getBounds().y;
+    popup.followTarget = spot;
+    uiLayer.addChild(popup);
+
+    lastPopup = popup;
+
+    // show selected row
+    // updateSelectedRow(farmInfo.id);
+  };
+
+  const handleWelcomeModal = () => {
+    setWelcomeModal(false);
+    onClickWelcomeModalOk();
+  };
+
+  let elapsed = 0.0; // 굳이 0.0 으로 준거보면 이유가 있을텐데.
+  app.ticker.add((delta) => {
+    elapsed += delta;
+    if (!!app.cloudsVfx)
+      // 구름효과가 true면
+      app.cloudsVfx.updateTexture(app, elapsed); // 구름효과에 updateTexture 실행?
+
+    if (!!lastPopup) {
+      // 섹터 안의 spot 에 값이 할당됨
+      let b = lastPopup.followTarget.getBounds(); // lastPopup 어디서 왔는지 찾기
+      lastPopup.x = b.x + b.width / 2;
+      lastPopup.y = b.y + b.height / 2;
+    }
+
+    if (app.blinkingItem) {
+      // console.log("효과 걸리는거", app.blinkingItem);
+      if (blinkingGizmo.width < 20) {
+        //! 왜 Spot부분은 계속 남아있는거지?
+        blinkingGizmo.scale.set(
+          1.0 + 2.0 * ((Math.sin(elapsed * 0.1) + 1) / 2)
+        );
+      } else {
+        blinkingGizmo.scale.set(
+          1.0 + 0.1 * ((Math.sin(elapsed * 0.1) + 1) / 2)
+        );
+        blinkingGizmo.alpha = 1 - Math.abs(Math.sin(elapsed * 0.05));
+      }
+    }
+  });
+
+  useEffect(() => {
+    // if (!nowSpot) return;
+    // const target = nowSpotList.find((one) => one.farmInfo.id === nowSpot);
+    // setBlinkingTarget(target);
+    // console.log(nowSpot, target);
+    // console.log("roTlqkf", buildsectorSpotDict);
+  }, [nowSpot]);
 
   return (
     <Main>
       <div ref={canvasParent} />
+      <WelcomeModal
+        welcomeModal={welcomeModal}
+        setWelcomeModal={handleWelcomeModal}
+      />
+      <DetailModal spotModal={spotModal} setSpotModal={setSpotModal} />
     </Main>
   );
 }
+
+/*
+
+원래 계획: Pasture과 같이 움직이게 하려고 클릭시 id를 상태값으로 저장해 이벤트를 보여주려고 했는데
+  useEffect안에서 호출한 setBlinkingTarget 함수는 sectorSpotDict를 제대로 가져오지 못함(빈 객체)
+
+수정 계획: sectorSpotDict를 상태값으로 저장해보기
+
+*/
