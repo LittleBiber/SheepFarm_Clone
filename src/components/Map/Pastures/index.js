@@ -76,6 +76,10 @@ const Main = styled.div`
 */
 
 export default function Pastures({
+  nowSpotList,
+  nowSpot,
+  setNowSpot,
+  //!
   selectedSectors,
   selectedSpot,
   handleSelectedSpots,
@@ -99,19 +103,19 @@ export default function Pastures({
       <div className="spot-list-heading" id="pastures-list-heading">
         <span>Pastures</span>
         <span id="remain-amount">
-          Remains {selectedSectors.filter((e) => e.sold !== 1).length} /{" "}
-          {selectedSectors.length}
+          Remains {nowSpotList.length} / {nowSpotList.length}
         </span>
       </div>
 
       <div id="pastures-list">
-        {selectedSectors.map((one) => {
+        {nowSpotList.map((one) => {
           return (
             <PastureBox
+              key={Math.random()}
+              onClick={() => alert("Tlkqf")}
               {...one.farmInfo}
-              selected={pinId === one.farmInfo.id ? true : false}
-              key={one.id}
-              handleSelectedSpots={handleSelectedSpots}
+              selected={nowSpot === one.farmInfo.id ? true : false}
+              setNowSpot={setNowSpot}
             />
           );
         })}

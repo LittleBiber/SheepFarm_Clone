@@ -13,6 +13,7 @@ const Main = styled.div`
   span {
     display: flex;
     align-items: center;
+    pointer-events: none;
   }
 
   .sector-id {
@@ -85,19 +86,12 @@ const Main = styled.div`
   }
 `;
 
-export default function PastureBox({
-  id,
-  sold,
-  handleSelectedSpots,
-  selected,
-}) {
+export default function PastureBox({ id, sold, selected, setNowSpot }) {
   const redirectToMarket = () => alert("Tlqkf");
 
   return (
-    <Main id={id} selected={selected} onClick={() => handleSelectedSpots(id)}>
-      {/* data-farm-id 는 어떻게 빼와야 하지? > id/class 또는 함수의 인자로 넘기기? */}
+    <Main id={id} selected={selected} onClick={() => setNowSpot(id)}>
       <span>
-        {/* style="pointer-events: none;" */}
         <span className="sector-id">{id}</span>
         <span className="property">
           <img src="/Map/size.png" />

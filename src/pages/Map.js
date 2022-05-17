@@ -22,6 +22,10 @@ export default function Map() {
 
   const [pinId, setPinId] = useState(0);
 
+  //! 새로 추가한 상태값
+  const [nowSpotList, setNowSpotList] = useState([]);
+  const [nowSpot, setNowSpot] = useState({});
+
   const items = sectors.map((e) => {
     // sector_0_data 의 각 값에 대해 처리하는것
     // Lands.fi >> Lands 데이터는 파일처리가 너무오래걸려서 삭제했었는데 다시 확인해봐야 함
@@ -47,20 +51,30 @@ export default function Map() {
   });
 
   useEffect(() => {
-    console.log(items);
-  }, []);
+    // console.log(items);
+    // console.log("Map", nowSpots);
+    // console.log(nowSector);
+  }, [selectedSpot]);
 
   return (
     <>
       <Canvas
         items={items}
-        selectedSectors={selectedSectors}
-        setSelectedSectors={setSelectedSectors}
-        handleSelectedSpots={handleSelectedSpots}
-        pinId={pinId}
-        setPinId={setPinId}
+        nowSpotList={nowSpotList}
+        setNowSpotList={setNowSpotList}
+        nowSpot={nowSpot}
+        setNowSpot={setNowSpot}
+        // selectedSectors={selectedSectors}
+        // setSelectedSectors={setSelectedSectors}
+        // handleSelectedSpots={handleSelectedSpots}
+        // pinId={pinId}
+        // setPinId={setPinId}
       />
       <Pastures
+        nowSpotList={nowSpotList}
+        nowSpot={nowSpot}
+        setNowSpot={setNowSpot}
+        //!
         selectedSectors={selectedSectors}
         handleSelectedSectors={handleSelectedSectors}
         selectedSpot={selectedSpot}
