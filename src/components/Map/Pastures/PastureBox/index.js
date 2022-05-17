@@ -86,7 +86,14 @@ const Main = styled.div`
   }
 `;
 
-export default function PastureBox({ id, sold, selected, setNowSpot }) {
+export default function PastureBox({
+  id,
+  sold,
+  size,
+  sheepLimit,
+  selected,
+  setNowSpot,
+}) {
   const redirectToMarket = () => alert("Tlqkf");
 
   return (
@@ -95,10 +102,11 @@ export default function PastureBox({ id, sold, selected, setNowSpot }) {
         <span className="sector-id">{id}</span>
         <span className="property">
           <img src="/Map/size.png" />
-          {"5X5"}
+          {size}
         </span>
         <span className="property">
-          <img src="/Map/sheep.png" />3
+          <img src="/Map/sheep.png" />
+          {sheepLimit}
         </span>
       </span>
       <span className="sold-btn-parent">

@@ -15,13 +15,7 @@ const Main = styled.div`
   overflow: hidden;
 `;
 
-export default function Canvas({
-  items,
-  nowSpotList,
-  setNowSpotList,
-  nowSpot,
-  setNowSpot,
-}) {
+export default function Canvas({ items, setNowSpotList, setNowSpot }) {
   const canvasParent = useRef(null);
   const CANVAS_SETTING = {
     width: window.innerWidth, // vw
@@ -55,27 +49,15 @@ export default function Canvas({
 
   let buttons = new PIXI.Container();
   let spotDict = {};
-  let sectorSpotDict = {}; //! 상태값으로 바꿔보기
+  let sectorSpotDict = {};
   let sectorDict = {};
-
-  // Make Popup
-  let popup = new PIXI.Container();
-  let popupBg = PIXI.Sprite.from("/Map/selected_spot_info.png");
-  let moreBtn = PIXI.Sprite.from("/Map/more_btn.png");
-  moreBtn.anchor.set(0.5, 0.5);
-  moreBtn.y = -70;
-  moreBtn.buttonMode = true;
-  moreBtn.interactive = true;
-  moreBtn.on("pointerup", () => {
-    // OnClickDetail(farmInfo.id);
-  });
 
   const [welcomeModal, setWelcomeModal] = useState(true);
   const [spotModal, setSpotModal] = useState(false);
+  const [detailData, setDetailData] = useState({});
 
   const app = new PIXI.Application(CANVAS_SETTING);
   const uiLayer = new PIXI.Container();
-  app.stage.addChild(uiLayer);
 
   const viewport = new Viewport({
     screenWidth: window.innerWidth,
@@ -142,10 +124,8 @@ export default function Canvas({
       (spot?.parent === app.blinkingItem ||
         (app.blinkingItem !== null && app.blinkingItem?.parent == spot?.parent))
     ) {
-      // console.log("spot clicked");
       onClickSpot(spot);
     } else if (!!sector) {
-      // console.log("sector clicked");
       onClickSector(sector);
     }
   });
@@ -158,11 +138,7 @@ export default function Canvas({
     drawBox();
     drawCloud();
 
-    // console.log("spotDict", spotDict);
-
-    console.log("sectorSpotDict", sectorSpotDict);
-
-    // console.log("sectorDict", sectorDict);
+    app.stage.addChild(uiLayer);
   }, []);
 
   let blinkingGizmo = new PIXI.Graphics();
@@ -256,12 +232,6 @@ export default function Canvas({
       sectorSpotDict[sector.sectorId].push(spot);
     });
 
-    console.log("11234", spotDict);
-
-    console.log("12222222", sectorSpotDict);
-
-    console.log("123444444444", sectorDict);
-
     background.addChild(buttons); // 아까 생성했던 Sector 저장된 변수를 배경에 추가
   };
 
@@ -327,15 +297,9 @@ export default function Canvas({
 
     blinkingGizmo.clear();
 
-    // console.log("BlinkTarget 시작");
-
     if (!target) return;
 
-    // console.log("에러 없이 지나옴");
-
     blinkingEffect(target);
-
-    // console.log("이펙트 함수 통과");
 
     for (let sectorId in sectorDict) {
       let sector = sectorDict[sectorId];
@@ -347,8 +311,6 @@ export default function Canvas({
       });
     }
 
-    // console.log("전부 감추기 통과");
-
     if ("farmInfo" in target) {
       //     // 클릭한 대상이 Spot이면
       showInfoPopup(target);
@@ -358,15 +320,12 @@ export default function Canvas({
       let sectorId = target.parentSectorId;
       let spots = sectorSpotDict[String(sectorId)];
 
-      console.log("여기 문제인가본데?");
-      console.log(sectorSpotDict, sectorId);
-      console.log("이게 중요함", spots, typeof sectorId);
+      // console.log(sectorSpotDict, sectorId);
+      // console.log("이게 중요함", spots, typeof sectorId);
 
       spots.forEach((e) => {
         e.visible = true;
       });
-
-      console.log("대상 섹터 보여주기 통과");
 
       // let sector = sectorDict[target.parentSectorId];
       // showFarmInfosInSector(sector);
@@ -375,18 +334,12 @@ export default function Canvas({
     if ("sectorId" in target) {
       let spots = sectorSpotDict[target.sectorId];
 
-      console.log();
-
       //! spots를 상태값으로 사용해 Pastures에 전달
       setNowSpotList(spots);
-
-      console.log();
 
       spots.forEach((e) => {
         e.visible = true;
       });
-
-      console.log();
 
       let sector = sectorDict[target.sectorId];
       sector.parent.setChildIndex(sector, sector.parent.children.length - 1); // sectorDict[target.sectorId].zOrder = 100;
@@ -451,8 +404,6 @@ export default function Canvas({
   };
 
   const onClickSector = (sector) => {
-    // console.log(sector);
-
     removePopup();
     setBlinkingTarget(sector);
 
@@ -464,8 +415,8 @@ export default function Canvas({
   };
 
   const onClickSpot = (spot) => {
-    console.log(spot);
     setBlinkingTarget(spot);
+    showInfoPopup(spot);
 
     setNowSpot(spot.farmInfo.id);
 
@@ -494,6 +445,19 @@ export default function Canvas({
     let farmInfo = spot.farmInfo;
 
     removePopup();
+
+    // Make Popup
+    let popup = new PIXI.Container();
+    let popupBg = PIXI.Sprite.from("/Map/selected_spot_info.png");
+    let moreBtn = PIXI.Sprite.from("/Map/more_btn.png");
+    moreBtn.anchor.set(0.5, 0.5);
+    moreBtn.y = -70;
+    moreBtn.buttonMode = true;
+    moreBtn.interactive = true;
+    moreBtn.on("pointerup", () => {
+      setDetailData(farmInfo);
+      setSpotModal(true);
+    });
 
     // set title text
     let popupTitleText = new PIXI.Text("[2321] 333.333", {
@@ -592,14 +556,6 @@ export default function Canvas({
     }
   });
 
-  useEffect(() => {
-    // if (!nowSpot) return;
-    // const target = nowSpotList.find((one) => one.farmInfo.id === nowSpot);
-    // setBlinkingTarget(target);
-    // console.log(nowSpot, target);
-    // console.log("roTlqkf", buildsectorSpotDict);
-  }, [nowSpot]);
-
   return (
     <Main>
       <div ref={canvasParent} />
@@ -607,7 +563,11 @@ export default function Canvas({
         welcomeModal={welcomeModal}
         setWelcomeModal={handleWelcomeModal}
       />
-      <DetailModal spotModal={spotModal} setSpotModal={setSpotModal} />
+      <DetailModal
+        {...detailData}
+        spotModal={spotModal}
+        setSpotModal={setSpotModal}
+      />
     </Main>
   );
 }

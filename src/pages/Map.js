@@ -50,12 +50,6 @@ export default function Map() {
     };
   });
 
-  useEffect(() => {
-    // console.log(items);
-    // console.log("Map", nowSpots);
-    // console.log(nowSector);
-  }, [selectedSpot]);
-
   return (
     <>
       <Canvas
@@ -64,11 +58,12 @@ export default function Map() {
         setNowSpotList={setNowSpotList}
         nowSpot={nowSpot}
         setNowSpot={setNowSpot}
-        // selectedSectors={selectedSectors}
-        // setSelectedSectors={setSelectedSectors}
-        // handleSelectedSpots={handleSelectedSpots}
-        // pinId={pinId}
-        // setPinId={setPinId}
+        //!
+        selectedSectors={selectedSectors}
+        setSelectedSectors={setSelectedSectors}
+        handleSelectedSpots={handleSelectedSpots}
+        pinId={pinId}
+        setPinId={setPinId}
       />
       <Pastures
         nowSpotList={nowSpotList}

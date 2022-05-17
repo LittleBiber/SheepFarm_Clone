@@ -229,7 +229,7 @@ export default function DetailModal({
                 No. {id}
                 <div className="owner-info">
                   Owner <br />
-                  {ownerId}
+                  0xf28191e65F145dd5CffF98cfe8792501a11074cB {/* 더미 ID */}
                 </div>
               </div>
               <div class="pasture-desc">

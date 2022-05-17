@@ -98,12 +98,15 @@ export default function Pastures({
   //   console.log(items.length);
   // }, []);
 
+  console.log(nowSpotList[0]);
+
   return (
     <Main div className="spot-list-area" id="sector-inspector">
       <div className="spot-list-heading" id="pastures-list-heading">
         <span>Pastures</span>
         <span id="remain-amount">
-          Remains {nowSpotList.length} / {nowSpotList.length}
+          Remains {nowSpotList.filter((e) => e.sold === 1).length} /{" "}
+          {nowSpotList.length}
         </span>
       </div>
 
