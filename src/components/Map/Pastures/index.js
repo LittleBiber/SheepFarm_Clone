@@ -79,6 +79,8 @@ export default function Pastures({
   nowSpotList,
   nowSpot,
   setNowSpot,
+
+  onClickGoButton,
   //!
   selectedSectors,
   selectedSpot,
@@ -86,13 +88,15 @@ export default function Pastures({
   pinId,
   setPinId,
 }) {
-  function onClickGoButton(event) {
-    // let data = event.target.data;
-    // if (data.farmId in spotDict) {
-    //   removePopup();
-    //   onClickSpot(spotDict[data.farmId]);
-    // }
-  }
+  // function onClickGoButton(id) {
+  //   console.log(id, spotDict);
+
+  //   if (id in spotDict) {
+  //     removePopup();
+  //     onClickSpot(spotDict[id]);
+  //   }
+  //   // alert("TEST!!!");
+  // }
 
   return (
     <Main div className="spot-list-area" id="sector-inspector">
@@ -109,10 +113,9 @@ export default function Pastures({
           return (
             <PastureBox
               key={Math.random()}
-              onClick={() => alert("Pasture Clicked")}
               {...one.farmInfo}
               selected={nowSpot === one.farmInfo.id ? true : false}
-              // setNowSpot={setNowSpot}
+              onClickGoButton={onClickGoButton}
             />
           );
         })}

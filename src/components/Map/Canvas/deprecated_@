@@ -18,11 +18,6 @@ const Main = styled.div`
   overflow: hidden;
 `;
 
-const TEST = styled.button`
-  position: absolute;
-  top: 1%;
-`;
-
 export default function Canvas({
   items,
   nowSpotList,
@@ -30,21 +25,21 @@ export default function Canvas({
   nowSpot,
   setNowSpot,
 }) {
-  const canvasParent = useRef(null);
   const [welcomeModal, setWelcomeModal] = useState(true);
   const [spotModal, setSpotModal] = useState(false);
   const [detailData, setDetailData] = useState({});
 
+  const canvasParent = useRef(null);
   const CANVAS_SETTING = {
     width: window.innerWidth, // vw
     height: window.innerHeight, // vh
     resolution: 1, //window.devicePixelRatio,
     backgroundColor: 0x4284d2,
   };
+
   const BACKGROUND_SIZE = { width: 1720, height: 1738 };
-
   const SECTOR_SIZE = 56 * 2;
-
+  const FIRST_FOCUS_SECTOR = "6_9";
   const UNLOCKED_SECTOR = {
     "3_9": 0,
     "4_9": 0,
@@ -64,18 +59,10 @@ export default function Canvas({
     "8_8": 0,
     "8_9": 0,
     "8_10": 0,
-  }; // 4th phase (final)
-  const FIRST_FOCUS_SECTOR = "6_9";
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  };
 
   const app = new PIXI.Application(CANVAS_SETTING);
-  useEffect(() => {
-    console.log("spot/spotDict", spotDict);
-    console.log("spot/sectorSpotDict", sectorSpotDict);
-    console.log("spot/sectorDict", sectorDict);
-
-    if (canvasParent.current) canvasParent.current.appendChild(app.view); // DOM접근 대신 useRef 사용
-  }, []);
+  // if (canvasParent.current) canvasParent.current.appendChild(app.view); // DOM접근 대신 useRef 사용
 
   const viewport = new Viewport({
     screenWidth: window.innerWidth,
@@ -89,7 +76,6 @@ export default function Canvas({
     .drag()
     .pinch()
     .wheel()
-    // .decelerate()
     .clamp({
       left: -BACKGROUND_SIZE.width,
       right: BACKGROUND_SIZE.width * 2,
@@ -138,20 +124,15 @@ export default function Canvas({
         (app.blinkingItem != null && app.blinkingItem.parent == spot.parent))
     ) {
       onClickSpot(spot);
-      setNowSpot(spot.farmInfo.id);
     } else if (!!sector) {
       onClickSector(sector);
     }
-    // console.log(sectorId, sector, spot, farmInfo);
   });
 
-  //.decelerate()
-  // add the viewport to the stage
   app.stage.addChild(viewport);
 
-  // Attach background
   const background = viewport.addChild(PIXI.Sprite.from("/Map/sector_0.png"));
-  if (isMobile == false) {
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) === false) {
     app.cloudsVfx = makeShader();
     app.cloudsVfx.scale.set(
       (BACKGROUND_SIZE.width * 3) / app.cloudsVfx.originalWidth,
@@ -165,7 +146,6 @@ export default function Canvas({
   const uiLayer = new PIXI.Container();
   app.stage.addChild(uiLayer);
 
-  // Attach spots
   let buttons = new PIXI.Container();
   let spotDict = {};
   let sectorSpotDict = {};
@@ -173,20 +153,23 @@ export default function Canvas({
   let lastPopup = null;
 
   items.forEach((e, i, a) => {
+    // 각 데이터, index, array 일듯
     let farmInfo = e;
     let spot_x = farmInfo.x * 5.6 + 71;
     let spot_y = farmInfo.y * 5.6 + 92;
-    let sector = makeSector(spot_x, spot_y, buttons);
-    if (sector.sectorId in sectorSpotDict == false)
+
+    let sector = makeSector(spot_x, spot_y, buttons); // 각각의 칸 생성해 반환
+    if (sector.sectorId in sectorSpotDict === false)
       sectorSpotDict[sector.sectorId] = [];
 
-    let spot = makeSpot(farmInfo, spot_x, spot_y, sector, sector.sectorId);
+    let spot = makeSpot(farmInfo, spot_x, spot_y, sector, sector.sectorId); // 칸 내부에 Spot 사각형 생성
     sector.addChild(spot);
     spotDict[farmInfo.id] = spot;
+
     sectorSpotDict[sector.sectorId].push(spot);
   });
 
-  background.addChild(buttons);
+  background.addChild(buttons); // 아까 생성했던 Sector 저장된 변수를 배경에 추가
   if (app.cloudsVfx) background.addChild(app.cloudsVfx);
 
   let elapsed = 0.0;
@@ -198,8 +181,6 @@ export default function Canvas({
       let b = lastPopup.followTarget.getBounds();
       lastPopup.x = b.x + b.width / 2;
       lastPopup.y = b.y + b.height / 2;
-
-      // console.log("Ticker 구문 lastPopup", lastPopup); //! 계속 출력되므로 켜지 말것
     }
 
     if (app.blinkingItem) {
@@ -215,28 +196,21 @@ export default function Canvas({
     }
   });
 
-  function onClickGoButton(id) {
-    console.log(id);
-
-    if (id in spotDict) {
-      removePopup();
-
-      setNowSpot(id);
-
-      onClickSpot(spotDict[id]);
-    }
-  }
-
   function makeSector(spot_x, spot_y, parent) {
     let sectorId =
       Math.floor(spot_x / SECTOR_SIZE) + "_" + Math.floor(spot_y / SECTOR_SIZE);
-    let sector = null;
-    if (sectorId in sectorDict == false) {
-      sector = new PIXI.Container();
 
+    let sector = null;
+
+    if (sectorId in sectorDict === false) {
+      sector = new PIXI.Container();
       let lockedCover = new PIXI.Graphics();
-      if (sectorId in UNLOCKED_SECTOR) lockedCover.beginFill(0x555555, 0.1);
-      else lockedCover.beginFill(0x555555, 0.5);
+      if (sectorId in UNLOCKED_SECTOR) {
+        lockedCover.beginFill(0x555555, 0.1);
+      } else {
+        lockedCover.beginFill(0x555555, 0.5);
+      }
+
       lockedCover.lineStyle(3, 0x000000, 0.25);
       lockedCover.drawRect(
         -SECTOR_SIZE / 2,
@@ -253,25 +227,16 @@ export default function Canvas({
       sector.x = Math.floor(spot_x / SECTOR_SIZE) * SECTOR_SIZE;
       sector.y = Math.floor(spot_y / SECTOR_SIZE) * SECTOR_SIZE;
 
-      sector.interactive = true;
-      sector.buttonMode = true;
+      sector.interactive = true; // 이벤트 처리 활성
+      sector.buttonMode = true; // 이건 모르겠다;;
 
       if (sectorId in UNLOCKED_SECTOR == false) {
-        const locked = PIXI.Sprite.from("/Map/locked.png");
+        const locked = PIXI.Sprite.from("/Map/locked.png"); // 자물쇠 이미지 여기서 추가됨
         locked.anchor.set(0.5, 0.5);
         sector.addChild(locked);
       }
 
-      // let label = new PIXI.Text(sectorId,{fontFamily : 'Arial', fontSize: 25, fill : 0xffFFff, align : 'center'});
-      // label.x = -30-15
-      // label.y = -30-15
-      // let label_shadow = new PIXI.Text(sectorId,{fontFamily : 'Arial', fontSize: 25, fill : 0x000000, align : 'center'});
-      // label_shadow.x = -28-15
-      // label_shadow.y = -28-15
-      // sector.addChild(label_shadow);
-      // sector.addChild(label);
-
-      parent.addChild(sector);
+      parent.addChild(sector); // buttons에 섹터(칸 하나) 추가
     } else {
       sector = sectorDict[sectorId];
     }
@@ -291,35 +256,44 @@ export default function Canvas({
 
     spot.farmInfo = farmInfo;
     spot.parentSectorId = sectorId;
-    spot.visible = false;
+    spot.visible = false; // 유저 클릭으로 활성화되었을 때만 보이게 > 기본값 False
     spot.x = spot_x - parent.x - SECTOR_SIZE / 2;
     spot.y = spot_y - parent.y - SECTOR_SIZE / 2;
     spot.buttonMode = true;
     spot.interactive = true;
 
-    return spot;
+    return spot; // 생성된 spot 반환
   }
 
   function onClickSector(sector) {
+    setNowSpotList(sectorSpotDict[sector.sectorId]);
+
     removePopup();
     setBlinkingTarget(sector);
+
     viewport.snap(sector.x, sector.y, {
       time: 300,
       removeOnComplete: true,
       removeOnInterrupt: true,
     });
-
-    setNowSpotList(sectorSpotDict[sector.sectorId]);
   }
 
   function onClickSpot(spot) {
-    // console.log("spot/spotDict", spotDict);
-    // console.log("spot/sectorSpotDict", sectorSpotDict);
-    // console.log("spot/sectorDict", sectorDict);
-
-    console.log("클릭 대상", spot);
+    console.log("함수 시작");
+    console.log("찾는 Spot", spot);
 
     setBlinkingTarget(spot);
+
+    // console.log("반짝이 설정");
+
+    // showInfoPopup(spot);
+
+    // console.log("팝업 띄우기");
+
+    setNowSpot(spot.farmInfo.id);
+
+    // console.log("현재 값 변경");
+
     viewport.snap(spot.parent.x + spot.x, spot.parent.y + spot.y, {
       time: 300,
       removeOnComplete: true,
@@ -328,15 +302,21 @@ export default function Canvas({
   }
 
   function removePopup() {
-    console.log("이전 이벤트 대상", lastPopup);
+    console.log("이전 팝업", lastPopup);
 
     if (lastPopup != null) {
+      console.log("이전 팝업 존재함 > 제거 시작");
+
       lastPopup.parent.removeChild(lastPopup);
+
+      console.log("이전 팝업 제거완료");
       lastPopup = null;
     }
   }
 
   function showInfoPopup(spot) {
+    console.log("팝업정보 보여주기 함수 실행");
+
     let farmInfo = spot.farmInfo;
 
     removePopup();
@@ -354,6 +334,8 @@ export default function Canvas({
       setSpotModal(true);
     });
 
+    console.log("팝업 백그라운드 생성");
+
     // set title text
     let popupTitleText = new PIXI.Text("[2321] 333.333", {
       fontFamily: "Arial",
@@ -368,7 +350,9 @@ export default function Canvas({
     // set max sheep count text
     let maxSheepNum = 3;
     if (farmInfo.id <= 6111) maxSheepNum = 3;
-    else if (farmInfo.id <= 9111) maxSheepNum = 4;
+    else if (farmInfo.id <= 9111)
+      // 9111
+      maxSheepNum = 4;
     else if (farmInfo.id <= 11111) maxSheepNum = 5;
     else maxSheepNum = "-";
 
@@ -395,6 +379,8 @@ export default function Canvas({
     popupSizeText.x = 20;
     popupSizeText.text = farmInfo.size;
 
+    console.log("팝업정보 생성 완료");
+
     //attach
     popupBg.anchor.set(0.5, 1);
     popupBg.addChild(moreBtn);
@@ -408,27 +394,26 @@ export default function Canvas({
     popup.followTarget = spot;
     uiLayer.addChild(popup);
 
-    // console.log("생성된 Popup", popup);
-    // console.log("uiLayer", uiLayer);
+    console.log("팝업 생성 완료");
 
     lastPopup = popup;
 
+    console.log("이전 팝업정보에 저장 완료");
+
     // show selected row
-    updateSelectedRow(farmInfo.id);
+    // updateSelectedRow(farmInfo.id);
   }
 
-  var blinkingGizmo = new PIXI.Graphics();
+  let blinkingGizmo = new PIXI.Graphics();
   blinkingGizmo.zOrder = 10000;
   blinkingGizmo.interactive = false;
   blinkingGizmo.buttonMode = false;
   function setBlinkingTarget(target) {
-    // console.log("setBlinkingTarget", target);
-
     blinkingGizmo.clear();
 
     if ("farmInfo" in target) {
       showInfoPopup(target);
-      updateSelectedRow(target.farmInfo.id);
+      // updateSelectedRow(target.farmInfo.id);
     }
 
     for (let sectorId in sectorDict) {
@@ -436,7 +421,6 @@ export default function Canvas({
       let sector = sectorDict[sectorId];
       sector.parent.setChildIndex(sector, 0);
       let spots = sectorSpotDict[sectorId];
-
       spots.forEach((e) => {
         e.visible = false;
       });
@@ -453,21 +437,18 @@ export default function Canvas({
         join: PIXI.LINE_JOIN.ROUND,
       });
       blinkingGizmo.drawRect(bound.x, bound.y, bound.width, bound.height);
-
       app.blinkingItem.addChild(blinkingGizmo);
 
       if ("farmInfo" in target) {
         // on select spot
         let sectorId = target.parentSectorId;
         let spots = sectorSpotDict[sectorId];
-
         spots.forEach((e) => {
           e.visible = true;
         });
       } else if ("sectorId" in target) {
         // on select sector
         let spots = sectorSpotDict[target.sectorId];
-
         spots.forEach((e) => {
           e.visible = true;
         });
@@ -479,71 +460,39 @@ export default function Canvas({
     if (target != null) {
       if ("farmInfo" in target) {
         let sector = sectorDict[target.parentSectorId];
-        showFarmInfosInSector(sector);
+        // showFarmInfosInSector(sector);
       } else if ("sectorId" in target) {
         let sector = sectorDict[target.sectorId];
-        showFarmInfosInSector(sector);
+        // showFarmInfosInSector(sector);
       }
     } else {
-      showFarmInfosInSector(null);
+      // showFarmInfosInSector(null);
     }
   }
 
-  var lastInspectorShowSector = null;
-  function showFarmInfosInSector(sector, cb) {
-    // if (sector != null) {
-    //   $("#sector-inspector").show();
-    //   if (lastInspectorShowSector != sector) {
-    //     $("#pastures-list").scrollTop(0);
-    //     $("#pastures-list").empty();
-    //     fetch(window.location.origin + `/map/sector/${sector.sectorId}`) // Fetch sold states
-    //       .then((resp) => resp.json())
-    //       .then((data) => {
-    //         window.soldStateDict = {};
-    //         data.forEach((e) => {
-    //           window.soldStateDict[e.id] = e.sold; //0=false 1=true
-    //         });
-    //         updateInfoInSector(sector.sectorId);
-    //         if (app.blinkingItem != null && "farmInfo" in app.blinkingItem)
-    //           updateSelectedRow(app.blinkingItem.farmInfo.id);
-    //         cb && cb();
-    //       });
-    //   }
-    //   lastInspectorShowSector = sector;
-    // } else {
-    //   $("#sector-inspector").hide();
-    // }
+  function onClickGoButton(id) {
+    // let data = event.target.data;
+    // console.log("onClick_spotDict", spotDict);
+
+    if (id in spotDict) {
+      removePopup(); //! 왜 lastPopup이 null이지???
+
+      console.log("OnClick실행됨", spotDict[id]);
+
+      onClickSpot(spotDict[id]);
+    }
   }
 
-  function updateSelectedRow(farmId) {
-    // $(`div.row[data-farm-id!="${farmId}"]`).removeClass("selected");
-    // $(`div.row[data-farm-id="${farmId}"]`).addClass("selected");
-    // if ($(`div.row[data-farm-id=${farmId}]`).length > 0) {
-    //   let row_position = $(`div.row[data-farm-id=${farmId}]`).offset().top;
-    //   let listTop = $("#pastures-list").offset().top;
-    //   let listBottom =
-    //     $("#pastures-list").offset().top + $("#pastures-list").height();
-    //   if (row_position < listTop || row_position > listBottom) {
-    //     $("#pastures-list").animate(
-    //       {
-    //         scrollTop: row_position - $("div.row").offset().top,
-    //       },
-    //       300
-    //     );
-    //   }
-    // }
-  }
-
-  function onClickLandSearch() {
-    // let searchLandId = $("#land-id-input").val();
-    // if (searchLandId in spotDict) {
-    //   removePopup();
-    //   onClickSpot(spotDict[searchLandId]);
-    // }
+  function onClickLandSearch(id) {
+    // let searchLandId = $("#land-id-input").val(); // Pasture ID 를 가져오는듯 > useRef 로 처리?
+    if (id in spotDict) {
+      // Spot 모아놓은 값에서 찾는 ID값이 존재하면?
+      removePopup(); // 원래 팝업 없애고
+      onClickSpot(spotDict[id]); // 찾는값 있으니까 바로 팝업 띄워주기
+    }
   }
 
   function onClickWelcomeModalOk() {
-    // $("#welcom-modal-background").hide();
     onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
   }
 
@@ -551,6 +500,14 @@ export default function Canvas({
     setWelcomeModal(false);
     onClickWelcomeModalOk();
   }
+
+  useEffect(() => {
+    console.log("spotDict", spotDict);
+    console.log("sectorSpotDict", sectorSpotDict);
+    console.log("sectorDict", sectorDict);
+
+    if (canvasParent.current) canvasParent.current.appendChild(app.view); // DOM접근 대신 useRef 사용
+  }, []);
 
   return (
     <Main>
@@ -571,7 +528,6 @@ export default function Canvas({
         onClickGoButton={onClickGoButton}
       />
       <Search onClickLandSearch={onClickLandSearch} />
-      {/* <TEST onClick={() => console.log("dd")}>테스트버튼</TEST> */}
     </Main>
   );
 }

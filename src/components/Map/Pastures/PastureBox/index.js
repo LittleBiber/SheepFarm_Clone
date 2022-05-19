@@ -92,10 +92,10 @@ export default function PastureBox({
   size,
   sheepLimit,
   selected,
-  setNowSpot,
+  onClickGoButton,
 }) {
   return (
-    <Main id={id} selected={selected} onClick={() => setNowSpot(id)}>
+    <Main id={id} selected={selected} onClick={() => onClickGoButton(id)}>
       <span>
         <span className="sector-id">{id}</span>
         <span className="property">

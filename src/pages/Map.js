@@ -78,19 +78,6 @@ export default function Map() {
         pinId={pinId}
         setPinId={setPinId}
       />
-      {/* <Pastures
-        nowSpotList={nowSpotList}
-        nowSpot={nowSpot}
-        setNowSpot={setNowSpot}
-        //!
-        selectedSectors={selectedSectors}
-        handleSelectedSectors={handleSelectedSectors}
-        selectedSpot={selectedSpot}
-        handleSelectedSpots={handleSelectedSpots}
-        pinId={pinId}
-        setPinId={setPinId}
-      /> */}
-      <Search />
     </>
   );
 }

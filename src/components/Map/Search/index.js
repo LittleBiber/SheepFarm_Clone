@@ -95,12 +95,12 @@ const BackButton = styled.span`
   }
 `;
 
-export default function Search() {
+export default function Search({ onClickLandSearch }) {
   const targetID = useRef(null);
 
-  const searchLand = () => {
-    // targetID.current.value
-  };
+  // const searchLand = () => {
+  //   // targetID.current.value
+  // };
 
   return (
     <>
@@ -113,7 +113,10 @@ export default function Search() {
             id="land-id-input"
             ref={targetID}
           />
-          <button id="search_btn" onClick={() => searchLand(targetID)}>
+          <button
+            id="search_btn"
+            onClick={() => onClickLandSearch(targetID.current.value)}
+          >
             GO
           </button>
         </div>
