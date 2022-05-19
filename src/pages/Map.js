@@ -24,7 +24,13 @@ export default function Map() {
 
   //! 새로 추가한 상태값
   const [nowSpotList, setNowSpotList] = useState([]);
-  const [nowSpot, setNowSpot] = useState({});
+  const [nowSpot, setNowSpot] = useState(null);
+
+  const [testSpotDict, setTestSpotDict] = useState({});
+
+  const [testSectorSpotDict, setTestSectorSpotDict] = useState({});
+
+  const [testSectorDict, setTestSectorDict] = useState({});
 
   const items = sectors.map((e) => {
     // sector_0_data 의 각 값에 대해 처리하는것
@@ -59,13 +65,20 @@ export default function Map() {
         nowSpot={nowSpot}
         setNowSpot={setNowSpot}
         //!
+        testSpotDict={testSpotDict}
+        setTestSpotDict={setTestSpotDict}
+        testSectorSpotDict={testSectorSpotDict}
+        setTestSectorSpotDict={setTestSectorSpotDict}
+        testSectorDict={testSectorDict}
+        setTestSectorDict={setTestSectorDict}
+        //!
         selectedSectors={selectedSectors}
         setSelectedSectors={setSelectedSectors}
         handleSelectedSpots={handleSelectedSpots}
         pinId={pinId}
         setPinId={setPinId}
       />
-      <Pastures
+      {/* <Pastures
         nowSpotList={nowSpotList}
         nowSpot={nowSpot}
         setNowSpot={setNowSpot}
@@ -76,7 +89,7 @@ export default function Map() {
         handleSelectedSpots={handleSelectedSpots}
         pinId={pinId}
         setPinId={setPinId}
-      />
+      /> */}
       <Search />
     </>
   );

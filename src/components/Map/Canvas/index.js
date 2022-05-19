@@ -7,6 +7,8 @@ import { makeShader } from "./map_shader";
 import DetailModal from "../DetailModal";
 import WelcomeModal from "../WelcomeModal";
 
+import Pastures from "../Pastures";
+
 const Main = styled.div`
   display: block;
   position: relative;
@@ -15,7 +17,18 @@ const Main = styled.div`
   overflow: hidden;
 `;
 
-export default function Canvas({ items, setNowSpotList, setNowSpot }) {
+const TEST = styled.button`
+  position: absolute;
+  top: 1%;
+`;
+
+export default function Canvas({
+  items,
+  nowSpotList,
+  setNowSpotList,
+  nowSpot,
+  setNowSpot,
+}) {
   const canvasParent = useRef(null);
   const CANVAS_SETTING = {
     width: window.innerWidth, // vw
@@ -52,6 +65,8 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
   let sectorSpotDict = {};
   let sectorDict = {};
 
+  let test = {};
+
   const [welcomeModal, setWelcomeModal] = useState(true);
   const [spotModal, setSpotModal] = useState(false);
   const [detailData, setDetailData] = useState({});
@@ -85,21 +100,17 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     });
 
   viewport.on("drag-start", (event) => {
-    // console.log(event.target);
     removePopup();
   });
   viewport.on("clicked", (event) => {
     let sectorId = "";
     let farmInfo = null;
-
     let sector = null;
     let spot = null;
-
     for (let k in sectorDict) {
       let s = sectorDict[k];
       if (s.getBounds().contains(event.screen.x, event.screen.y)) {
         sector = s;
-
         sectorId = k;
         break;
       }
@@ -111,9 +122,7 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
         let s = spots[i];
         if (s.getBounds().contains(event.screen.x, event.screen.y)) {
           spot = s;
-
           farmInfo = spot.farmInfo;
-
           break;
         }
       }
@@ -121,8 +130,8 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
 
     if (
       !!spot &&
-      (spot?.parent === app.blinkingItem ||
-        (app.blinkingItem !== null && app.blinkingItem?.parent == spot?.parent))
+      (spot.parent == app.blinkingItem ||
+        (app.blinkingItem != null && app.blinkingItem.parent == spot.parent))
     ) {
       onClickSpot(spot);
     } else if (!!sector) {
@@ -139,6 +148,15 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     drawCloud();
 
     app.stage.addChild(uiLayer);
+
+    // console.log("init_spotDict", spotDict);
+    // navigator.clipboard.writeText(JSON.parse(JSON.stringify(sectorSpotDict)));
+
+    console.log("spotDict", spotDict);
+    console.log("sectorSpotDict", sectorSpotDict);
+    console.log("sectorDict", sectorDict);
+
+    test = { ...spotDict };
   }, []);
 
   let blinkingGizmo = new PIXI.Graphics();
@@ -229,6 +247,7 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
       let spot = makeSpot(farmInfo, spot_x, spot_y, sector, sector.sectorId); // 칸 내부에 Spot 사각형 생성
       sector.addChild(spot);
       spotDict[farmInfo.id] = spot;
+
       sectorSpotDict[sector.sectorId].push(spot);
     });
 
@@ -279,7 +298,7 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     app.blinkingItem = target;
     let bound = app.blinkingItem.getLocalBounds();
 
-    app.blinkingItem.removeChild(blinkingGizmo);
+    // app.blinkingItem.removeChild(blinkingGizmo);
 
     blinkingGizmo.lineStyle({
       width: 3,
@@ -295,6 +314,8 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     // sector는 farmInfo가 없음
     // spot는 farmInfo가 있음
 
+    // console.log("BlinkingTarget", target);
+
     blinkingGizmo.clear();
 
     if (!target) return;
@@ -302,6 +323,7 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     blinkingEffect(target);
 
     for (let sectorId in sectorDict) {
+      // 섹터 전부 숨기기
       let sector = sectorDict[sectorId];
       sector.parent.setChildIndex(sector, 0);
       let spots = sectorSpotDict[sectorId];
@@ -312,16 +334,22 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     }
 
     if ("farmInfo" in target) {
-      //     // 클릭한 대상이 Spot이면
+      // 클릭한 대상이 Spot이면
       showInfoPopup(target);
+
       //     setPinId(target.farmInfo.id); // 내가 추가한거
       //     updateSelectedRow(target.farmInfo.id);
 
       let sectorId = target.parentSectorId;
-      let spots = sectorSpotDict[String(sectorId)];
+      let spots = sectorSpotDict[sectorId];
+      /*
+      ! 문제상황: Pasture클릭시 spotId 상태값 변경됨 > spots, sectorSpotDict가 null?
+      viewport.on("click") 에서 상태값 변경 방식으로 테스트해도 같은 결과
+        > 원본에선 onClickGoButton 으로 처리했으니 참고해보기
+      */
 
-      // console.log(sectorSpotDict, sectorId);
-      // console.log("이게 중요함", spots, typeof sectorId);
+      // console.log("sectorID", sectorId);
+      // console.log("spots/sectorSpotDict", spots, sectorSpotDict);
 
       spots.forEach((e) => {
         e.visible = true;
@@ -332,6 +360,7 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     }
 
     if ("sectorId" in target) {
+      // Sector 클릭시
       let spots = sectorSpotDict[target.sectorId];
 
       //! spots를 상태값으로 사용해 Pastures에 전달
@@ -346,61 +375,6 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
 
       // showFarmInfosInSector(null);
     }
-
-    // for (let sectorId in sectorDict) {
-    //     // last item was sector >> ?? 이게 뭔 소리지
-    //     let sector = sectorDict[sectorId];
-    //     sector.parent.setChildIndex(sector, 0);
-    //     let spots = sectorSpotDict[sectorId];
-
-    //     spots.forEach((e) => {
-    //       e.visible = false;
-    //     });
-    //     // console.log("hide last spots");
-    // alert("SECTOR");
-    // }
-
-    // if (target != null) {
-    // null일때 밑의 함수가 실행되면 오류 발생
-    // app.blinkingItem = target;
-    // let bound = app.blinkingItem.getLocalBounds();
-    // blinkingGizmo.lineStyle({
-    //   width: 3,
-    //   color: 0xffdd00,
-    //   alpha: 1.0,
-    //   join: PIXI.LINE_JOIN.ROUND,
-    // });
-    // blinkingGizmo.drawRect(bound.x, bound.y, bound.width, bound.height);
-    // app.blinkingItem.addChild(blinkingGizmo);
-    // if ("farmInfo" in target) {
-    //   // on select spot
-    //   let sectorId = target.parentSectorId;
-    //   let spots = sectorSpotDict[sectorId];
-    //   spots.forEach((e) => {
-    //     e.visible = true;
-    //   });
-    // } else if ("sectorId" in target) {
-    //   // on select sector
-    //   let spots = sectorSpotDict[target.sectorId];
-    //   spots.forEach((e) => {
-    //     e.visible = true;
-    //   });
-    //   let sector = sectorDict[target.sectorId];
-    //   sector.parent.setChildIndex(sector, sector.parent.children.length - 1); // sectorDict[target.sectorId].zOrder = 100;
-    // }
-    // }
-
-    //   if (target != null) {
-    //     if ("farmInfo" in target) {
-    //       let sector = sectorDict[target.parentSectorId];
-    //       showFarmInfosInSector(sector);
-    //     } else if ("sectorId" in target) {
-    //       let sector = sectorDict[target.sectorId];
-    //       showFarmInfosInSector(sector);
-    //     }
-    //   } else {
-    //     showFarmInfosInSector(null);
-    //   }
   };
 
   const onClickSector = (sector) => {
@@ -415,6 +389,10 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
   };
 
   const onClickSpot = (spot) => {
+    // console.log("spot/spotDict", spotDict);
+    // console.log("spot/sectorSpotDict", sectorSpotDict);
+    // console.log("spot/sectorDict", sectorDict)
+
     setBlinkingTarget(spot);
     showInfoPopup(spot);
 
@@ -442,6 +420,8 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
   };
 
   const showInfoPopup = (spot) => {
+    console.log(spot);
+
     let farmInfo = spot.farmInfo;
 
     removePopup();
@@ -541,7 +521,6 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     }
 
     if (app.blinkingItem) {
-      // console.log("효과 걸리는거", app.blinkingItem);
       if (blinkingGizmo.width < 20) {
         //! 왜 Spot부분은 계속 남아있는거지?
         blinkingGizmo.scale.set(
@@ -556,6 +535,125 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
     }
   });
 
+  // const testFunction = (target) => {
+  //   if (target.event) {
+  //     let sectorId = "";
+  //     let farmInfo = null;
+
+  //     let sector = null;
+  //     let spot = null;
+
+  //     for (let k in sectorDict) {
+  //       let s = sectorDict[k];
+  //       if (s.getBounds().contains(target.screen.x, target.screen.y)) {
+  //         sector = s;
+
+  //         sectorId = k;
+  //         break;
+  //       }
+  //     }
+
+  //     if (sectorId != "") {
+  //       let spots = sectorSpotDict[sectorId];
+  //       for (let i in spots) {
+  //         let s = spots[i];
+  //         if (s.getBounds().contains(target.screen.x, target.screen.y)) {
+  //           spot = s;
+
+  //           farmInfo = spot.farmInfo;
+
+  //           break;
+  //         }
+  //       }
+  //     }
+
+  //     if (
+  //       !!spot &&
+  //       (spot?.parent === app.blinkingItem ||
+  //         (app.blinkingItem !== null &&
+  //           app.blinkingItem?.parent == spot?.parent))
+  //     ) {
+  //       onClickSpot(spot);
+  //     } else if (!!sector) {
+  //       onClickSector(sector);
+  //     }
+  //   } else {
+  //     alert("테스트!");
+
+  //     console.log("이 부분 돌아가야 된다고ㅠㅠ", target);
+
+  //     let sectorId = target.parentSectorId;
+  //     let farmInfo = null;
+
+  //     let sector = sectorDict[target.parentSectorId];
+  //     let spot = null;
+
+  //     console.log("제반사항 체크", sectorSpotDict, sectorId);
+
+  //     if (sectorId !== "") {
+  //       let spots = sectorSpotDict[sectorId];
+  //       for (let i in spots) {
+  //         let s = spots[i];
+  //         if (s.farmInfo.id === target.farmInfo.id) {
+  //           spot = s;
+
+  //           farmInfo = spot.farmInfo;
+
+  //           break;
+  //         }
+  //       }
+  //     }
+
+  //     console.log("이게 null이라고?", spot);
+
+  //     // if (
+  //     //   !!spot &&
+  //     //   (spot?.parent === app.blinkingItem ||
+  //     //     (app.blinkingItem !== null &&
+  //     //       app.blinkingItem?.parent == spot?.parent))
+  //     // ) {
+  //     onClickSpot(spot);
+  //     // } else if (!!sector) {
+  //     //   onClickSector(sector);
+  //     // }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // console.log("커스텀", event);
+
+  //   // const target = nowSpotList.find((one) => one.farmInfo.id === nowSpot);
+
+  //   // console.log("찾는 대상", target);
+
+  //   // // if (target) testFunction(target);
+  //   // // else console.log("대상 없으므로 무시");
+  //   // if (target) {
+  //   //   removePopup();
+  //   //   onClickSpot(spotDict[target.farmInfo.id]);
+  //   // }
+
+  //   if (nowSpot) {
+  //     console.log("테스트", nowSpot);
+  //     onClickGoButton(nowSpot);
+  //   }
+  // }, [nowSpot]);
+
+  const onClickGoButton = (id) => {
+    // let data = event.target.data;
+    console.log("onClick_spotDict", spotDict);
+
+    if (id in spotDict) {
+      removePopup();
+
+      console.log("OnClick실행됨");
+
+      onClickSpot(spotDict[id]);
+    }
+
+    // onClickSpot(id);
+  };
+
   return (
     <Main>
       <div ref={canvasParent} />
@@ -568,6 +666,12 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
         spotModal={spotModal}
         setSpotModal={setSpotModal}
       />
+      <Pastures
+        nowSpotList={nowSpotList}
+        nowSpot={nowSpot}
+        setNowSpot={setNowSpot}
+      />
+      <TEST onClick={() => onClickGoButton(159)}>테스트</TEST>
     </Main>
   );
 }
@@ -578,5 +682,8 @@ export default function Canvas({ items, setNowSpotList, setNowSpot }) {
   useEffect안에서 호출한 setBlinkingTarget 함수는 sectorSpotDict를 제대로 가져오지 못함(빈 객체)
 
 수정 계획: sectorSpotDict를 상태값으로 저장해보기
+
+
+! Pasture클릭을 함수로 줘서 
 
 */

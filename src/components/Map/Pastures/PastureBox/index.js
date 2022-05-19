@@ -94,8 +94,6 @@ export default function PastureBox({
   selected,
   setNowSpot,
 }) {
-  const redirectToMarket = () => alert("Tlqkf");
-
   return (
     <Main id={id} selected={selected} onClick={() => setNowSpot(id)}>
       <span>
@@ -111,9 +109,13 @@ export default function PastureBox({
       </span>
       <span className="sold-btn-parent">
         {sold ? (
-          <a className="sold-btn" target="_blank" onClick={redirectToMarket}>
+          <button
+            className="sold-btn"
+            target="_blank"
+            onClick={() => alert("TEST")}
+          >
             OCCUPIED
-          </a>
+          </button>
         ) : (
           <button className="sold-btn">LOCKED</button>
         )}
