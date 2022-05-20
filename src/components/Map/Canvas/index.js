@@ -282,7 +282,8 @@ export default function Canvas({ items, setNowSpotList }) {
     });
 
     console.log(app);
-    nowSpotList.current = sectorSpotDict[app.blinkingItem?.sectorId];
+    mkSpotList(app.blinkingItem?.sectorId);
+    // nowSpotList.current = sectorSpotDict[app.blinkingItem?.sectorId];
   }
 
   function onClickSpot(spot) {
@@ -454,11 +455,13 @@ export default function Canvas({ items, setNowSpotList }) {
 
   function onClickWelcomeModalOk() {
     onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
+    // mkSpotList(FIRST_FOCUS_SECTOR);
   }
 
-  useEffect(() => {
-    console.log(nowSpotList);
-  }, [nowSpotList]);
+  function mkSpotList(SECTOR_ID) {
+    console.log("함수결과", sectorSpotDict[SECTOR_ID]);
+    return (nowSpotList.current = sectorSpotDict[SECTOR_ID]);
+  }
 
   return (
     <>
@@ -485,23 +488,11 @@ export default function Canvas({ items, setNowSpotList }) {
 
 /*
 
-! 아니 왜 똑같은 함수인데 작동을 안하냐고 콘솔로그도 다 찍히는데 진짜 뭘 어떻게 해달라는거야...
-
-- 성공한 것: 상태값으로 안 쓰니까 찾는 값들이 변수에 잘 잡힘
-- 안되는 것: 근데 왜 함수실행은 다 되는데 결과를 안보여주는 것이지?
-
   상태: 함수 실행은 되는데 Graphics 적용이 제대로 안됨.
 
-  !원인: 이제 찾아야지
-    - 추정1: useRef가 문제인가?
-      useRef는 DOM에 연결하여 해당 Element를 읽어오거나, 
-      .current 프로퍼티에 값을 저장해놓고 해당 값이 변동되어도 렌더링하고 싶지 않을 때 사용?
-      일단... div는 빈 요소이고 모달 뜰때까지도 undefined인데 모달 종료되면 useEffect가 돌면서 추가되지 않나?
-    !> useEffect 문제 맞음. DOM으로 root에 물리고 실행하니 팝업이 보이기는 함.
-    !> 문제는 클릭할때마다 Canvas가 하나씩 새로 생성됨. 이게 여러번 클릭하면 WebGL 오버플로우 발생하는 원인이었음.
-      !> 뭐가 됐건 상태값 건드릴 때마다 새로 canvas가 생성됨. 그럼 이제 상태값도 못 건드리네?
+  !원인: 상태값 자체를 안 써야 해결됨
 
-  !해결: 이제 찾아야지
+  !해결방법: 말 그대로 상태값 없이 모든것을 구현하기
 
 */
 // console.log("spot/spotDict", spotDict);
