@@ -75,29 +75,7 @@ const Main = styled.div`
     무턱대고 전체 데이터 렌더링하면 페이지 접속에만 5초씩 걸림
 */
 
-export default function Pastures({
-  nowSpotList,
-  nowSpot,
-  setNowSpot,
-
-  onClickGoButton,
-  //!
-  selectedSectors,
-  selectedSpot,
-  handleSelectedSpots,
-  pinId,
-  setPinId,
-}) {
-  // function onClickGoButton(id) {
-  //   console.log(id, spotDict);
-
-  //   if (id in spotDict) {
-  //     removePopup();
-  //     onClickSpot(spotDict[id]);
-  //   }
-  //   // alert("TEST!!!");
-  // }
-
+export default function Pastures({ nowSpotList, onClickGoButton }) {
   return (
     <Main div className="spot-list-area" id="sector-inspector">
       <div className="spot-list-heading" id="pastures-list-heading">
@@ -108,13 +86,13 @@ export default function Pastures({
         </span>
       </div>
 
-      <div id="pastures-list">
+      <div id="pastures-list" onClick={() => console.log(nowSpotList)}>
         {nowSpotList.map((one) => {
           return (
             <PastureBox
               key={Math.random()}
               {...one.farmInfo}
-              selected={nowSpot === one.farmInfo.id ? true : false}
+              // selected={nowSpotId === one.farmInfo.id ? true : false}
               onClickGoButton={onClickGoButton}
             />
           );

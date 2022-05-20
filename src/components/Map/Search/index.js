@@ -98,10 +98,6 @@ const BackButton = styled.span`
 export default function Search({ onClickLandSearch }) {
   const targetID = useRef(null);
 
-  // const searchLand = () => {
-  //   // targetID.current.value
-  // };
-
   return (
     <>
       <SearchBox>

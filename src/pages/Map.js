@@ -8,31 +8,7 @@ import { Lands } from "../components/Map/Canvas/Lands";
 import { Sectors } from "../components/Map/Canvas/Sectors";
 
 export default function Map() {
-  const [sectors, setSectors] = useState(Sectors);
-
-  const [selectedSectors, setSelectedSectors] = useState([]);
-  const handleSelectedSectors = (data) => {
-    setSelectedSectors(data);
-  };
-
-  const [selectedSpot, setSelectedSpot] = useState(null);
-  const handleSelectedSpots = (event) => {
-    setPinId(Number(event.target.id));
-  };
-
-  const [pinId, setPinId] = useState(0);
-
-  //! 새로 추가한 상태값
-  const [nowSpotList, setNowSpotList] = useState([]);
-  const [nowSpot, setNowSpot] = useState(null);
-
-  const [testSpotDict, setTestSpotDict] = useState({});
-
-  const [testSectorSpotDict, setTestSectorSpotDict] = useState({});
-
-  const [testSectorDict, setTestSectorDict] = useState({});
-
-  const items = sectors.map((e) => {
+  const items = Sectors.map((e) => {
     // sector_0_data 의 각 값에 대해 처리하는것
     // Lands.fi >> Lands 데이터는 파일처리가 너무오래걸려서 삭제했었는데 다시 확인해봐야 함
     //! Lands도 외부파일로 불러옴
@@ -56,29 +32,14 @@ export default function Map() {
     };
   });
 
+  const [nowSpotList, setNowSpotList] = useState([]);
+
   return (
-    <>
-      <Canvas
-        items={items}
-        nowSpotList={nowSpotList}
-        setNowSpotList={setNowSpotList}
-        nowSpot={nowSpot}
-        setNowSpot={setNowSpot}
-        //!
-        testSpotDict={testSpotDict}
-        setTestSpotDict={setTestSpotDict}
-        testSectorSpotDict={testSectorSpotDict}
-        setTestSectorSpotDict={setTestSectorSpotDict}
-        testSectorDict={testSectorDict}
-        setTestSectorDict={setTestSectorDict}
-        //!
-        selectedSectors={selectedSectors}
-        setSelectedSectors={setSelectedSectors}
-        handleSelectedSpots={handleSelectedSpots}
-        pinId={pinId}
-        setPinId={setPinId}
-      />
-    </>
+    <Canvas
+      items={items}
+      nowSpotList={nowSpotList}
+      setNowSpotList={setNowSpotList}
+    />
   );
 }
 
