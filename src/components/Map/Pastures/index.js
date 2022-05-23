@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import PastureBox from "./PastureBox";
@@ -81,13 +81,16 @@ export default function Pastures({ nowSpotList, onClickGoButton }) {
       <div className="spot-list-heading" id="pastures-list-heading">
         <span>Pastures</span>
         <span id="remain-amount">
-          Remains {nowSpotList.filter((e) => e.sold === 1).length} /{" "}
-          {nowSpotList.length}
+          {/* Remains {nowSpotList.filter((e) => e.sold === 1).length} /{" "}
+          {nowSpotList.length} */}
         </span>
       </div>
 
-      <div id="pastures-list" onClick={() => console.log(nowSpotList)}>
-        {nowSpotList.map((one) => {
+      <div
+        id="pastures-list"
+        // onClick={() => console.log(testRef.current)}
+      >
+        {/* {nowSpotList.map((one) => {
           return (
             <PastureBox
               key={Math.random()}
@@ -96,7 +99,7 @@ export default function Pastures({ nowSpotList, onClickGoButton }) {
               onClickGoButton={onClickGoButton}
             />
           );
-        })}
+        })} */}
       </div>
     </Main>
   );

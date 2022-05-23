@@ -10,6 +10,53 @@ import WelcomeModal from "../WelcomeModal";
 import Pastures from "../Pastures";
 import Search from "../Search";
 
+import PastureBox from "../Pastures/PastureBox";
+
+const PasturesMain = styled.div`
+  background-color: white;
+  z-index: 10;
+  position: absolute;
+  right: 0;
+  border-radius: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+  background-color: #e4bb88;
+  border: 5px solid #504130;
+  filter: drop-shadow(0px 5px 0px #000);
+  bottom: 10px;
+
+  span {
+    pointer-events: none;
+  }
+
+  @media (min-width: 758px) {
+    width: 350px;
+    top: 100px;
+  }
+
+  @media (max-width: 757px) {
+    width: calc(100% - 20px);
+    top: calc(100% - 35%);
+  }
+
+  .spot-list-heading {
+    background-color: #504130;
+    color: white;
+    padding: 0px 5px 5px 5px;
+    box-sizing: border-box;
+    width: calc(100% + 1px);
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    // span에는 따로 적용되는 속성 없었음
+  }
+
+  #pastures-list {
+    height: calc(100% - 30px);
+    overflow-y: scroll;
+  }
+`;
+
 const Test = styled.button`
   position: absolute;
   top: 1%;
@@ -17,8 +64,8 @@ const Test = styled.button`
 
 export default function Canvas({ items, setNowSpotList }) {
   //!
-  let nowSpotId = null;
-  const nowSpotList = useRef([]);
+  // const nowSpotList = useRef([]);
+
   //!
 
   const [welcomeModal, setWelcomeModal] = useState(true);
@@ -35,7 +82,10 @@ export default function Canvas({ items, setNowSpotList }) {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const vw = document.documentElement.clientWidth;
   const vh = document.documentElement.clientHeight;
+
   const canvasParent = document.getElementById("root");
+  const itemListParent = document.getElementById("pastures-list");
+
   const CANVAS_SETTING = {
     width: vw,
     height: vh,
@@ -166,6 +216,7 @@ export default function Canvas({ items, setNowSpotList }) {
   let sectorDict = {};
 
   //!
+  // const [nowSectorId, setNowSpotId] = useState(null);
 
   items.forEach((e, i, a) => {
     let farmInfo = e;
@@ -388,6 +439,8 @@ export default function Canvas({ items, setNowSpotList }) {
   blinkingGizmo.interactive = false;
   blinkingGizmo.buttonMode = false;
   function setBlinkingTarget(target) {
+    removeAllchild(itemListParent);
+
     blinkingGizmo.clear();
 
     if ("farmInfo" in target) {
@@ -458,9 +511,48 @@ export default function Canvas({ items, setNowSpotList }) {
     // mkSpotList(FIRST_FOCUS_SECTOR);
   }
 
+  // function mkPastureBox (farmInfo) {
+  //   const warpper =
+  // }
+
   function mkSpotList(SECTOR_ID) {
     console.log("함수결과", sectorSpotDict[SECTOR_ID]);
-    return (nowSpotList.current = sectorSpotDict[SECTOR_ID]);
+    // html 요소를 바로 만들어서 Ref로 넘겨줘야 할듯?
+    const targetList = sectorSpotDict[SECTOR_ID];
+    const boxList = [];
+
+    console.log(targetList[0].farmInfo);
+
+    targetList.map((one) => {
+      let box = (
+        <PastureBox
+          key={Math.random()}
+          {...one.farmInfo}
+          onClickGoButton={onClickGoButton}
+        />
+      );
+
+      boxList.push(box);
+
+      itemListParent.appendChild(<input />);
+    });
+
+    const test = document.createElement("input");
+    const test2 = React.createElement("div", null, `Hello World!`);
+
+    console.log(test, test2);
+
+    // console.log(boxList);
+
+    // itemListParent.appendChild(boxList);
+
+    // return (nowSpotList.current = sectorSpotDict[SECTOR_ID]);
+  }
+
+  function removeAllchild(div) {
+    while (div.hasChildNodes()) {
+      div.removeChild(div.firstChild);
+    }
   }
 
   return (
@@ -475,13 +567,34 @@ export default function Canvas({ items, setNowSpotList }) {
         spotModal={spotModal}
         setSpotModal={setSpotModal}
       />
-      <Pastures
-        nowSpotList={nowSpotList.current}
-        nowSpotId={nowSpotId}
+      <PasturesMain div className="spot-list-area" id="sector-inspector">
+        <div className="spot-list-heading" id="pastures-list-heading">
+          <span>Pastures</span>
+          <span id="remain-amount">
+            {/* Remains {nowSpotList.filter((e) => e.sold === 1).length} /{" "}
+          {nowSpotList.length} */}
+          </span>
+        </div>
+
+        <div id="pastures-list">
+          {/* {nowSpotList.map((one) => {
+          return (
+            <PastureBox
+              key={Math.random()}
+              {...one.farmInfo}
+              // selected={nowSpotId === one.farmInfo.id ? true : false}
+              onClickGoButton={onClickGoButton}
+            />
+          );
+        })} */}
+        </div>
+      </PasturesMain>
+      {/* <Pastures
+        // nowSpotList={nowSpotList.current}
         onClickGoButton={onClickGoButton}
-      />
+      /> */}
       <Search onClickLandSearch={onClickLandSearch} />
-      <Test onClick={() => console.log(nowSpotList)}>출력테스트</Test>
+      <Test onClick={() => removeAllchild(itemListParent)}>출력테스트</Test>
     </>
   );
 }
