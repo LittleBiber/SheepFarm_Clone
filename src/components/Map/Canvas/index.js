@@ -7,7 +7,7 @@ import { makeShader } from "./map_shader";
 import DetailModal from "../DetailModal";
 import WelcomeModal from "../WelcomeModal";
 
-import Pastures from "../Pastures";
+// import Pastures from "../Pastures";
 import Search from "../Search";
 
 import PastureBox from "../Pastures/PastureBox";
@@ -54,6 +54,95 @@ const PasturesMain = styled.div`
   #pastures-list {
     height: calc(100% - 30px);
     overflow-y: scroll;
+
+    .selected {
+      background: #643a3a !important;
+    }
+
+    .box_cover {
+      padding: 4px;
+      display: flex;
+      justify-content: space-between;
+      background: #ba8f5d;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+
+      span {
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+      }
+
+      .sector-id {
+        color: ${({ selected }) => (selected ? "white" : "black")};
+        justify-content: center;
+
+        @media (min-width: 758px) {
+          width: 50px;
+        }
+
+        @media (max-width: 757px) {
+          width: unset;
+        }
+      }
+
+      .property {
+        display: flex;
+        align-items: center;
+        color: white;
+
+        @media (min-width: 758px) {
+          padding: 0 5px;
+        }
+
+        img {
+          @media (max-width: 757px) {
+            width: 25px;
+          }
+        }
+      }
+
+      .sold-btn-parent {
+        display: flex;
+        align-items: center;
+
+        @media (min-width: 758px) {
+          width: 86px;
+        }
+
+        .sold-btn {
+          width: 100%;
+          text-align: center;
+          background-color: #bf3f3f;
+          color: white;
+          cursor: pointer;
+          padding: 6px;
+          text-decoration: none;
+          border-radius: 10px;
+          font-size: 13px;
+          font-family: "Arial";
+        }
+      }
+
+      span .sold-btn {
+        width: 100%;
+        text-align: center;
+        background-color: #bf3f3f;
+        color: white;
+        cursor: pointer;
+        padding: 6px;
+        text-decoration: none;
+        border-radius: 10px;
+        border: none;
+        font-size: 13px;
+        font-family: "Arial";
+
+        @media (min-width: 758px) {
+          width: 86px;
+        }
+      }
+    }
   }
 `;
 
@@ -62,19 +151,19 @@ const Test = styled.button`
   top: 1%;
 `;
 
-export default function Canvas({ items, setNowSpotList }) {
-  //!
-  // const nowSpotList = useRef([]);
+const Test2 = styled.button`
+  position: absolute;
+  top: 8%;
+`;
 
-  //!
-
+export default function Canvas({ items }) {
   const [welcomeModal, setWelcomeModal] = useState(true);
   const [spotModal, setSpotModal] = useState(false);
   const [detailData, setDetailData] = useState({});
+
+  const selectedSpot = useRef(null);
+
   function handleWelcomeModal() {
-    console.log("spot/spotDict", spotDict);
-    console.log("spot/sectorSpotDict", sectorSpotDict);
-    console.log("spot/sectorDict", sectorDict);
     setWelcomeModal(false);
     onClickWelcomeModalOk();
   }
@@ -133,7 +222,6 @@ export default function Canvas({ items, setNowSpotList }) {
     .drag()
     .pinch()
     .wheel()
-    // .decelerate()
     .clamp({
       left: -BACKGROUND_SIZE.width,
       right: BACKGROUND_SIZE.width * 2,
@@ -217,6 +305,7 @@ export default function Canvas({ items, setNowSpotList }) {
 
   //!
   // const [nowSectorId, setNowSpotId] = useState(null);
+  let prevSpotId = null;
 
   items.forEach((e, i, a) => {
     let farmInfo = e;
@@ -325,6 +414,8 @@ export default function Canvas({ items, setNowSpotList }) {
 
   function onClickSector(sector) {
     removePopup();
+    removeAllchild(itemListParent);
+
     setBlinkingTarget(sector);
     viewport.snap(sector.x, sector.y, {
       time: 300,
@@ -332,9 +423,12 @@ export default function Canvas({ items, setNowSpotList }) {
       removeOnInterrupt: true,
     });
 
-    console.log(app);
-    mkSpotList(app.blinkingItem?.sectorId);
+    makeHtmlPastureBox(sector.sectorId);
+    prevSpotId = null;
+    // mkSpotList(app.blinkingItem?.sectorId);
     // nowSpotList.current = sectorSpotDict[app.blinkingItem?.sectorId];
+
+    // nowSpotList = sectorSpotDict[sector];
   }
 
   function onClickSpot(spot) {
@@ -344,6 +438,8 @@ export default function Canvas({ items, setNowSpotList }) {
       removeOnComplete: true,
       removeOnInterrupt: true,
     });
+
+    pastureSelected(spot.farmInfo.id);
   }
 
   let lastPopup = null;
@@ -439,8 +535,6 @@ export default function Canvas({ items, setNowSpotList }) {
   blinkingGizmo.interactive = false;
   blinkingGizmo.buttonMode = false;
   function setBlinkingTarget(target) {
-    removeAllchild(itemListParent);
-
     blinkingGizmo.clear();
 
     if ("farmInfo" in target) {
@@ -490,18 +584,21 @@ export default function Canvas({ items, setNowSpotList }) {
     }
   }
 
-  function onClickGoButton(id) {
-    console.log(id);
+  function onClickGoButton(event) {
+    const targetID = Number(event.target.id.slice(7));
 
-    if (id in spotDict) {
+    if (targetID in spotDict) {
       removePopup();
-      onClickSpot(spotDict[id]);
+      onClickSpot(spotDict[targetID]);
     }
   }
 
   function onClickLandSearch(id) {
     if (id in spotDict) {
       removePopup();
+      removeAllchild(itemListParent);
+      makeHtmlPastureBox(spotDict[id].parentSectorId);
+      prevSpotId = null;
       onClickSpot(spotDict[id]);
     }
   }
@@ -511,48 +608,65 @@ export default function Canvas({ items, setNowSpotList }) {
     // mkSpotList(FIRST_FOCUS_SECTOR);
   }
 
-  // function mkPastureBox (farmInfo) {
-  //   const warpper =
-  // }
-
-  function mkSpotList(SECTOR_ID) {
-    console.log("함수결과", sectorSpotDict[SECTOR_ID]);
-    // html 요소를 바로 만들어서 Ref로 넘겨줘야 할듯?
-    const targetList = sectorSpotDict[SECTOR_ID];
-    const boxList = [];
-
-    console.log(targetList[0].farmInfo);
-
-    targetList.map((one) => {
-      let box = (
-        <PastureBox
-          key={Math.random()}
-          {...one.farmInfo}
-          onClickGoButton={onClickGoButton}
-        />
-      );
-
-      boxList.push(box);
-
-      itemListParent.appendChild(<input />);
-    });
-
-    const test = document.createElement("input");
-    const test2 = React.createElement("div", null, `Hello World!`);
-
-    console.log(test, test2);
-
-    // console.log(boxList);
-
-    // itemListParent.appendChild(boxList);
-
-    // return (nowSpotList.current = sectorSpotDict[SECTOR_ID]);
+  function removeAllchild(div) {
+    if (div) {
+      while (div.hasChildNodes()) {
+        div.removeChild(div.firstChild);
+      }
+    }
   }
 
-  function removeAllchild(div) {
-    while (div.hasChildNodes()) {
-      div.removeChild(div.firstChild);
+  function pastureSelected(id) {
+    if (prevSpotId) {
+      const removeTarget = document.getElementById(`pasture${prevSpotId}`);
+
+      removeTarget.setAttribute("class", "box_cover");
     }
+
+    const target = document.getElementById(`pasture${id}`);
+
+    target.setAttribute("class", "box_cover selected");
+    prevSpotId = id;
+  }
+
+  function makeHtmlPastureBox(sectorId) {
+    const sector = sectorSpotDict[sectorId];
+
+    console.log(sector);
+
+    sector.map((one) => {
+      const { farmInfo } = one;
+
+      const BoxCover = document.createElement("div");
+
+      BoxCover.innerHTML = `
+      <span>
+        <span class="sector-id">${farmInfo.id}</span>
+        <span class="property">
+          <img src="/Map/size.png" />
+          ${farmInfo.size}
+        </span>
+        <span class="property">
+          <img src="/Map/sheep.png" />
+          ${farmInfo.sheepLimit}
+        </span>
+      </span>
+      <span class="sold-btn-parent">
+        <button
+        class="sold-btn"
+        onclick="alert("TEST")"
+        >
+          OCCUPIED
+        </button>
+      </span>
+      `;
+
+      BoxCover.setAttribute("class", "box_cover");
+      BoxCover.setAttribute("id", "pasture" + farmInfo.id);
+      BoxCover.onclick = onClickGoButton;
+
+      itemListParent?.appendChild(BoxCover);
+    });
   }
 
   return (
@@ -594,7 +708,8 @@ export default function Canvas({ items, setNowSpotList }) {
         onClickGoButton={onClickGoButton}
       /> */}
       <Search onClickLandSearch={onClickLandSearch} />
-      <Test onClick={() => removeAllchild(itemListParent)}>출력테스트</Test>
+      <Test onClick={() => makeHtmlPastureBox()}>출력테스트</Test>
+      <Test2 onClick={() => console.log(selectedSpot)}>출력테스트2</Test2>
     </>
   );
 }

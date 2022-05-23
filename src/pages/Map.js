@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import Canvas from "../components/Map/Canvas";
-import Pastures from "../components/Map/Pastures";
-import Search from "../components/Map/Search";
+// import Pastures from "../components/Map/Pastures";
+// import Search from "../components/Map/Search";
 
 import { Lands } from "../components/Map/Canvas/Lands";
 import { Sectors } from "../components/Map/Canvas/Sectors";
@@ -32,15 +32,7 @@ export default function Map() {
     };
   });
 
-  const [nowSpotList, setNowSpotList] = useState([]);
-
-  return (
-    <Canvas
-      items={items}
-      nowSpotList={nowSpotList}
-      setNowSpotList={setNowSpotList}
-    />
-  );
+  return <Canvas items={items} />;
 }
 
 /*
