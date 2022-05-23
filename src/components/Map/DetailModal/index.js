@@ -208,31 +208,31 @@ export default function DetailModal({
   return (
     <Main modal={spotModal}>
       <PurchaseDetailModal id={id}>
-        <div class="content-area">
-          <div class="heading-area">
-            <div class="pasture-detail-title">Pasture details</div>
-            <div class="country-location">New Zealand / Stewart Island</div>
+        <div className="content-area">
+          <div className="heading-area">
+            <div className="pasture-detail-title">Pasture details</div>
+            <div className="country-location">New Zealand / Stewart Island</div>
           </div>
-          <div class="text-area">
-            <div class="contents">
-              <div class="properties">
-                <span class="property">
+          <div className="text-area">
+            <div className="contents">
+              <div className="properties">
+                <span className="property">
                   <img src="/DetailModal/size.png" />
                   <span id="farm-detail-size">{size}</span>
                 </span>
-                <span class="property">
+                <span className="property">
                   <img src="/DetailModal/sheep.png" />
                   <span id="farm-detail-sheeps">{sheepLimit}</span>
                 </span>
               </div>
-              <div class="pasture-number">
+              <div className="pasture-number">
                 No. {id}
                 <div className="owner-info">
                   Owner <br />
                   0xf28191e65F145dd5CffF98cfe8792501a11074cB {/* 더미 ID */}
                 </div>
               </div>
-              <div class="pasture-desc">
+              <div className="pasture-desc">
                 <p>
                   This pasture is reserved for pioneers&nbsp;who are among the
                   first to arrive in Meta-land.
@@ -262,16 +262,16 @@ export default function DetailModal({
                   it.
                 </p>
               </div>
-              <div class="charcter-area">
+              <div className="charcter-area">
                 <img src="/DetailModal/kelly.png" />
               </div>
             </div>
-            <div class="preview">
-              <div class="im" />
+            <div className="preview">
+              <div className="im" />
               {sold ? (
                 <button
                   id="occupied-btn"
-                  class="btn"
+                  className="btn"
                   onClick={() => OnClickOccupied(id)}
                 >
                   OCCUPIED
@@ -279,20 +279,20 @@ export default function DetailModal({
               ) : sold !== true && open === true ? (
                 <button
                   id="purchase-btn"
-                  class="btn"
+                  className="btn"
                   onclick="OnClickPurchase($('#purchase-detail').data().farmId)"
                 >
                   PURCHASE
                 </button>
               ) : (
-                <button id="locked-btn" class="btn">
+                <button id="locked-btn" className="btn">
                   LOCKED
                 </button>
               )}
 
               <button
                 id="close-btn"
-                class="btn"
+                className="btn"
                 onClick={() => setSpotModal(false)}
               >
                 CLOSE

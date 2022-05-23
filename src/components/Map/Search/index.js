@@ -101,8 +101,8 @@ export default function Search({ onClickLandSearch }) {
   return (
     <>
       <SearchBox>
-        <div class="info-area-heading">Search</div>
-        <div class="search-box">
+        <div className="info-area-heading">Search</div>
+        <div className="search-box">
           <input
             type="text"
             placeholder="Pasture ID"
@@ -119,7 +119,7 @@ export default function Search({ onClickLandSearch }) {
       </SearchBox>
       <BackButton>
         <a href="/">
-          <img src="/Search/back_button.png" alt="" />
+          <img src="/Search/back_className=.png" alt="" />
         </a>
       </BackButton>
     </>

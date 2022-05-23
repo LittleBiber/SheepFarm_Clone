@@ -425,10 +425,6 @@ export default function Canvas({ items }) {
 
     makeHtmlPastureBox(sector.sectorId);
     prevSpotId = null;
-    // mkSpotList(app.blinkingItem?.sectorId);
-    // nowSpotList.current = sectorSpotDict[app.blinkingItem?.sectorId];
-
-    // nowSpotList = sectorSpotDict[sector];
   }
 
   function onClickSpot(spot) {
@@ -632,8 +628,6 @@ export default function Canvas({ items }) {
   function makeHtmlPastureBox(sectorId) {
     const sector = sectorSpotDict[sectorId];
 
-    console.log(sector);
-
     sector.map((one) => {
       const { farmInfo } = one;
 
@@ -684,29 +678,11 @@ export default function Canvas({ items }) {
       <PasturesMain div className="spot-list-area" id="sector-inspector">
         <div className="spot-list-heading" id="pastures-list-heading">
           <span>Pastures</span>
-          <span id="remain-amount">
-            {/* Remains {nowSpotList.filter((e) => e.sold === 1).length} /{" "}
-          {nowSpotList.length} */}
-          </span>
+          <span id="remain-amount">Remains 0 / 0</span>
         </div>
 
-        <div id="pastures-list">
-          {/* {nowSpotList.map((one) => {
-          return (
-            <PastureBox
-              key={Math.random()}
-              {...one.farmInfo}
-              // selected={nowSpotId === one.farmInfo.id ? true : false}
-              onClickGoButton={onClickGoButton}
-            />
-          );
-        })} */}
-        </div>
+        <div id="pastures-list"></div>
       </PasturesMain>
-      {/* <Pastures
-        // nowSpotList={nowSpotList.current}
-        onClickGoButton={onClickGoButton}
-      /> */}
       <Search onClickLandSearch={onClickLandSearch} />
       <Test onClick={() => makeHtmlPastureBox()}>출력테스트</Test>
       <Test2 onClick={() => console.log(selectedSpot)}>출력테스트2</Test2>
@@ -723,6 +699,3 @@ export default function Canvas({ items }) {
   !해결방법: 말 그대로 상태값 없이 모든것을 구현하기
 
 */
-// console.log("spot/spotDict", spotDict);
-// console.log("spot/sectorSpotDict", sectorSpotDict);
-// console.log("spot/sectorDict", sectorDict);

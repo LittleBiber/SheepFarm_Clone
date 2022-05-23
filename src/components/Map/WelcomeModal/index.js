@@ -102,10 +102,10 @@ export default function WelcomeModal({ welcomeModal, setWelcomeModal }) {
   return (
     <Main modal={welcomeModal}>
       <div id="welcome-modal">
-        <div class="left-area">
-          <img class="kelly" src="/WelcomeModal/kelly.png" />
+        <div className="left-area">
+          <img className="kelly" src="/WelcomeModal/kelly.png" />
         </div>
-        <div class="welcome-text-area">
+        <div className="welcome-text-area">
           <p>
             <strong>
               {/*  style="font-size:25px" */}Welcome to Meta-land!
@@ -117,8 +117,8 @@ export default function WelcomeModal({ welcomeModal, setWelcomeModal }) {
             revealed after their official releases. In order to enjoy Sheepfarm,
             you must have at least one pasture.
           </p>
-          <div class="action-area">
-            <button class="ok-btn" onClick={setWelcomeModal}>
+          <div className="action-area">
+            <button className="ok-btn" onClick={setWelcomeModal}>
               Let's take a closer look!
             </button>
           </div>
