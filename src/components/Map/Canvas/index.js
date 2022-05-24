@@ -3,14 +3,11 @@ import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import styled from "styled-components";
 import { makeShader } from "./map_shader";
-
 import DetailModal from "../DetailModal";
 import WelcomeModal from "../WelcomeModal";
-
-// import Pastures from "../Pastures";
 import Search from "../Search";
 
-import PastureBox from "../Pastures/PastureBox";
+const Main = styled.div``;
 
 const PasturesMain = styled.div`
   background-color: white;
@@ -158,10 +155,13 @@ const Test2 = styled.button`
 
 export default function Canvas({ items }) {
   const [welcomeModal, setWelcomeModal] = useState(true);
-  const [spotModal, setSpotModal] = useState(false);
-  const [detailData, setDetailData] = useState({});
 
-  const selectedSpot = useRef(null);
+  //!
+  const pastureList = useRef(null);
+  const pastureCount = useRef(null);
+  const detailWrapper = useRef(null);
+  const detailRef = useRef(null);
+  //!
 
   function handleWelcomeModal() {
     setWelcomeModal(false);
@@ -173,6 +173,7 @@ export default function Canvas({ items }) {
   const vh = document.documentElement.clientHeight;
 
   const canvasParent = document.getElementById("root");
+
   const itemListParent = document.getElementById("pastures-list");
 
   const CANVAS_SETTING = {
@@ -182,6 +183,10 @@ export default function Canvas({ items }) {
     resolution: 1, //window.devicePixelRatio,
     backgroundColor: 0x4284d2,
   };
+
+  const app = new PIXI.Application(CANVAS_SETTING);
+  canvasParent.appendChild(app.view);
+
   const BACKGROUND_SIZE = { width: 1720, height: 1738 };
 
   const SECTOR_SIZE = 56 * 2;
@@ -206,9 +211,6 @@ export default function Canvas({ items }) {
     "8_10": 0,
   };
   const FIRST_FOCUS_SECTOR = "6_9";
-
-  const app = new PIXI.Application(CANVAS_SETTING);
-  canvasParent.appendChild(app.view);
 
   const viewport = new Viewport({
     screenWidth: vw,
@@ -276,7 +278,6 @@ export default function Canvas({ items }) {
     // console.log(sectorId, sector, spot, farmInfo);
   });
 
-  //.decelerate()
   // add the viewport to the stage
   app.stage.addChild(viewport);
 
@@ -304,7 +305,6 @@ export default function Canvas({ items }) {
   let sectorDict = {};
 
   //!
-  // const [nowSectorId, setNowSpotId] = useState(null);
   let prevSpotId = null;
 
   items.forEach((e, i, a) => {
@@ -436,6 +436,7 @@ export default function Canvas({ items }) {
     });
 
     pastureSelected(spot.farmInfo.id);
+    detailRef.current = spot.farmInfo;
   }
 
   let lastPopup = null;
@@ -460,8 +461,7 @@ export default function Canvas({ items }) {
     moreBtn.buttonMode = true;
     moreBtn.interactive = true;
     moreBtn.on("pointerup", () => {
-      setDetailData(farmInfo);
-      setSpotModal(true);
+      handleDetailModal();
     });
 
     // set title text
@@ -628,65 +628,99 @@ export default function Canvas({ items }) {
   function makeHtmlPastureBox(sectorId) {
     const sector = sectorSpotDict[sectorId];
 
+    let soldCount = 0;
+    const remainCount = document.getElementById("remain-amount");
+
     sector.map((one) => {
       const { farmInfo } = one;
+
+      if (farmInfo.sold) soldCount++;
 
       const BoxCover = document.createElement("div");
 
       BoxCover.innerHTML = `
-      <span>
-        <span class="sector-id">${farmInfo.id}</span>
-        <span class="property">
-          <img src="/Map/size.png" />
-          ${farmInfo.size}
+        <span>
+          <span class="sector-id">${farmInfo.id}</span>
+          <span class="property">
+            <img src="/Map/size.png" />
+            ${farmInfo.size}
+          </span>
+          <span class="property">
+            <img src="/Map/sheep.png" />
+            ${farmInfo.sheepLimit}
+          </span>
         </span>
-        <span class="property">
-          <img src="/Map/sheep.png" />
-          ${farmInfo.sheepLimit}
-        </span>
-      </span>
-      <span class="sold-btn-parent">
-        <button
-        class="sold-btn"
-        onclick="alert("TEST")"
-        >
-          OCCUPIED
-        </button>
-      </span>
       `;
 
       BoxCover.setAttribute("class", "box_cover");
       BoxCover.setAttribute("id", "pasture" + farmInfo.id);
       BoxCover.onclick = onClickGoButton;
 
+      // 버튼은 따로 만들기
+      const ButtonWarpper = document.createElement("span");
+      ButtonWarpper.setAttribute("class", "sold-btn-parent");
+      BoxCover.appendChild(ButtonWarpper);
+
+      let Button;
+      if (farmInfo.sold) {
+        Button = document.createElement("a");
+        Button.target = "_blank";
+        Button.href = "www.naver.com";
+        Button.innerHTML = "OCCUPIED";
+      } else {
+        Button = document.createElement("button");
+        Button.innerHTML = "LOCKED";
+      }
+
+      Button.setAttribute("class", "sold-btn");
+      ButtonWarpper.appendChild(Button);
+
       itemListParent?.appendChild(BoxCover);
     });
+
+    remainCount.innerHTML = `Remains ${sector.length} / ${
+      sector.length - soldCount
+    }`;
+  }
+
+  function handleDetailModal() {
+    console.log(detailWrapper.current.classList[0]);
+
+    if (detailWrapper.current.classList[0] === "hidden") {
+      detailWrapper.current.classList.remove("hidden");
+    } else {
+      detailWrapper.current.classList.add("hidden");
+    }
   }
 
   return (
-    <>
-      <div id="map-canv" />
-      <WelcomeModal
-        welcomeModal={welcomeModal}
-        setWelcomeModal={handleWelcomeModal}
-      />
-      <DetailModal
-        {...detailData}
-        spotModal={spotModal}
-        setSpotModal={setSpotModal}
-      />
-      <PasturesMain div className="spot-list-area" id="sector-inspector">
+    <Main>
+      <div className="welcome">
+        <WelcomeModal
+          welcomeModal={welcomeModal}
+          setWelcomeModal={handleWelcomeModal}
+        />
+      </div>
+      <div className="hidden" ref={detailWrapper}>
+        <DetailModal
+          handleDetailModal={handleDetailModal}
+          detailRef={detailRef}
+        />
+      </div>
+      <PasturesMain className="spot-list-area" id="sector-inspector">
         <div className="spot-list-heading" id="pastures-list-heading">
           <span>Pastures</span>
-          <span id="remain-amount">Remains 0 / 0</span>
+          <span id="remain-amount" ref={pastureCount}>
+            Remains 0 / 0
+          </span>
         </div>
 
-        <div id="pastures-list"></div>
+        <div id="pastures-list" ref={pastureList}></div>
       </PasturesMain>
       <Search onClickLandSearch={onClickLandSearch} />
       <Test onClick={() => makeHtmlPastureBox()}>출력테스트</Test>
-      <Test2 onClick={() => console.log(selectedSpot)}>출력테스트2</Test2>
-    </>
+      <Test2 onClick={() => console.log(detailRef)}>출력테스트2</Test2>
+    </Main>
   );
 }
 

@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Main = styled.div`
-  ${({ modal }) => (modal ? "" : "display: none;")}
-
   width: 100%;
   height: 100%;
   position: fixed;
@@ -195,8 +193,7 @@ export default function DetailModal({
   sold,
   open,
   ownerId,
-  spotModal,
-  setSpotModal,
+  handleDetailModal,
 }) {
   const OnClickOccupied = (id) => {
     window.open(
@@ -206,7 +203,7 @@ export default function DetailModal({
   };
 
   return (
-    <Main modal={spotModal}>
+    <Main>
       <PurchaseDetailModal id={id}>
         <div className="content-area">
           <div className="heading-area">
@@ -293,7 +290,7 @@ export default function DetailModal({
               <button
                 id="close-btn"
                 className="btn"
-                onClick={() => setSpotModal(false)}
+                onClick={handleDetailModal}
               >
                 CLOSE
               </button>
