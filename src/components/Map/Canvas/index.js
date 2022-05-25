@@ -119,6 +119,19 @@ const PasturesMain = styled.div`
         height: 28px;
       }
     }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      height: 10%;
+      background: #504130;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #ba8f5d;
+    }
   }
 `;
 
@@ -140,6 +153,7 @@ export default function Canvas({ items }) {
   const detailOwnerId = useRef(null);
   const detailDesc = useRef(null);
   const detailImg = useRef(null);
+  const detailLocked = useRef(null);
   //!
 
   function handleWelcomeModal() {
@@ -424,32 +438,34 @@ export default function Canvas({ items }) {
   }
 
   function handleDetailData(farmInfo) {
-    detailId.current.innerText = farmInfo.id;
-    detailSize.current.innerText = farmInfo.size;
-    detailSheepLimit.current.innerText = farmInfo.sheepLimit;
+    // detailId.current.innerText = `No. ${farmInfo.id}`;
+    detailId.current.textContent = farmInfo.id;
+    detailSize.current.textContent = farmInfo.size;
+    detailSheepLimit.current.textContent = farmInfo.sheepLimit;
+    if (farmInfo.sold) {
+      detailOwnerId.current.textContent = `0xf28191e65f145dd5cfff98cfe8792501a11074cb;`;
+    } else {
+      detailLocked.current.textContent = ``;
+    }
 
     if (farmInfo.size === "5X5") {
-      detailDesc.current.innerText = `This pasture can only hold 3 sheep at a time, therefore a combo effect that requires more than 4 sheep will not be able to be triggered.`;
+      detailDesc.current.textContent = `This pasture can only hold 3 sheep at a time, therefore a combo effect that requires more than 4 sheep will not be able to be triggered.`;
     } else if (farmInfo.size === "6X6") {
-      detailDesc.current.innerText = `This pasture can hold 4 sheep at a time. Which means it is able to trigger a combo effect that requires 4 sheep.`;
+      detailDesc.current.textContent = `This pasture can hold 4 sheep at a time. Which means it is able to trigger a combo effect that requires 4 sheep.`;
     } else {
-      detailDesc.current.innerText = `This pasture can hold 5 sheep at a time. This means you can trigger all kind of combo effect with this pasture.`;
+      detailDesc.current.textContent = `This pasture can hold 5 sheep at a time. This means you can trigger all kind of combo effect with this pasture.`;
     }
 
     const Button = document.createElement("button");
     if (farmInfo.sold) {
       Button.setAttribute("id", "occupied-btn");
       Button.setAttribute("class", "btn");
-      Button.onclick = () =>
-        window.open(
-          `https://opensea.io/assets/klaytn/0xa9f07b1260bb9eebcbaba66700b00fe08b61e1e6/${farmInfo.id}`,
-          "_blank"
-        );
-      Button.innerText = "OCCUPIED";
+      Button.onclick = () => onClickOccupied(farmInfo.tokenId);
+      Button.textContent = "OCCUPIED";
     } else {
       Button.setAttribute("id", "locked-btn");
       Button.setAttribute("class", "btn");
-      Button.innerText = "LOCKED";
+      Button.textContent = "LOCKED";
     }
 
     detailPurchaseButton.current.replaceChild(
@@ -685,11 +701,11 @@ export default function Canvas({ items }) {
       let Button;
       if (farmInfo.sold) {
         Button = document.createElement("button");
-        Button.onclick = () => onClickOccupied(farmInfo.id);
-        Button.innerText = "OCCUPIED";
+        Button.onclick = () => onClickOccupied(farmInfo.tokenId);
+        Button.textContent = "OCCUPIED";
       } else {
         Button = document.createElement("button");
-        Button.innerHTML = "LOCKED";
+        Button.textContent = "LOCKED";
       }
 
       Button.setAttribute("class", "sold-btn");
@@ -698,7 +714,7 @@ export default function Canvas({ items }) {
       itemListParent?.appendChild(BoxCover);
     });
 
-    remainCount.innerText = `Remains ${sector.length - soldCount} / ${
+    remainCount.textContent = `Remains ${sector.length - soldCount} / ${
       sector.length
     }`;
   }
@@ -754,6 +770,7 @@ export default function Canvas({ items }) {
           detailOwnerId={detailOwnerId}
           detailDesc={detailDesc}
           detailImg={detailImg}
+          detailLocked={detailLocked}
         />
       </div>
       <PasturesMain className="spot-list-area" id="sector-inspector">

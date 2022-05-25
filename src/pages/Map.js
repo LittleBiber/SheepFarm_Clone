@@ -24,7 +24,7 @@ const Logo = styled.div`
   }
 `;
 
-const Inventory = styled.div`
+const Inventory = styled.a`
   position: fixed;
   left: 10px;
   bottom: 10px;
@@ -62,7 +62,7 @@ export default function Map() {
           ? "6X6"
           : "7X7",
       sheepLimit: e[0] <= 1111 + 5000 ? 3 : e[0] <= 1111 + 5000 + 3000 ? 4 : 5, //! 양 마릿수도 id로 구분
-      tokenId: Lands[e[0] - 1].tokenId,
+      tokenId: Lands.find((v) => v.id == e[0]).tokenId,
       // lands.find((v) => v.id == e[0]).tokenId,
       // lands와 sectors 데이터 배열 길이는 같을텐데 index로 바꾸면 로딩이 빨라지긴 할듯 + 불필요한 연산 감소?
       // (Canvas와 Pastures 두번 안하고 상위컴포넌트에서 처리)
@@ -79,7 +79,7 @@ export default function Map() {
         </a>
       </Logo>
 
-      <Inventory onClick={() => (window.location.href = "/inventory")}>
+      <Inventory target="_blank" href="/inventory">
         <img src="/Map/inventory.png" alt="inventory" />
       </Inventory>
     </>

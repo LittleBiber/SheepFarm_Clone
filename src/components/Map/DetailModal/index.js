@@ -126,7 +126,7 @@ const PurchaseDetailModal = styled.div`
 
           p {
             font-family: Arial !important;
-            line-height: 25px;
+            line-height: 23px;
             letter-spacing: 0.4px;
             display: block;
             margin-block-start: 1em;
@@ -183,9 +183,13 @@ const PurchaseDetailModal = styled.div`
         }
 
         #occupied-btn,
-        #locked-btn,
         #close-btn {
           background-color: #a72b22;
+        }
+
+        #locked-btn {
+          background-color: #584342;
+          cursor: unset !important;
         }
 
         #purchase-btn {
@@ -204,6 +208,7 @@ export default function DetailModal({
   detailOwnerId,
   detailDesc,
   detailImg,
+  detailLocked,
 
   handleDetailModal,
 }) {
@@ -234,12 +239,9 @@ export default function DetailModal({
               </div>
               <div className="pasture-number">
                 No. <span ref={detailId}></span>
-                <div className="owner-info">
+                <div className="owner-info" ref={detailLocked}>
                   Owner <br />
-                  {/* 0xf28191e65F145dd5CffF98cfe8792501a11074cB 더미 ID */}
-                  <span ref={detailOwnerId}>
-                    0xf28191e65F145dd5CffF98cfe8792501a11074cB
-                  </span>
+                  <span ref={detailOwnerId} />
                 </div>
               </div>
               <div className="pasture-desc">
