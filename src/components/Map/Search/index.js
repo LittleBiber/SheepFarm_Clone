@@ -23,9 +23,10 @@ const SearchBox = styled.div`
   }
 
   .info-area-heading {
+    font-family: Arial;
     background-color: #504130;
     color: white;
-    padding: 0px 5px 5px 5px;
+    padding: 6px 5px 5px 5px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: calc(100% + 1px);
@@ -43,13 +44,15 @@ const SearchBox = styled.div`
   .search-box {
     display: flex;
     align-items: center;
+    
 
     // Placeholder 글자색상은 따로 변경
-    input::-webkit-input-placeholder { color: white; }
+    input::-webkit-input-placeholder { color: #e4bb88; }
 
     #land-id-input {
+      font-family: Arial;
       background-color: #ba8f5d;
-      color: white;
+      color: #e4bb88;
       border: 0px;
       border-radius: 10px 0 0 10px;
       height: 30px;
@@ -59,8 +62,6 @@ const SearchBox = styled.div`
       width: 100%;
       
       }
-
-      padding: 1px 2px;
     }
 
     #search_btn {

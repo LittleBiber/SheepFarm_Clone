@@ -1,11 +1,48 @@
-import React, { useEffect, useState } from "react";
-// import styled from "styled-components";
+import React, { useEffect, useState, useRef } from "react";
+import styled from "styled-components";
 import Canvas from "../components/Map/Canvas";
 // import Pastures from "../components/Map/Pastures";
 // import Search from "../components/Map/Search";
 
 import { Lands } from "../components/Map/Canvas/Lands";
 import { Sectors } from "../components/Map/Canvas/Sectors";
+
+const Logo = styled.div`
+  z-index: 10;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+
+  @media (min-width: 758px) {
+    display: block;
+  }
+
+  @media (max-width: 757px) {
+    display: none;
+  }
+`;
+
+const Inventory = styled.div`
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  cursor: pointer;
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (min-width: 758px) {
+    display: inline-block;
+  }
+
+  @media (max-width: 757px) {
+    display: none;
+  }
+`;
 
 export default function Map() {
   const items = Sectors.map((e) => {
@@ -32,7 +69,21 @@ export default function Map() {
     };
   });
 
-  return <Canvas items={items} />;
+  return (
+    <>
+      <Canvas items={items} />
+
+      <Logo>
+        <a href="/">
+          <img src="/Map/sheepfarm_logo_top.png" alt="logo" />
+        </a>
+      </Logo>
+
+      <Inventory onClick={() => alert("inventory")}>
+        <img src="/Map/inventory.png" alt="inventory" />
+      </Inventory>
+    </>
+  );
 }
 
 /*

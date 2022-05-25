@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
 import styled from "styled-components";
@@ -39,13 +39,17 @@ const PasturesMain = styled.div`
   .spot-list-heading {
     background-color: #504130;
     color: white;
-    padding: 0px 5px 5px 5px;
+    padding: 6px 5px 5px 5px;
     box-sizing: border-box;
     width: calc(100% + 1px);
     display: flex;
     justify-content: space-between;
     font-size: 1.2rem;
     // span에는 따로 적용되는 속성 없었음
+
+    span {
+      font-family: Arial !important;
+    }
   }
 
   #pastures-list {
@@ -72,8 +76,9 @@ const PasturesMain = styled.div`
       }
 
       .sector-id {
-        color: ${({ selected }) => (selected ? "white" : "black")};
+        color: "white";
         justify-content: center;
+        font-family: Arial !important;
 
         @media (min-width: 758px) {
           width: 50px;
@@ -88,6 +93,7 @@ const PasturesMain = styled.div`
         display: flex;
         align-items: center;
         color: white;
+        font-family: Arial !important;
 
         @media (min-width: 758px) {
           padding: 0 5px;
@@ -100,72 +106,49 @@ const PasturesMain = styled.div`
         }
       }
 
-      .sold-btn-parent {
-        display: flex;
-        align-items: center;
-
-        @media (min-width: 758px) {
-          width: 86px;
-        }
-
-        .sold-btn {
-          width: 100%;
-          text-align: center;
-          background-color: #bf3f3f;
-          color: white;
-          cursor: pointer;
-          padding: 6px;
-          text-decoration: none;
-          border-radius: 10px;
-          font-size: 13px;
-          font-family: "Arial";
-        }
-      }
-
-      span .sold-btn {
-        width: 100%;
+      .sold-btn {
         text-align: center;
         background-color: #bf3f3f;
         color: white;
         cursor: pointer;
-        padding: 6px;
+        padding: 0 6px;
         text-decoration: none;
         border-radius: 10px;
         border: none;
         font-size: 13px;
         font-family: "Arial";
 
-        @media (min-width: 758px) {
-          width: 86px;
-        }
+        // @media (min-width: 758px) {
+        //   width: 86px;
+        // }
       }
     }
   }
 `;
 
-const Test = styled.button`
-  position: absolute;
-  top: 1%;
-`;
-
-const Test2 = styled.button`
-  position: absolute;
-  top: 8%;
-`;
-
 export default function Canvas({ items }) {
-  const [welcomeModal, setWelcomeModal] = useState(true);
+  // 최초 canvas 생성 위한 상태값
+  const [load, setLoad] = useState(false);
 
   //!
+  const welcomeModal = useRef(null);
+
   const pastureList = useRef(null);
   const pastureCount = useRef(null);
   const detailWrapper = useRef(null);
-  const detailRef = useRef(null);
+
+  const detailId = useRef(null);
+  const detailSize = useRef(null);
+  const detailSheepLimit = useRef(null);
+  const detailPurchaseButton = useRef(null);
+  const detailOwnerId = useRef(null);
+  const detailDesc = useRef(null);
+  const detailImg = useRef(null);
   //!
 
   function handleWelcomeModal() {
-    setWelcomeModal(false);
-    onClickWelcomeModalOk();
+    welcomeModal.current.style.display = "none";
+    onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
   }
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -174,21 +157,14 @@ export default function Canvas({ items }) {
 
   const canvasParent = document.getElementById("root");
 
-  const itemListParent = document.getElementById("pastures-list");
-
   const CANVAS_SETTING = {
     width: vw,
     height: vh,
-    // resizeTo: canvasParent,
+    resizeTo: canvasParent,
     resolution: 1, //window.devicePixelRatio,
     backgroundColor: 0x4284d2,
   };
-
-  const app = new PIXI.Application(CANVAS_SETTING);
-  canvasParent.appendChild(app.view);
-
   const BACKGROUND_SIZE = { width: 1720, height: 1738 };
-
   const SECTOR_SIZE = 56 * 2;
   const UNLOCKED_SECTOR = {
     "3_9": 0,
@@ -211,6 +187,14 @@ export default function Canvas({ items }) {
     "8_10": 0,
   };
   const FIRST_FOCUS_SECTOR = "6_9";
+
+  const app = new PIXI.Application(CANVAS_SETTING);
+  canvasParent.appendChild(app.view);
+
+  useEffect(() => {
+    // 왜 상태값 업데이트를 해줘야 canvas가 렌더되는걸까
+    setLoad(true);
+  }, []);
 
   const viewport = new Viewport({
     screenWidth: vw,
@@ -283,6 +267,8 @@ export default function Canvas({ items }) {
 
   // Attach background
   const background = viewport.addChild(PIXI.Sprite.from("/Map/sector_0.png"));
+
+  const itemListParent = document.getElementById("pastures-list");
 
   if (isMobile == false) {
     app.cloudsVfx = makeShader();
@@ -436,7 +422,47 @@ export default function Canvas({ items }) {
     });
 
     pastureSelected(spot.farmInfo.id);
-    detailRef.current = spot.farmInfo;
+    handleDetailData(spot.farmInfo);
+  }
+
+  function handleDetailData(farmInfo) {
+    detailId.current.innerText = farmInfo.id;
+    detailSize.current.innerText = farmInfo.size;
+    detailSheepLimit.current.innerText = farmInfo.sheepLimit;
+
+    if (farmInfo.size === "5X5") {
+      detailDesc.current.innerText = `This pasture can only hold 3 sheep at a time, therefore a
+      combo effect that requires more than 4 sheep will not be able to be&nbsp;triggered.`;
+    } else if (farmInfo.size === "6X6") {
+      detailDesc.current.innerText = `This pasture can hold 4 sheep at a time. Which means it is
+      able to trigger a combo effect that requires 4 sheep.`;
+    } else {
+      detailDesc.current.innerText = `This pasture can hold 5 sheep at a time. This means you can
+      trigger all kind of combo effect with this pasture.`;
+    }
+
+    const Button = document.createElement("button");
+    if (farmInfo.sold) {
+      Button.setAttribute("id", "occupied-btn");
+      Button.setAttribute("class", "btn");
+      Button.onclick = () =>
+        window.open(
+          `https://opensea.io/assets/klaytn/0xa9f07b1260bb9eebcbaba66700b00fe08b61e1e6/${farmInfo.id}`,
+          "_blank"
+        );
+      Button.innerText = "OCCUPIED";
+    } else {
+      Button.setAttribute("id", "locked-btn");
+      Button.setAttribute("class", "btn");
+      Button.innerText = "LOCKED";
+    }
+
+    detailPurchaseButton.current.replaceChild(
+      Button,
+      detailPurchaseButton.current.childNodes[1]
+    );
+
+    detailImg.current.style.background = `url(https://cdn.sheepfarm.io/nft/img/land_${farmInfo.id}.png) center center`;
   }
 
   let lastPopup = null;
@@ -599,11 +625,6 @@ export default function Canvas({ items }) {
     }
   }
 
-  function onClickWelcomeModalOk() {
-    onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
-    // mkSpotList(FIRST_FOCUS_SECTOR);
-  }
-
   function removeAllchild(div) {
     if (div) {
       while (div.hasChildNodes()) {
@@ -625,6 +646,12 @@ export default function Canvas({ items }) {
     prevSpotId = id;
   }
 
+  function onClickOccupied(id) {
+    window.open(
+      `https://opensea.io/assets/klaytn/0xa9f07b1260bb9eebcbaba66700b00fe08b61e1e6/${id}`
+    );
+  }
+
   function makeHtmlPastureBox(sectorId) {
     const sector = sectorSpotDict[sectorId];
 
@@ -638,6 +665,8 @@ export default function Canvas({ items }) {
 
       const BoxCover = document.createElement("div");
 
+      //! 이 부분 반드시 다른방법 찾아야 함
+      //! innerHTML은 보안에 취약하다고 들었는데(아마 XSS) 다른 해결책 찾아서 고쳐야 함
       BoxCover.innerHTML = `
         <span>
           <span class="sector-id">${farmInfo.id}</span>
@@ -654,32 +683,27 @@ export default function Canvas({ items }) {
 
       BoxCover.setAttribute("class", "box_cover");
       BoxCover.setAttribute("id", "pasture" + farmInfo.id);
-      BoxCover.onclick = onClickGoButton;
+      BoxCover.onclick = onClickGoButton; //! 왜 박스는 되고 안의 버튼은 안되지???
 
       // 버튼은 따로 만들기
-      const ButtonWarpper = document.createElement("span");
-      ButtonWarpper.setAttribute("class", "sold-btn-parent");
-      BoxCover.appendChild(ButtonWarpper);
-
       let Button;
       if (farmInfo.sold) {
-        Button = document.createElement("a");
-        Button.target = "_blank";
-        Button.href = "www.naver.com";
-        Button.innerHTML = "OCCUPIED";
+        Button = document.createElement("button");
+        Button.onclick = () => onClickOccupied(farmInfo.id);
+        Button.innerText = "OCCUPIED";
       } else {
         Button = document.createElement("button");
         Button.innerHTML = "LOCKED";
       }
 
       Button.setAttribute("class", "sold-btn");
-      ButtonWarpper.appendChild(Button);
+      BoxCover.appendChild(Button);
 
       itemListParent?.appendChild(BoxCover);
     });
 
-    remainCount.innerHTML = `Remains ${sector.length} / ${
-      sector.length - soldCount
+    remainCount.innerText = `Remains ${sector.length - soldCount} / ${
+      sector.length
     }`;
   }
 
@@ -695,16 +719,19 @@ export default function Canvas({ items }) {
 
   return (
     <Main>
-      <div className="welcome">
-        <WelcomeModal
-          welcomeModal={welcomeModal}
-          setWelcomeModal={handleWelcomeModal}
-        />
+      <div className="welcome" ref={welcomeModal}>
+        <WelcomeModal handleWelcomeModal={handleWelcomeModal} />
       </div>
       <div className="hidden" ref={detailWrapper}>
         <DetailModal
           handleDetailModal={handleDetailModal}
-          detailRef={detailRef}
+          detailId={detailId}
+          detailSize={detailSize}
+          detailSheepLimit={detailSheepLimit}
+          detailPurchaseButton={detailPurchaseButton}
+          detailOwnerId={detailOwnerId}
+          detailDesc={detailDesc}
+          detailImg={detailImg}
         />
       </div>
       <PasturesMain className="spot-list-area" id="sector-inspector">
@@ -718,8 +745,6 @@ export default function Canvas({ items }) {
         <div id="pastures-list" ref={pastureList}></div>
       </PasturesMain>
       <Search onClickLandSearch={onClickLandSearch} />
-      <Test onClick={() => makeHtmlPastureBox()}>출력테스트</Test>
-      <Test2 onClick={() => console.log(detailRef)}>출력테스트2</Test2>
     </Main>
   );
 }

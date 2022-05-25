@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Main = styled.div`
-  ${({ modal }) => (modal ? "" : "display: none;")}
-
   width: 100%;
   height: 100%;
   position: fixed;
@@ -13,7 +11,7 @@ const Main = styled.div`
   z-index: 9999;
 
   @media (max-width: 757px) {
-    ${({ modal }) => (modal ? "display: flex;" : "display: none;")}
+    display: flex;
     flex-direction: column;
     justify-content: center;
   }
@@ -98,18 +96,16 @@ const Main = styled.div`
   }
 `;
 
-export default function WelcomeModal({ welcomeModal, setWelcomeModal }) {
+export default function WelcomeModal({ handleWelcomeModal }) {
   return (
-    <Main modal={welcomeModal}>
+    <Main>
       <div id="welcome-modal">
         <div className="left-area">
           <img className="kelly" src="/WelcomeModal/kelly.png" />
         </div>
         <div className="welcome-text-area">
           <p>
-            <strong>
-              {/*  style="font-size:25px" */}Welcome to Meta-land!
-            </strong>
+            <strong>Welcome to Meta-land!</strong>
             <br />
             Welcome! The map you're looking at right now is your Meta-land
             Pasture. It is based on a real-world landscape, although for the
@@ -118,7 +114,7 @@ export default function WelcomeModal({ welcomeModal, setWelcomeModal }) {
             you must have at least one pasture.
           </p>
           <div className="action-area">
-            <button className="ok-btn" onClick={setWelcomeModal}>
+            <button className="ok-btn" onClick={handleWelcomeModal}>
               Let's take a closer look!
             </button>
           </div>

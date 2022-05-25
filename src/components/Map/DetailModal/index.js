@@ -138,9 +138,6 @@ const PurchaseDetailModal = styled.div`
         text-align: center;
 
         .im {
-          ${({ id }) =>
-            `background: url(https://cdn.sheepfarm.io/nft/img/land_${id}.png) center center;`}
-
           box-sizing: border-box;
           margin: 20px;
           border: 1px solid #ddd5be;
@@ -187,24 +184,20 @@ const PurchaseDetailModal = styled.div`
 `;
 
 export default function DetailModal({
-  id,
-  size,
-  sheepLimit,
-  sold,
-  open,
-  ownerId,
+  detailId,
+  detailSize,
+  detailSheepLimit,
+  detailPurchaseButton,
+  detailOwnerId,
+  detailDesc,
+  detailImg,
+
   handleDetailModal,
 }) {
-  const OnClickOccupied = (id) => {
-    window.open(
-      `https://opensea.io/assets/klaytn/0xa9f07b1260bb9eebcbaba66700b00fe08b61e1e6/${id}`,
-      "_blank"
-    );
-  };
-
   return (
     <Main>
-      <PurchaseDetailModal id={id}>
+      <PurchaseDetailModal>
+        {/* id 들어가는게 preview 부분에 백그라운드 이미지 때문 */}
         <div className="content-area">
           <div className="heading-area">
             <div className="pasture-detail-title">Pasture details</div>
@@ -215,18 +208,25 @@ export default function DetailModal({
               <div className="properties">
                 <span className="property">
                   <img src="/DetailModal/size.png" />
-                  <span id="farm-detail-size">{size}</span>
+                  <span id="farm-detail-size" ref={detailSize}>
+                    5X5
+                  </span>
                 </span>
                 <span className="property">
                   <img src="/DetailModal/sheep.png" />
-                  <span id="farm-detail-sheeps">{sheepLimit}</span>
+                  <span id="farm-detail-sheeps" ref={detailSheepLimit}>
+                    3
+                  </span>
                 </span>
               </div>
               <div className="pasture-number">
-                No. {id}
+                No. <span ref={detailId}></span>
                 <div className="owner-info">
                   Owner <br />
-                  0xf28191e65F145dd5CffF98cfe8792501a11074cB {/* 더미 ID */}
+                  {/* 0xf28191e65F145dd5CffF98cfe8792501a11074cB 더미 ID */}
+                  <span ref={detailOwnerId}>
+                    0xf28191e65F145dd5CffF98cfe8792501a11074cB
+                  </span>
                 </div>
               </div>
               <div className="pasture-desc">
@@ -235,23 +235,7 @@ export default function DetailModal({
                   first to arrive in Meta-land.
                 </p>
 
-                {size === "5X5" ? (
-                  <p>
-                    This pasture can only hold 3 sheep at a time, therefore a
-                    combo effect that requires more than 4 sheep will not be
-                    able to be&nbsp;triggered.
-                  </p>
-                ) : size === "6X6" ? (
-                  <p>
-                    This pasture can hold 4 sheep at a time. Which means it is
-                    able to trigger a combo effect that requires 4 sheep.
-                  </p>
-                ) : (
-                  <p>
-                    This pasture can hold 5 sheep at a time. This means you can
-                    trigger all kind of combo effect with this pasture.
-                  </p>
-                )}
+                <p ref={detailDesc} />
 
                 <p>
                   This pasture includes an auto farming feature that allows
@@ -263,29 +247,12 @@ export default function DetailModal({
                 <img src="/DetailModal/kelly.png" />
               </div>
             </div>
-            <div className="preview">
-              <div className="im" />
-              {sold ? (
-                <button
-                  id="occupied-btn"
-                  className="btn"
-                  onClick={() => OnClickOccupied(id)}
-                >
-                  OCCUPIED
-                </button>
-              ) : sold !== true && open === true ? (
-                <button
-                  id="purchase-btn"
-                  className="btn"
-                  onclick="OnClickPurchase($('#purchase-detail').data().farmId)"
-                >
-                  PURCHASE
-                </button>
-              ) : (
-                <button id="locked-btn" className="btn">
-                  LOCKED
-                </button>
-              )}
+            <div className="preview" ref={detailPurchaseButton}>
+              <div className="im" ref={detailImg} />
+
+              <button id="locked-btn" className="btn">
+                LOCKED
+              </button>
 
               <button
                 id="close-btn"
