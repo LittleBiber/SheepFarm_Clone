@@ -409,8 +409,13 @@ export default function Canvas({ items }) {
       removeOnInterrupt: true,
     });
 
+    const target = pastureList.current;
+    // target.scrollTo(0, 0);
+
     makeHtmlPastureBox(sector.sectorId);
     prevSpotId = null;
+
+    // scrollList();
   }
 
   function onClickSpot(spot) {
@@ -423,6 +428,7 @@ export default function Canvas({ items }) {
 
     pastureSelected(spot.farmInfo.id);
     handleDetailData(spot.farmInfo);
+    scrollList(spot);
   }
 
   function handleDetailData(farmInfo) {
@@ -658,7 +664,7 @@ export default function Canvas({ items }) {
     let soldCount = 0;
     const remainCount = document.getElementById("remain-amount");
 
-    sector.map((one) => {
+    sector.map((one, idx) => {
       const { farmInfo } = one;
 
       if (farmInfo.sold) soldCount++;
@@ -683,6 +689,7 @@ export default function Canvas({ items }) {
 
       BoxCover.setAttribute("class", "box_cover");
       BoxCover.setAttribute("id", "pasture" + farmInfo.id);
+      BoxCover.setAttribute("idx", idx);
       BoxCover.onclick = onClickGoButton; //! 왜 박스는 되고 안의 버튼은 안되지???
 
       // 버튼은 따로 만들기
@@ -717,6 +724,35 @@ export default function Canvas({ items }) {
     }
   }
 
+  function scrollList(target) {
+    const base = pastureList.current;
+    console.log(base.children[0].id);
+    console.log(target);
+
+    // 요소 높이는 41px, margin은 상하 각 10px
+
+    const targetId = `pasture${target.farmInfo.id}`;
+    // 요소의 id > 159 라던가 획득
+
+    let targetIdx = 0;
+
+    for (let i of base.children) {
+      console.log(i.idx);
+      if (i.id === targetId) {
+        targetIdx = i.idx;
+        break;
+      }
+    }
+
+    console.log(targetIdx);
+
+    // base.scroll({
+    //   behavior: "smooth",
+    //   left: 0,
+    //   top: 10 * targetIdx + 41 * targetIdx,
+    // });
+  }
+
   return (
     <Main>
       <div className="welcome" ref={welcomeModal}>
@@ -737,9 +773,7 @@ export default function Canvas({ items }) {
       <PasturesMain className="spot-list-area" id="sector-inspector">
         <div className="spot-list-heading" id="pastures-list-heading">
           <span>Pastures</span>
-          <span id="remain-amount" ref={pastureCount}>
-            Remains 0 / 0
-          </span>
+          <span id="remain-amount" ref={pastureCount}></span>
         </div>
 
         <div id="pastures-list" ref={pastureList}></div>
@@ -748,13 +782,3 @@ export default function Canvas({ items }) {
     </Main>
   );
 }
-
-/*
-
-  상태: 함수 실행은 되는데 Graphics 적용이 제대로 안됨.
-
-  !원인: 상태값 자체를 안 써야 해결됨
-
-  !해결방법: 말 그대로 상태값 없이 모든것을 구현하기
-
-*/

@@ -79,7 +79,7 @@ export default function Map() {
         </a>
       </Logo>
 
-      <Inventory onClick={() => alert("inventory")}>
+      <Inventory onClick={() => (window.location.href = "/inventory")}>
         <img src="/Map/inventory.png" alt="inventory" />
       </Inventory>
     </>
