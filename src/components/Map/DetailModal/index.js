@@ -54,9 +54,11 @@ const PurchaseDetailModal = styled.div`
         font-weight: 700;
         color: #41322a;
         font-size: 18px;
+        font-family: Arial !important;
       }
 
       .country-location {
+        font-family: Arial !important;
         margin: 10px 25px 0 25px;
         font-size: 25px;
         border-bottom: 1px solid #ddd5be;
@@ -85,6 +87,7 @@ const PurchaseDetailModal = styled.div`
           justify-content: space-evenly;
 
           .property {
+            font-family: Arial !important;
             background-color: #ba8f5d;
             border-radius: 25px;
             color: white;
@@ -95,16 +98,23 @@ const PurchaseDetailModal = styled.div`
             padding: 2px 15px 2px 5px;
             margin: 10px;
             font-weight: 700;
+
+            #farm-detail-size {
+              font-family: Arial !important;
+              font-weight: 700;
+            }
           }
         }
 
         .pasture-number {
+          font-family: Arial !important;
           margin: 0px 20px 0 20px;
           border-bottom: 1px solid #ddd5be;
-          font-weight: 700;
+          font-weight: 600;
           padding-bottom: 7px;
 
           .owner-info {
+            font-family: Arial !important;
             font-size: 13px;
             font-weight: 500;
           }
@@ -115,6 +125,9 @@ const PurchaseDetailModal = styled.div`
           padding-bottom: 7px;
 
           p {
+            font-family: Arial !important;
+            line-height: 25px;
+            letter-spacing: 0.4px;
             display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;
@@ -231,8 +244,9 @@ export default function DetailModal({
               </div>
               <div className="pasture-desc">
                 <p>
-                  This pasture is reserved for pioneers&nbsp;who are among the
-                  first to arrive in Meta-land.
+                  This pasture is reserved for
+                  <br /> pioneers who are among the first to arrive in
+                  Meta-land.
                 </p>
 
                 <p ref={detailDesc} />

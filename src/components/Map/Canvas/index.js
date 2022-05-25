@@ -7,8 +7,6 @@ import DetailModal from "../DetailModal";
 import WelcomeModal from "../WelcomeModal";
 import Search from "../Search";
 
-const Main = styled.div``;
-
 const PasturesMain = styled.div`
   background-color: white;
   z-index: 10;
@@ -68,6 +66,7 @@ const PasturesMain = styled.div`
       border-radius: 10px;
       margin: 10px;
       cursor: pointer;
+      align-items: center;
 
       span {
         display: flex;
@@ -117,10 +116,7 @@ const PasturesMain = styled.div`
         border: none;
         font-size: 13px;
         font-family: "Arial";
-
-        // @media (min-width: 758px) {
-        //   width: 86px;
-        // }
+        height: 28px;
       }
     }
   }
@@ -401,6 +397,7 @@ export default function Canvas({ items }) {
   function onClickSector(sector) {
     removePopup();
     removeAllchild(itemListParent);
+    pastureList.current.scrollTo(0, 0);
 
     setBlinkingTarget(sector);
     viewport.snap(sector.x, sector.y, {
@@ -409,13 +406,8 @@ export default function Canvas({ items }) {
       removeOnInterrupt: true,
     });
 
-    const target = pastureList.current;
-    // target.scrollTo(0, 0);
-
     makeHtmlPastureBox(sector.sectorId);
     prevSpotId = null;
-
-    // scrollList();
   }
 
   function onClickSpot(spot) {
@@ -437,14 +429,11 @@ export default function Canvas({ items }) {
     detailSheepLimit.current.innerText = farmInfo.sheepLimit;
 
     if (farmInfo.size === "5X5") {
-      detailDesc.current.innerText = `This pasture can only hold 3 sheep at a time, therefore a
-      combo effect that requires more than 4 sheep will not be able to be&nbsp;triggered.`;
+      detailDesc.current.innerText = `This pasture can only hold 3 sheep at a time, therefore a combo effect that requires more than 4 sheep will not be able to be triggered.`;
     } else if (farmInfo.size === "6X6") {
-      detailDesc.current.innerText = `This pasture can hold 4 sheep at a time. Which means it is
-      able to trigger a combo effect that requires 4 sheep.`;
+      detailDesc.current.innerText = `This pasture can hold 4 sheep at a time. Which means it is able to trigger a combo effect that requires 4 sheep.`;
     } else {
-      detailDesc.current.innerText = `This pasture can hold 5 sheep at a time. This means you can
-      trigger all kind of combo effect with this pasture.`;
+      detailDesc.current.innerText = `This pasture can hold 5 sheep at a time. This means you can trigger all kind of combo effect with this pasture.`;
     }
 
     const Button = document.createElement("button");
@@ -689,8 +678,8 @@ export default function Canvas({ items }) {
 
       BoxCover.setAttribute("class", "box_cover");
       BoxCover.setAttribute("id", "pasture" + farmInfo.id);
-      BoxCover.setAttribute("idx", idx);
-      BoxCover.onclick = onClickGoButton; //! 왜 박스는 되고 안의 버튼은 안되지???
+      BoxCover.setAttribute("idx", idx); // for로 처리하니까 이제 필요없음. 정리할때 지우기
+      BoxCover.onclick = onClickGoButton;
 
       // 버튼은 따로 만들기
       let Button;
@@ -715,8 +704,6 @@ export default function Canvas({ items }) {
   }
 
   function handleDetailModal() {
-    console.log(detailWrapper.current.classList[0]);
-
     if (detailWrapper.current.classList[0] === "hidden") {
       detailWrapper.current.classList.remove("hidden");
     } else {
@@ -726,35 +713,34 @@ export default function Canvas({ items }) {
 
   function scrollList(target) {
     const base = pastureList.current;
-    console.log(base.children[0].id);
-    console.log(target);
-
-    // 요소 높이는 41px, margin은 상하 각 10px
 
     const targetId = `pasture${target.farmInfo.id}`;
-    // 요소의 id > 159 라던가 획득
 
     let targetIdx = 0;
 
-    for (let i of base.children) {
-      console.log(i.idx);
-      if (i.id === targetId) {
-        targetIdx = i.idx;
+    for (let i of base.childNodes) {
+      if (i.getAttribute("id") === targetId) {
+        targetIdx = Number(i.getAttribute("idx"));
         break;
       }
     }
 
-    console.log(targetIdx);
+    const offset = 51 * targetIdx;
 
-    // base.scroll({
-    //   behavior: "smooth",
-    //   left: 0,
-    //   top: 10 * targetIdx + 41 * targetIdx,
-    // });
+    if (
+      base.scrollTop > offset ||
+      base.scrollTop + base.offsetHeight < offset
+    ) {
+      base.scroll({
+        behavior: "smooth",
+        left: 0,
+        top: offset,
+      });
+    }
   }
 
   return (
-    <Main>
+    <>
       <div className="welcome" ref={welcomeModal}>
         <WelcomeModal handleWelcomeModal={handleWelcomeModal} />
       </div>
@@ -779,6 +765,6 @@ export default function Canvas({ items }) {
         <div id="pastures-list" ref={pastureList}></div>
       </PasturesMain>
       <Search onClickLandSearch={onClickLandSearch} />
-    </Main>
+    </>
   );
 }
