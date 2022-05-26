@@ -96,9 +96,9 @@ const Main = styled.div`
   }
 `;
 
-export default function WelcomeModal({ handleWelcomeModal }) {
+export default function WelcomeModal({ handleWelcomeModal, modal }) {
   return (
-    <Main>
+    <Main ref={modal}>
       <div id="welcome-modal">
         <div className="left-area">
           <img className="kelly" src="/WelcomeModal/kelly.png" />

@@ -143,7 +143,7 @@ export default function Canvas({ items }) {
   const welcomeModal = useRef(null);
   const pastureList = useRef(null);
   const pastureCount = useRef(null);
-  const detailWrapper = useRef(null);
+  const detailModal = useRef(null);
   const detailId = useRef(null);
   const detailSize = useRef(null);
   const detailSheepLimit = useRef(null);
@@ -703,7 +703,7 @@ export default function Canvas({ items }) {
   }
 
   function handleDetailModal() {
-    const modalClassList = detailWrapper.current.classList;
+    const modalClassList = detailModal.current.classList;
     if (modalClassList[0] === "hidden") {
       modalClassList.remove("hidden");
     } else {
@@ -755,10 +755,11 @@ export default function Canvas({ items }) {
 
   return (
     <>
-      <div className="welcome" ref={welcomeModal}>
-        <WelcomeModal handleWelcomeModal={handleWelcomeModal} />
-      </div>
-      <div className="hidden" ref={detailWrapper}>
+      <WelcomeModal
+        handleWelcomeModal={handleWelcomeModal}
+        modal={welcomeModal}
+      />
+      <div className="hidden" ref={detailModal}>
         <DetailModal {...DetailModalProps} />
       </div>
       <PasturesMain className="spot-list-area" id="sector-inspector">
