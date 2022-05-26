@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import Filter from "../components/Inventory/Filter";
-import Items from "../components/Inventory/Items";
-import Header from "../components/Common/Header";
-import MobileHeader from "../components/Common/MobileHeader";
-import Footer from "../components/Common/Footer";
+import { Filter, Items } from "../components/Inventory";
+import { Header, MobileHeader, Footer } from "../components/Common";
+import { InventoryMain } from "../styles";
 
-const Main = styled.div`
-  background-color: #fff8e2;
-  position: relative;
-
-  @media (max-width: 1100px) {
-    top: 80px;
-  }
-`;
-
-export default function Landing() {
+export default function Inventory() {
   const [selected, setSelected] = useState(0);
   const [world, setWorld] = useState(0);
 
@@ -26,7 +14,7 @@ export default function Landing() {
     <>
       <Header bgcolor="#543F36" />
       <MobileHeader bgcolor="#543F36" />
-      <Main>
+      <InventoryMain>
         <Filter
           selected={selected}
           setSelected={setSelected}
@@ -34,7 +22,7 @@ export default function Landing() {
           setWorld={setWorld}
         />
         <Items selected={selected} world={world} />
-      </Main>
+      </InventoryMain>
       <Footer section={false} />
     </>
   );

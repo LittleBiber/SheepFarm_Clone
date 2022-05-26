@@ -8,7 +8,9 @@ export const DATA_LIST = [
     question: "How do I obtain the pastures required for gameplay?",
     answer: [
       "We're launching a Local NFT marketplace on our website in April 2022 but for the time being, OpenSea is the only place where you can purchase our pastures. The following link will show you where each pasture is located: ",
-      <a href="https://sheepfarm.io/map">https://sheepfarm.io/map</a>,
+      <a href="/map" key={Math.random()}>
+        https://sheepfarm.io/map
+      </a>,
     ],
   },
   {
@@ -29,11 +31,11 @@ export const DATA_LIST = [
   {
     question: "What is MARD and NGIT?",
     answer: [
-      <div>
+      <div key={Math.random()}>
         <strong>• MARD</strong> is an abbreviation for Marmalade token, which is
         an in-game token that can be obtained through gameplay.
       </div>,
-      <div>
+      <div key={Math.random()}>
         <strong>• NGIT</strong> is an abbreviation for Nightingale token, which
         is a governance token that will play an essential role in the
         decision-making process regarding gaming features.
@@ -44,8 +46,8 @@ export const DATA_LIST = [
     question: "Where can I find my NFTs?",
     answer: [
       "To view your Sheepfarm NFTs, visit the following page and connect your wallet.",
-      <br />,
-      <a href="https://sheepfarm.io/inventory">
+      <br key={Math.random()} />,
+      <a href="/inventory" key={Math.random()}>
         https://sheepfarm.io/inventory
       </a>,
     ],
@@ -54,8 +56,10 @@ export const DATA_LIST = [
     question: "How do I open a box or envelope in my inventory?",
     answer: [
       "You can access your boxes by going to the following webpage:",
-      <br />,
-      <a href="https://sheepfarm.io/luckybox">https://sheepfarm.io/luckybox</a>,
+      <br key={Math.random()} />,
+      <a href="/luckybox" key={Math.random()}>
+        https://sheepfarm.io/luckybox
+      </a>,
     ],
   },
   {

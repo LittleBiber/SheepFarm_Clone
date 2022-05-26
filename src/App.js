@@ -1,14 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { Landing, Map, Inventory, Luckybox, Shop } from "./pages";
+import { MetamaskLogin } from "./components/Common";
 import "./App.css";
-
-import Landing from "./pages/Landing";
-import Inventory from "./pages/Inventory";
-import Luckybox from "./pages/Luckybox";
-import Shop from "./pages/Shop";
-import Map from "./pages/Map";
-import MetamaskLogin from "./components/Common/MetamaskLogin";
 
 function App() {
   return (

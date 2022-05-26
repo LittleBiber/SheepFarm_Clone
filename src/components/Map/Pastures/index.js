@@ -1,52 +1,17 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import { Main } from "./styles";
 
-import PastureBox from "./PastureBox";
-
-const Main = styled.div`
-  background-color: white;
-  z-index: 10;
-  position: absolute;
-  right: 0;
-  border-radius: 10px;
-  margin: 10px;
-  box-sizing: border-box;
-  background-color: #e4bb88;
-  border: 5px solid #504130;
-  filter: drop-shadow(0px 5px 0px #000);
-  bottom: 10px;
-
-  span {
-    pointer-events: none;
-  }
-
-  @media (min-width: 758px) {
-    width: 350px;
-    top: 100px;
-  }
-
-  @media (max-width: 757px) {
-    width: calc(100% - 20px);
-    top: calc(100% - 35%);
-  }
-
-  .spot-list-heading {
-    background-color: #504130;
-    color: white;
-    padding: 0px 5px 5px 5px;
-    box-sizing: border-box;
-    width: calc(100% + 1px);
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.2rem;
-    // span에는 따로 적용되는 속성 없었음
-  }
-
-  #pastures-list {
-    height: calc(100% - 30px);
-    overflow-y: scroll;
-  }
-`;
+export default function Pastures({ pastureCount, pastureList }) {
+  return (
+    <Main div className="spot-list-area" id="sector-inspector">
+      <div className="spot-list-heading" id="pastures-list-heading">
+        <span>Pastures</span>
+        <span id="remain-amount" ref={pastureCount}></span>
+      </div>
+      <div id="pastures-list" ref={pastureList}></div>
+    </Main>
+  );
+}
 
 /*
 1. 전달받는 정보:
@@ -73,40 +38,4 @@ const Main = styled.div`
   - 모달을 종료했을 때 포커스가 걸리면서 4_6섹터(맞는지 모름) 의 PastureBox들을 렌더링
   - 결과적으로 여기 들어오는 items는 한번 필터링된 요소가 들어와야 함.
     무턱대고 전체 데이터 렌더링하면 페이지 접속에만 5초씩 걸림
-*/
-
-export default function Pastures({ nowSpotList, onClickGoButton }) {
-  return (
-    <Main div className="spot-list-area" id="sector-inspector">
-      <div className="spot-list-heading" id="pastures-list-heading">
-        <span>Pastures</span>
-        <span id="remain-amount">
-          {/* Remains {nowSpotList.filter((e) => e.sold === 1).length} /{" "}
-          {nowSpotList.length} */}
-        </span>
-      </div>
-
-      <div
-        id="pastures-list"
-        // onClick={() => console.log(testRef.current)}
-      >
-        {/* {nowSpotList.map((one) => {
-          return (
-            <PastureBox
-              key={Math.random()}
-              {...one.farmInfo}
-              // selected={nowSpotId === one.farmInfo.id ? true : false}
-              onClickGoButton={onClickGoButton}
-            />
-          );
-        })} */}
-      </div>
-    </Main>
-  );
-}
-
-/*
-
-
-
 */

@@ -12,10 +12,7 @@ import {
   Newsletter,
   Faq,
 } from "../components/Landing";
-import Sidebar from "../components/Common/Sidebar";
-import Header from "../components/Common/Header";
-import MobileHeader from "../components/Common/MobileHeader";
-import Footer from "../components/Common/Footer";
+import { Sidebar, Header, MobileHeader, Footer } from "../components/Common";
 
 export default function Landing() {
   return (

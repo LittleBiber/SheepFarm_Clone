@@ -1,5 +1,5 @@
 import React from "react";
-import Question from "../../Common/Question/Question";
+import { Question } from "../../Common";
 import { Pin } from "../../../styles";
 import { Main, QuestionTitle } from "./styles";
 import { DATA_LIST } from "./dummy";

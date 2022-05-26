@@ -1,77 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
+import React from "react";
 import Canvas from "../components/Map/Canvas";
-// import Pastures from "../components/Map/Pastures";
-// import Search from "../components/Map/Search";
-
-import { Lands } from "../components/Map/Canvas/Lands";
-import { Sectors } from "../components/Map/Canvas/Sectors";
-
-const Logo = styled.div`
-  z-index: 10;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  padding: 0px;
-  margin: 0px;
-
-  @media (min-width: 758px) {
-    display: block;
-  }
-
-  @media (max-width: 757px) {
-    display: none;
-  }
-`;
-
-const Inventory = styled.a`
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
-  cursor: pointer;
-
-  img {
-    width: 80px;
-    height: 80px;
-  }
-
-  @media (min-width: 758px) {
-    display: inline-block;
-  }
-
-  @media (max-width: 757px) {
-    display: none;
-  }
-`;
+import { Logo, Inventory } from "../styles";
 
 export default function Map() {
-  const items = Sectors.map((e) => {
-    // sector_0_data 의 각 값에 대해 처리하는것
-    // Lands.fi >> Lands 데이터는 파일처리가 너무오래걸려서 삭제했었는데 다시 확인해봐야 함
-    //! Lands도 외부파일로 불러옴
-
-    return {
-      id: e[0],
-      x: e[1],
-      y: e[2],
-      sold: Lands[e[0] - 1].sold,
-      size:
-        e[0] <= 1111 + 5000 //! id값으로 사이즈 구분
-          ? "5X5"
-          : e[0] <= 1111 + 5000 + 3000
-          ? "6X6"
-          : "7X7",
-      sheepLimit: e[0] <= 1111 + 5000 ? 3 : e[0] <= 1111 + 5000 + 3000 ? 4 : 5, //! 양 마릿수도 id로 구분
-      tokenId: Lands.find((v) => v.id == e[0]).tokenId,
-      // lands.find((v) => v.id == e[0]).tokenId,
-      // lands와 sectors 데이터 배열 길이는 같을텐데 index로 바꾸면 로딩이 빨라지긴 할듯 + 불필요한 연산 감소?
-      // (Canvas와 Pastures 두번 안하고 상위컴포넌트에서 처리)
-    };
-  });
-
   return (
     <>
-      <Canvas items={items} />
+      <Canvas />
 
       <Logo>
         <a href="/">

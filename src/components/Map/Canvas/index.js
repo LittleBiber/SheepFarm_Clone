@@ -1,145 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
-import styled from "styled-components";
+import { Lands } from "./Lands";
+import { Sectors } from "./Sectors";
 import { makeShader } from "./map_shader";
 import DetailModal from "../DetailModal";
 import WelcomeModal from "../WelcomeModal";
+import Pastures from "../Pastures";
 import Search from "../Search";
 
-const PasturesMain = styled.div`
-  background-color: white;
-  z-index: 10;
-  position: absolute;
-  right: 0;
-  border-radius: 10px;
-  margin: 10px;
-  box-sizing: border-box;
-  background-color: #e4bb88;
-  border: 5px solid #504130;
-  filter: drop-shadow(0px 5px 0px #000);
-  bottom: 10px;
-
-  span {
-    pointer-events: none;
-  }
-
-  @media (min-width: 758px) {
-    width: 350px;
-    top: 100px;
-  }
-
-  @media (max-width: 757px) {
-    width: calc(100% - 20px);
-    top: calc(100% - 35%);
-  }
-
-  .spot-list-heading {
-    background-color: #504130;
-    color: white;
-    padding: 6px 5px 5px 5px;
-    box-sizing: border-box;
-    width: calc(100% + 1px);
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.2rem;
-    // span에는 따로 적용되는 속성 없었음
-
-    span {
-      font-family: Arial !important;
-      font-stretch: 50%;
-    }
-  }
-
-  #pastures-list {
-    height: calc(100% - 30px);
-    overflow-y: scroll;
-
-    .selected {
-      background: #643a3a !important;
-    }
-
-    .box_cover {
-      padding: 4px;
-      display: flex;
-      justify-content: space-between;
-      background: #ba8f5d;
-      border-radius: 10px;
-      margin: 10px;
-      cursor: pointer;
-      align-items: center;
-
-      span {
-        display: flex;
-        align-items: center;
-        pointer-events: none;
-      }
-
-      .sector-id {
-        color: "white";
-        justify-content: center;
-        font-family: Arial !important;
-
-        @media (min-width: 758px) {
-          width: 50px;
-        }
-
-        @media (max-width: 757px) {
-          width: unset;
-        }
-      }
-
-      .property {
-        display: flex;
-        align-items: center;
-        color: white;
-        font-family: Arial !important;
-
-        @media (min-width: 758px) {
-          padding: 0 5px;
-        }
-
-        img {
-          @media (max-width: 757px) {
-            width: 25px;
-          }
-        }
-      }
-
-      .sold-btn {
-        text-align: center;
-        background-color: #bf3f3f;
-        color: white;
-        cursor: pointer;
-        padding: 0 6px;
-        text-decoration: none;
-        border-radius: 10px;
-        border: none;
-        font-size: 13px;
-        font-family: "Arial";
-        height: 28px;
-      }
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      height: 10%;
-      background: #504130;
-    }
-
-    ::-webkit-scrollbar-track {
-      background-color: #ba8f5d;
-    }
-  }
-`;
-
-export default function Canvas({ items }) {
-  // 최초 canvas 생성 위한 상태값
+export default function Canvas() {
+  //! canvas 생성 위한 상태값
   const [load, setLoad] = useState(false);
 
+  //! Detail Modal 정보전달 Ref
   const welcomeModal = useRef(null);
   const pastureList = useRef(null);
   const pastureCount = useRef(null);
@@ -152,13 +26,15 @@ export default function Canvas({ items }) {
   const detailDesc = useRef(null);
   const detailImg = useRef(null);
   const detailLocked = useRef(null);
+  const itemListParent = pastureList.current;
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //! Canvas, Viewport 생성 위한 변수
   const vw = document.documentElement.clientWidth;
   const vh = document.documentElement.clientHeight;
+  const BACKGROUND_SIZE = { width: 1720, height: 1738 };
 
+  //! Canvas 생성 위한 변수
   const canvasParent = document.getElementById("root");
-
   const CANVAS_SETTING = {
     width: vw,
     height: vh,
@@ -166,7 +42,11 @@ export default function Canvas({ items }) {
     resolution: 1, //window.devicePixelRatio,
     backgroundColor: 0x4284d2,
   };
-  const BACKGROUND_SIZE = { width: 1720, height: 1738 };
+
+  //! 모바일 여부 판단
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  //! Sector 생성 위한 변수
   const SECTOR_SIZE = 56 * 2;
   const UNLOCKED_SECTOR = {
     "3_9": 0,
@@ -188,16 +68,36 @@ export default function Canvas({ items }) {
     "8_9": 0,
     "8_10": 0,
   };
+
+  //! Sector 및 Spot 저장하는 변수
+  let buttons = new PIXI.Container();
+  let spotDict = {};
+  let sectorSpotDict = {};
+  let sectorDict = {};
+  let prevSpotId = null;
+
+  //! Welcome Modal 종료 후 첫 포커스 대상 Sector
   const FIRST_FOCUS_SECTOR = "6_9";
 
-  const app = new PIXI.Application(CANVAS_SETTING);
-  canvasParent.appendChild(app.view);
+  //! 이전 팝업 대상 저장하는 변수
+  let lastPopup = null;
 
+  //! Sector/Spot 클릭 시 가장자리 Effect 생성
+  const blinkingGizmo = new PIXI.Graphics();
+  blinkingGizmo.zOrder = 10000;
+  blinkingGizmo.interactive = false;
+  blinkingGizmo.buttonMode = false;
+
+  //! State업데이트로 Canvas 생성
   useEffect(() => {
-    // 왜 상태값 업데이트를 해줘야 canvas가 렌더되는걸까
     setLoad(true);
   }, []);
 
+  //! Canvas 생성
+  const app = new PIXI.Application(CANVAS_SETTING);
+  canvasParent.appendChild(app.view);
+
+  //! 컨트롤을 위한 Viewport 생성
   const viewport = new Viewport({
     screenWidth: vw,
     screenHeight: vh,
@@ -205,7 +105,6 @@ export default function Canvas({ items }) {
     worldHeight: vh,
     interaction: app.renderer.plugins.interaction,
   });
-
   viewport
     .drag()
     .pinch()
@@ -223,6 +122,7 @@ export default function Canvas({ items }) {
       maxHeight: vh,
     });
 
+  //! Viewport 이벤트 등록
   viewport.on("drag-start", (event) => {
     removePopup();
   });
@@ -240,7 +140,7 @@ export default function Canvas({ items }) {
       }
     }
 
-    if (sectorId != "") {
+    if (sectorId !== "") {
       let spots = sectorSpotDict[sectorId];
       for (let i in spots) {
         let s = spots[i];
@@ -264,15 +164,14 @@ export default function Canvas({ items }) {
     // console.log(sectorId, sector, spot, farmInfo);
   });
 
-  // add the viewport to the stage
+  //! app(Canvas)에 Viewport 추가
   app.stage.addChild(viewport);
 
-  // Attach background
+  //! 배경 이미지 추가
   const background = viewport.addChild(PIXI.Sprite.from("/Map/sector_0.png"));
 
-  const itemListParent = document.getElementById("pastures-list");
-
-  if (isMobile === false) {
+  //! 모바일 여부 판단해 PC에서 접속할 때만 Cloud Effect 추가
+  if (!isMobile) {
     app.cloudsVfx = makeShader();
     app.cloudsVfx.scale.set(
       (BACKGROUND_SIZE.width * 3) / app.cloudsVfx.originalWidth,
@@ -283,17 +182,36 @@ export default function Canvas({ items }) {
     app.cloudsVfx.y = -BACKGROUND_SIZE.height;
   }
 
+  //! Sector 팝업을 보여줄 Container 생성 및 추가
   const uiLayer = new PIXI.Container();
   app.stage.addChild(uiLayer);
 
-  // Attach spots
-  let buttons = new PIXI.Container();
-  let spotDict = {};
-  let sectorSpotDict = {};
-  let sectorDict = {};
-  let prevSpotId = null;
+  //! Sectors 데이터를 Sector/Spot 생성 가능하게 처리
+  const chkSize = (value) => {
+    return value <= 1111 + 5000
+      ? "5X5"
+      : value <= 1111 + 5000 + 3000
+      ? "6X6"
+      : "7X7";
+  };
+  const chkLimit = (value) => {
+    return value <= 1111 + 5000 ? 3 : value <= 1111 + 5000 + 3000 ? 4 : 5;
+  };
 
-  items.forEach((e, i, a) => {
+  const items = Sectors.map((e) => {
+    return {
+      id: e[0],
+      x: e[1],
+      y: e[2],
+      sold: Lands[e[0] - 1].sold,
+      size: chkSize(e[0]), //! id값으로 사이즈 구분
+      sheepLimit: chkLimit(e[0]), //! 양 마릿수도 id로 구분
+      tokenId: Lands.find((v) => v.id === e[0]).tokenId,
+    };
+  });
+
+  //! items를 각각 처리해 Sector/Spot 추가
+  items.forEach((e) => {
     let farmInfo = e;
     let spot_x = farmInfo.x * 5.6 + 71;
     let spot_y = farmInfo.y * 5.6 + 92;
@@ -307,9 +225,11 @@ export default function Canvas({ items }) {
     sectorSpotDict[sector.sectorId].push(spot);
   });
 
+  //! 배경 이미지에 Sector/Spot 추가 후 Cloud Effect가 있으면 추가
   background.addChild(buttons);
   if (app.cloudsVfx) background.addChild(app.cloudsVfx);
 
+  //! Sector/Spot 포커스 시 보여주는 이펙트
   let elapsed = 0.0;
   app.ticker.add((delta) => {
     elapsed += delta;
@@ -334,6 +254,7 @@ export default function Canvas({ items }) {
     }
   });
 
+  //! Sector(큰 격자) 생성하는 함수
   function makeSector(spot_x, spot_y, parent) {
     let sectorId =
       Math.floor(spot_x / SECTOR_SIZE) + "_" + Math.floor(spot_y / SECTOR_SIZE);
@@ -377,6 +298,59 @@ export default function Canvas({ items }) {
     return sector;
   }
 
+  //! Sector 클릭 시 Pastures 목록 생성
+  function makeHtmlPastureBox(sectorId) {
+    const sector = sectorSpotDict[sectorId];
+    const remainCount = pastureCount.current;
+    let soldCount = 0;
+
+    sector.forEach((one) => {
+      const { farmInfo } = one;
+      if (farmInfo.sold) soldCount++;
+
+      const BoxCover = document.createElement("div");
+
+      //! 이 부분 반드시 다른방법 찾아야 함
+      //! innerHTML은 보안에 취약하다고 들었는데(아마 XSS) 다른 해결책 찾아서 고쳐야 함
+      BoxCover.innerHTML = `
+          <span>
+            <span class="sector-id">${farmInfo.id}</span>
+            <span class="property">
+              <img src="/Map/size.png" />
+              ${farmInfo.size}
+            </span>
+            <span class="property">
+              <img src="/Map/sheep.png" />
+              ${farmInfo.sheepLimit}
+            </span>
+          </span>
+        `;
+
+      BoxCover.classList.add("box_cover");
+      BoxCover.id = `pasture${farmInfo.id}`;
+      BoxCover.onclick = onClickGoButton;
+
+      // 버튼은 따로 만들기
+      let Button = document.createElement("button");
+      if (farmInfo.sold) {
+        Button.onclick = () => onClickOccupied(farmInfo.tokenId);
+        Button.textContent = "OCCUPIED";
+      } else {
+        Button.textContent = "LOCKED";
+      }
+
+      Button.classList.add("sold-btn");
+      BoxCover.appendChild(Button);
+
+      itemListParent?.appendChild(BoxCover);
+    });
+
+    remainCount.textContent = `Remains ${sector.length - soldCount} / ${
+      sector.length
+    }`;
+  }
+
+  //! Spot(Sector 안의 작은 사각형) 생성하는 함수
   function makeSpot(farmInfo, spot_x, spot_y, parent, sectorId) {
     let spot = new PIXI.Graphics();
     const rectSize = 5;
@@ -398,10 +372,11 @@ export default function Canvas({ items }) {
     return spot;
   }
 
+  //! Sector 클릭 시 실행
   function onClickSector(sector) {
     removePopup();
     removeAllchild(itemListParent);
-    pastureList.current.scrollTo(0, 0);
+    pastureList.current?.scrollTo(0, 0);
 
     setBlinkingTarget(sector);
     viewport.snap(sector.x, sector.y, {
@@ -414,6 +389,7 @@ export default function Canvas({ items }) {
     prevSpotId = null;
   }
 
+  //! Spot 클릭 시 실행
   function onClickSpot(spot) {
     setBlinkingTarget(spot);
     viewport.snap(spot.parent.x + spot.x, spot.parent.y + spot.y, {
@@ -427,6 +403,28 @@ export default function Canvas({ items }) {
     scrollList(spot);
   }
 
+  //! Pastures 컴포넌트에서 요소 클릭 시 해당 Spot으로 이동
+  function onClickGoButton(event) {
+    const targetID = Number(event.target.id.slice(7));
+
+    if (targetID in spotDict) {
+      removePopup();
+      onClickSpot(spotDict[targetID]);
+    }
+  }
+
+  //! Search 컴포넌트에서 요소 검색 시 해당 Spot으로 이동
+  function onClickLandSearch(id) {
+    if (id in spotDict) {
+      removePopup();
+      removeAllchild(itemListParent);
+      makeHtmlPastureBox(spotDict[id].parentSectorId);
+      prevSpotId = null;
+      onClickSpot(spotDict[id]);
+    }
+  }
+
+  //! Detail 모달 데이터 처리
   function handleDetailData(farmInfo) {
     detailId.current.textContent = farmInfo.id;
     detailSize.current.textContent = farmInfo.size;
@@ -465,14 +463,7 @@ export default function Canvas({ items }) {
     detailImg.current.style.background = `url(https://cdn.sheepfarm.io/nft/img/land_${farmInfo.id}.png) center center`;
   }
 
-  let lastPopup = null;
-  function removePopup() {
-    if (lastPopup != null) {
-      lastPopup.parent.removeChild(lastPopup);
-      lastPopup = null;
-    }
-  }
-
+  //! Spot 클릭시 핀 출력
   function showInfoPopup(spot) {
     let farmInfo = spot.farmInfo;
 
@@ -552,10 +543,15 @@ export default function Canvas({ items }) {
     // updateSelectedRow(farmInfo.id);
   }
 
-  const blinkingGizmo = new PIXI.Graphics();
-  blinkingGizmo.zOrder = 10000;
-  blinkingGizmo.interactive = false;
-  blinkingGizmo.buttonMode = false;
+  //! Spot 클릭시 출력되는 핀 제거
+  function removePopup() {
+    if (lastPopup != null) {
+      lastPopup.parent.removeChild(lastPopup);
+      lastPopup = null;
+    }
+  }
+
+  //! Sector/Spot 클릭 시 가장자리 Effect 생성
   function setBlinkingTarget(target) {
     blinkingGizmo.clear();
 
@@ -605,25 +601,7 @@ export default function Canvas({ items }) {
     }
   }
 
-  function onClickGoButton(event) {
-    const targetID = Number(event.target.id.slice(7));
-
-    if (targetID in spotDict) {
-      removePopup();
-      onClickSpot(spotDict[targetID]);
-    }
-  }
-
-  function onClickLandSearch(id) {
-    if (id in spotDict) {
-      removePopup();
-      removeAllchild(itemListParent);
-      makeHtmlPastureBox(spotDict[id].parentSectorId);
-      prevSpotId = null;
-      onClickSpot(spotDict[id]);
-    }
-  }
-
+  //! Sector 전환 시 이전 Sector의 Pasture 목록 제거
   function removeAllchild(div) {
     if (div) {
       while (div.hasChildNodes()) {
@@ -632,85 +610,36 @@ export default function Canvas({ items }) {
     }
   }
 
+  //! Pastures 컴포넌트의 선택한 요소 Class 변경
   function pastureSelected(id) {
     if (prevSpotId) {
       const removeTarget = document.getElementById(`pasture${prevSpotId}`);
-
-      removeTarget.setAttribute("class", "box_cover");
+      removeTarget.classList.remove("selected");
     }
 
     const target = document.getElementById(`pasture${id}`);
-
-    target.setAttribute("class", "box_cover selected");
+    target.classList.add("selected");
     prevSpotId = id;
   }
 
+  //! Occupied 상태의 Pasture 클릭 시 OpenSea 페이지로 이동
   function onClickOccupied(id) {
     window.open(
       `https://opensea.io/assets/klaytn/0xa9f07b1260bb9eebcbaba66700b00fe08b61e1e6/${id}`
     );
   }
 
-  function makeHtmlPastureBox(sectorId) {
-    const sector = sectorSpotDict[sectorId];
-    const remainCount = pastureCount.current;
-    let soldCount = 0;
-
-    sector.map((one, idx) => {
-      const { farmInfo } = one;
-      if (farmInfo.sold) soldCount++;
-
-      const BoxCover = document.createElement("div");
-
-      //! 이 부분 반드시 다른방법 찾아야 함
-      //! innerHTML은 보안에 취약하다고 들었는데(아마 XSS) 다른 해결책 찾아서 고쳐야 함
-      BoxCover.innerHTML = `
-        <span>
-          <span class="sector-id">${farmInfo.id}</span>
-          <span class="property">
-            <img src="/Map/size.png" />
-            ${farmInfo.size}
-          </span>
-          <span class="property">
-            <img src="/Map/sheep.png" />
-            ${farmInfo.sheepLimit}
-          </span>
-        </span>
-      `;
-
-      BoxCover.setAttribute("class", "box_cover");
-      BoxCover.setAttribute("id", "pasture" + farmInfo.id);
-      BoxCover.onclick = onClickGoButton;
-
-      // 버튼은 따로 만들기
-      let Button = document.createElement("button");
-      if (farmInfo.sold) {
-        Button.onclick = () => onClickOccupied(farmInfo.tokenId);
-        Button.textContent = "OCCUPIED";
-      } else {
-        Button.textContent = "LOCKED";
-      }
-
-      Button.setAttribute("class", "sold-btn");
-      BoxCover.appendChild(Button);
-
-      itemListParent?.appendChild(BoxCover);
-    });
-
-    remainCount.textContent = `Remains ${sector.length - soldCount} / ${
-      sector.length
-    }`;
-  }
-
+  //! Sector 핀의 Detail 클릭시 모달 보여주는 함수
   function handleDetailModal() {
     const modalClassList = detailModal.current.classList;
-    if (modalClassList[0] === "hidden") {
+    if (modalClassList.contains("hidden")) {
       modalClassList.remove("hidden");
     } else {
       modalClassList.add("hidden");
     }
   }
 
+  //! Canvas 상에서 Spot 클릭 시 Pastures 컴포넌트를 스크롤하는 함수
   function scrollList(target) {
     const base = pastureList.current;
     const targetId = `pasture${target.farmInfo.id}`;
@@ -736,11 +665,13 @@ export default function Canvas({ items }) {
     }
   }
 
+  //! Welcome 모달 종료 시 숨겨주는 함수
   function handleWelcomeModal() {
     welcomeModal.current.style.display = "none";
     onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
   }
 
+  //! Detail 모달 Ref목록
   const DetailModalProps = {
     handleDetailModal,
     detailId,
@@ -755,21 +686,12 @@ export default function Canvas({ items }) {
 
   return (
     <>
-      <WelcomeModal
-        handleWelcomeModal={handleWelcomeModal}
-        modal={welcomeModal}
-      />
-      <div className="hidden" ref={detailModal}>
-        <DetailModal {...DetailModalProps} />
-      </div>
-      <PasturesMain className="spot-list-area" id="sector-inspector">
-        <div className="spot-list-heading" id="pastures-list-heading">
-          <span>Pastures</span>
-          <span id="remain-amount" ref={pastureCount}></span>
-        </div>
+      <WelcomeModal handleModal={handleWelcomeModal} modal={welcomeModal} />
 
-        <div id="pastures-list" ref={pastureList}></div>
-      </PasturesMain>
+      <DetailModal {...DetailModalProps} modal={detailModal} />
+
+      <Pastures pastureCount={pastureCount} pastureList={pastureList} />
+
       <Search onClickLandSearch={onClickLandSearch} />
     </>
   );

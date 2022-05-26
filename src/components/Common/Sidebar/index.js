@@ -1,7 +1,7 @@
 import React from "react";
 import { Main } from "./styles";
 
-export default function Footer() {
+export default function Sidebar() {
   const copyLink = () => {
     const link = "https://sheepfarm.io";
     navigator.clipboard.writeText(link);
@@ -9,7 +9,11 @@ export default function Footer() {
   };
 
   const scrollTop = () => {
-    window.scrollTo(0, 0);
+    window.scroll({
+      behavior: "smooth",
+      left: 0,
+      top: 0,
+    });
   };
 
   return (

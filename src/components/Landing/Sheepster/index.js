@@ -1,5 +1,4 @@
 import React from "react";
-import { Title } from "../../../styles/index";
 import { Main, SheepsterTitle } from "./styles";
 
 export default function Sheepster() {
