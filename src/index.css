@@ -93,7 +93,6 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -212,10 +211,4 @@ li {
 .canvas-root {
   width: 100vw;
   height: 100vh;
-}
-
-#root {
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
 }

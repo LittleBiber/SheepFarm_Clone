@@ -47,6 +47,7 @@ const PasturesMain = styled.div`
 
     span {
       font-family: Arial !important;
+      font-stretch: 50%;
     }
   }
 
@@ -170,7 +171,7 @@ export default function Canvas({ items }) {
   const CANVAS_SETTING = {
     width: vw,
     height: vh,
-    resizeTo: canvasParent,
+    resizeTo: window, // root에 걸어버려서 window에 맞춰 크기 조정
     resolution: 1, //window.devicePixelRatio,
     backgroundColor: 0x4284d2,
   };

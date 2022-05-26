@@ -52,7 +52,7 @@ const SearchBox = styled.div`
     #land-id-input {
       font-family: Arial;
       background-color: #ba8f5d;
-      color: #e4bb88;
+      color: white;
       border: 0px;
       border-radius: 10px 0 0 10px;
       height: 30px;
@@ -99,6 +99,12 @@ const BackButton = styled.span`
 export default function Search({ onClickLandSearch }) {
   const targetID = useRef(null);
 
+  const onKeyEnter = (e) => {
+    if (e.key === "Enter") {
+      onClickLandSearch(targetID.current.value);
+    }
+  };
+
   return (
     <>
       <SearchBox>
@@ -109,6 +115,7 @@ export default function Search({ onClickLandSearch }) {
             placeholder="Pasture ID"
             id="land-id-input"
             ref={targetID}
+            onKeyPress={onKeyEnter}
           />
           <button
             id="search_btn"
