@@ -16,7 +16,7 @@ export const Main = styled.div`
 
 export const PurchaseDetailModal = styled.div`
   display: flex;
-  font-familiy: Noto Sans CJK KR !important;
+  font-family: Noto Sans CJK KR !important;
 
   @media (min-width: 758px) {
     width: 630px;
@@ -114,7 +114,7 @@ export const PurchaseDetailModal = styled.div`
           padding-bottom: 7px;
 
           .owner-info {
-            font-family: Arial !important;
+            font-family: Noto Sans CJK KR !important;
             font-size: 13px;
             font-weight: 500;
           }
@@ -125,9 +125,8 @@ export const PurchaseDetailModal = styled.div`
           padding-bottom: 7px;
 
           p {
+            letter-spacing: -0.2px;
             font-family: Noto Sans CJK KR !important;
-            line-height: 23px;
-            letter-spacing: 0.4px;
             display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;

@@ -116,9 +116,6 @@ export const ShopContentWrapper = styled.div`
 `;
 
 export const ShopContent = styled.div`
-  // margin: 0 auto;
-  // max-width: 1440px;
-
   min-height: 100vh;
   background-color: #fff8e2;
   padding: 75px 65px 197px 70px;
@@ -135,18 +132,18 @@ export const ShopContent = styled.div`
   }
 
   @media (max-width: 720px) {
-    padding: 0px 0px 20px 0px;
+    padding: 0;
   }
 
   .shop-contents {
     @media (max-width: 720px) {
-      padding: 0 7.71028vw;
+      padding: 25px 7.71028vw;
     }
   }
 
   .content-box {
     @media (max-width: 1000px) {
-      padding: 0;
+      padding: 0 0 50px 0;
     }
 
     .title {

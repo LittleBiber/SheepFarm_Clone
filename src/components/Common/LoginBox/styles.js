@@ -83,7 +83,10 @@ const BUTTON_VALUES = {
     justify-content: center;
     align-items: center;
 
-    
+    @media (max-width: 720px) {
+      padding-top: 0px;
+    padding-bottom: 0px;
+    }
 
     img {
       width: 30px;
@@ -133,5 +136,9 @@ export const WalletButton = styled.button`
     line-height: 27px;
     font-weight: 500;
     letter-spacing: 0px;
+
+    @media (max-width: 720px) {
+      ${({ type }) => (type === "big" ? `font-size: 13px` : `font-size: 16px`)};
+    }
   }
 `;

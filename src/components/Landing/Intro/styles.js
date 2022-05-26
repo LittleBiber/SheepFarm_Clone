@@ -11,6 +11,11 @@ export const Main = styled.div`
   align-items: center;
   font-weight: 900;
 
+  @media (max-width: 580px) {
+    width: 100%;
+    height: 100% !important;
+  }
+
   .welcome_image {
     position: absolute;
     left: 50%;

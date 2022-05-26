@@ -3,6 +3,18 @@ import styled from "styled-components";
 export const Main = styled.div`
   position: relative;
 
+  @media (max-width: 1100px) {
+    margin-bottom: 80px;
+  }
+
+  @media (max-width: 1000px) {
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 720px) {
+    margin-bottom: 25px;
+  }
+
   .upgrades-select-container {
     display: flex;
     justify-content: center;

@@ -53,7 +53,7 @@ export const Main = styled.div`
     }
 
     .box_cover {
-      padding: 4px;
+      padding: 4.5px;
       display: flex;
       justify-content: space-between;
       background: #ba8f5d;

@@ -25,6 +25,10 @@ export const ItemTable = styled.div`
     align-items: center;
     padding: 44px 0 119px;
 
+    @media (max-width: 720px) {
+      padding-top: 100px;
+    }
+
     .comp-sign-in--bx {
       background-repeat: no-repeat;
       background-position: center;
@@ -33,12 +37,24 @@ export const ItemTable = styled.div`
       height: 490px;
       padding: 27px 45px 0px;
 
+      @media (max-width: 720px) {
+        width: 358px;
+        height: 274px;
+        padding: 15px 0 0;
+        text-align: center;
+      }
+
       .wallet-btns {
         display: flex;
         flex-direction: column;
         align-items: center;
         -webkit-transition: all 0.2s;
         transition: all 0.2s;
+
+        @media (max-width: 720px) {
+          display: inline-block;
+          width: 306px;
+        }
       }
     }
   }
