@@ -652,7 +652,9 @@ export default function Canvas() {
       }
     }
 
-    const offset = 51 * targetIdx;
+    const offset =
+      Number(base.childNodes[0].scrollHeight) * targetIdx + 10 * targetIdx;
+
     if (
       base.scrollTop > offset ||
       base.scrollTop + base.offsetHeight < offset

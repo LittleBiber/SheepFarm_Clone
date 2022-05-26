@@ -32,7 +32,7 @@ export default function Search({ onClickLandSearch }) {
       </SearchBox>
       <BackButton>
         <a href="/">
-          <img src="/Search/back_className=.png" alt="" />
+          <img src="/Search/back_button.png" alt="" />
         </a>
       </BackButton>
     </>
