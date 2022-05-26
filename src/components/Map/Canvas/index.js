@@ -140,13 +140,10 @@ export default function Canvas({ items }) {
   // 최초 canvas 생성 위한 상태값
   const [load, setLoad] = useState(false);
 
-  //!
   const welcomeModal = useRef(null);
-
   const pastureList = useRef(null);
   const pastureCount = useRef(null);
   const detailWrapper = useRef(null);
-
   const detailId = useRef(null);
   const detailSize = useRef(null);
   const detailSheepLimit = useRef(null);
@@ -155,12 +152,6 @@ export default function Canvas({ items }) {
   const detailDesc = useRef(null);
   const detailImg = useRef(null);
   const detailLocked = useRef(null);
-  //!
-
-  function handleWelcomeModal() {
-    welcomeModal.current.style.display = "none";
-    onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
-  }
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const vw = document.documentElement.clientWidth;
@@ -263,8 +254,8 @@ export default function Canvas({ items }) {
 
     if (
       !!spot &&
-      (spot.parent == app.blinkingItem ||
-        (app.blinkingItem != null && app.blinkingItem.parent == spot.parent))
+      (spot.parent === app.blinkingItem ||
+        (app.blinkingItem != null && app.blinkingItem.parent === spot.parent))
     ) {
       onClickSpot(spot);
     } else if (!!sector) {
@@ -281,7 +272,7 @@ export default function Canvas({ items }) {
 
   const itemListParent = document.getElementById("pastures-list");
 
-  if (isMobile == false) {
+  if (isMobile === false) {
     app.cloudsVfx = makeShader();
     app.cloudsVfx.scale.set(
       (BACKGROUND_SIZE.width * 3) / app.cloudsVfx.originalWidth,
@@ -300,8 +291,6 @@ export default function Canvas({ items }) {
   let spotDict = {};
   let sectorSpotDict = {};
   let sectorDict = {};
-
-  //!
   let prevSpotId = null;
 
   items.forEach((e, i, a) => {
@@ -309,7 +298,7 @@ export default function Canvas({ items }) {
     let spot_x = farmInfo.x * 5.6 + 71;
     let spot_y = farmInfo.y * 5.6 + 92;
     let sector = makeSector(spot_x, spot_y, buttons);
-    if (sector.sectorId in sectorSpotDict == false)
+    if (sector.sectorId in sectorSpotDict === false)
       sectorSpotDict[sector.sectorId] = [];
 
     let spot = makeSpot(farmInfo, spot_x, spot_y, sector, sector.sectorId);
@@ -349,7 +338,7 @@ export default function Canvas({ items }) {
     let sectorId =
       Math.floor(spot_x / SECTOR_SIZE) + "_" + Math.floor(spot_y / SECTOR_SIZE);
     let sector = null;
-    if (sectorId in sectorDict == false) {
+    if (sectorId in sectorDict === false) {
       sector = new PIXI.Container();
 
       let lockedCover = new PIXI.Graphics();
@@ -374,7 +363,7 @@ export default function Canvas({ items }) {
       sector.interactive = true;
       sector.buttonMode = true;
 
-      if (sectorId in UNLOCKED_SECTOR == false) {
+      if (sectorId in UNLOCKED_SECTOR === false) {
         const locked = PIXI.Sprite.from("/Map/locked.png");
         locked.anchor.set(0.5, 0.5);
         sector.addChild(locked);
@@ -391,9 +380,9 @@ export default function Canvas({ items }) {
   function makeSpot(farmInfo, spot_x, spot_y, parent, sectorId) {
     let spot = new PIXI.Graphics();
     const rectSize = 5;
-    if (farmInfo.size == "5X5") spot.beginFill(0x774466, 0.5);
-    else if (farmInfo.size == "6X6") spot.beginFill(0x665588, 0.5);
-    else if (farmInfo.size == "7X7") spot.beginFill(0x3355bb, 0.5);
+    if (farmInfo.size === "5X5") spot.beginFill(0x774466, 0.5);
+    else if (farmInfo.size === "6X6") spot.beginFill(0x665588, 0.5);
+    else if (farmInfo.size === "7X7") spot.beginFill(0x3355bb, 0.5);
 
     spot.drawRect(-rectSize / 2, -rectSize / 2, rectSize, rectSize);
     spot.endFill();
@@ -439,7 +428,6 @@ export default function Canvas({ items }) {
   }
 
   function handleDetailData(farmInfo) {
-    // detailId.current.innerText = `No. ${farmInfo.id}`;
     detailId.current.textContent = farmInfo.id;
     detailSize.current.textContent = farmInfo.size;
     detailSheepLimit.current.textContent = farmInfo.sheepLimit;
@@ -564,7 +552,7 @@ export default function Canvas({ items }) {
     // updateSelectedRow(farmInfo.id);
   }
 
-  var blinkingGizmo = new PIXI.Graphics();
+  const blinkingGizmo = new PIXI.Graphics();
   blinkingGizmo.zOrder = 10000;
   blinkingGizmo.interactive = false;
   blinkingGizmo.buttonMode = false;
@@ -573,7 +561,6 @@ export default function Canvas({ items }) {
 
     if ("farmInfo" in target) {
       showInfoPopup(target);
-      // updateSelectedRow(target.farmInfo.id);
     }
 
     for (let sectorId in sectorDict) {
@@ -666,13 +653,11 @@ export default function Canvas({ items }) {
 
   function makeHtmlPastureBox(sectorId) {
     const sector = sectorSpotDict[sectorId];
-
+    const remainCount = pastureCount.current;
     let soldCount = 0;
-    const remainCount = document.getElementById("remain-amount");
 
     sector.map((one, idx) => {
       const { farmInfo } = one;
-
       if (farmInfo.sold) soldCount++;
 
       const BoxCover = document.createElement("div");
@@ -695,17 +680,14 @@ export default function Canvas({ items }) {
 
       BoxCover.setAttribute("class", "box_cover");
       BoxCover.setAttribute("id", "pasture" + farmInfo.id);
-      BoxCover.setAttribute("idx", idx); // for로 처리하니까 이제 필요없음. 정리할때 지우기
       BoxCover.onclick = onClickGoButton;
 
       // 버튼은 따로 만들기
-      let Button;
+      let Button = document.createElement("button");
       if (farmInfo.sold) {
-        Button = document.createElement("button");
         Button.onclick = () => onClickOccupied(farmInfo.tokenId);
         Button.textContent = "OCCUPIED";
       } else {
-        Button = document.createElement("button");
         Button.textContent = "LOCKED";
       }
 
@@ -721,29 +703,27 @@ export default function Canvas({ items }) {
   }
 
   function handleDetailModal() {
-    if (detailWrapper.current.classList[0] === "hidden") {
-      detailWrapper.current.classList.remove("hidden");
+    const modalClassList = detailWrapper.current.classList;
+    if (modalClassList[0] === "hidden") {
+      modalClassList.remove("hidden");
     } else {
-      detailWrapper.current.classList.add("hidden");
+      modalClassList.add("hidden");
     }
   }
 
   function scrollList(target) {
     const base = pastureList.current;
-
     const targetId = `pasture${target.farmInfo.id}`;
-
     let targetIdx = 0;
 
-    for (let i of base.childNodes) {
-      if (i.getAttribute("id") === targetId) {
-        targetIdx = Number(i.getAttribute("idx"));
+    for (let i = 0; i < base.childNodes.length; i++) {
+      if (base.childNodes[i].getAttribute("id") === targetId) {
+        targetIdx = i;
         break;
       }
     }
 
     const offset = 51 * targetIdx;
-
     if (
       base.scrollTop > offset ||
       base.scrollTop + base.offsetHeight < offset
@@ -756,23 +736,30 @@ export default function Canvas({ items }) {
     }
   }
 
+  function handleWelcomeModal() {
+    welcomeModal.current.style.display = "none";
+    onClickSector(sectorDict[FIRST_FOCUS_SECTOR]);
+  }
+
+  const DetailModalProps = {
+    handleDetailModal,
+    detailId,
+    detailSize,
+    detailSheepLimit,
+    detailPurchaseButton,
+    detailOwnerId,
+    detailDesc,
+    detailImg,
+    detailLocked,
+  };
+
   return (
     <>
       <div className="welcome" ref={welcomeModal}>
         <WelcomeModal handleWelcomeModal={handleWelcomeModal} />
       </div>
       <div className="hidden" ref={detailWrapper}>
-        <DetailModal
-          handleDetailModal={handleDetailModal}
-          detailId={detailId}
-          detailSize={detailSize}
-          detailSheepLimit={detailSheepLimit}
-          detailPurchaseButton={detailPurchaseButton}
-          detailOwnerId={detailOwnerId}
-          detailDesc={detailDesc}
-          detailImg={detailImg}
-          detailLocked={detailLocked}
-        />
+        <DetailModal {...DetailModalProps} />
       </div>
       <PasturesMain className="spot-list-area" id="sector-inspector">
         <div className="spot-list-heading" id="pastures-list-heading">
