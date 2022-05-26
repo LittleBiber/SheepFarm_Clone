@@ -208,6 +208,6 @@ li {
   margin-bottom: 25px;
 }
 
-#root {
-  overflow-y: hidden;
+canvas {
+  overflow: hidden;
 }

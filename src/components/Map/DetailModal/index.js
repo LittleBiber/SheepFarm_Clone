@@ -46,9 +46,8 @@ export default function DetailModal({
               </div>
               <div className="pasture-desc">
                 <p>
-                  This pasture is reserved for
-                  <br /> pioneers who are among the first to arrive in
-                  Meta-land.
+                  This pasture is reserved for pioneers who are among the first
+                  to arrive in Meta-land.
                 </p>
 
                 <p ref={detailDesc} />

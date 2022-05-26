@@ -112,7 +112,7 @@ export const Main = styled.div`
         border: none;
         font-size: 13px;
         font-family: Noto Sans CJK KR !important;
-        height: 28px;
+        height: 26px;
       }
     }
 
