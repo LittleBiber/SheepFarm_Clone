@@ -8,6 +8,7 @@ export const Main = styled.div`
   top: 0;
   background-color: #000000b3;
   z-index: 9999;
+  font-family: Noto Sans CJK KR !important;
 
   @media (max-width: 757px) {
     display: flex;
@@ -57,9 +58,11 @@ export const Main = styled.div`
         margin-block-end: 1em;
         margin-inline-start: 0px;
         margin-inline-end: 0px;
+        font-family: Noto Sans CJK KR !important;
 
         strong {
           font-size: 25px;
+          font-family: Noto Sans CJK KR !important;
         }
       }
 
@@ -70,7 +73,7 @@ export const Main = styled.div`
           cursor: pointer;
           outline: none;
 
-          font-family: "Poppins";
+          font-family: Noto Sans CJK KR !important;
 
           border: 0;
           width: 200px;

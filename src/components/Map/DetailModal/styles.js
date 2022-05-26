@@ -16,6 +16,7 @@ export const Main = styled.div`
 
 export const PurchaseDetailModal = styled.div`
   display: flex;
+  font-familiy: Noto Sans CJK KR !important;
 
   @media (min-width: 758px) {
     width: 630px;
@@ -53,11 +54,11 @@ export const PurchaseDetailModal = styled.div`
         font-weight: 700;
         color: #41322a;
         font-size: 18px;
-        font-family: Arial !important;
+        font-family: Noto Sans CJK KR !important;
       }
 
       .country-location {
-        font-family: Arial !important;
+        font-family: Noto Sans CJK KR !important;
         margin: 10px 25px 0 25px;
         font-size: 25px;
         border-bottom: 1px solid #ddd5be;
@@ -86,7 +87,7 @@ export const PurchaseDetailModal = styled.div`
           justify-content: space-evenly;
 
           .property {
-            font-family: Arial !important;
+            font-family: Noto Sans CJK KR !important;
             background-color: #ba8f5d;
             border-radius: 25px;
             color: white;
@@ -99,14 +100,14 @@ export const PurchaseDetailModal = styled.div`
             font-weight: 700;
 
             #farm-detail-size {
-              font-family: Arial !important;
+              font-family: Noto Sans CJK KR !important;
               font-weight: 700;
             }
           }
         }
 
         .pasture-number {
-          font-family: Arial !important;
+          font-family: Noto Sans CJK KR !important;
           margin: 0px 20px 0 20px;
           border-bottom: 1px solid #ddd5be;
           font-weight: 600;
@@ -124,7 +125,7 @@ export const PurchaseDetailModal = styled.div`
           padding-bottom: 7px;
 
           p {
-            font-family: Arial !important;
+            font-family: Noto Sans CJK KR !important;
             line-height: 23px;
             letter-spacing: 0.4px;
             display: block;

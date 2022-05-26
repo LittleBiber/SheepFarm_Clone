@@ -30,7 +30,7 @@ export const Main = styled.div`
   .spot-list-heading {
     background-color: #504130;
     color: white;
-    padding: 6px 5px 5px 5px;
+    padding: 0 5px 5px 5px;
     box-sizing: border-box;
     width: calc(100% + 1px);
     display: flex;
@@ -39,7 +39,7 @@ export const Main = styled.div`
     // span에는 따로 적용되는 속성 없었음
 
     span {
-      font-family: Arial !important;
+      font-family: Noto Sans CJK KR !important;
       font-stretch: 50%;
     }
   }
@@ -61,17 +61,19 @@ export const Main = styled.div`
       margin: 10px;
       cursor: pointer;
       align-items: center;
+      font-family: Noto Sans CJK KR !important;
 
       span {
         display: flex;
         align-items: center;
         pointer-events: none;
+        font-family: Noto Sans CJK KR !important;
       }
 
       .sector-id {
         color: "white";
         justify-content: center;
-        font-family: Arial !important;
+        font-family: Noto Sans CJK KR !important;
 
         @media (min-width: 758px) {
           width: 50px;
@@ -86,7 +88,7 @@ export const Main = styled.div`
         display: flex;
         align-items: center;
         color: white;
-        font-family: Arial !important;
+        font-family: Noto Sans CJK KR !important;
 
         @media (min-width: 758px) {
           padding: 0 5px;
@@ -109,7 +111,7 @@ export const Main = styled.div`
         border-radius: 10px;
         border: none;
         font-size: 13px;
-        font-family: "Arial";
+        font-family: Noto Sans CJK KR !important;
         height: 28px;
       }
     }

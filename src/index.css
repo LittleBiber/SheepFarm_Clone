@@ -208,7 +208,6 @@ li {
   margin-bottom: 25px;
 }
 
-.canvas-root {
-  width: 100vw;
-  height: 100vh;
+#root {
+  overflow-y: hidden;
 }

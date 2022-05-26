@@ -22,11 +22,11 @@ export const SearchBox = styled.div`
   }
 
   .info-area-heading {
-    font-family: Arial;
+      font-family: Noto Sans CJK KR !important;
+    font-size: 19.2px;
     background-color: #504130;
     color: white;
-    padding: 6px 5px 5px 5px;
-    -webkit-box-sizing: border-box;
+    padding: 0 5px 5px 5px;
     box-sizing: border-box;
     width: calc(100% + 1px);
     font-size: 1.2rem;
@@ -49,7 +49,7 @@ export const SearchBox = styled.div`
     input::-webkit-input-placeholder { color: #e4bb88; }
 
     #land-id-input {
-      font-family: Arial;
+        font-family: Noto Sans CJK KR !important;
       background-color: #ba8f5d;
       color: white;
       border: 0px;
