@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import PurchaseModal from "../PurchaseModal";
 import { Main } from "./styles";
 
 export default function Item({ id, name, price, desc, desc_sub }) {
+  const Count = useRef(null);
+  const [unit, setUnit] = useState(1);
+
   const [modal, setModal] = useState(false);
   const handleModal = () => {
     setModal(true);
   };
-  const [unit, setUnit] = useState(1);
+
   const handleUnit = (value) => {
-    if (value <= 0) setUnit(1);
+    if (unit === 0 && value === -1) return setUnit(0);
+    else if (value === "") return setUnit(0);
     else setUnit(value);
   };
 
@@ -31,14 +35,15 @@ export default function Item({ id, name, price, desc, desc_sub }) {
 
       <div className="item-control">
         <div className="comp-count-bx">
-          <div className="comp-count" data-counter-idx="0">
+          <div className="comp-count">
             <button className="minus-btn" onClick={() => handleUnit(unit - 1)}>
               -
             </button>
             <input
-              type="text"
+              type="number"
               value={unit}
               onChange={(e) => handleUnit(e.target.value)}
+              ref={Count}
             />
             <button className="plus-btn" onClick={() => handleUnit(unit + 1)}>
               +

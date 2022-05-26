@@ -8,6 +8,11 @@ export const Main = styled.div`
   background-color: #fff;
   box-sizing: border-box;
 
+  input[type="number"]:: -webkit-outer-spin-button,
+  input[type="number"]:: -webkit-inner-spin-button {
+    appearance: none;
+  }
+
   .item-view {
     display: flex;
     justify-content: center;
