@@ -7,7 +7,8 @@ export default function SelectSheepModal({ modal, setModal }) {
     setRarity(event.target.id);
   };
 
-  const killModal = () => {
+  const killModal = (event) => {
+    event.stopPropagation();
     setRarity("rare");
     setModal(false);
   };
@@ -52,8 +53,7 @@ export default function SelectSheepModal({ modal, setModal }) {
             <div className="comp-select-list hidden">
               <a
                 className="select-list__btn select-list__btn--left"
-                href="javascript:;"
-                tabindex="0"
+                tabIndex="0"
                 role="button"
                 aria-label="Previous slide"
                 aria-controls="swiper-wrapper-eb60b0262adbcd2d"
@@ -82,8 +82,7 @@ export default function SelectSheepModal({ modal, setModal }) {
 
               <a
                 className="select-list__btn select-list__btn--right"
-                href="javascript:;"
-                tabindex="0"
+                tabIndex="0"
                 role="button"
                 aria-label="Next slide"
                 aria-controls="swiper-wrapper-eb60b0262adbcd2d"
@@ -113,9 +112,7 @@ export default function SelectSheepModal({ modal, setModal }) {
 
                 <div className="comp-select-ok">
                   <div className="comp-btn-default comp-btn--red">
-                    <a href="javascript:;">
-                      <button>OK</button>
-                    </a>
+                    <button>OK</button>
                   </div>
                 </div>
               </div>
@@ -125,13 +122,13 @@ export default function SelectSheepModal({ modal, setModal }) {
           </div>
         </div>
 
-        <div className="dimmed-bg" onclick="closePopup()" />
+        <div className="dimmed-bg" onClick={killModal} />
       </div>
 
       {/* 양 합칠때 나오는 부분 > 현재 볼 수 없음... */}
       {/* 사용가능한 Sheep이 있을때 보여줘야 함 */}
       <div className="popup-content select-morph-grade hidden">
-        <div className="close-btn" onclick="closePopup()"></div>
+        <div className="close-btn" onClick={killModal}></div>
         <div className="comp-select-popup">
           <div>Morphing can result in a sheep of equal or higher rarity.</div>
           <div id="do-morph-grade1">
@@ -146,7 +143,7 @@ export default function SelectSheepModal({ modal, setModal }) {
             Probability Increased By <span>+5%</span>
           </div>
         </div>
-        <div className="dimmed-bg" onclick="closePopup()"></div>
+        <div className="dimmed-bg" onClick={killModal}></div>
       </div>
       {/* 사용가능한 Sheep이 있을때 보여줘야 함 */}
       <div className="popup-content morphing hidden">

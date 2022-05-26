@@ -8,6 +8,10 @@ export default function Item({ id, name, price, desc, desc_sub }) {
     setModal(true);
   };
   const [unit, setUnit] = useState(1);
+  const handleUnit = (value) => {
+    if (value <= 0) setUnit(1);
+    else setUnit(value);
+  };
 
   return (
     <Main>
@@ -28,11 +32,15 @@ export default function Item({ id, name, price, desc, desc_sub }) {
       <div className="item-control">
         <div className="comp-count-bx">
           <div className="comp-count" data-counter-idx="0">
-            <button className="minus-btn" onClick={() => setUnit(unit - 1)}>
+            <button className="minus-btn" onClick={() => handleUnit(unit - 1)}>
               -
             </button>
-            <input type="text" value={unit} />
-            <button className="plus-btn" onClick={() => setUnit(unit + 1)}>
+            <input
+              type="text"
+              value={unit}
+              onChange={(e) => handleUnit(e.target.value)}
+            />
+            <button className="plus-btn" onClick={() => handleUnit(unit + 1)}>
               +
             </button>
           </div>

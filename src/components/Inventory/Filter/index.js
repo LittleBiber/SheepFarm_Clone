@@ -13,8 +13,10 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
                   <img src="/Inventory/ic_menu00.png" alt="" />
                 </p>
                 <dl>
-                  <dt className={selected === 0 && "selected"}>ALL</dt>
-                  <dd className={selected === 0 && "selected"}>0</dd>
+                  <dt className={selected === 0 ? "selected" : undefined}>
+                    ALL
+                  </dt>
+                  <dd className={selected === 0 ? "selected" : undefined}>0</dd>
                 </dl>
               </button>
             </li>
@@ -24,8 +26,10 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
                   <img src="/Inventory/ic_menu01.png" alt="" />
                 </p>
                 <dl>
-                  <dt className={selected === 1 && "selected"}>PASTURES</dt>
-                  <dd className={selected === 1 && "selected"}>0</dd>
+                  <dt className={selected === 1 ? "selected" : undefined}>
+                    PASTURES
+                  </dt>
+                  <dd className={selected === 1 ? "selected" : undefined}>0</dd>
                 </dl>
               </button>
             </li>
@@ -35,8 +39,10 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
                   <img src="/Inventory/ic_menu02.png" alt="" />
                 </p>
                 <dl>
-                  <dt className={selected === 2 && "selected"}>SHEEP</dt>
-                  <dd className={selected === 2 && "selected"}>0</dd>
+                  <dt className={selected === 2 ? "selected" : undefined}>
+                    SHEEP
+                  </dt>
+                  <dd className={selected === 2 ? "selected" : undefined}>0</dd>
                 </dl>
               </button>
             </li>
@@ -46,8 +52,10 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
                   <img src="/Inventory/ic_menu03.png" alt="" />
                 </p>
                 <dl>
-                  <dt className={selected === 3 && "selected"}>DECORATIONS</dt>
-                  <dd className={selected === 3 && "selected"}>0</dd>
+                  <dt className={selected === 3 ? "selected" : undefined}>
+                    DECORATIONS
+                  </dt>
+                  <dd className={selected === 3 ? "selected" : undefined}>0</dd>
                 </dl>
               </button>
             </li>
@@ -59,8 +67,10 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
                   <span></span>
                 </p>
                 <dl>
-                  <dt className={selected === 4 && "selected"}>OTHER</dt>
-                  <dd className={selected === 4 && "selected"}>0</dd>
+                  <dt className={selected === 4 ? "selected" : undefined}>
+                    OTHER
+                  </dt>
+                  <dd className={selected === 4 ? "selected" : undefined}>0</dd>
                 </dl>
               </button>
             </li>
@@ -69,12 +79,12 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
         <WorldSelector>
           <ul>
             <li onClick={() => setWorld(0)}>
-              <button className={world === 0 && "checked"}>
+              <button className={world === 0 ? "checked" : undefined}>
                 <span>In Real-world</span>
               </button>
             </li>
             <li onClick={() => setWorld(1)}>
-              <button className={world === 1 && "checked"}>
+              <button className={world === 1 ? "checked" : undefined}>
                 <span>In Meta-land</span>
               </button>
             </li>

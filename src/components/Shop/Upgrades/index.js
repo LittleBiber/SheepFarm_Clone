@@ -20,7 +20,7 @@ export default function Upgrades() {
       <div className="upgrades-select-container">
         <div className="comp-select">
           <div className="comp-select-bx">
-            <div className="comp-select-item" onclick="showMainPopup()">
+            <div className="comp-select-item">
               <div className="select-box">
                 <span className="on">
                   Select An Item

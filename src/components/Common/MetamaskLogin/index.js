@@ -24,20 +24,20 @@ export default function MetamaskLogin() {
 
   return (
     <Main>
-      <div class="header">
-        <div class="header-background"></div>
-        <div class="header-text">서명 요청</div>
-        <div class="header-tip-container">
-          <div class="header-tip"></div>
+      <div className="header">
+        <div className="header-background"></div>
+        <div className="header-text">서명 요청</div>
+        <div className="header-tip-container">
+          <div className="header-tip"></div>
         </div>
       </div>
-      <div class="content">
-        <div class="account-info">
-          <div class="account">
-            <div class="account-text">계정:</div>
-            <div class="account-item">
-              <div class="account-list-item">
-                <div class="account-list-item__top-row">
+      <div className="content">
+        <div className="account-info">
+          <div className="account">
+            <div className="account-text">계정:</div>
+            <div className="account-item">
+              <div className="account-list-item">
+                <div className="account-list-item__top-row">
                   <div>
                     <svg x="0" y="0" width="18" height="18">
                       <rect
@@ -71,35 +71,35 @@ export default function MetamaskLogin() {
               </div>
             </div>
           </div>
-          <div class="request-icon">
-            <div class="identicon__image-border" />
+          <div className="request-icon">
+            <div className="identicon__image-border" />
           </div>
-          <div class="balance">
-            <div class="balance-text">잔액:</div>
-            <div class="balance-value">0 KLAY</div>
+          <div className="balance">
+            <div className="balance-text">잔액:</div>
+            <div className="balance-value">0 KLAY</div>
           </div>
         </div>
-        <div class="origin-row">
-          <div class="request-signature__origin-label">원본:</div>
-          <div class="request-signature__origin">https://sheepfarm.io</div>
+        <div className="origin-row">
+          <div className="request-signature__origin-label">원본:</div>
+          <div className="request-signature__origin">https://sheepfarm.io</div>
         </div>
-        <div class="notice">서명 중입니다.:</div>
-        <div class="signature-rows">
+        <div className="notice">서명 중입니다.:</div>
+        <div className="signature-rows">
           {/* 여러 개의 메세지가 들어오는 경우를 위해 분리 */}
-          <div class="signature-row">
-            <div class="row-title">메시지:</div>
-            <div class="row-value">
+          <div className="signature-row">
+            <div className="row-title">메시지:</div>
+            <div className="row-value">
               0x106adc0a00a6ee29af40e9969a27568e989c76aeb3ee2e70d78ce01478552f05
             </div>
           </div>
         </div>
       </div>
-      <div class="footer">
-        <button class="cancel-button" role="button" onClick={cancelLogin}>
+      <div className="footer">
+        <button className="cancel-button" role="button" onClick={cancelLogin}>
           취소
         </button>
         <button
-          class="sign-button"
+          className="sign-button"
           data-testid="request-signature__sign"
           role="button"
           onClick={DummyLogin}
