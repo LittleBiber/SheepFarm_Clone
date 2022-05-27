@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Box from "../../Common/Box";
 import { Pin } from "../../../styles";
 import CardSlider from "../../Common/CardSlider";
@@ -7,6 +7,31 @@ import { DATA_LIST } from "./dummy";
 
 export default function Features() {
   const [idx, setIdx] = useState(0);
+
+  const scrollRef = useRef(null); // Drag대상 지정
+  const [isDrag, setIsDrag] = useState(false);
+  const [startX, setStartX] = useState(0);
+
+  const onDragStart = (e) => {
+    e.preventDefault();
+    setIsDrag(true);
+    // setStartX(e.pageX + scrollRef.current.scrollLeft)
+    console.log(e.pageX);
+  };
+
+  const onDrageEnd = (e) => {
+    setIsDrag(false);
+    console.log(e.pageX);
+  };
+
+  const onDragMove = (e) => {
+    // if(isDrag) {
+    //   scrollLeft.current.scrollLeft =
+    // }
+    console.log(e.pageX);
+  };
+
+  const handleDrag = () => {};
 
   return (
     <Main offset={idx * -455}>
@@ -17,7 +42,13 @@ export default function Features() {
         <div className="feature_title">GAME FEATURES</div>
 
         <div className="box_wrapper">
-          <div className="boxes">
+          <div
+            className="boxes"
+            ref={scrollRef}
+            onMouseDown={() => console.log("drag start")}
+            onMouseUp={() => console.log("drag")}
+            draggable
+          >
             {DATA_LIST.map((e, idx) => (
               <Box {...e} key={idx} offset={idx * -404} />
             ))}

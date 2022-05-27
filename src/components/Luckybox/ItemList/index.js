@@ -6,6 +6,11 @@ import { BOX_LIST, MODAL_DATA } from "./dummy";
 
 export default function ItemList() {
   const [modal, setModal] = useState(false);
+  const killModal = (e) => {
+    if (e.target.className === "page-container") {
+      setModal(false);
+    }
+  };
 
   return (
     <Main>
@@ -15,7 +20,7 @@ export default function ItemList() {
 
       <ProbabilityModal
         modal={modal}
-        setModal={setModal}
+        killModal={killModal}
         data={MODAL_DATA[modal - 1] || MODAL_DATA[0]}
       />
     </Main>

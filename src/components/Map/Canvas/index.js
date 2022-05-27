@@ -432,7 +432,7 @@ export default function Canvas() {
     if (farmInfo.sold) {
       detailOwnerId.current.textContent = `0xf28191e65f145dd5cfff98cfe8792501a11074cb;`;
     } else {
-      detailLocked.current.textContent = ``;
+      detailLocked.current.textContent = "";
     }
 
     if (farmInfo.size === "5X5") {

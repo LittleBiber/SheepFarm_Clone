@@ -2,15 +2,15 @@ import React from "react";
 import { Main } from "./styles";
 import { DATA_LIST } from "./dummy";
 
-export default function ProbabiltyModal({ modal, setModal }) {
+export default function ProbabiltyModal({ modal, killModal }) {
   const data = DATA_LIST;
 
   return (
-    <Main modal={modal}>
+    <Main modal={modal} onClick={killModal}>
       <div className="page-container">
         <div className="panel">
           <div className="panel-bg">
-            <div className="close-btn" onClick={() => setModal(false)} />
+            <div className="close-btn" onClick={killModal} />
             <img src="/Luckybox/bg-probability.png" />
           </div>
           <div className="panel-contents">
@@ -111,7 +111,7 @@ export default function ProbabiltyModal({ modal, setModal }) {
           </div>
         </div>
       </div>
-      <div className="dimmed-bg" />
+      <div class="dimmed-bg" onClick={() => alert("!")} />
     </Main>
   );
 }

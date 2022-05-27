@@ -106,7 +106,7 @@ export default function PurchaseModal({
             alt=""
           />
 
-          <div className="dimmed-bg"></div>
+          <div className="dimmed-bg" onClick={killModal}></div>
         </div>
       </div>
 
@@ -122,6 +122,9 @@ export default function PurchaseModal({
 }
 
 /*
+! Issue: 심각함(View 깨짐)
+! Target: PC/Mobile
+
 결제 버튼을 누르면 Receipt 가 먼저 나옴(로그인여부에 관계X)
   상품 이름 / 가격 / 개수 / 총 가격 제시
   결제 버튼

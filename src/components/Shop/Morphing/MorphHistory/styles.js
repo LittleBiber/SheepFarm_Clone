@@ -94,6 +94,7 @@ export const MorphLog = styled.div`
       font-weight: 800;
 
       @media (max-width: 720px) {
+        margin-bottom: 25px;
         font-size: 20px;
         line-height: 56px;
       }

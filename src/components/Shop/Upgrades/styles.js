@@ -52,6 +52,11 @@ export const Main = styled.div`
             top: 69px;
             left: 10px;
             overflow: hidden;
+            cursor: pointer;
+
+            :hover span {
+              color: #fd7e14;
+            }
 
             @media (max-width: 1100px) {
               width: 32.36364vw;
@@ -171,6 +176,8 @@ export const Main = styled.div`
         }
         li {
           position: relative;
+          cursor: pointer;
+
           @media (max-width: 1100px) {
             flex-shrink: 0;
           }
@@ -322,6 +329,9 @@ export const Main = styled.div`
     .comp-btn-default {
       width: 300px;
 
+      margin-bottom: 5px;
+      margin-top: 5px;
+
       button {
         display: flex;
         justify-content: center;
@@ -333,7 +343,7 @@ export const Main = styled.div`
         transition: transform 0.1s, -webkit-transform 0.1s;
         color: #fff;
 
-        border: 1px solid grey;
+        border: 2px solid #adb5bd;
 
         font-size: 24px;
         font-weight: 700;

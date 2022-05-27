@@ -10,7 +10,7 @@ export const Main = styled.div`
   align-items: center;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 20;
-  overflow-x: auto;
+  overflow: hidden;
 
   .page-container {
     .popup-content {
@@ -185,6 +185,16 @@ export const Main = styled.div`
           .login-wrapper {
             width: 419px;
             margin: auto;
+
+            position: absolute;
+            // left: 0;
+            // bottom: 80px;
+            width: 100%;
+            text-align: center;
+
+            @media (max-width: 720px) {
+              bottom: 0;
+            }
           }
         }
       }
@@ -216,25 +226,9 @@ export const Main = styled.div`
         height: 100%;
         left: 0;
         top: 0;
-        z-index: -1;
       }
     }
   }
-
-  // .login-modal {
-  //   position: absolute;
-  //   left: 0;
-  //   bottom: 180px;
-  //   width: 100%;
-  //   text-align: center;
-
-  //   .login-wrapper {
-  //     display: flex;
-  //     justify-content: center;
-  //     display: inline-block;
-  //     width: 419px;
-  //   }
-  // }
 
   .hidden {
     display: none;

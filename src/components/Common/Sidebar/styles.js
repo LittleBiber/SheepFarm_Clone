@@ -42,6 +42,7 @@ export const Main = styled.div`
 
   @media screen and (max-width: 1000px) {
     z-index: 2000;
+    bottom: 20px;
 
     img {
       width: 35px;

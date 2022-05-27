@@ -8,6 +8,7 @@ export const Main = styled.div`
     z-index: 9999;
     top: 0;
     left: 0;
+    margin: auto;
     width: 100%;
     height: var(--measure-height, calc(100vh - 1px));
     background-color: rgba(255, 248, 226, 0.7);
@@ -200,7 +201,6 @@ export const Main = styled.div`
     height: 100%;
     left: 0;
     top: 0;
-    z-index: -1;
     background-color: transparent;
   }
 

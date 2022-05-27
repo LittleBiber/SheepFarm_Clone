@@ -48,6 +48,7 @@ export const ItemList = styled.div`
         @media (max-width: 720px) {
           font-size: 5.60748vw;
           line-height: 8.17757vw;
+          letter-spacing: 1px;
         }
       }
     }

@@ -10,6 +10,11 @@ const BOX_VALUES = {
     button:not(:last-child) {
       margin-bottom: 15px;
     }
+
+    @media (max-width: 720px){
+      display: inline-block;
+      width: 70.09346vw;
+    }
   `,
   big: `
     width: 100%;

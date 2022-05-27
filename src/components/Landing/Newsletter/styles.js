@@ -91,6 +91,7 @@ export const Main = styled.div`
           @media (max-width: 580px) {
             font-size: 20px;
             line-height: 24px;
+            min-width: 256px !important;
           }
         }
 

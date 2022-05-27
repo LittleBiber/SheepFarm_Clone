@@ -202,6 +202,7 @@ export const MobileWallet = styled.div`
       border-radius: 10px;
       font-size: 14px;
       cursor: pointer;
+      border: none;
 
       display: flex;
       align-items: center;

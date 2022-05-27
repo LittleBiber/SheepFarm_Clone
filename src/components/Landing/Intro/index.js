@@ -2,6 +2,10 @@ import React from "react";
 import { Main } from "./styles";
 
 export default function Intro() {
+  const redirectToMap = () => {
+    window.location.href = "/map";
+  };
+
   return (
     <Main>
       <img
@@ -18,7 +22,7 @@ export default function Intro() {
         <span className="title small">INTRODUCING A METAVERSE</span>
         <span className="title big underline">SHEEP FARMING</span>
         <span className="title big">SIMULATOR!</span>
-        <button className="play-game" onClick={() => alert("Not Ready")}>
+        <button className="play-game" onClick={redirectToMap}>
           PLAY GAME
         </button>
       </div>

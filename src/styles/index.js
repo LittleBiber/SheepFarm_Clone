@@ -113,6 +113,10 @@ export const ShopMain = styled.div`
 export const ShopContentWrapper = styled.div`
   margin: 0 auto;
   max-width: 1440px;
+
+  @media (max-width: 720px) {
+    margin: 0 0 20px;
+  }
 `;
 
 export const ShopContent = styled.div`
@@ -137,7 +141,7 @@ export const ShopContent = styled.div`
 
   .shop-contents {
     @media (max-width: 720px) {
-      padding: 25px 7.71028vw;
+      padding: 0 7.71028vw 0 7.71028vw;
     }
   }
 

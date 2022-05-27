@@ -11,10 +11,18 @@ export default function Item({ id, name, price, desc, desc_sub }) {
     setModal(true);
   };
 
-  const handleUnit = (value) => {
-    if (unit === 0 && value === -1) return setUnit(0);
-    else if (value === "") return setUnit(0);
-    else setUnit(value);
+  const handleUnit = (event) => {
+    console.log(typeof event.key);
+    if (Number(event.key) >= 0 && Number(event.key) <= 9) {
+      setUnit(Count.current.value * 10 + Number(event.key));
+      return true;
+    }
+    return false;
+  };
+
+  const plus_minus = (value) => {
+    if (value < 0) return;
+    setUnit(value);
   };
 
   return (
@@ -36,16 +44,16 @@ export default function Item({ id, name, price, desc, desc_sub }) {
       <div className="item-control">
         <div className="comp-count-bx">
           <div className="comp-count">
-            <button className="minus-btn" onClick={() => handleUnit(unit - 1)}>
+            <button className="minus-btn" onClick={() => plus_minus(unit - 1)}>
               -
             </button>
             <input
               type="number"
               value={unit}
-              onChange={(e) => handleUnit(e.target.value)}
+              onKeyPress={handleUnit}
               ref={Count}
             />
-            <button className="plus-btn" onClick={() => handleUnit(unit + 1)}>
+            <button className="plus-btn" onClick={() => plus_minus(unit + 1)}>
               +
             </button>
           </div>

@@ -16,6 +16,11 @@ export const Main = styled.div`
   @media (max-width: 1100px) {
     padding-top: 0;
   }
+
+  @media (max-width: 720px) {
+    padding-right: 0;
+    padding-left: 0;
+  }
 `;
 
 export const ItemTable = styled.div`

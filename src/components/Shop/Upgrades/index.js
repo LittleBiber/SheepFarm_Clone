@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Main } from "./styles";
+import SelectUpgradeItem from "./SelectUpgradeItem";
 
 export default function Upgrades() {
   const [itemBox, setItemBox] = useState([
@@ -15,13 +16,15 @@ export default function Upgrades() {
     null,
   ]);
 
+  const [modal, setModal] = useState(false);
+
   return (
     <Main>
       <div className="upgrades-select-container">
         <div className="comp-select">
           <div className="comp-select-bx">
             <div className="comp-select-item">
-              <div className="select-box">
+              <div className="select-box" onClick={() => setModal(true)}>
                 <span className="on">
                   Select An Item
                   <br />
@@ -91,7 +94,9 @@ export default function Upgrades() {
           <div>1 MARD</div>
         </div>
       </div>
-      <div className="maintenance">Under maintenance</div>
+
+      <SelectUpgradeItem modal={modal} setModal={setModal} />
+      {/* <div className="maintenance">Under maintenance</div> */}
     </Main>
   );
 }

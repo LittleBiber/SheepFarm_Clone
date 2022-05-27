@@ -10,8 +10,10 @@ export const Main = styled.li`
   padding: 25px;
 
   @media (max-width: 580px) {
-    min-width: 350px !important;
-    padding: 20px;
+    // min-width: 350px !important;
+    // padding: 20px;
+
+    min-width: unset;
   }
 
   .question_num {
@@ -41,6 +43,8 @@ export const Main = styled.li`
     line-height: 24px;
 
     @media (max-width: 580px) {
+      letter-spacing: unset;
+      line-height: unset;
       font-size: 14px;
     }
   }
