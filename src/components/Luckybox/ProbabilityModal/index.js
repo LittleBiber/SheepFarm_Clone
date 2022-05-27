@@ -2,11 +2,17 @@ import React from "react";
 import { Main } from "./styles";
 import { DATA_LIST } from "./dummy";
 
-export default function ProbabiltyModal({ modal, killModal }) {
+export default function ProbabilityModal({ modal, killModal }) {
   const data = DATA_LIST;
 
+  const OuterClick = (e) => {
+    if (e.target.className === "page-container") {
+      killModal();
+    }
+  };
+
   return (
-    <Main modal={modal} onClick={killModal}>
+    <Main modal={modal} onClick={OuterClick}>
       <div className="page-container">
         <div className="panel">
           <div className="panel-bg">

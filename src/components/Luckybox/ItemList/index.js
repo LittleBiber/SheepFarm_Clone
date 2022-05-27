@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import ItemBox from "../ItemBox";
-import ProbabilityModal from "../ProbabiltyModal";
+import ProbabilityModal from "../ProbabilityModal";
 import { Main } from "./styles";
 import { BOX_LIST, MODAL_DATA } from "./dummy";
 
 export default function ItemList() {
   const [modal, setModal] = useState(false);
-  const killModal = (e) => {
-    if (e.target.className === "page-container") {
-      setModal(false);
-    }
+  const killModal = () => {
+    setModal(false);
   };
 
   return (
