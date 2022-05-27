@@ -24,7 +24,9 @@ export default function OpenBox() {
           </div>
         </>
       ) : (
-        <LoginBox type="no_background" />
+        <div className="loginbox_warpper">
+          <LoginBox type="no_background" />
+        </div>
       )}
     </Main>
   );

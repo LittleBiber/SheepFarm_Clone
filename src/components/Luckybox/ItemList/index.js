@@ -11,7 +11,7 @@ export default function ItemList() {
   };
 
   return (
-    <Main>
+    <Main modal={modal}>
       {BOX_LIST.map((one, idx) => (
         <ItemBox {...one} setModal={setModal} key={idx} />
       ))}

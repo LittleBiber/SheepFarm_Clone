@@ -6,13 +6,14 @@ export default function ProbabilityModal({ modal, killModal }) {
   const data = DATA_LIST;
 
   const OuterClick = (e) => {
+    e.stopPropagation();
     if (e.target.className === "page-container") {
       killModal();
     }
   };
 
   return (
-    <Main modal={modal} onClick={OuterClick}>
+    <Main modal={modal} onClick={OuterClick} onTouch={OuterClick}>
       <div className="page-container">
         <div className="panel">
           <div className="panel-bg">

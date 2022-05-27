@@ -50,6 +50,10 @@ export const Main = styled.div`
 
     .selected {
       background: #643a3a !important;
+
+      span .sector-id {
+        color: white;
+      }
     }
 
     .box_cover {
@@ -71,7 +75,6 @@ export const Main = styled.div`
       }
 
       .sector-id {
-        color: "white";
         justify-content: center;
         font-family: Noto Sans CJK KR !important;
 

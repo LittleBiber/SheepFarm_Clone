@@ -103,6 +103,7 @@ body {
 
 * {
   font-family: "Poppins";
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 div {

@@ -28,6 +28,7 @@ export const Main = styled.div`
       .comp-select-item {
         position: absolute;
         z-index: 1;
+        -webkit-tap-highlight-color: transparent !important;
 
         @media (max-width: 720px) {
           position: relative;

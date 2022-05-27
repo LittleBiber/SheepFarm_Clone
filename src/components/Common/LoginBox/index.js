@@ -53,7 +53,7 @@ export default function LoginBox({ type }) {
           type={type}
           className="wallet-button"
           color="black"
-          bgcolor="#FAE64D"
+          bgcolor="#F7D621"
           border="#F6BA21"
           onClick={() => setModal(!modal)}
         >

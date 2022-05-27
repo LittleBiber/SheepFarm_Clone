@@ -9,6 +9,10 @@ export const Main = styled.div`
   align-items: center;
   overflow: hidden;
 
+  .loginbox_warpper {
+    margin-top: 10px;
+  }
+
   #noitem {
     width: 500px;
     vertical-align: middle;

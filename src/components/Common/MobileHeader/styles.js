@@ -120,6 +120,7 @@ export const Link = styled.a`
   width: 100%;
   text-align: center;
   text-decoration: none;
+  outline: none;
   color: ${({ value }) =>
     window.location.href.split("/").reverse()[0] === value
       ? "#ffc107"
@@ -128,6 +129,9 @@ export const Link = styled.a`
   :hover {
     color: #ffc107;
   }
+
+  -webkit-tap-highlight-color: transparent !important;
+  // 이런게 있네?
 `;
 
 export const MobileWallet = styled.div`

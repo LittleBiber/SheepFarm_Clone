@@ -29,7 +29,7 @@ export default function Nightingale() {
 
     if (result < -50 && now > 0) {
       setNow(now - 1);
-    } else if (result > 50 && now < 3) {
+    } else if (result > 50 && now < 2) {
       setNow(now + 1);
     }
   };

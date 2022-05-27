@@ -13,7 +13,7 @@ export const Main = styled.div`
   overflow: hidden;
 
   @media (max-width: 1000px) {
-    padding: 50px 0 40px 0;
+    padding: 50px 0 20px 0;
   }
 
   .page-container {

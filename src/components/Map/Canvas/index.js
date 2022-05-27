@@ -430,7 +430,7 @@ export default function Canvas() {
     detailSize.current.textContent = farmInfo.size;
     detailSheepLimit.current.textContent = farmInfo.sheepLimit;
     if (farmInfo.sold) {
-      detailOwnerId.current.textContent = `0xf28191e65f145dd5cfff98cfe8792501a11074cb;`;
+      detailOwnerId.current.textContent = `0xf28191e65f145dd5cfff98cfe8792501a11074cb`;
     } else {
       detailLocked.current.textContent = "";
     }

@@ -145,5 +145,9 @@ export const WalletButton = styled.button`
     @media (max-width: 720px) {
       ${({ type }) => (type === "big" ? `font-size: 13px` : `font-size: 16px`)};
     }
+
+    @media (max-width: 580px) {
+      font-weight: 400;
+    }
   }
 `;

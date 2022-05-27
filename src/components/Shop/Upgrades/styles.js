@@ -53,6 +53,7 @@ export const Main = styled.div`
             left: 10px;
             overflow: hidden;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent !important;
 
             :hover span {
               color: #fd7e14;
