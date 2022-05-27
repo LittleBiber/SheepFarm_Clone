@@ -8,6 +8,32 @@ import { DATA_LIST } from "./dummy";
 export default function Marmalade() {
   const [now, setNow] = useState(0);
 
+  const [startOffset, setStartOffest] = useState(null);
+  const handleDragStart = (event) => {
+    if (event.type === "touchstart") {
+      setStartOffest(event.changedTouches[0].screenX);
+    } else {
+      setStartOffest(event.pageX);
+    }
+  };
+
+  const handleDragEnd = (event) => {
+    let endOffset;
+    if (event.type === "touchend") {
+      endOffset = event.changedTouches[0].screenX;
+    } else {
+      endOffset = event.pageX;
+    }
+
+    const result = startOffset - endOffset;
+
+    if (result < -50 && now > 0) {
+      setNow(now - 1);
+    } else if (result > 50 && now < 3) {
+      setNow(now + 1);
+    }
+  };
+
   return (
     <Main offset={-150 + now * -435}>
       <div className="page-container">
@@ -27,7 +53,13 @@ export default function Marmalade() {
           </div>
         </div>
         <div className="mar_bottom">
-          <div className="imgbox_wrapper">
+          <div
+            className="imgbox_wrapper"
+            onMouseDown={handleDragStart}
+            onMouseUp={handleDragEnd}
+            onTouchStart={handleDragStart}
+            onTouchEnd={handleDragEnd}
+          >
             {DATA_LIST.map((one, idx) => (
               <ImageBox {...one} key={idx} />
             ))}
@@ -36,8 +68,8 @@ export default function Marmalade() {
         <CardSlider
           top={-10}
           count={3}
-          active_color="#3E2A18"
-          color="#c7bd9d"
+          active_color="#75594E"
+          color="#EADEB9"
           now={now}
           update={setNow}
         />

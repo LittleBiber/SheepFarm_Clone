@@ -8,30 +8,31 @@ import { DATA_LIST } from "./dummy";
 export default function Features() {
   const [idx, setIdx] = useState(0);
 
-  const scrollRef = useRef(null); // Drag대상 지정
-  const [isDrag, setIsDrag] = useState(false);
-  const [startX, setStartX] = useState(0);
-
-  const onDragStart = (e) => {
-    e.preventDefault();
-    setIsDrag(true);
-    // setStartX(e.pageX + scrollRef.current.scrollLeft)
-    console.log(e.pageX);
+  const [startOffset, setStartOffest] = useState(null);
+  const handleDragStart = (event) => {
+    if (event.type === "touchstart") {
+      setStartOffest(event.changedTouches[0].screenX);
+    } else {
+      setStartOffest(event.pageX);
+    }
   };
 
-  const onDrageEnd = (e) => {
-    setIsDrag(false);
-    console.log(e.pageX);
-  };
+  const handleDragEnd = (event) => {
+    let endOffset;
+    if (event.type === "touchend") {
+      endOffset = event.changedTouches[0].screenX;
+    } else {
+      endOffset = event.pageX;
+    }
 
-  const onDragMove = (e) => {
-    // if(isDrag) {
-    //   scrollLeft.current.scrollLeft =
-    // }
-    console.log(e.pageX);
-  };
+    const result = startOffset - endOffset;
 
-  const handleDrag = () => {};
+    if (result < -50 && idx > 0) {
+      setIdx(idx - 1);
+    } else if (result > 50 && idx < 3) {
+      setIdx(idx + 1);
+    }
+  };
 
   return (
     <Main offset={idx * -455}>
@@ -44,10 +45,10 @@ export default function Features() {
         <div className="box_wrapper">
           <div
             className="boxes"
-            ref={scrollRef}
-            onMouseDown={() => console.log("drag start")}
-            onMouseUp={() => console.log("drag")}
-            draggable
+            onMouseDown={handleDragStart}
+            onMouseUp={handleDragEnd}
+            onTouchStart={handleDragStart}
+            onTouchEnd={handleDragEnd}
           >
             {DATA_LIST.map((e, idx) => (
               <Box {...e} key={idx} offset={idx * -404} />

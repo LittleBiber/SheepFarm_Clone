@@ -5,8 +5,7 @@ export const Main = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 10;
-  // filter: brightness(80%);
-  opacity: 0.8;
+
   color: ${({ color }) => color};
 
   @media (max-width: 1000px) {
@@ -46,7 +45,7 @@ export const Main = styled.div`
     height: 21px;
     margin: 0 20px;
     cursor: pointer;
-    background-color: #decc92;
+    background-color: ${({ color }) => color};
   }
 
   .side-active {
