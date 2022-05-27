@@ -41,7 +41,10 @@ export const Main = styled.div`
 
       resize: vertical;
 
-      margin: 0;
+      resize: vertical;
+      margin-top: 10px;
+      box-sizing: border-box;
+
       font-family: inherit;
       font-size: inherit;
       line-height: inherit;
@@ -59,6 +62,7 @@ export const Main = styled.div`
       border-radius: 18px;
       margin-left: 10px;
       box-sizing: border-box;
+      font-size: 16px;
 
       cursor: pointer;
       text-transform: none;
@@ -72,6 +76,7 @@ export const Main = styled.div`
       border-radius: 18px;
       margin-left: 10px;
       box-sizing: border-box;
+      font-size: 16px;
 
       cursor: pointer;
       text-transform: none;
