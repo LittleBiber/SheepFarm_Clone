@@ -631,6 +631,11 @@ export default function Canvas() {
 
   //! Sector 핀의 Detail 클릭시 모달 보여주는 함수
   function handleDetailModal() {
+    detailModal.current.scroll({
+      left: 0,
+      top: 0,
+    });
+
     const modalClassList = detailModal.current.classList;
     if (modalClassList.contains("hidden")) {
       modalClassList.remove("hidden");
