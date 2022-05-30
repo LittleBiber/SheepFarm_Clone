@@ -9,11 +9,12 @@ export default function PurchaseModal({
   item_name,
   price,
   unit,
+  height,
 }) {
   const [proceed, setProceed] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
-
   const [loginType, setLoginType] = useState(null);
+  const body = document.getElementsByTagName("body")[0]; // DOM말고는 body에 접근할수 없는건가?
 
   const handleModal = () => {
     if (window.localStorage.getItem("userID")) {
@@ -27,6 +28,11 @@ export default function PurchaseModal({
     setProceed(false);
     setLoginModal(false);
     setModal(false);
+
+    body.style.top = "unset"; // 원래 스크롤양을 전달받아서 실행해야 할듯?
+    body.style.position = "unset";
+    body.style["overflow-y"] = "unset";
+    window.scrollTo(0, height);
   };
 
   useEffect(() => {

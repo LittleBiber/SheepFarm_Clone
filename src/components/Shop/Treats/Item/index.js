@@ -7,7 +7,18 @@ export default function Item({ id, name, price, desc, desc_sub }) {
   const [unit, setUnit] = useState(1);
 
   const [modal, setModal] = useState(false);
+
+  const body = document.getElementsByTagName("body")[0]; // DOM말고는 body에 접근할수 없는건가?
+  const [height, setHeight] = useState(0);
   const handleModal = () => {
+    const nowHeight = window.scrollY;
+
+    console.log(nowHeight);
+
+    body.style.top = `-${nowHeight}px`; //!반대로!반대로주라고!!!!
+    body.style.position = "fixed";
+    body.style["overflow-y"] = "hidden";
+    setHeight(nowHeight);
     setModal(true);
   };
 
@@ -26,7 +37,7 @@ export default function Item({ id, name, price, desc, desc_sub }) {
   };
 
   return (
-    <Main>
+    <Main modal={modal}>
       <div className="item-view">
         <img src="https://cdn.sheepfarm.io/cms/item/thumb/338.png" alt="" />
       </div>
@@ -52,6 +63,7 @@ export default function Item({ id, name, price, desc, desc_sub }) {
               value={unit}
               onKeyPress={handleUnit}
               ref={Count}
+              onChange={(e) => setUnit(e.target.value)}
             />
             <button className="plus-btn" onClick={() => plus_minus(unit + 1)}>
               +
@@ -78,6 +90,7 @@ export default function Item({ id, name, price, desc, desc_sub }) {
         item_name={name}
         price={price}
         unit={unit}
+        height={height}
       />
     </Main>
   );

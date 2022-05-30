@@ -18,7 +18,23 @@ export default function MobileHeader({ bgcolor }) {
     }
   }, []);
 
+  const [height, setHeight] = useState(0);
   const handleOpen = () => {
+    const body = document.getElementsByTagName("body")[0];
+
+    if (open) {
+      body.style.top = "unset";
+      body.style.position = "unset";
+      body.style["overflow-y"] = "unset";
+      window.scrollTo(0, height);
+    } else {
+      const nowHeight = window.scrollY;
+      body.style.top = `-${nowHeight}px`;
+      body.style.position = "fixed";
+      body.style["overflow-y"] = "hidden";
+      setHeight(nowHeight);
+    }
+
     setOpen(!open);
     setWalletBox(false);
   };

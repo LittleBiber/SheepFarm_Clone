@@ -168,7 +168,6 @@ export const Main = styled.div`
               cursor: pointer;
 
               transition: transform 0.1s;
-              transition: transform 0.1s, -webkit-transform 0.1s;
               color: #fff;
               border-color: #df650d;
               background-color: #ff7f22;
@@ -183,16 +182,18 @@ export const Main = styled.div`
           }
 
           .login-wrapper {
-            width: 419px;
+            width: 420px;
             margin: auto;
 
             position: absolute;
-            // left: 0;
-            // bottom: 80px;
-            width: 100%;
+            left: calc(50% - 210px);
+            transition: transform 0.1s;
+            bottom: 0px;
             text-align: center;
 
             @media (max-width: 720px) {
+              width: 100%;
+              left: 0;
               bottom: 0;
             }
           }

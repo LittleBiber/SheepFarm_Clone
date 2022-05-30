@@ -2,13 +2,19 @@ import React from "react";
 import { Main } from "./styles";
 import { DATA_LIST } from "./dummy";
 
-export default function ProbabilityModal({ modal, killModal }) {
+export default function ProbabilityModal({ modal, killModal, height }) {
   const data = DATA_LIST;
 
   const OuterClick = (e) => {
     e.stopPropagation();
     if (e.target.className === "page-container") {
       killModal();
+
+      const body = document.getElementsByTagName("body")[0];
+      body.style.top = "unset"; // 원래 스크롤양을 전달받아서 실행해야 할듯?
+      body.style.position = "unset";
+      body.style["overflow-y"] = "unset";
+      window.scrollTo(0, height);
     }
   };
 

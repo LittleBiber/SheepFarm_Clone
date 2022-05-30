@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
+  ${({ modal }) => (modal ? "touch-action: none;" : "")}
+
   width: 405px;
   border-radius: 22px;
   border: 2px solid #ecc66a;

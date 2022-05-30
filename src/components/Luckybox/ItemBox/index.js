@@ -9,10 +9,16 @@ export default function ItemBox({
   current,
   startat,
   setModal,
+  handleScroll,
 }) {
   const checkout = () => {
     if (count > 0) return alert("checkout");
     else return alert("Sorry, it's sold out.");
+  };
+
+  const handleModal = (id) => {
+    setModal(id);
+    handleScroll();
   };
 
   return (
@@ -25,7 +31,7 @@ export default function ItemBox({
           </div>
         </div>
         <div className="probability-wrap">
-          <button className="probability-btn" onClick={() => setModal(id)}>
+          <button className="probability-btn" onClick={() => handleModal(id)}>
             Item Probability
           </button>
         </div>
