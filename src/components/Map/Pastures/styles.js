@@ -26,6 +26,7 @@ export const Main = styled.div`
     width: calc(100% - 20px);
     // top: calc(100% - 35%);
     height: calc(35% - 30px);
+    position: fixed;
   }
 
   .spot-list-heading {

@@ -15,6 +15,7 @@ export const SearchBox = styled.div`
 
   @media (max-width: 757px) {
     width: calc(100% - 20px - 70px);
+    position: fixed;
   }
 
   @media (min-width: 758px) {
