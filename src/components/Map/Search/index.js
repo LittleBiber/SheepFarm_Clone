@@ -51,7 +51,7 @@ export default function Search({ onClickLandSearch }) {
         <div className="search-box">
           <input
             type="number"
-            min="0"
+            pattern="\d*"
             placeholder="Pasture ID"
             id="land-id-input"
             ref={searchInput}
