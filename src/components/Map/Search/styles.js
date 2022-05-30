@@ -22,6 +22,13 @@ export const SearchBox = styled.div`
     width: 350px;
   }
 
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+  }
+
   .info-area-heading {
       font-family: Noto Sans CJK KR !important;
     font-size: 19.2px;

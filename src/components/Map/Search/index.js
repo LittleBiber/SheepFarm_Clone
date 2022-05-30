@@ -1,18 +1,36 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { SearchBox, BackButton } from "./styles";
 
 export default function Search({ onClickLandSearch }) {
-  const targetID = useRef(null);
+  // const targetID = useRef(null);
+  const [targetID, setTargetID] = useState(null);
 
   const onKeyEnter = (e) => {
+    if (e.key === "-" || e.key === "+" || e.key === "." || e.key === "e") {
+      e.preventDefault();
+      return null;
+    }
+
     if (e.key === "Enter") {
-      onClickLandSearch(targetID.current.value);
+      onClickLandSearch(targetID);
     }
   };
 
-  const isNotNumber = (value) => {
-    const regExp = /[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g;
-    return regExp.test(value);
+  const handleInput = (event) => {
+    const value = event.target.value;
+
+    let result = "";
+    if (value[0] !== "0") result += value[0];
+
+    console.log(event);
+
+    for (let i = 1; i < value.length; i++) {
+      if (!Number.isNaN(Number(value[i]))) result += value[i];
+    }
+
+    if (Number.isNaN(Number(result))) result = 0;
+
+    setTargetID(result);
   };
 
   return (
@@ -22,21 +40,14 @@ export default function Search({ onClickLandSearch }) {
         <div className="search-box">
           <input
             type="number"
+            min="0"
             placeholder="Pasture ID"
             id="land-id-input"
-            ref={targetID}
+            // ref={targetID}
             onKeyPress={onKeyEnter}
-            onChange={(e) => {
-              if (e.nativeEvent.data && isNotNumber(e.nativeEvent.data)) {
-                e.preventDefault();
-                return null;
-              }
-            }}
+            onChange={handleInput}
           />
-          <button
-            id="search_btn"
-            onClick={() => onClickLandSearch(targetID.current.value)}
-          >
+          <button id="search_btn" onClick={() => onClickLandSearch(targetID)}>
             GO
           </button>
         </div>
