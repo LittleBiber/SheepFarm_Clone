@@ -10,17 +10,28 @@ export default function Search({ onClickLandSearch }) {
     }
   };
 
+  const isNotNumber = (value) => {
+    const regExp = /[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g;
+    return regExp.test(value);
+  };
+
   return (
     <>
       <SearchBox>
         <div className="info-area-heading">Search</div>
         <div className="search-box">
           <input
-            type="text"
+            type="number"
             placeholder="Pasture ID"
             id="land-id-input"
             ref={targetID}
             onKeyPress={onKeyEnter}
+            onChange={(e) => {
+              if (e.nativeEvent.data && isNotNumber(e.nativeEvent.data)) {
+                e.preventDefault();
+                return null;
+              }
+            }}
           />
           <button
             id="search_btn"
