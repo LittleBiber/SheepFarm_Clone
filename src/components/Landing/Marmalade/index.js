@@ -35,7 +35,7 @@ export default function Marmalade() {
   };
 
   return (
-    <Main offset={-150 + now * -435}>
+    <Main offset={-150 + now * -440}>
       <div className="page-container">
         <div className="mar_top">
           <img src="/Token_Nft/logo-mard.png" />

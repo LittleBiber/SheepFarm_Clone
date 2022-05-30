@@ -11,8 +11,7 @@ export const Main = styled.div`
   background-color: #e4bb88;
   border: 5px solid #504130;
   filter: drop-shadow(0px 5px 0px #000);
-  // bottom: 10px;
-  bottom: 5px;
+  bottom: 10px;
   span {
     pointer-events: none;
   }

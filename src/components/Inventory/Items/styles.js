@@ -20,6 +20,7 @@ export const Main = styled.div`
   @media (max-width: 720px) {
     padding-right: 0;
     padding-left: 0;
+    padding-bottom: 30px;
   }
 `;
 
