@@ -6,15 +6,18 @@ export default function Search({ onClickLandSearch }) {
   const [targetID, setTargetID] = useState(null);
 
   const onKeyEnter = (e) => {
-    if (e.key === "-" || e.key === "+" || e.key === "." || e.key === "e") {
-      e.preventDefault();
-      return null;
-    }
-
     if (e.key === "Enter") {
       e.preventDefault();
       onClickLandSearch(targetID);
       searchInput.current.blur();
+    } else if (
+      e.key === "-" ||
+      e.key === "+" ||
+      e.key === "." ||
+      e.key === "e"
+    ) {
+      e.preventDefault();
+      return null;
     }
   };
 

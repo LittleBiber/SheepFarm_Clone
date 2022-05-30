@@ -13,8 +13,17 @@ export default function DetailModal({
   modal,
   handleDetailModal,
 }) {
+  const outerClick = (e) => {
+    if (e.target.id === "detailmodalbg") handleDetailModal();
+  };
+
   return (
-    <Main className="hidden" ref={modal}>
+    <Main
+      id="detailmodalbg"
+      className="hidden"
+      ref={modal}
+      onClick={outerClick}
+    >
       <PurchaseDetailModal>
         <div className="content-area">
           <div className="heading-area">
