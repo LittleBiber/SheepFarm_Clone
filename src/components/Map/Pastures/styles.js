@@ -11,8 +11,8 @@ export const Main = styled.div`
   background-color: #e4bb88;
   border: 5px solid #504130;
   filter: drop-shadow(0px 5px 0px #000);
-  bottom: 10px;
-
+  // bottom: 10px;
+  bottom: 5px;
   span {
     pointer-events: none;
   }
@@ -24,8 +24,8 @@ export const Main = styled.div`
 
   @media (max-width: 757px) {
     width: calc(100% - 20px);
-    top: calc(100% - 35%);
-    // height: calc(35% - 30px);
+    // top: calc(100% - 35%);
+    height: calc(35% - 30px);
   }
 
   .spot-list-heading {
