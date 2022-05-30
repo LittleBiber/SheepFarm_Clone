@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { SearchBox, BackButton } from "./styles";
 
 export default function Search({ onClickLandSearch }) {
-  // const targetID = useRef(null);
+  const searchInput = useRef(null);
   const [targetID, setTargetID] = useState(null);
 
   const onKeyEnter = (e) => {
@@ -13,7 +13,13 @@ export default function Search({ onClickLandSearch }) {
 
     if (e.key === "Enter") {
       onClickLandSearch(targetID);
+      searchInput.current.blur();
     }
+  };
+
+  const onClickSearch = () => {
+    onClickLandSearch(targetID);
+    searchInput.current.blur();
   };
 
   const handleInput = (event) => {
@@ -43,11 +49,11 @@ export default function Search({ onClickLandSearch }) {
             min="0"
             placeholder="Pasture ID"
             id="land-id-input"
-            // ref={targetID}
+            ref={searchInput}
             onKeyPress={onKeyEnter}
             onChange={handleInput}
           />
-          <button id="search_btn" onClick={() => onClickLandSearch(targetID)}>
+          <button id="search_btn" onClick={onClickSearch}>
             GO
           </button>
         </div>
