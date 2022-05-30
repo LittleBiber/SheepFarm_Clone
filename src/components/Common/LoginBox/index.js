@@ -20,6 +20,7 @@ export default function LoginBox({ type }) {
 
   useEffect(() => {
     chkUserAgent();
+    console.log(window.location.href.split("/").reverse()[0]);
   }, []);
 
   return (
@@ -53,11 +54,15 @@ export default function LoginBox({ type }) {
           type={type}
           className="wallet-button"
           color="black"
-          bgcolor="#F7D621"
+          bgcolor={
+            window.location.href.split("/").reverse()[0] === "luckybox"
+              ? "#F7D621"
+              : "#FAE64D"
+          }
           border="#F6BA21"
           onClick={() => setModal(!modal)}
         >
-          <img src="/Header/klip.svg" />
+          <img src="/Header/klip.svg" alt="" />
           <span>Connect with Kilp</span>
         </WalletButton>
       </div>
