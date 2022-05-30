@@ -12,12 +12,14 @@ export default function Search({ onClickLandSearch }) {
     }
 
     if (e.key === "Enter") {
+      e.preventDefault();
       onClickLandSearch(targetID);
       searchInput.current.blur();
     }
   };
 
-  const onClickSearch = () => {
+  const onClickSearch = (e) => {
+    e.preventDefault();
     onClickLandSearch(targetID);
     searchInput.current.blur();
   };
