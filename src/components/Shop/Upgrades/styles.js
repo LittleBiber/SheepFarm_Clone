@@ -237,6 +237,10 @@ export const Main = styled.div`
       width: 358px;
     }
 
+    @media (max-width: 720px) {
+      width: 100%;
+    }
+
     .upgrades-gage-bx {
       position: relative;
       text-align: center;
