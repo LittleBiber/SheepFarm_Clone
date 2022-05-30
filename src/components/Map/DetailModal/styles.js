@@ -8,6 +8,7 @@ export const Main = styled.div`
   top: 0;
   background-color: #000000b3;
   z-index: 9999;
+  overflow: scroll;
 
   @media (min-width: 757px) {
     overflow-y: scroll;
