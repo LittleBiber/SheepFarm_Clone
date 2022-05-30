@@ -23,12 +23,25 @@ export default function Item({ id, name, price, desc, desc_sub }) {
   };
 
   const handleUnit = (event) => {
-    console.log(typeof event.key);
-    if (Number(event.key) >= 0 && Number(event.key) <= 9) {
-      setUnit(Count.current.value * 10 + Number(event.key));
-      return true;
+    const value = event.target.value;
+    /*
+    1. 0~9 사이 숫자만 입력 가능
+    2. 음수는 안됨
+    3. 백스페이스로 삭제가 가능해야 함.
+
+    !대체 e는 왜 들어가는거지... 큰 수 표현 때문인듯
+    */
+
+    console.log(value, typeof value);
+    let result = "";
+    if (value[0] !== "0") result += value[0];
+    for (let i = 1; i < value.length; i++) {
+      if (!Number.isNaN(Number(value[i]))) result += value[i];
     }
-    return false;
+
+    if (Number.isNaN(Number(result))) result = 0;
+
+    setUnit(result);
   };
 
   const plus_minus = (value) => {
@@ -61,9 +74,9 @@ export default function Item({ id, name, price, desc, desc_sub }) {
             <input
               type="number"
               value={unit}
-              onKeyPress={handleUnit}
+              pattern="\d*"
               ref={Count}
-              onChange={(e) => setUnit(e.target.value)}
+              onChange={handleUnit}
             />
             <button className="plus-btn" onClick={() => plus_minus(unit + 1)}>
               +
