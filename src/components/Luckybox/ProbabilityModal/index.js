@@ -9,21 +9,29 @@ export default function ProbabilityModal({ modal, killModal, height }) {
     e.stopPropagation();
     if (e.target.className === "page-container") {
       killModal();
-
-      const body = document.getElementsByTagName("body")[0];
-      body.style.top = "unset"; // 원래 스크롤양을 전달받아서 실행해야 할듯?
-      body.style.position = "unset";
-      body.style["overflow-y"] = "unset";
-      window.scrollTo(0, height);
+      resetScroll();
     }
   };
 
+  const resetScroll = () => {
+    const body = document.getElementsByTagName("body")[0];
+    body.style.top = "unset"; // 원래 스크롤양을 전달받아서 실행해야 할듯?
+    body.style.position = "unset";
+    body.style["overflow-y"] = "unset";
+    window.scrollTo(0, height);
+  };
+
+  const closeButton = () => {
+    killModal();
+    resetScroll();
+  };
+
   return (
-    <Main modal={modal} onClick={OuterClick} onTouch={OuterClick}>
+    <Main modal={modal} onClick={OuterClick}>
       <div className="page-container">
         <div className="panel">
           <div className="panel-bg">
-            <div className="close-btn" onClick={killModal} />
+            <div className="close-btn" onClick={closeButton} />
             <img src="/Luckybox/bg-probability.png" />
           </div>
           <div className="panel-contents">
@@ -124,7 +132,7 @@ export default function ProbabilityModal({ modal, killModal, height }) {
           </div>
         </div>
       </div>
-      <div class="dimmed-bg" onClick={() => alert("!")} />
+      <div className="dimmed-bg" onClick={() => alert("!")} />
     </Main>
   );
 }
