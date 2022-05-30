@@ -24,7 +24,8 @@ export const Main = styled.div`
 
   @media (max-width: 757px) {
     width: calc(100% - 20px);
-    top: calc(100% - 35%);
+    // top: calc(100% - 35%);
+    height: calc(35% - 30px);
   }
 
   .spot-list-heading {
@@ -45,7 +46,8 @@ export const Main = styled.div`
   }
 
   #pastures-list {
-    height: calc(100% - 30px);
+    // height: calc(100% - 30px);
+    height: calc(96% - 20px);
     overflow-y: scroll;
 
     .selected {
