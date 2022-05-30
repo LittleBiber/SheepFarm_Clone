@@ -9,6 +9,7 @@ export const Main = styled.div`
   background-color: #000000b3;
   z-index: 9999;
   overflow: scroll;
+  user-select: none;
 
   @media (min-width: 757px) {
     overflow-y: scroll;

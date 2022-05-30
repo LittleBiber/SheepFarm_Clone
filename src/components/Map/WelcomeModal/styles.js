@@ -9,6 +9,8 @@ export const Main = styled.div`
   background-color: #000000b3;
   z-index: 9999;
   font-family: Noto Sans CJK KR !important;
+  overflow: scroll;
+  user-select: none;
 
   @media (max-width: 757px) {
     display: flex;
