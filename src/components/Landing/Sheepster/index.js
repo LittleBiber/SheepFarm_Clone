@@ -12,6 +12,7 @@ export default function Sheepster() {
             <a
               href="https://survey.typeform.com/to/Y04a4sh1"
               target="_blank"
+              rel="noopener noreferrer"
             ></a>
           </div>
         </div>

@@ -48,7 +48,7 @@ export default function Overview() {
         </div>
       </div>
       <div className="bg_pattern" />
-      <img className="bottom_img" src="Trailer/plant-bg-trailer.png" />
+      <img className="bottom_img" src="Trailer/plant-bg-trailer.png" alt="" />
     </Main>
   );
 }

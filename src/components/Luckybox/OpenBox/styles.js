@@ -11,6 +11,7 @@ export const Main = styled.div`
 
   .loginbox_warpper {
     margin-top: 10px;
+    width: 100%;
   }
 
   #noitem {

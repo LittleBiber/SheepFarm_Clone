@@ -94,9 +94,3 @@ export default function Filter({ selected, setSelected, world, setWorld }) {
     </Main>
   );
 }
-
-/*
-따라 만들어보다 발견한 새로운 태그 [ dl, dt, dd ]
-- <dl> 태그는 용어(term)와 그에 대한 설명(description)을 리스트 형식으로 정의할 때 사용합니다.
-- <dl> 요소는 용어(term)나 이름(name)을 나타내는 <dt> 요소와 해당 용어에 대한 설명을 나타내는 <dd> 요소로 구성됩니다.
-*/

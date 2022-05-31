@@ -9,7 +9,7 @@ export default function Partners() {
         <PartnersTitle color="#FFF8E2">PARTNERS</PartnersTitle>
         <div className="partners_wrapper">
           {IMAGE_LINK.map((one, idx) => (
-            <img className="partner-img" src={one} alt="image" key={idx} />
+            <img className="partner-img" src={one} alt="partner" key={idx} />
           ))}
         </div>
       </div>

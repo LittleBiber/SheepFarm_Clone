@@ -33,8 +33,6 @@ export default function Search({ onClickLandSearch }) {
     let result = "";
     if (value[0] !== "0") result += value[0];
 
-    console.log(event);
-
     for (let i = 1; i < value.length; i++) {
       if (!Number.isNaN(Number(value[i]))) result += value[i];
     }

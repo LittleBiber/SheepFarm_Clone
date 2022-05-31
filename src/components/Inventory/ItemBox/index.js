@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ItemList, ProductList, SelectAll } from "./styles";
 
-export default function ItemBox({ selected, world }) {
+export default function ItemBox({ world }) {
   const [checkall, setCheckAll] = useState(false);
 
   return (

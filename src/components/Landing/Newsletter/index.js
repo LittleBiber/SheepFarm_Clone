@@ -27,23 +27,39 @@ export default function Newsletter() {
           <div className="desc">Join our community to stay informed!</div>
           <div className="links">
             <span>
-              <a href="https://discord.gg/sheepfarm" target="_blank">
+              <a
+                href="https://discord.gg/sheepfarm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src="/Newsletter/discord.svg" alt="discord" />
               </a>
             </span>
             <span>
-              <a href="https://twitter.com/SheepFarmMeta" target="_blank">
-                <img src="/Newsletter/twitter.svg" />
+              <a
+                href="https://twitter.com/SheepFarmMeta"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src="/Newsletter/twitter.svg" alt="news_twitter" />
               </a>
             </span>
             <span>
-              <a href="https://t.me/sheepmeta" target="_blank">
-                <img src="/Newsletter/telegram.svg" />
+              <a
+                href="https://t.me/sheepmeta"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src="/Newsletter/telegram.svg" alt="news_telegram" />
               </a>
             </span>
             <span>
-              <a href="https://sheepfarm.medium.com/" target="_blank">
-                <img src="/Newsletter/medium.png" />
+              <a
+                href="https://sheepfarm.medium.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src="/Newsletter/medium.png" alt="news_medium" />
               </a>
             </span>
           </div>

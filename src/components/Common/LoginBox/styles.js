@@ -47,6 +47,10 @@ const BOX_VALUES = {
       flex-direction: column;
       width: 100%;
     }
+
+    @media (max-width: 720px) {
+      padding: 0 25px;
+    }
   `,
 };
 

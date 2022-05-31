@@ -65,11 +65,15 @@ export default function MobileHeader({ bgcolor }) {
   return (
     <>
       <MobileMenuBar open={open} bgcolor={bgcolor}>
-        <a className="button-top shared" onClick={copyLink} />
+        <div className="button-top shared" onClick={copyLink} />
         <a href="/">
-          <img className="logo" src="/MobileHeader/sheepfarm_logo_top.png" />
+          <img
+            className="logo"
+            src="/MobileHeader/sheepfarm_logo_top.png"
+            alt=""
+          />
         </a>
-        <a className="button-top menu" onClick={handleOpen} />
+        <div className="button-top menu" onClick={handleOpen} />
       </MobileMenuBar>
 
       <MobileMenu open={open}>
@@ -88,7 +92,7 @@ export default function MobileHeader({ bgcolor }) {
           </Link>
           <Link href="https://guide.sheepfarm.io/guide/">GUIDEBOOK</Link>
           <span className="wallet" onClick={handleLoginModal}>
-            <img src="/MobileHeader/ic_wallet_main_m.svg" />
+            <img src="/MobileHeader/ic_wallet_main_m.svg" alt="" />
             <span>Connect Wallet</span>
           </span>
         </div>
@@ -112,7 +116,7 @@ export default function MobileHeader({ bgcolor }) {
                       )
               }
             >
-              <img src="/MobileHeader/metamask.webp" />
+              <img src="/MobileHeader/metamask.webp" alt="" />
               <span>
                 {loginType === "metamask"
                   ? curUserID()
@@ -124,7 +128,7 @@ export default function MobileHeader({ bgcolor }) {
               id="klip-btn"
               onClick={loginType === "klip" ? signOut : () => setModal(!modal)}
             >
-              <img src="/MobileHeader/klip.svg" />
+              <img src="/MobileHeader/klip.svg" alt="" />
               <span>
                 {loginType === "klip" ? curUserID() : "Connect with Kilp"}
               </span>
@@ -140,14 +144,3 @@ export default function MobileHeader({ bgcolor }) {
     </>
   );
 }
-
-/*
-- 모바일 버전이라 햄버거 메뉴 들어감
-- 이전 클론코딩에서 제대로 못 따라했던 부분이므로 이번에 만들어보면서 구조를 익혀야 할듯
-
-- 로그인 파트
-  - 여전히 Metamask는 아무것도 없음
-  - 카이카스는 아예 존재하지도 않음(주석처리로 비활성화됨)
-  - Klip 연결은 가능 / 연결하면 PC처럼 지갑주소를 ㅁㅁㅁㅁㅁ...ㅁㅁㅁㅁ 형식으로 보여줌
-  - Disconnect는 항상 보임
-*/

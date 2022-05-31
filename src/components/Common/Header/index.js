@@ -4,7 +4,6 @@ import LoginBox from "../../Common/LoginBox";
 
 export default function Header({ bgcolor }) {
   const [boxOpen, setBoxOpen] = useState(false);
-
   const [loginType, setLoginType] = useState(null);
   const [userID, setUserID] = useState(null);
 
@@ -25,7 +24,6 @@ export default function Header({ bgcolor }) {
     const now = window.location.href.split("/").reverse()[0];
     return Boolean(now);
   };
-
   useEffect(() => {
     const value = JSON.parse(window.localStorage.getItem("userID"));
 
@@ -40,7 +38,7 @@ export default function Header({ bgcolor }) {
       <div className="menu">
         <div className="menu_box">
           <a href="/">
-            <img className="logo" src="/Header/sheepfarm_logo_top.png" />
+            <img className="logo" src="/Header/sheepfarm_logo_top.png" alt="" />
           </a>
           <div className="options">
             <Link value="map" href="/map">
@@ -125,12 +123,3 @@ export default function Header({ bgcolor }) {
     </Main>
   );
 }
-
-/*
-- 지갑 연결 시도
-  > 클립 제외하고 전부 오류남(???대체 왜지)
-  > 클립은 클릭하면 모달로 QR을 보여줌
-    로그인되면 연결 버튼의 지갑 이미지는 클립 이미지로, 문자열은 지갑주소로 변경
-    호버 시 클립 이미지가 X로 바뀜
-    버튼 클릭 시 로그아웃됨
-*/

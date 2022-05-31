@@ -35,7 +35,7 @@ export default function LoginBox({ type }) {
             window.open("metamast_login", "_blank", "width=363, height=623")
           }
         >
-          <img src="/Header/metamask.webp" />
+          <img src="/Header/metamask.webp" alt="" />
           <span>Connect Metamask Wallet</span>
         </WalletButton>
         {userAgent === "pc" && (
@@ -46,7 +46,7 @@ export default function LoginBox({ type }) {
             border="#38332A"
             onClick={() => alert("Not Ready")}
           >
-            <img src="/Header/kaikas.svg" />
+            <img src="/Header/kaikas.svg" alt="" />
             <span>Connect KAIKAS Wallet</span>
           </WalletButton>
         )}
@@ -70,10 +70,3 @@ export default function LoginBox({ type }) {
     </Main>
   );
 }
-
-/*
-??? 내가 잘못 봤던가 왜 디자인이 달라진거같지...
-
-타입은 3가지가 있음 normal / big / nobackground
-props로 받아서 사이즈 할당하면 될듯
-*/

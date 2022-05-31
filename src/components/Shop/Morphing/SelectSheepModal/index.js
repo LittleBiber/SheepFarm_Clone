@@ -51,16 +51,9 @@ export default function SelectSheepModal({ modal, setModal }) {
             </div>
 
             <div className="comp-select-list hidden">
-              <a
-                className="select-list__btn select-list__btn--left"
-                tabIndex="0"
-                role="button"
-                aria-label="Previous slide"
-                aria-controls="swiper-wrapper-eb60b0262adbcd2d"
-                aria-disabled="false"
-              >
+              <div className="select-list__btn select-list__btn--left">
                 <img src="/Morphing/btn_left_arrow.png" alt="" />
-              </a>
+              </div>
               <div className="swiper-bx">
                 <div id="loading" className="display-none"></div>
                 <div className="select-list swiper comp-select__list-swiper swiper-initialized swiper-horizontal swiper-pointer-events">
@@ -80,16 +73,16 @@ export default function SelectSheepModal({ modal, setModal }) {
                 <div className="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"></div>
               </div>
 
-              <a
+              <div
                 className="select-list__btn select-list__btn--right"
-                tabIndex="0"
-                role="button"
-                aria-label="Next slide"
-                aria-controls="swiper-wrapper-eb60b0262adbcd2d"
-                aria-disabled="false"
+                // tabIndex="0"
+                // role="button"
+                // aria-label="Next slide"
+                // aria-controls="swiper-wrapper-eb60b0262adbcd2d"
+                // aria-disabled="false"
               >
                 <img src="img/shop/btn_right_arrow.png" alt="" />
-              </a>
+              </div>
             </div>
 
             {/* 사용가능한 Sheep 이 없을때 보여줘야 함, className='on' 으로 구분 */}
@@ -154,7 +147,6 @@ export default function SelectSheepModal({ modal, setModal }) {
         </div>
         <div className="dimmed-bg" onClick={killModal} />
       </div>
-      {/* </div> */}
     </Main>
   );
 }

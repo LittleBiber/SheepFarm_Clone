@@ -28,11 +28,11 @@ export default function SelectUpgradeItem({ modal, setModal }) {
             <div className="comp-select-list hidden">
               <a
                 className="select-list__btn select-list__btn--left"
-                tabIndex="0"
-                role="button"
-                aria-label="Previous slide"
-                aria-controls="swiper-wrapper-eb60b0262adbcd2d"
-                aria-disabled="false"
+                // tabIndex="0"
+                // role="button"
+                // aria-label="Previous slide"
+                // aria-controls="swiper-wrapper-eb60b0262adbcd2d"
+                // aria-disabled="false"
               >
                 <img src="/Morphing/btn_left_arrow.png" alt="" />
               </a>
@@ -56,12 +56,12 @@ export default function SelectUpgradeItem({ modal, setModal }) {
               </div>
 
               <a
-                className="select-list__btn select-list__btn--right"
-                tabIndex="0"
-                role="button"
-                aria-label="Next slide"
-                aria-controls="swiper-wrapper-eb60b0262adbcd2d"
-                aria-disabled="false"
+              // className="select-list__btn select-list__btn--right"
+              // tabIndex="0"
+              // role="button"
+              // aria-label="Next slide"
+              // aria-controls="swiper-wrapper-eb60b0262adbcd2d"
+              // aria-disabled="false"
               >
                 <img src="img/shop/btn_right_arrow.png" alt="" />
               </a>

@@ -15,6 +15,8 @@ export const Main = styled.div`
 
   overflow: hidden;
 
+  user-select: none;
+
   @media (max-width: 1000px) {
     padding: 50px 0 40px 0;
   }

@@ -8,7 +8,7 @@ export default function Overview() {
       <div className="page-container">
         <div className="row align-items-center mobile-flex-vertical">
           <div className="col-lg-6">
-            <img className="overview-img" src="/Overview/ss3t.png" />
+            <img className="overview-img" src="/Overview/ss3t.png" alt="bg" />
           </div>
           <div className="contents col-lg-6">
             <div className="pin_wrapper">
@@ -29,12 +29,13 @@ export default function Overview() {
                 <br />
                 <div className="mobile-banner">
                   <a className="icon-pasture" href="/map">
-                    <img src="/Overview/icon-pasture.svg" />
+                    <img src="/Overview/icon-pasture.svg" alt="overview_bg" />
                     <span>GET YOUR PASTURE</span>
                   </a>
                   <img
                     onClick={() => alert("Coming Soon!")}
                     src="/Overview/available_web.png"
+                    alt="coming_soon"
                   />
                 </div>
               </div>

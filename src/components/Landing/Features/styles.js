@@ -13,6 +13,8 @@ export const Main = styled.div`
 
   overflow: hidden;
 
+  user-select: none;
+
   @media (max-width: 1000px) {
     position: relative;
   }

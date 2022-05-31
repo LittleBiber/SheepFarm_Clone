@@ -14,7 +14,3 @@ export default function Treats() {
     </Main>
   );
 }
-
-/*
-
-*/
