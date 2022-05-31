@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Pin } from "../../../styles/index";
-import ImageBox from "../../Common/ImageBox";
-import CardSlider from "../../Common/CardSlider";
-import { Main, MAR_Title } from "./styles";
+import { ImageBox, CardSlider } from "../../Common";
+import { Main, TokenTitle } from "./styles";
 import { DATA_LIST } from "./dummy";
 
 export default function NFTMarket() {
   const [now, setNow] = useState(0);
-
   const [startOffset, setStartOffest] = useState(null);
+
   const handleDragStart = (event) => {
     if (event.type === "touchstart") {
       setStartOffest(event.changedTouches[0].screenX);
@@ -34,16 +33,24 @@ export default function NFTMarket() {
     }
   };
 
+  const options = {
+    count: 3,
+    active_color: "#77AACF",
+    color: "#FFF8E2",
+    now,
+    update: setNow,
+  };
+
   return (
     <Main offset={-150 + now * -440}>
       <div className="page-container">
         <div className="mar_top">
-          <img src="/Token_Nft/logo-nft.png" />
+          <img src="/Token_Nft/logo-nft.png" alt="logo" />
           <div className="mar_text">
             <div className="pin_wrapper">
               <Pin>TOKEN/NFT</Pin>
             </div>
-            <MAR_Title color="#FFF8E2">NFT MARKET</MAR_Title>
+            <TokenTitle color="#FFF8E2">NFT MARKET</TokenTitle>
             <div className="mar_desc">
               You can easily trade game items with other users either within our
               local NFT marketplace or 3rd party marketplaces such as OpenSea,
@@ -60,17 +67,11 @@ export default function NFTMarket() {
             onTouchEnd={handleDragEnd}
           >
             {DATA_LIST.map((one, idx) => (
-              <ImageBox {...one} key={idx} />
+              <ImageBox options={one} key={idx} />
             ))}
           </div>
         </div>
-        <CardSlider
-          count={3}
-          active_color="#77AACF"
-          color="#FFF8E2"
-          now={now}
-          update={setNow}
-        />
+        <CardSlider options={options} />
       </div>
     </Main>
   );

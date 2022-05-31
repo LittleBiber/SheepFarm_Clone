@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Pin } from "../../../styles/index";
-import ImageBox from "../../Common/ImageBox";
-import CardSlider from "../../Common/CardSlider";
-import { Main, MAR_Title } from "./styles";
+import { Pin } from "../../../styles";
+import { ImageBox, CardSlider } from "../../Common";
+import { Main, TokenTitle } from "./styles";
 import { DATA_LIST } from "./dummy";
 
 export default function Nightingale() {
@@ -34,16 +33,25 @@ export default function Nightingale() {
     }
   };
 
+  const options = {
+    top: -30,
+    count: 3,
+    active_color: "#3E2A18",
+    color: "#EADEB9",
+    now,
+    update: setNow,
+  };
+
   return (
     <Main offset={-150 + now * -440}>
       <div className="page-container">
         <div className="mar_top">
-          <img src="/Token_Nft/ngit.png" />
+          <img src="/Token_Nft/ngit.png" alt="logo" />
           <div className="mar_text">
             <div className="pin_wrapper">
               <Pin>TOKEN/NFT</Pin>
             </div>
-            <MAR_Title color="#FFF8E2">NIGHTINGALE TOKEN</MAR_Title>
+            <TokenTitle color="#FFF8E2">NIGHTINGALE TOKEN</TokenTitle>
             <div className="mar_desc">
               NGIT is the governance token of meta-land. The token represents
               voting power in UCC polling and DAO gaming. NGIT has a fixed
@@ -60,18 +68,11 @@ export default function Nightingale() {
             onTouchEnd={handleDragEnd}
           >
             {DATA_LIST.map((one, idx) => (
-              <ImageBox {...one} key={idx} />
+              <ImageBox options={one} key={idx} />
             ))}
           </div>
         </div>
-        <CardSlider
-          top={-30}
-          count={3}
-          active_color="#3E2A18"
-          color="#EADEB9"
-          now={now}
-          update={setNow}
-        />
+        <CardSlider options={options} />
       </div>
     </Main>
   );

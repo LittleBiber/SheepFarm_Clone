@@ -1,23 +1,17 @@
 import React from "react";
 import { Main } from "./styles";
 
-export default function CardSlider({
-  top,
-  active_color,
-  color,
-  count,
-  now,
-  update,
-}) {
+export default function CardSlider({ options }) {
+  const { count, now, update } = options;
+
   const handleButton = (value) => {
     if (now === 0 && value === -1) return;
-
-    if (now === count - 1 && value === 1) return;
+    else if (now === count - 1 && value === 1) return;
     else return update(now + value);
   };
 
   return (
-    <Main color={color} active_color={active_color} top={top}>
+    <Main {...options}>
       <div
         className={["left-side", now !== 0 && "side-active"].join(" ")}
         onClick={() => handleButton(-1)}

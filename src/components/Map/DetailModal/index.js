@@ -34,13 +34,13 @@ export default function DetailModal({
             <div className="contents">
               <div className="properties">
                 <span className="property">
-                  <img src="/DetailModal/size.png" />
+                  <img src="/DetailModal/size.png" alt="size" />
                   <span id="farm-detail-size" ref={detailSize}>
                     5X5
                   </span>
                 </span>
                 <span className="property">
-                  <img src="/DetailModal/sheep.png" />
+                  <img src="/DetailModal/sheep.png" alt="sheep" />
                   <span id="farm-detail-sheeps" ref={detailSheepLimit}>
                     3
                   </span>
@@ -68,7 +68,7 @@ export default function DetailModal({
                 </p>
               </div>
               <div className="charcter-area">
-                <img src="/DetailModal/kelly.png" />
+                <img src="/DetailModal/kelly.png" alt="char" />
               </div>
             </div>
             <div className="preview" ref={detailPurchaseButton}>

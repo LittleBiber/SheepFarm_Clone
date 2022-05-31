@@ -8,7 +8,7 @@ export default function Inventory() {
   const [world, setWorld] = useState(0);
 
   useEffect(() => {
-    if (world) setWorld(0); //  카테고리 변경 시 World 초기화
+    if (world) setWorld(0);
   }, [selected]);
   return (
     <>

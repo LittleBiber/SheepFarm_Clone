@@ -1,29 +1,13 @@
 import React from "react";
 import { Main } from "./styles";
 
-export default function ImageBox({
-  imgborder = "#6f5246",
-  boxborder = "#ecc66a",
-  background = "#ffec9e",
-  shadow = "#e8dcb5",
-  color = "#6f5246",
-  image = "/Token_Nft/harvest.png",
-  title = "Title",
-  desc = "Description",
-}) {
+export default function ImageBox({ options }) {
   return (
-    <Main
-      imgborder={imgborder}
-      boxborder={boxborder}
-      background={background}
-      shadow={shadow}
-      color={color}
-      image={image}
-    >
-      <img src={image} alt="" />
+    <Main {...options}>
+      <img src={options.image} alt="" />
       <div className="ibox_desc">
-        <div className="ibox_title">{title}</div>
-        <div className="token-desc">{desc}</div>
+        <div className="ibox_title">{options.title}</div>
+        <div className="token-desc">{options.desc}</div>
       </div>
     </Main>
   );

@@ -10,10 +10,8 @@ export const Main = styled.div`
     left: 0;
     margin: auto;
     width: 100%;
-    height: var(--measure-height, calc(100vh - 1px));
+    height: calc(100vh - 1px);
     background-color: rgba(255, 248, 226, 0.7);
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,8 +64,6 @@ export const Main = styled.div`
         left: 0;
         width: 100%;
         height: 90%;
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -92,8 +88,6 @@ export const Main = styled.div`
         }
 
         .table-wrapper {
-          display: -webkit-box;
-          display: -ms-flexbox;
           display: flex;
           justify-content: center;
           width: calc(100% - 70px);
@@ -205,11 +199,11 @@ export const Main = styled.div`
   }
 
   .table-wrapper::-webkit-scrollbar {
-    width: 8px; /* 스크롤바의 너비 */
+    width: 8px;
   }
 
   .table-wrapper::-webkit-scrollbar-thumb {
-    background: #75594e; /* 스크롤바의 색상 */
+    background: #75594e;
 
     border-radius: 10px;
   }

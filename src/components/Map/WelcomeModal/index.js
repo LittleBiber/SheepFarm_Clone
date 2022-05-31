@@ -7,7 +7,7 @@ export default function WelcomeModal({ handleModal, modal }) {
     <Main ref={modal}>
       <div id="welcome-modal">
         <div className="left-area">
-          <img className="kelly" src="/WelcomeModal/kelly.png" />
+          <img className="kelly" src="/WelcomeModal/kelly.png" alt="char" />
         </div>
         <div className="welcome-text-area">
           <p>

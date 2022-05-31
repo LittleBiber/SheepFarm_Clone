@@ -6,6 +6,7 @@ import { BOX_LIST, MODAL_DATA } from "./dummy";
 
 export default function ItemList() {
   const [modal, setModal] = useState(false);
+
   const killModal = () => {
     setModal(false);
   };
@@ -27,7 +28,7 @@ export default function ItemList() {
     <Main modal={modal}>
       {BOX_LIST.map((one, idx) => (
         <ItemBox
-          {...one}
+          options={one}
           setModal={setModal}
           key={idx}
           handleScroll={handleScroll}
@@ -43,7 +44,3 @@ export default function ItemList() {
     </Main>
   );
 }
-
-/*
-처음 보는 태그 grid-template-columns
-*/

@@ -41,7 +41,7 @@ export const Main = styled.div`
   .item-description-bx {
     padding-top: 28px;
 
-    margin-top: 0; // dl 기본 마진이 있는건가?
+    margin-top: 0;
     margin-bottom: 1rem;
 
     .item-name {
@@ -63,7 +63,7 @@ export const Main = styled.div`
       line-height: 36px;
       letter-spacing: -0.015em;
 
-      margin-left: 0; // dd 기본으로 margin-left가 주어지는듯
+      margin-left: 0;
     }
 
     .item-description {
@@ -91,7 +91,6 @@ export const Main = styled.div`
   }
 
   .item-control {
-    // padding: 0 1.38889vw; // 미디어 쿼리 (max-width: 1440px)가 걸려있음
     padding: 0 20px;
 
     .comp-count-bx {
@@ -115,7 +114,6 @@ export const Main = styled.div`
           line-height: 36px;
           letter-spacing: -0.015em;
 
-          // 이 2가지는 버튼 기본값으로 들어가있는듯
           border: none;
           outline: none;
 
@@ -136,13 +134,6 @@ export const Main = styled.div`
       }
 
       .total-price {
-        // margin-top: 22px;
-        // display: flex;
-        // justify-content: space-between;
-        // align-items: center;
-        // margin-bottom: 1rem;
-        // font-size: 20px;
-
         margin-top: 22px;
         display: flex;
         justify-content: space-between;
@@ -157,16 +148,6 @@ export const Main = styled.div`
         }
 
         dd {
-          // font-size: 1.66667vw;
-          // line-height: 1.66667vw;
-
-          // flex-shrink: 0;
-          // margin: 0;
-          // color: #ff7f22;
-
-          // font-weight: 700;
-          // letter-spacing: -0.015em;
-
           flex-shrink: 0;
           margin: 0;
           color: #ff7f22;

@@ -13,7 +13,7 @@ export const ItemList = styled.div`
 
   dl {
     text-align: center;
-    width: 860px; // 왜 이거 내쪽에서만 오류 나지?
+    width: 860px;
 
     @media (max-width: 1000px) {
       width: 100%;

@@ -43,7 +43,6 @@ export const Main = styled.div`
   }
 
   .row {
-    // 이 부분이 제일 중요
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     display: flex;
@@ -176,8 +175,6 @@ export const Main = styled.div`
   }
 
   .col-lg-6 {
-    // height: 580px; // 박스 전체가 흔들거려서 임시로 넣은 값
-
     @media (min-width: 992px) {
       flex: 0 0 auto;
       width: 50%;
@@ -186,21 +183,11 @@ export const Main = styled.div`
     .overview-img {
       position: relative;
       left: -80px;
-
-      // -webkit-transform: translateY(0);
-      // transform: translateY(0);
-      // -webkit-animation: float 7s infinite;
-      // animation: float 7s infinite;
-      // -webkit-animation-timing-function: ease-in-out;
-      // animation-timing-function: ease-in-out;
-      // -webkit-filter: drop-shadow(24px 24px 15px rgba(68, 89, 46, 0.76));
-
       filter: drop-shadow(24px 24px 15px rgba(68, 89, 46, 0.76));
 
       animation: float ease-in-out 2s infinite alternate;
       @keyframes float {
         0% {
-          // 유레카!
           top: 0px;
         }
 

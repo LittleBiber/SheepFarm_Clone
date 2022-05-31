@@ -28,7 +28,7 @@ export const Main = styled.div`
 
   .ibox_desc {
     background-color: ${({ background }) => background};
-    border: 5px solid; // 오늘 안 사실: 둘을 분리할거면 border를 먼저 지정하고 색상 지정을 해줘야 함
+    border: 5px solid;
     border-color: ${({ boxborder }) => boxborder};
     box-shadow: 0px 22px 20px ${({ shadow }) => shadow};
 

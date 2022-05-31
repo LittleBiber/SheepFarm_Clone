@@ -14,7 +14,7 @@ export default function Faq() {
         <QuestionTitle>STILL DON'T UNDERSTAND?</QuestionTitle>
         <ul className="question_list">
           {DATA_LIST.map((one, idx) => (
-            <Question {...one} idx={idx + 1} key={idx} />
+            <Question options={one} idx={idx + 1} key={idx} />
           ))}
         </ul>
       </div>
@@ -23,9 +23,3 @@ export default function Faq() {
     </Main>
   );
 }
-
-/*
-이틀짜리 고민 해결: 요소를 문장 안에 넣어줄거면 그냥 배열로 주면 된다;
-
-position: absolute로 고정한 이미지의 위치를 div안에서 조정하려면 relative로 잡아야 "상대적" 위치 조정이 가능
-*/

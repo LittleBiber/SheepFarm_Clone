@@ -59,7 +59,6 @@ export const Main = styled.div`
           color: #fff8e2;
           font-size: 20px;
           font-weight: 500;
-          // letter-spacing: 0.5px;
 
           @media (max-width: 580px) {
             font-size: 14px !important;
@@ -108,7 +107,7 @@ export const Main = styled.div`
   }
 `;
 
-export const MAR_Title = styled(Title)`
+export const TokenTitle = styled(Title)`
   margin-bottom: 20px;
   font-weight: bold;
 

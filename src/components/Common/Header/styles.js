@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-  background-color: ${({ bgcolor }) => bgcolor} !important; // 페이지별 배경색
+  background-color: ${({ bgcolor }) => bgcolor} !important;
   width: 100%;
   position: absolute;
   z-index: 10;
@@ -15,10 +15,6 @@ export const Main = styled.div`
   .login_off {
     visibility: hidden !important;
     opacity: 0 !important;
-
-    // z-index: 0 !important;
-    // height: 0 !important;
-    // pointer-events: none;
   }
 
   .menu {
@@ -107,13 +103,6 @@ export const Main = styled.div`
           width: 24px;
           vertical-align: middle;
         }
-
-        // .wallet-kaikas,
-        // .wallet-klip,
-        // .wallet-matamask,
-        // .wallet-signout {
-        //   // margin-right: 9px;
-        // }
 
         img {
           vertical-align: center;

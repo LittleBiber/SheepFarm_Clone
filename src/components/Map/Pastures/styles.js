@@ -25,7 +25,6 @@ export const Main = styled.div`
 
   @media (max-width: 757px) {
     width: calc(100% - 20px);
-    // top: calc(100% - 35%);
     height: calc(35% - 30px);
     position: fixed;
   }
@@ -39,7 +38,6 @@ export const Main = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 1.2rem;
-    // span에는 따로 적용되는 속성 없었음
 
     span {
       font-family: Noto Sans CJK KR !important;
@@ -49,7 +47,6 @@ export const Main = styled.div`
 
   #pastures-list {
     height: calc(100% - 30px);
-    // height: calc(96% - 20px);
     overflow-y: scroll;
 
     .selected {

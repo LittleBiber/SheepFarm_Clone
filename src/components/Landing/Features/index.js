@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
-import Box from "../../Common/Box";
+import React, { useState } from "react";
+import { Box, CardSlider } from "../../Common";
 import { Pin } from "../../../styles";
-import CardSlider from "../../Common/CardSlider";
 import { Main } from "./styles";
 import { DATA_LIST } from "./dummy";
 
@@ -34,6 +33,15 @@ export default function Features() {
     }
   };
 
+  const options = {
+    top: -90,
+    active_color: "#75594E",
+    color: "#EADEB9",
+    count: 4,
+    now: idx,
+    update: setIdx,
+  };
+
   return (
     <Main offset={idx * -455}>
       <div className="page-container">
@@ -51,19 +59,12 @@ export default function Features() {
             onTouchEnd={handleDragEnd}
           >
             {DATA_LIST.map((e, idx) => (
-              <Box {...e} key={idx} offset={idx * -404} />
+              <Box options={e} key={idx} offset={idx * -404} />
             ))}
           </div>
         </div>
 
-        <CardSlider
-          top={-90}
-          active_color="#75594E"
-          color="#EADEB9"
-          count={4}
-          now={idx}
-          update={setIdx}
-        />
+        <CardSlider options={options} />
       </div>
       <img
         className="bg-char"
@@ -73,29 +74,3 @@ export default function Features() {
     </Main>
   );
 }
-
-/*
-일반웹
-  - 제목
-  - 설명
-  - 카드 4개
-
-모바일
-  - 카드가 오른쪽으로 넓게 퍼짐
-  - 아래쪽 버튼으로 이동
-*/
-
-/*
-background border = color
-*/
-
-// 필요한 것 : 클릭하는 버튼 값에 따라서 카드 메뉴가 이동해야 함
-
-// 레퍼런스의 해결방법 : onClick함수 인자로 인덱스를 전달 > offset값에 곱해 사용
-
-// 나에게 필요한 것:
-// 	1. 동적으로 변하는 offset을 저장할 useState
-// 	2. onClick을 처리해 줄 함수
-
-// --------------------------------------------------------------
-// 필요한 것 : 클릭하면 색상이 변경되는 div

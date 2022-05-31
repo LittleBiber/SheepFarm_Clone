@@ -1,20 +1,12 @@
 import React from "react";
 import { Main } from "./styles";
 
-export default function Box({
-  title,
-  desc,
-  img,
-  bgcolor,
-  border,
-  color,
-  offset,
-}) {
+export default function Box({ options }) {
   return (
-    <Main bgcolor={bgcolor} color={color} border={border} offset={offset}>
-      <img src={img} alt="land" />
-      <div className="box_title">{title}</div>
-      <div className="box_desc">{desc}</div>
+    <Main {...options}>
+      <img src={options.img} alt="land" />
+      <div className="box_title">{options.title}</div>
+      <div className="box_desc">{options.desc}</div>
     </Main>
   );
 }

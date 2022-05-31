@@ -18,7 +18,3 @@ export default function Selector({ select, setSelect }) {
     </Main>
   );
 }
-
-/*
-a태그 href로 주소를 바꿔서 보여주는데 State로 새로고침 없이 변경하는 편이 좋지 않을까?
-*/

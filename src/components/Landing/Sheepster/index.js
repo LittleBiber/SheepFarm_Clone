@@ -13,7 +13,9 @@ export default function Sheepster() {
               href="https://survey.typeform.com/to/Y04a4sh1"
               target="_blank"
               rel="noopener noreferrer"
-            ></a>
+            >
+              {""}
+            </a>
           </div>
         </div>
       </div>

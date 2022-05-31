@@ -59,7 +59,6 @@ export const Main = styled.div`
     display: flex;
     flex-flow: column;
     flex: 1 1 auto;
-    // height: 0; //왜????
 
     .account-info {
       display: flex;
@@ -86,7 +85,6 @@ export const Main = styled.div`
           font-style: normal;
           font-weight: normal;
           height: 22px;
-          background-color: var(--color-background-default);
           width: 124px;
 
           .account-list-item {
@@ -174,8 +172,6 @@ export const Main = styled.div`
       font-weight: normal;
       display: flex;
       margin: 0 15px;
-
-      // justify-content: space-between;
 
       div: nth-child(1) {
         flex-grow: 1;

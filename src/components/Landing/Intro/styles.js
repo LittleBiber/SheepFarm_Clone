@@ -50,9 +50,7 @@ export const Main = styled.div`
     flex-direction: column;
     align-items: center;
     position: absolute;
-    // width: 610px;
     top: 75px;
-    // padding: 60px 0;
     text-align: center;
 
     @media (max-width: 1100px) {

@@ -43,8 +43,6 @@ export const MobileMenuBar = styled.div`
       else if (bgcolor !== "#543F36" && !open) return "hamburger.svg";
       else if (bgcolor === "#543F36" && open) return "icon-menu-close_sub.svg";
       else return "icon-menu-close_sub.svg";
-
-      // return open ? "icon-menu-close_sub.svg" : "hamburger.svg";
     }});
   }
 
@@ -61,7 +59,7 @@ export const MobileMenu = styled.div`
   top: 80px;
   left: 0;
   width: 100%;
-  height: var(--measure-height, calc(100vh - 80px));
+  height: calc(100vh - 80px);
   background-color: rgba(84, 63, 54, 0.9);
 
   .mobile-menu {
@@ -131,7 +129,6 @@ export const Link = styled.a`
   }
 
   -webkit-tap-highlight-color: transparent !important;
-  // 이런게 있네?
 `;
 
 export const MobileWallet = styled.div`

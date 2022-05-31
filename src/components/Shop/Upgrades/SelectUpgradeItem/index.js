@@ -4,10 +4,6 @@ import { Main } from "./styles";
 export default function SelectUpgradeItem({ modal, setModal }) {
   const [rarity, setRarity] = useState("rare");
 
-  // const handleRarity = (event) => {
-  //   setRarity(event.target.id);
-  // };
-
   const killModal = (event) => {
     event.stopPropagation();
     setRarity("rare");
@@ -87,7 +83,6 @@ export default function SelectUpgradeItem({ modal, setModal }) {
         <div className="dimmed-bg" onClick={killModal} />
       </div>
 
-      {/* 양 합칠때 나오는 부분 > 현재 볼 수 없음... */}
       {/* 사용가능한 Sheep이 있을때 보여줘야 함 */}
       <div className="popup-content select-morph-grade hidden">
         <div className="close-btn" onClick={killModal}></div>
@@ -116,14 +111,6 @@ export default function SelectUpgradeItem({ modal, setModal }) {
         </div>
         <div className="dimmed-bg" onClick={killModal} />
       </div>
-      {/* </div> */}
     </Main>
   );
 }
-
-/*
-모달 켜질때 받아와야 하는 데이터
-  - Male / Female
-  - 이용가능한 Sheep의 데이터
-    - 예상) 각 Sheep은 이름, 이미지, 레어도(원래는 Epic도 있었나본데 비활성화함)
-*/

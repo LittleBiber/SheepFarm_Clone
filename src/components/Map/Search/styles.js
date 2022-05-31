@@ -52,8 +52,6 @@ export const SearchBox = styled.div`
     display: flex;
     align-items: center;
     
-
-    // Placeholder 글자색상은 따로 변경
     input::-webkit-input-placeholder { color: #e4bb88; }
 
     #land-id-input {

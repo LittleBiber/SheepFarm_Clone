@@ -31,8 +31,6 @@ export const Main = styled.div`
       .comp-payment-receipt {
         width: 100%;
         height: 100%;
-
-        // 박스크기가 맞을 생각을 안해서 비활성화 > 나중에 완성하고 주석 풀면 해결될려나
         position: absolute;
         left: 0;
         top: 0;

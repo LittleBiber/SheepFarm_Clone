@@ -20,7 +20,6 @@ export default function LoginBox({ type }) {
 
   useEffect(() => {
     chkUserAgent();
-    console.log(window.location.href.split("/").reverse()[0]);
   }, []);
 
   return (

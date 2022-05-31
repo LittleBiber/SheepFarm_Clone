@@ -14,7 +14,7 @@ export default function PurchaseModal({
   const [proceed, setProceed] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [loginType, setLoginType] = useState(null);
-  const body = document.getElementsByTagName("body")[0]; // DOM말고는 body에 접근할수 없는건가?
+  const body = document.getElementsByTagName("body")[0];
 
   const handleModal = () => {
     if (window.localStorage.getItem("userID")) {
@@ -29,7 +29,7 @@ export default function PurchaseModal({
     setLoginModal(false);
     setModal(false);
 
-    body.style.top = "unset"; // 원래 스크롤양을 전달받아서 실행해야 할듯?
+    body.style.top = "unset";
     body.style.position = "unset";
     body.style["overflow-y"] = "unset";
     window.scrollTo(0, height);
@@ -116,34 +116,7 @@ export default function PurchaseModal({
         </div>
       </div>
 
-      {/* <div className={["login-modal", !loginModal && "hidden"].join(" ")}>
-        <div className="login-wrapper">
-          <LoginBox type="normal" />
-        </div>
-      </div> */}
-
       <KlipModal modal={proceed} setModal={setProceed} />
     </Main>
   );
 }
-
-/*
-! Issue: 심각함(View 깨짐)
-! Target: PC/Mobile
-
-결제 버튼을 누르면 Receipt 가 먼저 나옴(로그인여부에 관계X)
-  상품 이름 / 가격 / 개수 / 총 가격 제시
-  결제 버튼
-    (로그인O) > QR코드 출력해 결제 연결
-    (로그인X) > 로그인 박스 출력
-
-모바일에서는 글자가 작아짐(레이아웃 변경은 없다)
-  배경 이미지로 변경되는 것 같음
-
-받아야 할 데이터:
-  - 상품 이름
-  - 가격
-  - 개수
-*/
-
-/* .popup-content wallet 부분은 뭔지 잘 모르겠으니 일단 주석처리 */

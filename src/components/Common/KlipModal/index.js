@@ -25,9 +25,10 @@ export default function KlipModal({ modal, setModal }) {
           className="ic-close"
           src="/KlipModal/icon-close.svg"
           onClick={() => setModal(!modal)}
+          alt=""
         />
         <div className="modal-title">
-          <img src="/KlipModal/icon-klip.svg" />
+          <img src="/KlipModal/icon-klip.svg" alt="" />
           Connect Klip via Kakao
         </div>
         <div id="klip-qr-code">

@@ -6,9 +6,9 @@ export default function MobileHeader({ bgcolor }) {
   const [open, setOpen] = useState(false);
   const [walletBox, setWalletBox] = useState(false);
   const [modal, setModal] = useState(false);
-
   const [loginType, setLoginType] = useState(null);
   const [userID, setUserID] = useState(null);
+  const [height, setHeight] = useState(0);
 
   useEffect(() => {
     const value = JSON.parse(window.localStorage.getItem("userID"));
@@ -18,7 +18,6 @@ export default function MobileHeader({ bgcolor }) {
     }
   }, []);
 
-  const [height, setHeight] = useState(0);
   const handleOpen = () => {
     const body = document.getElementsByTagName("body")[0];
 
@@ -70,7 +69,7 @@ export default function MobileHeader({ bgcolor }) {
           <img
             className="logo"
             src="/MobileHeader/sheepfarm_logo_top.png"
-            alt=""
+            alt="logo"
           />
         </a>
         <div className="button-top menu" onClick={handleOpen} />
@@ -92,7 +91,7 @@ export default function MobileHeader({ bgcolor }) {
           </Link>
           <Link href="https://guide.sheepfarm.io/guide/">GUIDEBOOK</Link>
           <span className="wallet" onClick={handleLoginModal}>
-            <img src="/MobileHeader/ic_wallet_main_m.svg" alt="" />
+            <img src="/MobileHeader/ic_wallet_main_m.svg" alt="wallet" />
             <span>Connect Wallet</span>
           </span>
         </div>
@@ -111,8 +110,7 @@ export default function MobileHeader({ bgcolor }) {
                   : () =>
                       window.open(
                         "metamast_login",
-                        "_blank",
-                        "width=363, height=623"
+                        "width=363, height=623, status=no, noopener, noreferer"
                       )
               }
             >

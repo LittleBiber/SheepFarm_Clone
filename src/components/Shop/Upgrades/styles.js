@@ -246,15 +246,12 @@ export const Main = styled.div`
       text-align: center;
 
       .upgrades-gage__txt {
-        // transform: translateX(50%);
-
         span {
           display: inline-block;
           font-size: 16px;
           line-height: 24px;
           color: #6f5246;
           font-weight: 700;
-          // transform: translateX(-50%);
         }
       }
 
@@ -345,7 +342,6 @@ export const Main = styled.div`
         height: 60px !important;
         border-radius: 12px;
         transition: transform 0.1s;
-        transition: transform 0.1s, -webkit-transform 0.1s;
         color: #fff;
 
         border: 2px solid #adb5bd;

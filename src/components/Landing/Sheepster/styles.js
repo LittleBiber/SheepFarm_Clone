@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Title } from "../../../styles/index";
+import { Title } from "../../../styles";
 
 export const Main = styled.div`
   width: 100%;

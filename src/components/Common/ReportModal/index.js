@@ -14,7 +14,6 @@ export default function ReportModal({ setReport }) {
   };
 
   const SubmitReport = () => {
-    // 원래대로면 여기서 리포트 전송하는 함수가 실행
     alert("Successfully reported.");
     killReport();
   };

@@ -104,7 +104,7 @@ export const Main = styled.div`
   }
 `;
 
-export const MAR_Title = styled(Title)`
+export const TokenTitle = styled(Title)`
   margin-bottom: 20px;
   font-weight: bold;
 

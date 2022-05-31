@@ -49,7 +49,7 @@ export default function Search({ onClickLandSearch }) {
         <div className="search-box">
           <input
             type="number"
-            pattern="\d*" //! [0-9]* 도 있는데 이거 정규식처럼 쓰는 건가?
+            pattern="\d*"
             placeholder="Pasture ID"
             id="land-id-input"
             ref={searchInput}

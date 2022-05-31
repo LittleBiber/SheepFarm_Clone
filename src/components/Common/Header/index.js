@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Main, Link } from "./styles";
-import LoginBox from "../../Common/LoginBox";
+import { LoginBox } from "../../Common";
 
 export default function Header({ bgcolor }) {
   const [boxOpen, setBoxOpen] = useState(false);
@@ -24,6 +24,11 @@ export default function Header({ bgcolor }) {
     const now = window.location.href.split("/").reverse()[0];
     return Boolean(now);
   };
+
+  const clickWalletBox = () => {
+    userID ? signOut() : setBoxOpen(!boxOpen);
+  };
+
   useEffect(() => {
     const value = JSON.parse(window.localStorage.getItem("userID"));
 
@@ -58,46 +63,49 @@ export default function Header({ bgcolor }) {
         </div>
 
         <div className="login_box">
-          <a
-            href="https://game.sheepfarm.io/"
-            className={["play-btn", !chkHref() && "hidden"].join(" ")}
-          >
-            <span>PLAY GAME</span>
-          </a>
-          <input
-            type="checkbox"
-            id="walletbox"
-            onClick={userID ? signOut : () => setBoxOpen(!boxOpen)}
-          />
+          {chkHref() ? (
+            <a href="https://game.sheepfarm.io/" className="play-btn">
+              <span>PLAY GAME</span>
+            </a>
+          ) : (
+            ""
+          )}
+          <input type="checkbox" id="walletbox" onClick={clickWalletBox} />
           <label htmlFor="walletbox">
             <div className="wallet_web">
               <div className="wallet_icons">
+                {!userID ? (
+                  <img
+                    className="wallet-list"
+                    src="/Header/ic_wallet.png"
+                    alt=""
+                  />
+                ) : (
+                  ""
+                )}
                 <img
-                  className={["wallet-list", userID && "hidden"].join(" ")}
-                  src="/Header/ic_wallet.png"
-                  alt=""
-                />
-                <img
-                  className={["wallet-kaikas", "hidden"].join(" ")}
+                  className="wallet-kaikas hidden"
                   src="/Header/ic_wallet_kaikas.png"
                   alt=""
                 />
-                <img
-                  className={[
-                    "wallet-klip",
-                    loginType !== "klip" && "hidden",
-                  ].join(" ")}
-                  src="/Header/ic_wallet_klip.png"
-                  alt=""
-                />
-                <img
-                  className={[
-                    "wallet-matamask",
-                    loginType !== "metamask" && "hidden",
-                  ].join(" ")}
-                  src="/Header/ic_wallet_matamask.png"
-                  alt=""
-                />
+                {loginType === "klip" ? (
+                  <img
+                    className="wallet-klip"
+                    src="/Header/ic_wallet_klip.png"
+                    alt=""
+                  />
+                ) : (
+                  ""
+                )}
+                {loginType === "metamask" ? (
+                  <img
+                    className="wallet-matamask"
+                    src="/Header/ic_wallet_matamask.png"
+                    alt=""
+                  />
+                ) : (
+                  ""
+                )}
                 <img
                   className="wallet-signout"
                   src="/Header/ic_wallet_close.png"

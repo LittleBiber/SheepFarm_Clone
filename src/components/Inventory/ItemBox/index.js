@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ItemList, ProductList, SelectAll } from "./styles";
 
-export default function ItemBox({ world }) {
+export default function ItemBox({ selected, world }) {
   const [checkall, setCheckAll] = useState(false);
 
   return (
@@ -33,12 +33,12 @@ export default function ItemBox({ world }) {
             <img
               src="/ItemBox/img_message01.png"
               alt=""
-              className={!world && "on"}
+              className={!world ? "on" : "hidden"}
             />
             <img
               src="/ItemBox/img_message02.png"
               alt=""
-              className={world && "on"}
+              className={world ? "on" : "hidden"}
             />
           </dt>
           <dd>
@@ -57,18 +57,3 @@ export default function ItemBox({ world }) {
     </>
   );
 }
-
-/*
-여기서 물건이 있을때를 고려해서 구조를 만들어야 함
-- item 이 있을때 고려해야 할 점 (대충 생각했을때)
-  1. 이미지
-  2. 이름
-  3. 개수
-
-- 구현하려면?
-  1. 박스에 이미지 - 이름(dt) - 개수(dd) 구조로 집어넣을 수 있을 듯
-*/
-
-/*
-720px 기준 레이아웃 변경
-*/

@@ -9,6 +9,7 @@ export const Main = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+
   padding: 28px;
   border-radius: 35px;
   box-sizing: border-box;
@@ -46,7 +47,5 @@ export const Main = styled.div`
     line-height: 22px;
     text-align: center;
     letter-spacing: 0.03em;
-
-    // width: 230px;
   }
 `;

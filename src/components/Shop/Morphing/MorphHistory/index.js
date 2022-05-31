@@ -17,7 +17,7 @@ export default function MorphHistory() {
       <MorphLog>
         <dl>
           <dt>
-            <img src="/Morphing/img_no_morph.png" alt="" />
+            <img src="/Morphing/img_no_morph.png" alt="no_morph" />
           </dt>
           <dd>No results to show</dd>
         </dl>

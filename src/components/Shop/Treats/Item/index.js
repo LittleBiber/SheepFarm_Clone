@@ -2,7 +2,9 @@ import React, { useState, useRef } from "react";
 import PurchaseModal from "../PurchaseModal";
 import { Main } from "./styles";
 
-export default function Item({ id, name, price, desc, desc_sub }) {
+export default function Item({ options }) {
+  const { id, name, price, desc, desc_sub } = options;
+
   const Count = useRef(null);
   const [unit, setUnit] = useState(1);
 
@@ -101,7 +103,3 @@ export default function Item({ id, name, price, desc, desc_sub }) {
     </Main>
   );
 }
-
-/*
-
-*/

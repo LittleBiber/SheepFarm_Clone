@@ -10,9 +10,6 @@ export const Main = styled.li`
   padding: 25px;
 
   @media (max-width: 580px) {
-    // min-width: 350px !important;
-    // padding: 20px;
-
     min-width: unset;
   }
 

@@ -8,7 +8,6 @@ export const Main = styled.div`
   align-items: center;
   background-color: #75594e;
   position: relative;
-  // padding: 50px 0;
 
   min-height: 100vh;
   display: flex;

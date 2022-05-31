@@ -4,7 +4,6 @@ export const Main = styled.div`
   width: 100%;
   height: 100%;
   background: #75594e;
-
   position: relative;
 
   @media (max-width: 1100px) {

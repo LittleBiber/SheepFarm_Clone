@@ -91,8 +91,6 @@ export const Main = styled.div`
               padding: 0 4.6729vw;
               font-size: 3.27103vw;
               line-height: 4.90654vw;
-
-              // img {
             }
 
             img {
@@ -124,7 +122,6 @@ export const Main = styled.div`
       }
     }
 
-    // 이 부분은 아이템을 실제로 추가해봐야 알 수 있을 것 같은데
     .comp-select__item--name {
       display: none;
       margin-top: 10px;
@@ -189,9 +186,7 @@ export const ButtonBox = styled.div`
       width: 100%;
       height: 60px !important;
       border-radius: 12px;
-      transition: -webkit-transform 0.1s;
       transition: transform 0.1s;
-      transition: transform 0.1s, -webkit-transform 0.1s;
       color: #fff;
     }
   }

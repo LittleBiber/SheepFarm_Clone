@@ -8,7 +8,7 @@ export default function Treats() {
     <Main>
       {ITEM_LIST.map((one, idx) => (
         <li key={idx}>
-          <Item {...one} />
+          <Item options={one} />
         </li>
       ))}
     </Main>

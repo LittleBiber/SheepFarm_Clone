@@ -73,14 +73,7 @@ export default function SelectSheepModal({ modal, setModal }) {
                 <div className="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"></div>
               </div>
 
-              <div
-                className="select-list__btn select-list__btn--right"
-                // tabIndex="0"
-                // role="button"
-                // aria-label="Next slide"
-                // aria-controls="swiper-wrapper-eb60b0262adbcd2d"
-                // aria-disabled="false"
-              >
+              <div className="select-list__btn select-list__btn--right">
                 <img src="img/shop/btn_right_arrow.png" alt="" />
               </div>
             </div>
@@ -118,7 +111,6 @@ export default function SelectSheepModal({ modal, setModal }) {
         <div className="dimmed-bg" onClick={killModal} />
       </div>
 
-      {/* 양 합칠때 나오는 부분 > 현재 볼 수 없음... */}
       {/* 사용가능한 Sheep이 있을때 보여줘야 함 */}
       <div className="popup-content select-morph-grade hidden">
         <div className="close-btn" onClick={killModal}></div>
@@ -150,10 +142,3 @@ export default function SelectSheepModal({ modal, setModal }) {
     </Main>
   );
 }
-
-/*
-모달 켜질때 받아와야 하는 데이터
-  - Male / Female
-  - 이용가능한 Sheep의 데이터
-    - 예상) 각 Sheep은 이름, 이미지, 레어도(원래는 Epic도 있었나본데 비활성화함)
-*/
