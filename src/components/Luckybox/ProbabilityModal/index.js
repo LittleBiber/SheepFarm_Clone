@@ -32,7 +32,7 @@ export default function ProbabilityModal({ modal, killModal, height }) {
         <div className="panel">
           <div className="panel-bg">
             <div className="close-btn" onClick={closeButton} />
-            <img src="/Luckybox/bg-probability.png" />
+            <img src="/Luckybox/bg-probability.png" alt="" />
           </div>
           <div className="panel-contents">
             <div className="title">ITEM PROBABILITY</div>

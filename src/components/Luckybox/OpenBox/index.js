@@ -14,9 +14,9 @@ export default function OpenBox() {
     <Main>
       {userID ? (
         <>
-          <img id="noitem" src="/Luckybox/noitems_NPC.png" />
+          <img id="noitem" src="/Luckybox/noitems_NPC.png" alt="" />
           <div className="no-box-text">
-            <img src="/Luckybox/no-luckybox-bg.png" />
+            <img src="/Luckybox/no-luckybox-bg.png" alt="" />
             <div>
               <span>You don't have</span>
               <span>any Lucky boxes</span>

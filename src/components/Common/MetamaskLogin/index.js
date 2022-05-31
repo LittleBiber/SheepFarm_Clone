@@ -87,10 +87,10 @@ export default function MetamaskLogin() {
         </div>
       </div>
       <div className="footer">
-        <button className="cancel-button" role="button" onClick={cancelLogin}>
+        <button className="cancel-button" onClick={cancelLogin}>
           취소
         </button>
-        <button className="sign-button" role="button" onClick={DummyLogin}>
+        <button className="sign-button" onClick={DummyLogin}>
           서명
         </button>
       </div>

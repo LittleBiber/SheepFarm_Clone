@@ -25,7 +25,7 @@ export default function ItemBox({
     <Main>
       <Content className={count ? "" : "soldout"}>
         <div className="img-wrap">
-          <img src="/Luckybox/202204_luckbox3rd.png" />
+          <img src="/Luckybox/202204_luckbox3rd.png" alt="" />
           <div className="soldout_txt">
             <div>SOLD OUT</div>
           </div>
